@@ -1,6 +1,6 @@
 {
   "version": "y90-publication-database-v3",
-  "savedAt": "2026-07-24T07:03:19.426Z",
+  "savedAt": "2026-08-13T03:11:43.075Z",
   "categories": [
     "Asian Data",
     "Balloon Occlusion",
@@ -7754,6 +7754,36 @@
         "Dosimetry",
         "HCC",
         "Safety"
+      ]
+    },
+    {
+      "id": 1786590672283,
+      "year": 2026,
+      "title": "Efficacy and safety of Y90 radioembolization combined with targeted therapy and immunotherapy in patients with unresectable hepatocellular carcinoma: a dual-center, retrospective study",
+      "country": "China",
+      "authors": "Xiaolong Wang, Qinggui Jiang, Shiguang Chen et al.",
+      "journal": "",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41923204/",
+      "pmcid": "PMC13169584",
+      "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/Resin/2026%20Wang%20Efficacy%20and%20safety%20of%20Y90%20combined%20with%20targeted%20therapy%20and%20immunotherapy%20in%20patients%20with%20unresectable%20HCC%20a%20dual%20center,%20retrospective%20s.pdf?d=w4e3c970143ae42eab4ba1a062fe115f5&csf=1&web=1&e=jNzrRB",
+      "pdfFileName": "",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "results": "• The objective response rate was 71.9% by mRECIST and 50.0% by RECIST 1.1.\n• After a median follow-up of 12 months (IQR: 9–14.3), median progression-free survival was 10.5 months (95% CI: 7.4–13.6), and median overall survival was 17.0 months (95% CI: 11.5–22.5).\n• A baseline alpha-fetoprotein level ≥400 ng/mL was identified as an independent adverse prognostic factor for both progression-free survival (HR = 2.755, p = 0.033) and overall survival (HR = 4.189, p = 0.029).\n• Grade 3–4 treatment-related adverse events occurred in 43.8% of patients, with no treatment-related deaths.",
+      "findings": "• The objective response rate was 71.9% by mRECIST and 50.0% by RECIST 1.1.\n• After a median follow-up of 12 months (IQR: 9–14.3), median progression-free survival was 10.5 months (95% CI: 7.4–13.6), and median overall survival was 17.0 months (95% CI: 11.5–22.5).\n• A baseline alpha-fetoprotein level ≥400 ng/mL was identified as an independent adverse prognostic factor for both progression-free survival (HR = 2.755, p = 0.033) and overall survival (HR = 4.189, p = 0.029).\n• Grade 3–4 treatment-related adverse events occurred in 43.8% of patients, with no treatment-related deaths.\n• In conclusion, this real-world study provides preliminary evidence that the triple-modality regimen combining TARE, targeted therapy, and immunotherapy is feasible and demonstrates encouraging antitumor activity in patients with uHCC, including those with high-risk features.",
+      "notes": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "primaryCategory": "Immunotherapy",
+      "product": "resin",
+      "categories": [
+        "Immunotherapy",
+        "Resin",
+        "Combination Therapy",
+        "Dosimetry",
+        "HCC",
+        "Safety",
+        "Mapping / Failed Evaluation"
       ]
     }
   ]
