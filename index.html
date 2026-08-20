@@ -1499,34 +1499,24 @@ body.modal-open .library-filter-sticky{
   }
 }
 
-/* v6.1 — Compact publication table: fit the full desktop view without sideways scrolling. */
+/* v6.2 — Keep the original table typography and spacing; narrow only the JIF column. */
 @media (min-width:769px){
-  .table-wrap{overflow-x:hidden !important;}
-  .publication-table{width:100% !important;min-width:0 !important;table-layout:fixed !important;font-size:12px !important;}
-  .publication-table .col-year{width:4%;}
-  .publication-table .col-title{width:23.5%;}
-  .publication-table .col-country{width:7%;}
-  .publication-table .col-categories{width:11%;}
-  .publication-table .col-product{width:9%;}
-  .publication-table .col-jif{width:6%;}
-  .publication-table .col-findings{width:18.5%;}
-  .publication-table .col-fulltext{width:6%;}
-  .publication-table .col-review{width:7%;}
-  .publication-table .col-actions{width:8%;}
-  .publication-table th{font-size:10px !important;padding:8px 5px !important;white-space:normal !important;line-height:1.2 !important;overflow-wrap:anywhere;}
-  .publication-table td{font-size:12px !important;padding:9px 5px !important;line-height:1.35 !important;overflow-wrap:anywhere;word-break:break-word;}
-  .publication-table .td-title{min-width:0 !important;max-width:none !important;font-size:12px !important;}
-  .publication-table .td-country{font-size:11px !important;white-space:normal !important;}
-  .publication-table .td-year{font-size:12px !important;}
-  .publication-table .td-findings{min-width:0 !important;max-width:none !important;font-size:11px !important;}
-  .publication-table .cat-tags{gap:2px !important;}
-  .publication-table .cat-tag{font-size:9px !important;padding:2px 4px !important;white-space:normal !important;}
-  .publication-table .product-badge{font-size:10px !important;padding:3px 5px !important;white-space:normal !important;text-align:center;justify-content:center;}
-  .publication-table .jif-badge{font-size:10px !important;padding:3px 4px !important;white-space:normal !important;text-align:center;justify-content:center;}
-  .publication-table .badge-pmc{font-size:9px !important;padding:3px 5px !important;white-space:normal !important;}
-  .publication-table .access-links{gap:3px !important;}
-  .publication-table .icon-btn{width:28px !important;height:28px !important;font-size:12px !important;}
-  .publication-table .icon-btn svg{width:12px !important;height:12px !important;}
+  .publication-table th:nth-child(6),
+  .publication-table td:nth-child(6){
+    width:76px !important;
+    min-width:76px !important;
+    max-width:76px !important;
+    padding-left:6px !important;
+    padding-right:6px !important;
+    text-align:center !important;
+  }
+  .publication-table td:nth-child(6) .jif-badge{
+    width:100%;
+    box-sizing:border-box;
+    justify-content:center;
+    text-align:center;
+    white-space:normal;
+  }
 }
 
 </style>
@@ -1622,10 +1612,6 @@ body.modal-open .library-filter-sticky{
     <div id="table-view">
       <div class="table-wrap">
         <table class="publication-table">
-          <colgroup>
-            <col class="col-year"><col class="col-title"><col class="col-country"><col class="col-categories"><col class="col-product">
-            <col class="col-jif"><col class="col-findings"><col class="col-fulltext"><col class="col-review"><col class="col-actions">
-          </colgroup>
           <thead><tr>
             <th onclick="sortBy('year')">Year ↕</th>
             <th onclick="sortBy('title')">Title ↕</th>
