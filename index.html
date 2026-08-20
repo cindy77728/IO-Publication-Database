@@ -89,6 +89,10 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .badge-y90-glass{background:rgba(88,166,255,.15);color:var(--y90-glass);border:1px solid rgba(88,166,255,.3)}
 .badge-y90-na{background:rgba(188,140,255,.15);color:var(--y90-na);border:1px solid rgba(188,140,255,.3)}
 .jif-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;background:rgba(232,201,106,.10);border:1px solid rgba(232,201,106,.32);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;white-space:nowrap}
+.jif-badge{background:rgba(232,201,106,.22);border-color:var(--accent);color:#fff6cf;font-size:12px;font-weight:800;box-shadow:0 0 0 1px rgba(232,201,106,.08),0 2px 8px rgba(0,0,0,.28)}
+.jif-badge small{display:block;font-size:9px;font-weight:600;color:#fff;opacity:.82}
+.jif-match-status{margin-top:5px;font-size:12px;font-weight:600;text-transform:none;letter-spacing:0}
+.jif-match-status.matched{color:#72e18a}.jif-match-status.unmatched{color:var(--text-muted)}
 .badge-pmc{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;background:rgba(63,185,80,.15);color:#4cca5a;border:1px solid rgba(63,185,80,.3);white-space:nowrap}
 
 .cat-tags{display:flex;flex-wrap:wrap;gap:3px}
@@ -1503,9 +1507,9 @@ body.modal-open .library-filter-sticky{
 @media (min-width:769px){
   .publication-table th:nth-child(6),
   .publication-table td:nth-child(6){
-    width:76px !important;
-    min-width:76px !important;
-    max-width:76px !important;
+    width:84px !important;
+    min-width:84px !important;
+    max-width:84px !important;
     padding-left:6px !important;
     padding-right:6px !important;
     text-align:center !important;
@@ -1591,8 +1595,9 @@ body.modal-open .library-filter-sticky{
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
-    <select id="sort-by" onchange="applyFilters()">
+    <select id="sort-by" onchange="applySortSelection()">
       <option value="year-desc">Year ↓</option><option value="year-asc">Year ↑</option>
+      <option value="jif-desc">JIF: highest first</option><option value="jif-asc">JIF: lowest first</option>
       <option value="title-asc">Title A–Z</option><option value="country-asc">Country A–Z</option>
     </select>
     <button class="btn btn-secondary" onclick="clearFilters()">Clear</button>
@@ -1616,7 +1621,7 @@ body.modal-open .library-filter-sticky{
             <th onclick="sortBy('year')">Year ↕</th>
             <th onclick="sortBy('title')">Title ↕</th>
             <th onclick="sortBy('country')">Country ↕</th>
-            <th>Categories</th><th>Product</th><th title="Journal Impact Factor">JIF</th><th>Key Findings</th>
+            <th>Categories</th><th>Product</th><th title="Sort by Journal Impact Factor" onclick="sortBy('jif')">JIF ↕</th><th>Key Findings</th>
             <th>Full Text</th><th>Review</th><th>Actions</th>
           </tr></thead>
           <tbody id="table-body"></tbody>
@@ -1697,9 +1702,9 @@ body.modal-open .library-filter-sticky{
       <div class="form-group"><label>Country *</label><input type="text" id="f-country" placeholder="USA, UK, Korea…"></div>
       <div class="form-group full"><label>Title *</label><textarea id="f-title" placeholder="Full publication title" rows="3" style="resize:vertical;min-height:72px;font-family:inherit;font-size:inherit;line-height:1.5"></textarea></div>
       <div class="form-group full"><label>Authors</label><input type="text" id="f-authors" placeholder="Smith J, Doe A, et al."></div>
-      <div class="form-group full"><label>Journal</label><input type="text" id="f-journal" placeholder="Journal of Vascular and Interventional Radiology" onblur="autoFillJIFForForm()"></div>
-      <div class="form-group"><label>Journal Impact Factor</label><input type="number" id="f-jif" min="0" step="0.001" placeholder="Auto-filled from JIF registry"></div>
-      <div class="form-group"><label>JIF Year</label><input type="number" id="f-jifyear" min="1990" max="2099" placeholder="e.g. 2025"></div>
+      <div class="form-group full"><label>Journal</label><input type="text" id="f-journal" list="journal-jif-options" autocomplete="off" placeholder="Journal of Vascular and Interventional Radiology" oninput="scheduleAutoFillJIFForForm()" onblur="autoFillJIFForForm(true)"><datalist id="journal-jif-options"></datalist><div id="f-jif-match-status" class="jif-match-status"></div></div>
+      <div class="form-group"><label>Journal Impact Factor</label><input type="number" id="f-jif" min="0" step="0.001" placeholder="Auto-filled from JIF registry" oninput="delete this.dataset.autoFilled"></div>
+      <div class="form-group"><label>JIF Year</label><input type="number" id="f-jifyear" min="1990" max="2099" placeholder="e.g. 2025" oninput="delete this.dataset.autoFilled"></div>
       <div class="form-group full"><div class="review-note">JIF is a journal-level metric, not a score calculated from one paper. Enter it once (or import a JCR export in JIF Registry) and the database will automatically apply it to every matching journal.</div></div>
       <div class="form-group">
         <label>Product</label>
@@ -10607,6 +10612,13 @@ function applyFilters(){
       const pa = primaryCategorySortRank(a, selectedCatForSort);
       const pb = primaryCategorySortRank(b, selectedCatForSort);
       if(pa !== pb) return pa - pb;
+      if(sf==='jif'){
+        const va=validJIFNumber(a.journalImpactFactor ?? a.jif), vb=validJIFNumber(b.journalImpactFactor ?? b.jif);
+        if(va===null && vb===null) return String(a.title||'').localeCompare(String(b.title||''));
+        if(va===null) return 1;
+        if(vb===null) return -1;
+        return sd==='desc' ? vb-va : va-vb;
+      }
       let va=sf==='year'?a.year:sf==='country'?a.country||'':a.title;
       let vb=sf==='year'?b.year:sf==='country'?b.country||'':b.title;
       if (typeof va==='string') va=va.toLowerCase();
@@ -10617,6 +10629,10 @@ function applyFilters(){
   renderTable(filtered); renderCards(filtered); updateStats();
   document.getElementById('results-info').textContent=`Showing ${filtered.length} of ${publications.length} publications`;
   populateYearFilter();
+}
+function applySortSelection(){
+  const [field,direction]=(document.getElementById('sort-by')?.value || 'year-desc').split('-');
+  sortField=field; sortDir=direction; applyFilters();
 }
 function filterByCategory(el,cat){
   activeCategory=cat;
@@ -14457,13 +14473,34 @@ function applyJIFRegistryToPublications(showMessage=false){
   }
   return {matched,changed};
 }
-function autoFillJIFForForm(){
+let __ioeJifFillTimer=null;
+function renderJournalJIFOptions(){
+  const list=document.getElementById('journal-jif-options'); if(!list) return;
+  list.innerHTML=Object.values(journalImpactFactorRegistry)
+    .sort((a,b)=>String(a.journal).localeCompare(String(b.journal)))
+    .map(e=>`<option value="${escapeHtml(e.journal)}">JIF ${e.value}${e.year?` (${e.year})`:''}</option>`).join('');
+}
+function scheduleAutoFillJIFForForm(){
+  clearTimeout(__ioeJifFillTimer);
+  __ioeJifFillTimer=setTimeout(()=>autoFillJIFForForm(true),220);
+}
+function autoFillJIFForForm(force=false){
   const journal=document.getElementById('f-journal')?.value || '';
   const entry=getJIFEntry(journal);
   const valEl=document.getElementById('f-jif'), yearEl=document.getElementById('f-jifyear');
+  const status=document.getElementById('f-jif-match-status');
   if(entry){
-    if(valEl && !valEl.value) valEl.value=entry.value;
-    if(yearEl && !yearEl.value) yearEl.value=entry.year || '';
+    if(valEl && (force || !valEl.value)) valEl.value=entry.value;
+    if(yearEl && (force || !yearEl.value)) yearEl.value=entry.year || '';
+    if(valEl) valEl.dataset.autoFilled='true'; if(yearEl) yearEl.dataset.autoFilled='true';
+    if(status){status.className='jif-match-status matched';status.textContent=`✓ JIF ${entry.value}${entry.year?` (${entry.year})`:''} matched automatically`;}
+  }else if(status){
+    status.className='jif-match-status unmatched';
+    status.textContent=journal.trim().length>2?'No verified JIF match yet. Choose a registry journal or enter the JIF manually.':'';
+    if(force){
+      if(valEl?.dataset.autoFilled==='true'){valEl.value='';delete valEl.dataset.autoFilled;}
+      if(yearEl?.dataset.autoFilled==='true'){yearEl.value='';delete yearEl.dataset.autoFilled;}
+    }
   }
   return entry;
 }
@@ -14489,6 +14526,7 @@ function deleteJIFRegistryEntry(key){
   delete journalImpactFactorRegistry[key]; saveJIFRegistryLocal(); renderJIFRegistryList();
 }
 function renderJIFRegistryList(){
+  renderJournalJIFOptions();
   const list=document.getElementById('jif-registry-list');
   const summary=document.getElementById('jif-registry-summary');
   if(!list) return;
@@ -14608,6 +14646,7 @@ init=function(){
   migrateIOEDatabase();
   mergeJIFRows(extractJIFRows(IOE_BUNDLED_JIF_DATA),'Bundled verified JIF registry',{onlyIfNewer:true,verifiedAt:IOE_BUNDLED_JIF_DATA.verifiedAt});
   applyJIFRegistryToPublications(false);
+  renderJournalJIFOptions();
   __ioeLegacyInit();
   const desc=document.getElementById('pubmed-query-description');
   const scope=document.getElementById('pubmed-scope');
@@ -14728,6 +14767,8 @@ function clearForm(){
   const review=document.getElementById('f-reviewstatus');if(review)review.value='AI Draft'; const full=document.getElementById('f-fulltextstatus');if(full)full.value='auto';
   const label=document.getElementById('pdf-label');if(label)label.textContent='Click to attach PDF · or enter PMC ID above for auto free-text';
   const ai=document.getElementById('ai-form-result');if(ai)ai.style.display='none'; selectedPdfData=null; const pdf=document.getElementById('f-pdf');if(pdf)pdf.value='';
+  ['f-jif','f-jifyear'].forEach(id=>{const el=document.getElementById(id);if(el)delete el.dataset.autoFilled;});
+  const jifStatus=document.getElementById('f-jif-match-status');if(jifStatus){jifStatus.textContent='';jifStatus.className='jif-match-status';}
 }
 
 const __ioeOpenEditModal=openEditModal;
