@@ -1503,13 +1503,19 @@ body.modal-open .library-filter-sticky{
   }
 }
 
-/* v6.2 — Keep the original table typography and spacing; narrow only the JIF column. */
+/* v6.3 — Keep typography and other columns unchanged; trade a little Country width for JIF. */
 @media (min-width:769px){
+  .publication-table th:nth-child(3),
+  .publication-table td.td-country{
+    width:125px !important;
+    min-width:115px !important;
+    max-width:135px !important;
+  }
   .publication-table th:nth-child(6),
   .publication-table td:nth-child(6){
-    width:84px !important;
-    min-width:84px !important;
-    max-width:84px !important;
+    width:116px !important;
+    min-width:116px !important;
+    max-width:116px !important;
     padding-left:6px !important;
     padding-right:6px !important;
     text-align:center !important;
