@@ -1,6 +1,6 @@
 {
   "version": "y90-publication-database-v3",
-  "savedAt": "2026-08-20T07:45:30.015Z",
+  "savedAt": "2026-08-20T08:07:38.124Z",
   "categories": [
     "APAC Data",
     "Asian Data",
@@ -7873,7 +7873,9 @@
       "categories": [
         "Metastases / Ovarian Cancer",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780381921651,
@@ -7881,7 +7883,7 @@
       "title": "Yttrium-90 Transarterial Radioembolization of a Hepatocellular Carcinoma via Parasitized Adrenal and Renal Capsular Arteries.",
       "country": "USA",
       "authors": "Okinedo I, Frageau J, Krishnarao A, et al.",
-      "journal": "J Vasc Interv Radiol",
+      "journal": "Journal of Vascular and Interventional Radiology",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41856402/",
       "pmcid": "",
       "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/technical/2026%20Okinedo%20Y90%20Transarterial%20Radioembolization%20of%20a%20HCC%20via%20Parasitized%20Adrenal%20and%20Renal%20Capsular%20Arteries.pdf?csf=1&web=1&e=vrWNvZ",
@@ -7985,9 +7987,7 @@
         "HCC",
         "Comparative",
         "Resection / Transplantation"
-      ],
-      "journalImpactFactor": null,
-      "journalImpactFactorYear": ""
+      ]
     },
     {
       "id": 1780383803826,
@@ -8099,7 +8099,9 @@
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Downstaging",
         "Resection / Downstaging and Bridging"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780384829145,
@@ -8124,7 +8126,9 @@
       "categories": [
         "Immunotherapy",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780455636555,
