@@ -1499,6 +1499,36 @@ body.modal-open .library-filter-sticky{
   }
 }
 
+/* v6.1 — Compact publication table: fit the full desktop view without sideways scrolling. */
+@media (min-width:769px){
+  .table-wrap{overflow-x:hidden !important;}
+  .publication-table{width:100% !important;min-width:0 !important;table-layout:fixed !important;font-size:12px !important;}
+  .publication-table .col-year{width:4%;}
+  .publication-table .col-title{width:23.5%;}
+  .publication-table .col-country{width:7%;}
+  .publication-table .col-categories{width:11%;}
+  .publication-table .col-product{width:9%;}
+  .publication-table .col-jif{width:6%;}
+  .publication-table .col-findings{width:18.5%;}
+  .publication-table .col-fulltext{width:6%;}
+  .publication-table .col-review{width:7%;}
+  .publication-table .col-actions{width:8%;}
+  .publication-table th{font-size:10px !important;padding:8px 5px !important;white-space:normal !important;line-height:1.2 !important;overflow-wrap:anywhere;}
+  .publication-table td{font-size:12px !important;padding:9px 5px !important;line-height:1.35 !important;overflow-wrap:anywhere;word-break:break-word;}
+  .publication-table .td-title{min-width:0 !important;max-width:none !important;font-size:12px !important;}
+  .publication-table .td-country{font-size:11px !important;white-space:normal !important;}
+  .publication-table .td-year{font-size:12px !important;}
+  .publication-table .td-findings{min-width:0 !important;max-width:none !important;font-size:11px !important;}
+  .publication-table .cat-tags{gap:2px !important;}
+  .publication-table .cat-tag{font-size:9px !important;padding:2px 4px !important;white-space:normal !important;}
+  .publication-table .product-badge{font-size:10px !important;padding:3px 5px !important;white-space:normal !important;text-align:center;justify-content:center;}
+  .publication-table .jif-badge{font-size:10px !important;padding:3px 4px !important;white-space:normal !important;text-align:center;justify-content:center;}
+  .publication-table .badge-pmc{font-size:9px !important;padding:3px 5px !important;white-space:normal !important;}
+  .publication-table .access-links{gap:3px !important;}
+  .publication-table .icon-btn{width:28px !important;height:28px !important;font-size:12px !important;}
+  .publication-table .icon-btn svg{width:12px !important;height:12px !important;}
+}
+
 </style>
 </head>
 <body>
@@ -1591,12 +1621,16 @@ body.modal-open .library-filter-sticky{
     <div class="results-info" id="results-info"></div>
     <div id="table-view">
       <div class="table-wrap">
-        <table>
+        <table class="publication-table">
+          <colgroup>
+            <col class="col-year"><col class="col-title"><col class="col-country"><col class="col-categories"><col class="col-product">
+            <col class="col-jif"><col class="col-findings"><col class="col-fulltext"><col class="col-review"><col class="col-actions">
+          </colgroup>
           <thead><tr>
             <th onclick="sortBy('year')">Year ↕</th>
             <th onclick="sortBy('title')">Title ↕</th>
             <th onclick="sortBy('country')">Country ↕</th>
-            <th>Categories</th><th>Product</th><th>Journal Impact Factor</th><th>Key Findings</th>
+            <th>Categories</th><th>Product</th><th title="Journal Impact Factor">JIF</th><th>Key Findings</th>
             <th>Full Text</th><th>Review</th><th>Actions</th>
           </tr></thead>
           <tbody id="table-body"></tbody>
@@ -1799,6 +1833,15 @@ body.modal-open .library-filter-sticky{
       </label>
       <button class="btn btn-secondary" onclick="applyJIFRegistryToPublications(true)">Apply Registry to All</button>
       <button class="btn btn-secondary" onclick="exportJIFRegistry()">Export Registry</button>
+    </div>
+    <div class="category-manager-note" style="margin-bottom:14px">
+      <strong>Annual verified update</strong>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin-top:10px">
+        <div class="form-group" style="flex:1;min-width:260px"><label>Verified JIF JSON URL</label><input id="jif-auto-url" type="url" value="journal-impact-factors.json" onchange="saveJIFAutoSettings()"></div>
+        <label style="display:flex;gap:7px;align-items:center;padding-bottom:10px"><input id="jif-auto-enabled" type="checkbox" checked onchange="saveJIFAutoSettings()"> Check automatically each JCR season</label>
+        <button class="btn btn-blue" onclick="loadVerifiedJIFUpdates(true)">Check verified updates now</button>
+      </div>
+      <div id="jif-auto-status" style="margin-top:8px;color:var(--text-muted)">The bundled registry uses official publisher/journal pages. A licensed Clarivate/JCR JSON endpoint can be entered above; API keys should never be placed in this browser file.</div>
     </div>
     <div class="results-info" id="jif-registry-summary"></div>
     <div id="jif-registry-list"></div>
@@ -14387,10 +14430,14 @@ function getJIFEntry(journal){
 function saveJIFRegistryLocal(){
   localStorage.setItem('ioeJifRegistry', JSON.stringify(journalImpactFactorRegistry));
 }
-function upsertJIFEntry(journal,value,year,source='Manual/JCR import'){
+function upsertJIFEntry(journal,value,year,source='Manual/JCR import',metadata={}){
   const key=normalizeJournalKey(journal), num=validJIFNumber(value), yr=parseInt(year);
   if(!key || num===null) return false;
-  journalImpactFactorRegistry[key]={journal:String(journal).trim(),value:num,year:Number.isFinite(yr)?yr:'',source};
+  const existing=journalImpactFactorRegistry[key], incomingYear=Number.isFinite(yr)?yr:'';
+  if(metadata.onlyIfNewer && existing && Number(existing.year || 0)>Number(incomingYear || 0)) return false;
+  journalImpactFactorRegistry[key]={journal:String(journal).trim(),value:num,year:incomingYear,source,
+    sourceUrl:metadata.sourceUrl || existing?.sourceUrl || '',verificationStatus:metadata.verificationStatus || existing?.verificationStatus || '',
+    verifiedAt:metadata.verifiedAt || existing?.verifiedAt || ''};
   saveJIFRegistryLocal();
   return true;
 }
@@ -14436,6 +14483,7 @@ function autoFillJIFForForm(){
 }
 function openJIFManager(){
   seedJIFRegistryFromPublications();
+  loadJIFAutoSettings();
   renderJIFRegistryList();
   openModal('jif-modal');
 }
@@ -14463,7 +14511,7 @@ function renderJIFRegistryList(){
   if(summary) summary.textContent=`${entries.length} journals in registry · ${matched} of ${(publications || []).length} publications matched`;
   list.innerHTML=entries.length ? entries.map(([key,e])=>`
     <div class="category-manager-row">
-      <div class="category-manager-name">${escapeHtml(e.journal)}<div style="font-size:11px;color:var(--text-muted);font-weight:400">${escapeHtml(e.source || '')}</div></div>
+      <div class="category-manager-name">${escapeHtml(e.journal)}<div style="font-size:11px;color:var(--text-muted);font-weight:400">${e.sourceUrl?`<a href="${escapeHtml(e.sourceUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${escapeHtml(e.source || 'Source')}</a>`:escapeHtml(e.source || '')}${e.verifiedAt?` · checked ${escapeHtml(e.verifiedAt)}`:''}</div></div>
       <div class="category-manager-count">JIF ${e.value}${e.year?` · ${e.year}`:''}</div>
       <div class="category-manager-actions"><button class="btn btn-secondary" onclick="deleteJIFRegistryEntry('${String(key).replace(/'/g,"\\'")}')">Delete</button></div>
     </div>`).join('') : '<div class="no-results">No JIF values yet. Import a JCR export or add the first journal above.</div>';
@@ -14475,16 +14523,64 @@ function extractJIFRows(payload){
   if(payload && typeof payload==='object') return Object.entries(payload).map(([journal,v])=>typeof v==='object'?{journal,...v}:{journal,value:v});
   return [];
 }
-function mergeJIFRows(rows,source='JCR import'){
+function mergeJIFRows(rows,source='JCR import',options={}){
   let added=0;
   (rows || []).forEach(row=>{
     const normalized={}; Object.entries(row || {}).forEach(([k,v])=>normalized[normalizeJournalKey(k)]=v);
     const journal=normalized['journal'] || normalized['journal title'] || normalized['full journal title'] || normalized['source title'] || normalized['source'] || row.journal;
     const value=normalized['journal impact factor'] ?? normalized['impact factor'] ?? normalized['jif'] ?? normalized['value'] ?? row.value;
     const year=normalized['jif year'] ?? normalized['impact factor year'] ?? normalized['year'] ?? row.year;
-    if(upsertJIFEntry(journal,value,year,source)) added++;
+    const rowSource=row.source || row.publisher || source;
+    if(upsertJIFEntry(journal,value,year,rowSource,{sourceUrl:row.sourceUrl || row.url || '',verificationStatus:row.verificationStatus || '',verifiedAt:row.verifiedAt || options.verifiedAt || '',onlyIfNewer:!!options.onlyIfNewer})) added++;
   });
   return added;
+}
+
+const IOE_BUNDLED_JIF_DATA={"metricYear":2025,"verifiedAt":"2026-08-20","journals":[{"journal":"Abdominal Radiology","value":2.3,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/261","verificationStatus":"official-publisher"},{"journal":"Acta Oncologica","value":2.7,"year":2025,"source":"Medical Journals Sweden / JCR","sourceUrl":"https://medicaljournalssweden.se/actaoncologica/journalinformation","verificationStatus":"official-journal"},{"journal":"American Journal of Transplantation","value":8.1,"year":2025,"source":"American Journal of Transplantation / JCR","sourceUrl":"https://www.amjtransplant.org/","verificationStatus":"official-journal"},{"journal":"Biomedicine & Pharmacotherapy","value":7.5,"year":2025,"source":"Elsevier journal page / JCR","sourceUrl":"https://www.elsevier.com/journals/biomedicine-and-pharmacotherapy/07533322/open-access-journal","verificationStatus":"official-publisher-current"},{"journal":"BMC Cancer","value":4.1,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/12885","verificationStatus":"official-publisher"},{"journal":"British Journal of Radiology","value":3.4,"year":2025,"source":"Oxford University Press / JCR","sourceUrl":"https://academic.oup.com/bjr/pages/about","verificationStatus":"official-publisher"},{"journal":"Cancer Biotherapy and Radiopharmaceuticals","value":1.7,"year":2025,"source":"SAGE journal page / JCR","sourceUrl":"https://journals.sagepub.com/home/cbt","verificationStatus":"official-publisher-current"},{"journal":"Cancer Imaging","value":4.8,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40644","verificationStatus":"official-publisher"},{"journal":"Cancers","value":4.8,"year":2025,"source":"MDPI / JCR","sourceUrl":"https://www.mdpi.com/about/announcements/17198","verificationStatus":"official-publisher"},{"journal":"Cardiovascular and Interventional Radiology","value":3.4,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/270","verificationStatus":"official-publisher"},{"journal":"Clinical and Translational Imaging","value":1.4,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40336","verificationStatus":"official-publisher"},{"journal":"Diagnostic and Interventional Imaging","value":11.1,"year":2025,"source":"Elsevier journal page / JCR","sourceUrl":"https://www.sciencedirect.com/journal/diagnostic-and-interventional-imaging","verificationStatus":"official-publisher-current"},{"journal":"EJNMMI Physics","value":3.5,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40658","verificationStatus":"official-publisher"},{"journal":"EJNMMI Research","value":2.7,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13550","verificationStatus":"official-publisher"},{"journal":"European Journal of Nuclear Medicine and Molecular Imaging","value":7.6,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/259","verificationStatus":"official-publisher"},{"journal":"European Radiology","value":6.0,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/330","verificationStatus":"official-publisher"},{"journal":"Frontiers in Medicine","value":3.6,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/medicine","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Nuclear Medicine","value":2.5,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/nuclear-medicine","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Oncology","value":3.4,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/oncology","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Pharmacology","value":5.4,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/pharmacology","verificationStatus":"official-publisher-current"},{"journal":"Journal of Cancer Research and Clinical Oncology","value":3.3,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/432","verificationStatus":"official-publisher"},{"journal":"Radiation Oncology","value":3.6,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13014","verificationStatus":"official-publisher"},{"journal":"Scientific Reports","value":4.9,"year":2025,"source":"Nature Portfolio / 2025 JCR","sourceUrl":"https://link.springer.com/journal/41598","verificationStatus":"official-publisher"},{"journal":"Trials","value":2.1,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13063","verificationStatus":"official-publisher"}]};
+const IOE_JIF_DEFAULT_URL='journal-impact-factors.json';
+function loadJIFAutoSettings(){
+  const url=document.getElementById('jif-auto-url'), enabled=document.getElementById('jif-auto-enabled');
+  if(url) url.value=localStorage.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL;
+  if(enabled) enabled.checked=localStorage.getItem('ioeJifAutoEnabled')!=='false';
+  renderJIFAutoStatus();
+}
+function saveJIFAutoSettings(){
+  const url=document.getElementById('jif-auto-url')?.value.trim() || IOE_JIF_DEFAULT_URL;
+  const enabled=document.getElementById('jif-auto-enabled')?.checked !== false;
+  localStorage.setItem('ioeJifAutoUrl',url); localStorage.setItem('ioeJifAutoEnabled',String(enabled));
+  renderJIFAutoStatus();
+}
+function renderJIFAutoStatus(message=''){
+  const el=document.getElementById('jif-auto-status'); if(!el) return;
+  const last=localStorage.getItem('ioeJifLastChecked'), metricYear=localStorage.getItem('ioeJifMetricYear');
+  const now=new Date(), nextYear=now.getFullYear()+(now.getMonth()>=5?1:0);
+  el.textContent=message || `${metricYear?`Latest verified metric year: ${metricYear}. `:''}${last?`Last checked: ${new Date(last).toLocaleDateString()}. `:'Not checked yet. '}Next automatic JCR-season check: June ${nextYear}.`;
+}
+async function loadVerifiedJIFUpdates(manual=false){
+  const url=(document.getElementById('jif-auto-url')?.value.trim() || localStorage.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL);
+  if(manual) renderJIFAutoStatus('Checking verified JIF source…');
+  try{
+    const r=await fetch(url+(url.includes('?')?'&':'?')+'ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data=await r.json(), verifiedAt=data.verifiedAt || new Date().toISOString().slice(0,10);
+    const added=mergeJIFRows(extractJIFRows(data),'Verified JIF update',{onlyIfNewer:true,verifiedAt});
+    const result=applyJIFRegistryToPublications(false), now=new Date().toISOString();
+    localStorage.setItem('ioeJifLastChecked',now); if(data.metricYear) localStorage.setItem('ioeJifMetricYear',String(data.metricYear));
+    saveJIFRegistryLocal(); applyFilters(); renderDashboard(); renderJIFRegistryList();
+    renderJIFAutoStatus(`Verified source checked ${new Date(now).toLocaleDateString()}: ${added} journal records read; ${result.matched} publications matched${result.changed?`, ${result.changed} updated`:''}.`);
+    if(manual) showToast(`Verified JIF update complete · ${result.matched} publications matched.`,'success');
+    return {added,...result};
+  }catch(err){
+    console.error(err); renderJIFAutoStatus(`Update check failed: ${err.message}. Existing verified values were kept.`);
+    if(manual) showToast('Could not reach the verified JIF source. Existing values were kept.','error');
+    return null;
+  }
+}
+function maybeAutoUpdateJIF(){
+  if(localStorage.getItem('ioeJifAutoEnabled')==='false') return;
+  const now=new Date(), last=Date.parse(localStorage.getItem('ioeJifLastChecked') || 0), due=!last || now-last>30*86400000;
+  if(now.getMonth()>=5 && due) loadVerifiedJIFUpdates(false);
+  else if(!last) loadVerifiedJIFUpdates(false);
 }
 function importJIFRegistryFile(input){
   const file=input?.files?.[0]; if(!file) return;
@@ -14524,14 +14620,13 @@ function migrateIOEDatabase(){
 const __ioeLegacyInit=init;
 init=function(){
   migrateIOEDatabase();
+  mergeJIFRows(extractJIFRows(IOE_BUNDLED_JIF_DATA),'Bundled verified JIF registry',{onlyIfNewer:true,verifiedAt:IOE_BUNDLED_JIF_DATA.verifiedAt});
+  applyJIFRegistryToPublications(false);
   __ioeLegacyInit();
   const desc=document.getElementById('pubmed-query-description');
   const scope=document.getElementById('pubmed-scope');
   if(scope) scope.onchange=()=>{if(desc) desc.textContent=scope.value==='y90'?'Y90 and radioembolization terms':scope.value==='cryo'?'Oncologic cryoablation terms constrained to tumor/cancer and IO target organs':'Y90/radioembolization OR oncologic cryoablation terms';};
-  Promise.resolve(fetch('journal-impact-factors.json?ts='+Date.now(),{cache:'no-store'})).then(r=>r.ok?r.json():null).then(data=>{
-    if(!data) return; const added=mergeJIFRows(extractJIFRows(data),'journal-impact-factors.json');
-    if(added){applyJIFRegistryToPublications(false);applyFilters();renderDashboard();}
-  }).catch(()=>{});
+  maybeAutoUpdateJIF();
 };
 
 function updateStats(){
