@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Y90 Publication Database v5.0.1</title>
+<title>IO&amp;E Database</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -12,7 +12,8 @@
   --bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#30363d;
   --accent:#e8c96a;--accent2:#58a6ff;--accent3:#3fb950;--red:#f85149;
   --purple:#bc8cff;--text:#e6edf3;--text-muted:#7d8590;--text-dim:#4d5562;
-  --resin:#f0883e;--glass:#58a6ff;--both:#bc8cff;
+  --cryo:#3fb950;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
+  --resin:var(--y90-resin);--glass:var(--y90-glass);--both:var(--y90-na);
   --radius:8px;--radius-lg:14px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -83,6 +84,11 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .badge-glass{background:rgba(88,166,255,.15);color:var(--glass);border:1px solid rgba(88,166,255,.3)}
 .badge-both{background:rgba(188,140,255,.15);color:var(--purple);border:1px solid rgba(188,140,255,.3)}
 .badge-ns{background:rgba(125,133,144,.12);color:var(--text-muted);border:1px solid rgba(125,133,144,.2)}
+.badge-cryo{background:rgba(63,185,80,.15);color:var(--cryo);border:1px solid rgba(63,185,80,.32)}
+.badge-y90-resin{background:rgba(240,136,62,.15);color:var(--y90-resin);border:1px solid rgba(240,136,62,.3)}
+.badge-y90-glass{background:rgba(88,166,255,.15);color:var(--y90-glass);border:1px solid rgba(88,166,255,.3)}
+.badge-y90-na{background:rgba(188,140,255,.15);color:var(--y90-na);border:1px solid rgba(188,140,255,.3)}
+.jif-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;background:rgba(232,201,106,.10);border:1px solid rgba(232,201,106,.32);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;white-space:nowrap}
 .badge-pmc{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;background:rgba(63,185,80,.15);color:#4cca5a;border:1px solid rgba(63,185,80,.3);white-space:nowrap}
 
 .cat-tags{display:flex;flex-wrap:wrap;gap:3px}
@@ -102,6 +108,10 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .pub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .pub-card.resin::before{background:var(--resin)}.pub-card.glass::before{background:var(--glass)}
 .pub-card.both::before{background:linear-gradient(90deg,var(--resin),var(--glass))}.pub-card.ns::before{background:var(--border)}
+.pub-card.cryoablation::before{background:var(--cryo)}
+.pub-card.y90-resin::before{background:var(--y90-resin)}
+.pub-card.y90-glass::before{background:var(--y90-glass)}
+.pub-card.y90-na::before{background:var(--y90-na)}
 .pub-card:hover{border-color:rgba(232,201,106,.3);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.4)}
 .card-title{font-family:'DM Serif Display',serif;font-size:14px;line-height:1.35;margin-bottom:8px;color:var(--text)}
 .card-findings{font-size:12px;color:var(--text-muted);line-height:1.55;border-left:2px solid var(--border);padding-left:8px;margin-bottom:9px}
@@ -1496,19 +1506,21 @@ body.modal-open .library-filter-sticky{
 <header>
   <div class="header-top">
     <div class="logo-area">
-      <h1>Y<span>90</span> Publication Database</h1>
-      <p>Radioembolization Literature Management · v5.0.1 · Manual Subcategory Support + paper1/paper2 import</p>
+      <h1>IO&amp;E <span>Database</span></h1>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v6.0</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
       <div class="header-stats">
         <div class="stat-pill">Total: <strong id="stat-total">0</strong></div>
-        <div class="stat-pill">Resin: <strong id="stat-resin" style="color:var(--resin)">0</strong></div>
-        <div class="stat-pill">Glass: <strong id="stat-glass" style="color:var(--glass)">0</strong></div>
-        <div class="stat-pill">Both: <strong id="stat-both" style="color:var(--purple)">0</strong></div>
+        <div class="stat-pill">Cryo: <strong id="stat-cryo" style="color:var(--cryo)">0</strong></div>
+        <div class="stat-pill">Y90 Resin: <strong id="stat-y90-resin" style="color:var(--y90-resin)">0</strong></div>
+        <div class="stat-pill">Y90 Glass: <strong id="stat-y90-glass" style="color:var(--y90-glass)">0</strong></div>
+        <div class="stat-pill">Y90 N/A: <strong id="stat-y90-na" style="color:var(--y90-na)">0</strong></div>
         <div class="stat-pill">PMC Free: <strong id="stat-pmc" style="color:#4cca5a">0</strong></div>
       </div>
       <button class="btn btn-secondary" onclick="openCategoryManager()">🏷️ Manage Categories</button>
+      <button class="btn btn-secondary" onclick="openJIFManager()">📈 JIF Registry</button>
       <button class="btn btn-green" onclick="saveToGitHub()" id="github-save-btn" title="Save all changes directly to GitHub">☁️ Save to GitHub</button>
       <button class="btn btn-blue" onclick="resetGitHubTokenAndOpenSettings()" id="github-settings-btn" title="Open GitHub settings and replace/reset token">⚙️ GitHub Settings / Reset Token</button>
       <div class="stat-pill" id="autosave-pill" title="Auto-save runs every 10 minutes when GitHub is configured" style="display:none;cursor:default">🕐 Auto-save: <strong id="autosave-countdown" style="color:var(--accent3)">10:00</strong></div>
@@ -1535,11 +1547,12 @@ body.modal-open .library-filter-sticky{
 
   <div class="smart-search-bar">
     <span style="font-size:15px">🧠</span>
-    <input class="smart-search-input" id="smart-search" placeholder='Smart search: "large tumor + glass + >400 Gy"  ·  "PVT resin survival"  ·  "immunotherapy 2022"' oninput="smartSearch(this.value)">
+    <input class="smart-search-input" id="smart-search" placeholder='Smart search: "lung cryoablation safety" · "Y90 glass + >400 Gy" · "PVT resin survival"' oninput="smartSearch(this.value)">
     <span class="smart-badge">AI-powered</span>
     <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
       <span style="font-size:11px;color:var(--text-dim)">Try:</span>
-      <span class="smart-ex" onclick="setSmartSearch('large tumor glass dosimetry')">large tumor + glass</span>
+      <span class="smart-ex" onclick="setSmartSearch('lung cryoablation safety')">lung cryoablation</span>
+      <span class="smart-ex" onclick="setSmartSearch('large tumor Y90 glass dosimetry')">large tumor + Y90 glass</span>
       <span class="smart-ex" onclick="setSmartSearch('PVT resin survival')">PVT + resin</span>
       <span class="smart-ex" onclick="setSmartSearch('immunotherapy combination 2023')">immunotherapy 2023</span>
       <span class="smart-ex" onclick="setSmartSearch('lung shunt complications radiation')">lung shunt complications</span>
@@ -1553,8 +1566,8 @@ body.modal-open .library-filter-sticky{
     </div>
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
-      <option value="">All Products</option><option value="resin">Resin</option>
-      <option value="glass">Glass</option><option value="both">Both</option><option value="ns">Not Specific</option>
+      <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
+      <option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-na">Y90 N/A</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
@@ -1583,7 +1596,7 @@ body.modal-open .library-filter-sticky{
             <th onclick="sortBy('year')">Year ↕</th>
             <th onclick="sortBy('title')">Title ↕</th>
             <th onclick="sortBy('country')">Country ↕</th>
-            <th>Categories</th><th>Product</th><th>Key Findings</th>
+            <th>Categories</th><th>Product</th><th>Journal Impact Factor</th><th>Key Findings</th>
             <th>Full Text</th><th>Review</th><th>Actions</th>
           </tr></thead>
           <tbody id="table-body"></tbody>
@@ -1613,6 +1626,11 @@ body.modal-open .library-filter-sticky{
     <div class="section-header">
       <span class="section-title">🔄 PubMed Weekly Updates</span>
       <div class="pubmed-timeframe-tools" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+        <select id="pubmed-scope" title="Choose which literature stream to search">
+          <option value="all">All IO&amp;E</option>
+          <option value="y90">Y90 only</option>
+          <option value="cryo">Cryoablation only</option>
+        </select>
         <button class="btn btn-blue" onclick="fetchPubMed(7)">🔍 Last 7 days</button>
         <button class="btn btn-secondary" onclick="fetchPubMed(30)">Last 30 days</button>
         <button class="btn btn-secondary" onclick="fetchPubMed(90)">Last 90 days</button>
@@ -1625,12 +1643,12 @@ body.modal-open .library-filter-sticky{
 
     <div class="pubmed-status" id="pubmed-status">
       <span class="pulse-dot"></span>
-      <span>Ready — Click "Last 7 days" to fetch new Y90 publications from PubMed. Papers with free PMC full text are automatically detected 🟢</span>
+      <span>Ready — choose All IO&amp;E, Y90, or Cryoablation, then select a timeframe. Papers with free PMC full text are automatically detected 🟢</span>
     </div>
 
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px">
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px"><strong style="color:var(--text)">Search query:</strong></div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2)">"Y-90"[tiab] OR "Y90"[tiab] OR "yttrium-90"[tiab] OR "yttrium 90"[tiab] OR "radioembolization"[tiab] OR "radio-embolization"[tiab] OR "selective internal radiation therapy"[tiab] OR "yttrium-90 microspheres"[tiab] OR "Y-90 microspheres"[tiab] OR ("SIRT"[tiab] AND radioembolization/liver terms)</div>
+      <div id="pubmed-query-description" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2)">Y90/radioembolization terms OR oncologic cryoablation terms (tumor, cancer, lung, renal, liver, bone, soft tissue, adrenal, or metastasis)</div>
       <div style="margin-top:8px;font-size:11px;color:var(--text-muted)">
         <span class="badge-pmc" style="display:inline-flex;margin-right:6px">PMC FREE</span> = Full text automatically available from PubMed Central (free, legal) · ~30% of papers
       </div>
@@ -1642,7 +1660,7 @@ body.modal-open .library-filter-sticky{
       <input type="text" id="pmid-manual" placeholder="e.g. 38765432" style="flex:1;min-width:140px;max-width:200px">
       <button class="btn btn-primary" style="font-size:12px" onclick="fetchByPMID(document.getElementById('pmid-manual').value)">Fetch & Import</button>
       <button class="btn btn-green" id="pubmed-import-all-btn" style="font-size:12px;display:none" onclick="importAllPubMedResults()">⬇ Import all search results</button>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=%22Y-90%22+OR+%22yttrium-90%22+OR+%22radioembolization%22+OR+%22SIRT%22&sort=date" target="_blank" class="btn btn-secondary" style="font-size:12px">🔗 Open PubMed Search</a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=%28%22Y-90%22%5BTitle%2FAbstract%5D+OR+%22radioembolization%22%5BTitle%2FAbstract%5D+OR+%22cryoablation%22%5BTitle%2FAbstract%5D%29&sort=date" target="_blank" class="btn btn-secondary" style="font-size:12px">🔗 Open PubMed Search</a>
     </div>
 
     <div id="pubmed-results"></div>
@@ -1659,14 +1677,17 @@ body.modal-open .library-filter-sticky{
       <div class="form-group"><label>Country *</label><input type="text" id="f-country" placeholder="USA, UK, Korea…"></div>
       <div class="form-group full"><label>Title *</label><textarea id="f-title" placeholder="Full publication title" rows="3" style="resize:vertical;min-height:72px;font-family:inherit;font-size:inherit;line-height:1.5"></textarea></div>
       <div class="form-group full"><label>Authors</label><input type="text" id="f-authors" placeholder="Smith J, Doe A, et al."></div>
-      <div class="form-group full"><label>Journal</label><input type="text" id="f-journal" placeholder="Journal of Vascular and Interventional Radiology"></div>
+      <div class="form-group full"><label>Journal</label><input type="text" id="f-journal" placeholder="Journal of Vascular and Interventional Radiology" onblur="autoFillJIFForForm()"></div>
+      <div class="form-group"><label>Journal Impact Factor</label><input type="number" id="f-jif" min="0" step="0.001" placeholder="Auto-filled from JIF registry"></div>
+      <div class="form-group"><label>JIF Year</label><input type="number" id="f-jifyear" min="1990" max="2099" placeholder="e.g. 2025"></div>
+      <div class="form-group full"><div class="review-note">JIF is a journal-level metric, not a score calculated from one paper. Enter it once (or import a JCR export in JIF Registry) and the database will automatically apply it to every matching journal.</div></div>
       <div class="form-group">
         <label>Product</label>
         <div class="radio-group" style="margin-top:4px">
-          <label class="radio-option"><input type="radio" name="product" value="resin"> <span style="color:var(--resin)">● Resin</span></label>
-          <label class="radio-option"><input type="radio" name="product" value="glass"> <span style="color:var(--glass)">● Glass</span></label>
-          <label class="radio-option"><input type="radio" name="product" value="both"> <span style="color:var(--purple)">● Both</span></label>
-          <label class="radio-option"><input type="radio" name="product" value="ns" checked> <span style="color:var(--text-muted)">○ N/S</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="cryoablation"> <span style="color:var(--cryo)">● Cryoablation</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="y90-na" checked> <span style="color:var(--y90-na)">○ Y90 N/A</span></label>
         </div>
       </div>
       <div class="form-group"><label>Review Status</label><select id="f-reviewstatus">
@@ -1759,11 +1780,70 @@ body.modal-open .library-filter-sticky{
   </div>
 </div>
 
+<div class="modal-overlay" id="jif-modal">
+  <div class="modal wide">
+    <button class="modal-close" onclick="closeModal('jif-modal')">×</button>
+    <h2>📈 Journal Impact Factor Registry</h2>
+    <div class="category-manager-note">
+      Journal Impact Factor is published at journal level. Import an authorized JCR export (Excel/CSV/JSON), or enter a value once below. Matching publications will be updated automatically. Other citation metrics are never relabeled as JIF.
+    </div>
+    <div class="form-grid" style="margin-bottom:14px">
+      <div class="form-group full"><label>Journal title</label><input type="text" id="jif-journal" placeholder="Full journal title"></div>
+      <div class="form-group"><label>Journal Impact Factor</label><input type="number" id="jif-value" min="0" step="0.001" placeholder="e.g. 8.6"></div>
+      <div class="form-group"><label>JIF Year</label><input type="number" id="jif-year" min="1990" max="2099" placeholder="e.g. 2025"></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn btn-primary" onclick="saveJIFRegistryEntry()">Save &amp; Apply</button>
+      <label class="btn btn-blue" style="cursor:pointer">Import JCR Excel / CSV / JSON
+        <input id="jif-import-file" type="file" accept=".xlsx,.xls,.csv,.json" style="display:none" onchange="importJIFRegistryFile(this)">
+      </label>
+      <button class="btn btn-secondary" onclick="applyJIFRegistryToPublications(true)">Apply Registry to All</button>
+      <button class="btn btn-secondary" onclick="exportJIFRegistry()">Export Registry</button>
+    </div>
+    <div class="results-info" id="jif-registry-summary"></div>
+    <div id="jif-registry-list"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ══════════════════════════════════════════════════════════ CATEGORIES
 const DEFAULT_CATEGORIES = [
+  'Indication',
+  'Indication / HCC',
+  'Indication / ICC',
+  'Indication / mCRC',
+  'Indication / Neuroendocrine Tumor',
+  'Indication / Lung Cancer',
+  'Indication / Renal Tumor',
+  'Indication / Bone & Soft Tissue',
+  'Indication / Other Metastases',
+  'Evidence Type',
+  'Evidence Type / Randomized Trial',
+  'Evidence Type / Prospective Study',
+  'Evidence Type / Retrospective Study',
+  'Evidence Type / Registry & Real-World Evidence',
+  'Evidence Type / Systematic Review & Meta-analysis',
+  'Evidence Type / Guideline & Consensus',
+  'Evidence Type / Case Report',
+  'Clinical Topic',
+  'Clinical Topic / Efficacy',
+  'Clinical Topic / Safety',
+  'Clinical Topic / Patient Selection',
+  'Clinical Topic / Quality of Life',
+  'Technique',
+  'Technique / Cryoablation Protocol',
+  'Technique / Cryoprotection',
+  'Technique / Image Guidance',
+  'Technique / Ablation Zone',
+  'Technique / Y90 Dosimetry',
+  'Technique / Mapping & MAA',
+  'Technique / Lung Shunt',
+  'Technique / Radiation Segmentectomy',
+  'Combination Therapy',
+  'Health Economics',
+  'APAC Data',
   'Asian data',
   'Balloon Occlusion',
   'Carbon',
@@ -8295,9 +8375,10 @@ function clearFilters() {
 
 function updateStats() {
   document.getElementById('stat-total').textContent=publications.length;
-  document.getElementById('stat-resin').textContent=publications.filter(p=>p.product==='resin').length;
-  document.getElementById('stat-glass').textContent=publications.filter(p=>p.product==='glass').length;
-  document.getElementById('stat-both').textContent=publications.filter(p=>p.product==='both').length;
+  document.getElementById('stat-cryo').textContent=publications.filter(p=>normalizeProductCode(p.product)==='cryoablation').length;
+  document.getElementById('stat-y90-resin').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-resin').length;
+  document.getElementById('stat-y90-glass').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-glass').length;
+  document.getElementById('stat-y90-na').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-na').length;
   document.getElementById('stat-pmc').textContent=publications.filter(p=>hasPMC(p)).length;
 }
 
@@ -8616,14 +8697,15 @@ async function fetchPubMedAbstractsByPmids(ids){
 async function fetchPubMed(days=7) {
   const statusEl=document.getElementById('pubmed-status');
   const resultsEl=document.getElementById('pubmed-results');
-  statusEl.innerHTML=`<div class="ai-thinking"><span></span><span></span><span></span></div><span style="margin-left:9px">Searching PubMed for Y90 papers from the last ${days} days…</span>`;
+  const scope=document.getElementById('pubmed-scope')?.value || 'all';
+  const scopeLabel={all:'IO&E',y90:'Y90',cryo:'oncologic cryoablation'}[scope] || 'IO&E';
+  statusEl.innerHTML=`<div class="ai-thinking"><span></span><span></span><span></span></div><span style="margin-left:9px">Searching PubMed for ${scopeLabel} papers from the last ${days} days…</span>`;
   resultsEl.innerHTML='';
   lastPubMedSearchResults = [];
   const importAllBtn=document.getElementById('pubmed-import-all-btn');
   if(importAllBtn) importAllBtn.style.display='none';
 
-  // v5.7: safer Y90 query. Bare "SIRT" pulls unrelated sirtuin / skincare papers, so SIRT is now constrained by radioembolization/liver terms.
-  const queryString='("Y-90"[tiab] OR "Y90"[tiab] OR "yttrium-90"[tiab] OR "yttrium 90"[tiab] OR "radioembolization"[tiab] OR "radio-embolization"[tiab] OR "selective internal radiation therapy"[tiab] OR "yttrium-90 microspheres"[tiab] OR "Y-90 microspheres"[tiab] OR ("SIRT"[tiab] AND (radioembolization[tiab] OR yttrium[tiab] OR microsphere*[tiab] OR liver[tiab] OR hepatic[tiab] OR hepatocellular[tiab] OR HCC[tiab])))';
+  const queryString=buildIOEPubMedQuery(scope);
   const query=encodeURIComponent(queryString);
 
   try {
@@ -8665,14 +8747,16 @@ async function fetchPubMed(days=7) {
       });
     } catch(e){}
 
-    const isLikelyY90Paper=(paper, abstract='')=>{
+    const isLikelyIOEPaper=(paper, abstract='')=>{
       const txt=[paper?.title, paper?.source, abstract].filter(Boolean).join(' ').toLowerCase();
       if(/sirtuin|antiaging|anti-aging|cosmeceutical|skin aging|pentapeptide|vialox|leuphasyl/.test(txt)) return false;
-      return /y-?90|yttrium[- ]?90|radioembolization|radio-embolization|selective internal radiation therapy|microsphere|hepatic|hepatocellular|hcc|liver/.test(txt);
+      const y90=/y-?90|yttrium[- ]?90|radioembolization|radio-embolization|selective internal radiation therapy/.test(txt);
+      const cryo=/cryoablat|cryosurger|freeze[- ]?thaw/.test(txt) && /tumou?r|cancer|oncolog|neoplasm|metasta|lung|pulmonary|renal|kidney|liver|hepatic|bone|soft tissue|adrenal/.test(txt);
+      return scope==='y90' ? y90 : scope==='cryo' ? cryo : (y90 || cryo);
     };
-    const papers=ids.map(id=>summaryData.result?.[id]).filter(Boolean).filter(p=>isLikelyY90Paper(p, abstractMap?.[p.uid]||''));
+    const papers=ids.map(id=>summaryData.result?.[id]).filter(Boolean).filter(p=>isLikelyIOEPaper(p, abstractMap?.[p.uid]||''));
     if (!papers.length) {
-      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No likely Y90/radioembolization publications found in the last ${days} days after filtering unrelated SIRT/sirtuin records.</span>`;
+      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No likely ${scopeLabel} publications found in the last ${days} days after relevance filtering.</span>`;
       return;
     }
     const validPmids=new Set(papers.map(p=>String(p.uid)));
@@ -8696,7 +8780,7 @@ async function fetchPubMed(days=7) {
     }
 
     statusEl.innerHTML=`<span class="pulse-dot" style="background:var(--accent3)"></span>
-      <span style="color:var(--accent3);margin-left:8px">✓ ${papers.length}${totalFound>papers.length?' of '+totalFound:''} Y90 papers loaded · 
+      <span style="color:var(--accent3);margin-left:8px">✓ ${papers.length}${totalFound>papers.length?' of '+totalFound:''} ${scopeLabel} papers loaded · 
       <span style="color:#4cca5a">🟢 ${pmcCount} with FREE full text on PMC</span> · 
       ${papers.length-pmcCount} paywalled</span>`;
 
@@ -8786,7 +8870,7 @@ function importAllPubMedResults(){
       authors: r.authors || '',
       journal: r.journal || '',
       country: '',
-      product: 'ns',
+      product: classifyIOEProduct([r.title,r.journal,r.abstract].filter(Boolean).join(' ')),
       categories: ['PubMed Updates'],
       primaryCategory: 'PubMed Updates',
       results: r.abstract ? buildResultsDraftFromAbstract(r.abstract,4) : '',
@@ -8878,7 +8962,7 @@ async function importFromPubMed(pmid,title,authors,journal,year,pmcid='') {
     const combined=[title,journal,authors,abstractText].filter(Boolean).join(' ');
     const autoCats=guessLocalCategoriesFromText(combined);
     if(autoCats.length) addFormCategories(autoCats);
-    const product=/glass/i.test(combined)&&/resin|sir-spheres|sirspheres|sirtax/i.test(combined)?'both':/glass/i.test(combined)?'glass':/resin|sir-spheres|sirspheres|sirtax/i.test(combined)?'resin':'ns';
+    const product=classifyIOEProduct(combined);
     const r=document.querySelector(`input[name="product"][value="${product}"]`); if(r) r.checked=true;
     const country=await inferCountryFromPublication(temp, combined);
     if(country && !document.getElementById('f-country').value.trim()) document.getElementById('f-country').value=country;
@@ -9503,7 +9587,7 @@ async function aiSummarizeForm() {
     const resultsForClassification=document.getElementById('f-results')?.value.trim() || '';
     const textForClassification=[sourceText,titleOnlyText,journal,resultsForClassification,notes].filter(Boolean).join(' ');
     const categories=guessLocalCategoriesFromText(textForClassification);
-    const product=/glass/i.test(textForClassification)&&/resin|sir-spheres|sirspheres|sirtax/i.test(textForClassification)?'both':/glass/i.test(textForClassification)?'glass':/resin|sir-spheres|sirspheres|sirtax/i.test(textForClassification)?'resin':'ns';
+    const product=classifyIOEProduct(textForClassification);
     const inferredCountry=await inferCountryFromPublication(tempPub, textForClassification);
 
     if(product){
@@ -9639,7 +9723,7 @@ function openEditModal(id){
 
 function clearForm(){
   ['f-year','f-country','f-title','f-authors','f-journal','f-url','f-pmcid','f-pdfurl','f-pdffilename','f-results','f-findings','f-notes','f-abstract'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.querySelector('input[name="product"][value="ns"]').checked=true;
+  document.querySelector('input[name="product"][value="y90-na"]').checked=true;
   populatePrimaryCategorySelect('');
   const reviewSelect=document.getElementById('f-reviewstatus'); if(reviewSelect) reviewSelect.value='AI Draft';
   document.querySelectorAll('.cat-select-chip').forEach(c=>c.classList.remove('selected'));
@@ -10014,7 +10098,7 @@ function savePublication(){
 
 function clearForm(){
   ['f-year','f-country','f-title','f-authors','f-journal','f-url','f-pmcid','f-pdfurl','f-pdffilename','f-fulltextnote','f-results','f-findings','f-notes','f-abstract','category-form-search'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.querySelector('input[name="product"][value="ns"]').checked=true;
+  document.querySelector('input[name="product"][value="y90-na"]').checked=true;
   populatePrimaryCategorySelect('');
   document.querySelectorAll('.cat-select-chip').forEach(c=>{c.classList.remove('selected'); c.style.display='inline-flex';});
   document.getElementById('pdf-label').textContent='Click to attach PDF · or enter PMC ID above for auto free-text';
@@ -13325,7 +13409,7 @@ function syncPrimaryCategoryWithSelections(){
 
 function clearForm(){
   ['f-year','f-country','f-title','f-authors','f-journal','f-url','f-pmcid','f-pdfurl','f-pdffilename','f-fulltextnote','f-results','f-findings','f-notes','f-abstract','category-form-search'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.querySelector('input[name="product"][value="ns"]').checked=true;
+  document.querySelector('input[name="product"][value="y90-na"]').checked=true;
   formSecondaryCategories = [];
   populatePrimaryCategorySelect('');
   renderSecondaryCategoryPicker();
@@ -13455,7 +13539,8 @@ async function bootY90Database(){
   }
   init();
 }
-bootY90Database();
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bootY90Database,{once:true});
+else bootY90Database();
 
 // ══════════════════════════════════════════════════════════
 // ☁️ SAVE TO GITHUB — commits publications.json directly via GitHub API
@@ -14155,6 +14240,447 @@ savePublication = function(){
   // (poll every 5 seconds so pill appears right after settings are saved)
   setInterval(updatePill, 5000);
 })();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   IO&E DATABASE v6.0
+   Cryoablation + Y90 product model, journal-level JIF registry,
+   and combined PubMed discovery. Legacy Y90 records are migrated in place.
+   ══════════════════════════════════════════════════════════ */
+
+const IOE_PRODUCT_META = {
+  'cryoablation': {label:'Cryoablation', short:'Cryo', cls:'badge-cryo'},
+  'y90-resin': {label:'Y90 Resin', short:'Y90 Resin', cls:'badge-y90-resin'},
+  'y90-glass': {label:'Y90 Glass', short:'Y90 Glass', cls:'badge-y90-glass'},
+  'y90-na': {label:'Y90 N/A', short:'Y90 N/A', cls:'badge-y90-na'}
+};
+
+function normalizeProductCode(value){
+  const v=String(value || '').trim().toLowerCase();
+  if(v==='cryoablation' || v==='cryo') return 'cryoablation';
+  if(v==='y90-resin' || v==='resin') return 'y90-resin';
+  if(v==='y90-glass' || v==='glass') return 'y90-glass';
+  if(v==='y90-na' || v==='both' || v==='ns' || v==='n/a' || v==='not specific' || !v) return 'y90-na';
+  return 'y90-na';
+}
+
+function classifyIOEProduct(text){
+  const t=String(text || '').toLowerCase();
+  if(/cryoablat|cryosurger|freeze[- ]?thaw|cryoprobe/.test(t)) return 'cryoablation';
+  const hasResin=/\bresin\b|sir[- ]?spheres?|sirspheres|sirtax/.test(t);
+  const hasGlass=/\bglass\b|therasphere/.test(t);
+  if(hasResin && !hasGlass) return 'y90-resin';
+  if(hasGlass && !hasResin) return 'y90-glass';
+  return 'y90-na';
+}
+
+function productBadge(product){
+  const meta=IOE_PRODUCT_META[normalizeProductCode(product)] || IOE_PRODUCT_META['y90-na'];
+  return `<span class="product-badge ${meta.cls}">● ${meta.label}</span>`;
+}
+
+function buildIOEPubMedQuery(scope='all'){
+  const y90='("Y-90"[tiab] OR "Y90"[tiab] OR "yttrium-90"[tiab] OR "yttrium 90"[tiab] OR "radioembolization"[tiab] OR "radio-embolization"[tiab] OR "selective internal radiation therapy"[tiab] OR "yttrium-90 microspheres"[tiab] OR "Y-90 microspheres"[tiab] OR ("SIRT"[tiab] AND (radioembolization[tiab] OR yttrium[tiab] OR microsphere*[tiab] OR liver[tiab] OR hepatic[tiab] OR hepatocellular[tiab] OR HCC[tiab])))';
+  const cryo='(("cryoablation"[tiab] OR "cryo-ablation"[tiab] OR "percutaneous cryoablation"[tiab] OR "image-guided cryoablation"[tiab] OR "cryosurgery"[tiab]) AND (tumor[tiab] OR tumour[tiab] OR cancer[tiab] OR oncology[tiab] OR neoplasm*[tiab] OR metast*[tiab] OR lung[tiab] OR pulmonary[tiab] OR renal[tiab] OR kidney[tiab] OR liver[tiab] OR hepatic[tiab] OR bone[tiab] OR "soft tissue"[tiab] OR adrenal[tiab]))';
+  return scope==='y90' ? y90 : scope==='cryo' ? cryo : `(${y90} OR ${cryo})`;
+}
+
+function parseSmartQuery(q){
+  const tokens=[], lq=String(q || '').toLowerCase();
+  if(/\bcryo(?:ablation)?\b/.test(lq)) tokens.push({type:'product',val:'cryoablation'});
+  if(/\bglass\b/.test(lq)) tokens.push({type:'product',val:'y90-glass'});
+  if(/\bresin\b/.test(lq)) tokens.push({type:'product',val:'y90-resin'});
+  for(const m of String(q || '').matchAll(/([><])\s*(\d+)\s*gy/gi)) tokens.push({type:'dose',op:m[1],val:parseInt(m[2])});
+  for(const m of String(q || '').matchAll(/([><])(\d{4})/g)) tokens.push({type:'year',op:m[1],val:parseInt(m[2])});
+  const cleaned=String(q || '').replace(/[><]\d+\s*gy/gi,'').replace(/[><]\d{4}/g,'').replace(/\b(and|or|y90|glass|resin|cryo|cryoablation)\b/gi,'').trim();
+  cleaned.split(/[\s+]+/).forEach(w=>{
+    const wc=w.replace(/[^a-z0-9-]/gi,'').toLowerCase();
+    if(wc.length>2) tokens.push({type:'keyword',val:wc,required:String(q).includes('+'+w)||String(q).includes(w+'+')});
+  });
+  return tokens;
+}
+
+const IOE_BASE_CATEGORIES = [
+  'Indication','Indication / HCC','Indication / ICC','Indication / mCRC','Indication / Neuroendocrine Tumor',
+  'Indication / Lung Cancer','Indication / Renal Tumor','Indication / Bone & Soft Tissue','Indication / Other Metastases',
+  'Evidence Type','Evidence Type / Randomized Trial','Evidence Type / Prospective Study','Evidence Type / Retrospective Study',
+  'Evidence Type / Registry & Real-World Evidence','Evidence Type / Systematic Review & Meta-analysis','Evidence Type / Guideline & Consensus','Evidence Type / Case Report',
+  'Clinical Topic','Clinical Topic / Efficacy','Clinical Topic / Safety','Clinical Topic / Patient Selection','Clinical Topic / Quality of Life',
+  'Technique','Technique / Cryoablation Protocol','Technique / Cryoprotection','Technique / Image Guidance','Technique / Ablation Zone',
+  'Technique / Y90 Dosimetry','Technique / Mapping & MAA','Technique / Lung Shunt','Technique / Radiation Segmentectomy',
+  'Combination Therapy','Health Economics','APAC Data'
+];
+
+function guessLocalCategoriesFromText(text){
+  const t=String(text || '').toLowerCase();
+  const picks=[];
+  const add=cat=>{ if(ALL_CATEGORIES.includes(cat) && !picks.includes(cat)) picks.push(cat); };
+  if(/hcc|hepatocellular|bclc/.test(t)){add('Indication / HCC');add('HCC');}
+  if(/cholangiocarcinoma|\bicc\b|biliary/.test(t)){add('Indication / ICC');add('ICC');}
+  if(/colorectal|\bcrc\b|crlm|mcrc/.test(t)){add('Indication / mCRC');add('mCRC');}
+  if(/neuroendocrine|\bnet\b/.test(t)) add('Indication / Neuroendocrine Tumor');
+  if(/lung cancer|pulmonary (?:tumou?r|metasta)|non-small cell|\bnsclc\b/.test(t)) add('Indication / Lung Cancer');
+  if(/renal|kidney|renal cell|\brcc\b/.test(t)) add('Indication / Renal Tumor');
+  if(/bone|osseous|soft tissue|sarcoma/.test(t)) add('Indication / Bone & Soft Tissue');
+  if(/randomi[sz]ed|\brct\b/.test(t)) add('Evidence Type / Randomized Trial');
+  else if(/prospective/.test(t)) add('Evidence Type / Prospective Study');
+  else if(/retrospective/.test(t)) add('Evidence Type / Retrospective Study');
+  if(/registry|real[- ]world/.test(t)) add('Evidence Type / Registry & Real-World Evidence');
+  if(/systematic review|meta-analysis/.test(t)) add('Evidence Type / Systematic Review & Meta-analysis');
+  if(/guideline|consensus|recommendation/.test(t)) add('Evidence Type / Guideline & Consensus');
+  if(/case report/.test(t)) add('Evidence Type / Case Report');
+  if(/safety|toxicity|adverse|complication|reild/.test(t)){add('Clinical Topic / Safety');add('Safety');}
+  if(/response|survival|efficacy|overall survival|\bpfs\b|\borr\b/.test(t)){add('Clinical Topic / Efficacy');add('Clinical efficacy');}
+  if(/patient selection|eligib|predictor|risk factor/.test(t)) add('Clinical Topic / Patient Selection');
+  if(/quality of life|qol|patient reported/.test(t)) add('Clinical Topic / Quality of Life');
+  if(/cryoablat|cryosurger|freeze[- ]?thaw/.test(t)) add('Technique / Cryoablation Protocol');
+  if(/hydrodissection|pneumodissection|cryoprotection|thermal protection/.test(t)) add('Technique / Cryoprotection');
+  if(/ablation zone|ice ball|margin/.test(t)) add('Technique / Ablation Zone');
+  if(/image guidance|ct-guided|mri-guided|ultrasound-guided/.test(t)) add('Technique / Image Guidance');
+  if(/dosim|absorbed dose|dose[- ]response|partition|mird|voxel|tumor dose/.test(t)){add('Technique / Y90 Dosimetry');add('Dosimetry');}
+  if(/mapping|\bmaa\b/.test(t)){add('Technique / Mapping & MAA');add('MAA');}
+  if(/lung shunt|\blsf\b/.test(t)){add('Technique / Lung Shunt');add('Lung Shunt');}
+  if(/radiation segmentectomy/.test(t)){add('Technique / Radiation Segmentectomy');add('Radiation segmentectomy');}
+  if(/combination|immunotherap|checkpoint|chemotherap|targeted therap/.test(t)) add('Combination Therapy');
+  if(/asia|asian|apac|taiwan|korea|japan|china|singapore/.test(t)) add('APAC Data');
+  return picks.slice(0,8);
+}
+
+/* Journal Impact Factor registry. JIF values are looked up, never inferred from
+   article citation counts or substituted with OpenAlex/SJR metrics. */
+let journalImpactFactorRegistry = (()=>{
+  try{return JSON.parse(localStorage.getItem('ioeJifRegistry') || '{}') || {};}catch(e){return {};}
+})();
+
+function normalizeJournalKey(value){
+  const key=String(value || '').toLowerCase().replace(/&/g,' and ').replace(/^the\s+/,'').replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+  const aliases={
+    'jvir':'journal of vascular and interventional radiology',
+    'j vasc interv radiol':'journal of vascular and interventional radiology',
+    'cvir':'cardiovascular and interventional radiology',
+    'cardiovasc intervent radiol':'cardiovascular and interventional radiology',
+    'ejnmmi':'european journal of nuclear medicine and molecular imaging',
+    'eur j nucl med mol imaging':'european journal of nuclear medicine and molecular imaging',
+    'jnm':'journal of nuclear medicine',
+    'j nucl med':'journal of nuclear medicine',
+    'j hepatol':'journal of hepatology',
+    'lancet oncol':'lancet oncology',
+    'int j hyperthermia':'international journal of hyperthermia',
+    'nucl med commun':'nuclear medicine communications',
+    'j clin oncol':'journal of clinical oncology',
+    'j gastroenterol hepatol':'journal of gastroenterology and hepatology',
+    'radiat oncol':'radiation oncology',
+    'kjr':'korean journal of radiology'
+  };
+  return aliases[key] || key;
+}
+function validJIFNumber(value){
+  if(value===null || value===undefined || String(value).trim()==='') return null;
+  const n=Number(value); return Number.isFinite(n) && n>=0 ? n : null;
+}
+function getJIFEntry(journal){
+  const key=normalizeJournalKey(journal);
+  if(!key) return null;
+  return journalImpactFactorRegistry[key] || null;
+}
+function saveJIFRegistryLocal(){
+  localStorage.setItem('ioeJifRegistry', JSON.stringify(journalImpactFactorRegistry));
+}
+function upsertJIFEntry(journal,value,year,source='Manual/JCR import'){
+  const key=normalizeJournalKey(journal), num=validJIFNumber(value), yr=parseInt(year);
+  if(!key || num===null) return false;
+  journalImpactFactorRegistry[key]={journal:String(journal).trim(),value:num,year:Number.isFinite(yr)?yr:'',source};
+  saveJIFRegistryLocal();
+  return true;
+}
+function seedJIFRegistryFromPublications(){
+  (publications || []).forEach(p=>{
+    const val=validJIFNumber(p.journalImpactFactor ?? p.jif);
+    if(p.journal && val!==null && !getJIFEntry(p.journal)) upsertJIFEntry(p.journal,val,p.journalImpactFactorYear ?? p.jifYear,'Publication record');
+  });
+}
+function jifBadgeHtml(p){
+  const val=validJIFNumber(p?.journalImpactFactor ?? p?.jif);
+  if(val===null) return '<span style="color:var(--text-dim)">—</span>';
+  const year=p?.journalImpactFactorYear ?? p?.jifYear ?? '';
+  return `<span class="jif-badge" title="Journal-level metric${year?' · JIF '+year:''}">JIF ${val.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')}${year?` <small>(${year})</small>`:''}</span>`;
+}
+function applyJIFRegistryToPublications(showMessage=false){
+  let matched=0, changed=0;
+  publications=(publications || []).map(p=>{
+    const entry=getJIFEntry(p.journal);
+    if(!entry) return p;
+    matched++;
+    const oldVal=validJIFNumber(p.journalImpactFactor ?? p.jif);
+    if(oldVal!==entry.value || String(p.journalImpactFactorYear || '')!==String(entry.year || '')) changed++;
+    return {...p,journalImpactFactor:entry.value,journalImpactFactorYear:entry.year || ''};
+  });
+  saveJIFRegistryLocal();
+  try{localStorage.setItem('y90db',JSON.stringify(publications));}catch(e){}
+  if(showMessage){
+    applyFilters(); renderDashboard(); renderJIFRegistryList();
+    showToast(`JIF applied to ${matched} publication${matched===1?'':'s'}${changed?` · ${changed} updated`:''}.`,'success');
+  }
+  return {matched,changed};
+}
+function autoFillJIFForForm(){
+  const journal=document.getElementById('f-journal')?.value || '';
+  const entry=getJIFEntry(journal);
+  const valEl=document.getElementById('f-jif'), yearEl=document.getElementById('f-jifyear');
+  if(entry){
+    if(valEl && !valEl.value) valEl.value=entry.value;
+    if(yearEl && !yearEl.value) yearEl.value=entry.year || '';
+  }
+  return entry;
+}
+function openJIFManager(){
+  seedJIFRegistryFromPublications();
+  renderJIFRegistryList();
+  openModal('jif-modal');
+}
+function saveJIFRegistryEntry(){
+  const journal=document.getElementById('jif-journal')?.value.trim() || '';
+  const value=document.getElementById('jif-value')?.value;
+  const year=document.getElementById('jif-year')?.value;
+  if(!journal || validJIFNumber(value)===null){showToast('Journal title and a valid JIF are required.','error');return;}
+  upsertJIFEntry(journal,value,year,'Manual entry');
+  applyJIFRegistryToPublications(false);
+  ['jif-journal','jif-value','jif-year'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  renderJIFRegistryList(); applyFilters(); renderDashboard();
+  showToast('JIF saved and applied to matching publications.','success');
+}
+function deleteJIFRegistryEntry(key){
+  if(!confirm('Delete this JIF registry entry? Existing publication values will be kept.')) return;
+  delete journalImpactFactorRegistry[key]; saveJIFRegistryLocal(); renderJIFRegistryList();
+}
+function renderJIFRegistryList(){
+  const list=document.getElementById('jif-registry-list');
+  const summary=document.getElementById('jif-registry-summary');
+  if(!list) return;
+  const entries=Object.entries(journalImpactFactorRegistry).sort((a,b)=>String(a[1].journal).localeCompare(String(b[1].journal)));
+  const matched=(publications || []).filter(p=>getJIFEntry(p.journal)).length;
+  if(summary) summary.textContent=`${entries.length} journals in registry · ${matched} of ${(publications || []).length} publications matched`;
+  list.innerHTML=entries.length ? entries.map(([key,e])=>`
+    <div class="category-manager-row">
+      <div class="category-manager-name">${escapeHtml(e.journal)}<div style="font-size:11px;color:var(--text-muted);font-weight:400">${escapeHtml(e.source || '')}</div></div>
+      <div class="category-manager-count">JIF ${e.value}${e.year?` · ${e.year}`:''}</div>
+      <div class="category-manager-actions"><button class="btn btn-secondary" onclick="deleteJIFRegistryEntry('${String(key).replace(/'/g,"\\'")}')">Delete</button></div>
+    </div>`).join('') : '<div class="no-results">No JIF values yet. Import a JCR export or add the first journal above.</div>';
+}
+function extractJIFRows(payload){
+  if(Array.isArray(payload)) return payload;
+  if(Array.isArray(payload?.journals)) return payload.journals;
+  if(Array.isArray(payload?.registry)) return payload.registry;
+  if(payload && typeof payload==='object') return Object.entries(payload).map(([journal,v])=>typeof v==='object'?{journal,...v}:{journal,value:v});
+  return [];
+}
+function mergeJIFRows(rows,source='JCR import'){
+  let added=0;
+  (rows || []).forEach(row=>{
+    const normalized={}; Object.entries(row || {}).forEach(([k,v])=>normalized[normalizeJournalKey(k)]=v);
+    const journal=normalized['journal'] || normalized['journal title'] || normalized['full journal title'] || normalized['source title'] || normalized['source'] || row.journal;
+    const value=normalized['journal impact factor'] ?? normalized['impact factor'] ?? normalized['jif'] ?? normalized['value'] ?? row.value;
+    const year=normalized['jif year'] ?? normalized['impact factor year'] ?? normalized['year'] ?? row.year;
+    if(upsertJIFEntry(journal,value,year,source)) added++;
+  });
+  return added;
+}
+function importJIFRegistryFile(input){
+  const file=input?.files?.[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      let rows=[];
+      if(/\.json$/i.test(file.name)) rows=extractJIFRows(JSON.parse(new TextDecoder().decode(e.target.result)));
+      else{
+        const wb=XLSX.read(e.target.result,{type:'array'});
+        rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
+      }
+      const added=mergeJIFRows(rows,`Imported from ${file.name}`);
+      applyJIFRegistryToPublications(false); renderJIFRegistryList(); applyFilters(); renderDashboard();
+      showToast(`Imported ${added} JIF entr${added===1?'y':'ies'} and matched publications automatically.`,'success');
+    }catch(err){console.error(err);showToast('Could not read the JIF file. Check the journal, JIF, and year columns.','error');}
+    input.value='';
+  };
+  reader.readAsArrayBuffer(file);
+}
+function exportJIFRegistry(){
+  const rows=Object.values(journalImpactFactorRegistry).map(e=>({'Journal':e.journal,'Journal Impact Factor':e.value,'JIF Year':e.year || '','Source':e.source || ''}));
+  const ws=XLSX.utils.json_to_sheet(rows), wb=XLSX.utils.book_new();
+  ws['!cols']=[{wch:48},{wch:22},{wch:12},{wch:30}]; XLSX.utils.book_append_sheet(wb,ws,'JIF Registry');
+  XLSX.writeFile(wb,`IOE_JIF_Registry_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+
+function migrateIOEDatabase(){
+  IOE_BASE_CATEGORIES.forEach(c=>{if(!ALL_CATEGORIES.includes(c)) ALL_CATEGORIES.push(c);});
+  publications=(publications || []).map(p=>({...p,product:normalizeProductCode(p.product),categories:Array.isArray(p.categories)?p.categories:[],journalImpactFactor:validJIFNumber(p.journalImpactFactor ?? p.jif),journalImpactFactorYear:p.journalImpactFactorYear ?? p.jifYear ?? ''}));
+  seedJIFRegistryFromPublications();
+  applyJIFRegistryToPublications(false);
+  saveCategories();
+  try{localStorage.setItem('y90db',JSON.stringify(publications));}catch(e){}
+}
+
+const __ioeLegacyInit=init;
+init=function(){
+  migrateIOEDatabase();
+  __ioeLegacyInit();
+  const desc=document.getElementById('pubmed-query-description');
+  const scope=document.getElementById('pubmed-scope');
+  if(scope) scope.onchange=()=>{if(desc) desc.textContent=scope.value==='y90'?'Y90 and radioembolization terms':scope.value==='cryo'?'Oncologic cryoablation terms constrained to tumor/cancer and IO target organs':'Y90/radioembolization OR oncologic cryoablation terms';};
+  Promise.resolve(fetch('journal-impact-factors.json?ts='+Date.now(),{cache:'no-store'})).then(r=>r.ok?r.json():null).then(data=>{
+    if(!data) return; const added=mergeJIFRows(extractJIFRows(data),'journal-impact-factors.json');
+    if(added){applyJIFRegistryToPublications(false);applyFilters();renderDashboard();}
+  }).catch(()=>{});
+};
+
+function updateStats(){
+  const count=code=>(publications || []).filter(p=>normalizeProductCode(p.product)===code).length;
+  const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-y90-resin',count('y90-resin'));
+  set('stat-y90-glass',count('y90-glass')); set('stat-y90-na',count('y90-na')); set('stat-pmc',(publications || []).filter(p=>hasPMC(p)).length);
+}
+
+function renderTable(data){
+  document.getElementById('no-results').style.display=data.length?'none':'block';
+  document.getElementById('table-body').innerHTML=data.map(p=>`
+    <tr onclick="openDetail(${p.id})">
+      <td class="td-year">${p.year}</td>
+      <td class="td-title">${p.url?`<a href="${p.url}" target="_blank" onclick="event.stopPropagation()">${htmlSafe(p.title)}</a>`:htmlSafe(p.title)}</td>
+      <td class="td-country">${htmlSafe(p.country||'—')}</td>
+      <td><div class="cat-tags">${categoryTagsHtml(p)}</div></td>
+      <td>${productBadge(p.product)}</td>
+      <td>${jifBadgeHtml(p)}</td>
+      <td class="td-findings">${p.findings?`<div class="findings-preview ${p.findings.length>220?'long':'short'}" title="${htmlSafe(p.findings)}">${htmlSafe(p.findings)}</div>`:'<span style="color:var(--text-dim)">—</span>'}</td>
+      <td><div class="access-links">${paperPdfAccessLinks(p)}</div></td>
+      <td>${reviewStatusBadge(getReviewStatus(p))}</td>
+      <td><div class="access-links">
+        <button class="icon-btn" style="font-size:12px" onclick="event.stopPropagation();openAIModal(${p.id})" title="AI Analysis">🧠</button>
+        <button class="icon-btn edit-btn" onclick="event.stopPropagation();openEditModal(${p.id})" title="Edit">✎</button>
+        <button class="icon-btn del-btn" onclick="event.stopPropagation();deletePublication(${p.id})" title="Delete">×</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function renderCards(data){
+  document.getElementById('no-results-cards').style.display=data.length?'none':'block';
+  document.getElementById('cards-container').innerHTML=data.map(p=>`
+    <div class="pub-card ${normalizeProductCode(p.product)}" onclick="openDetail(${p.id})">
+      ${hasPMC(p)?'<div class="pmc-corner"><span class="badge-pmc">🟢 PMC FREE</span></div>':''}
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap">
+        <span style="font-family:'DM Mono',monospace;color:var(--accent);font-size:13px">${p.year}</span>
+        ${p.country?`<span style="background:var(--surface2);padding:2px 7px;border-radius:4px;font-size:11px;color:var(--text-muted)">${htmlSafe(p.country)}</span>`:''}
+        ${productBadge(p.product)} ${jifBadgeHtml(p)} ${reviewStatusBadge(getReviewStatus(p))}
+      </div>
+      <div class="card-title">${htmlSafe(p.title)}</div>
+      ${(p.categories||[]).length?`<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:9px">${categoryTagsHtml(p,{limit:4})}</div>`:''}
+      ${p.findings?`<div class="card-findings">${htmlSafe(p.findings.substring(0,130))}${p.findings.length>130?'…':''}</div>`:''}
+      <div class="card-footer"><div class="access-links">${paperPdfAccessLinks(p)}</div><div style="display:flex;gap:4px">
+        <button class="icon-btn" onclick="event.stopPropagation();openAIModal(${p.id})">🧠</button>
+        <button class="icon-btn edit-btn" onclick="event.stopPropagation();openEditModal(${p.id})">✎</button>
+        <button class="icon-btn del-btn" onclick="event.stopPropagation();deletePublication(${p.id})">×</button>
+      </div></div>
+    </div>`).join('');
+}
+
+function renderDashboard(){
+  const total=(publications || []).length;
+  const productOrder=['cryoablation','y90-resin','y90-glass','y90-na'];
+  const colors={'cryoablation':'var(--cryo)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
+  const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
+  publications.forEach(p=>{
+    byProduct[normalizeProductCode(p.product)]++;
+    byYear[p.year]=(byYear[p.year]||0)+1; (p.categories||[]).forEach(c=>byCat[c]=(byCat[c]||0)+1);
+    if(p.country) byCountry[p.country]=(byCountry[p.country]||0)+1;
+  });
+  const years=Object.entries(byYear).sort((a,b)=>b[0]-a[0]).slice(0,10), cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).slice(0,12), countries=Object.entries(byCountry).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxYear=Math.max(...Object.values(byYear),1), maxCat=cats[0]?.[1]||1, maxCountry=countries[0]?.[1]||1;
+  const pmcCount=publications.filter(p=>hasPMC(p)).length, jifCount=publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length;
+  document.getElementById('dashboard-content').innerHTML=`
+    <div class="dash-card"><h3>Overview</h3><div class="big-stat"><div class="num">${total}</div><div class="sub">total publications</div></div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">🟢 PMC Free Full Text</span><strong style="color:#4cca5a">${pmcCount}</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📈 JIF matched</span><strong style="color:var(--accent)">${jifCount} (${total?(jifCount/total*100).toFixed(0):0}%)</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📄 Uploaded PDFs</span><strong>${publications.filter(p=>p.pdfData).length}</strong></div>
+      </div></div>
+    <div class="dash-card"><h3>By Product</h3>${productOrder.map(k=>`<div class="donut-row"><div class="donut-dot" style="background:${colors[k]}"></div><span class="donut-label">${IOE_PRODUCT_META[k].label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?byProduct[k]/total*100:0}%;background:${colors[k]}"></div></div><span class="donut-val">${byProduct[k]}</span></div>`).join('')}</div>
+    <div class="dash-card" style="grid-column:span 2"><h3>By Year</h3><div class="bar-chart">${years.map(([y,n])=>`<div class="bar-row"><span class="bar-label">${y}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxYear*100}%;background:var(--accent2)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
+    <div class="dash-card" style="grid-column:span 2"><h3>Top Categories</h3><div class="bar-chart">${cats.map(([c,n])=>`<div class="bar-row dash-cat-row"><span class="bar-label bar-label-full">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCat*100}%;background:var(--accent)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
+    <div class="dash-card"><h3>Top Countries</h3><div class="bar-chart">${countries.map(([c,n])=>`<div class="bar-row"><span class="bar-label">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCountry*100}%;background:var(--accent3)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>`;
+}
+
+function exportExcel(){
+  const wb=XLSX.utils.book_new();
+  const headers=['Year','Title','Authors','Journal','Journal Impact Factor','JIF Year','Country','Product','Review Status','Primary Category','Categories','Results','Key Findings','Notes','PMC Free','PMC ID','URL'];
+  const rows=publications.map(p=>[p.year,p.title,p.authors||'',p.journal||'',validJIFNumber(p.journalImpactFactor ?? p.jif) ?? '',p.journalImpactFactorYear ?? p.jifYear ?? '',p.country||'',IOE_PRODUCT_META[normalizeProductCode(p.product)].label,getReviewStatus(p),getPrimaryCategory(p),(p.categories||[]).join('; '),p.results||'',p.findings||'',p.notes||'',hasPMC(p)?'YES':'',p.pmcid||'',p.url||'']);
+  const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);
+  ws['!cols']=[8,50,28,32,20,10,14,16,15,24,42,38,58,28,10,14,40].map(w=>({wch:w})); XLSX.utils.book_append_sheet(wb,ws,'Publications');
+  const byProduct={}; Object.keys(IOE_PRODUCT_META).forEach(k=>byProduct[IOE_PRODUCT_META[k].label]=publications.filter(p=>normalizeProductCode(p.product)===k).length);
+  const byYear={},byCat={},byCountry={}; publications.forEach(p=>{byYear[p.year]=(byYear[p.year]||0)+1;(p.categories||[]).forEach(c=>byCat[c]=(byCat[c]||0)+1);if(p.country)byCountry[p.country]=(byCountry[p.country]||0)+1;});
+  const dash=[['IO&E DATABASE — DASHBOARD','',''],['','',''],['SUMMARY','',''],['Total Publications',publications.length,''],['Publications with JIF',publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length,''],['PMC Free Full Text',publications.filter(p=>hasPMC(p)).length,''],['','',''],['BY PRODUCT','Count',''],...Object.entries(byProduct).map(([k,v])=>[k,v,'']),['','',''],['BY YEAR','Count',''],...Object.entries(byYear).sort((a,b)=>b[0]-a[0]).map(([y,n])=>[y,n,'']),['','',''],['TOP CATEGORIES','Count',''],...Object.entries(byCat).sort((a,b)=>b[1]-a[1]).slice(0,25).map(([c,n])=>[c,n,'']),['','',''],['BY COUNTRY','Count',''],...Object.entries(byCountry).sort((a,b)=>b[1]-a[1]).map(([c,n])=>[c,n,''])];
+  const ws2=XLSX.utils.aoa_to_sheet(dash); ws2['!cols']=[{wch:40},{wch:12},{wch:10}]; XLSX.utils.book_append_sheet(wb,ws2,'Dashboard');
+  XLSX.writeFile(wb,`IOE_Publications_${new Date().toISOString().slice(0,10)}.xlsx`);
+  showToast('✅ IO&E Excel exported with JIF fields and dashboard.','success');
+}
+
+function exportJSON(){
+  const backup={version:'ioe-database-v6',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
+  showToast('✅ IO&E database backup exported.','success');
+}
+
+const __ioeOpenDetail=openDetail;
+openDetail=function(id){
+  __ioeOpenDetail(id);
+  const p=publications.find(x=>x.id===id), content=document.getElementById('detail-content');
+  if(!p || !content) return;
+  const journalSection=[...content.querySelectorAll('.detail-section')].find(el=>el.querySelector('.detail-label')?.textContent==='Journal');
+  const section=document.createElement('div'); section.className='detail-section'; section.innerHTML=`<div class="detail-label">Journal Impact Factor</div><div class="detail-value">${jifBadgeHtml(p)} <span style="font-size:11px;color:var(--text-muted);margin-left:6px">journal-level metric</span></div>`;
+  if(journalSection) journalSection.insertAdjacentElement('afterend',section); else content.querySelector('.detail-title')?.insertAdjacentElement('afterend',section);
+};
+
+function clearForm(){
+  ['f-year','f-country','f-title','f-authors','f-journal','f-jif','f-jifyear','f-url','f-pmcid','f-pdfurl','f-pdffilename','f-fulltextnote','f-results','f-findings','f-notes','f-abstract','category-form-search'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const radio=document.querySelector('input[name="product"][value="y90-na"]'); if(radio) radio.checked=true;
+  formSecondaryCategories=[]; populatePrimaryCategorySelect(''); renderSecondaryCategoryPicker();
+  const review=document.getElementById('f-reviewstatus');if(review)review.value='AI Draft'; const full=document.getElementById('f-fulltextstatus');if(full)full.value='auto';
+  const label=document.getElementById('pdf-label');if(label)label.textContent='Click to attach PDF · or enter PMC ID above for auto free-text';
+  const ai=document.getElementById('ai-form-result');if(ai)ai.style.display='none'; selectedPdfData=null; const pdf=document.getElementById('f-pdf');if(pdf)pdf.value='';
+}
+
+const __ioeOpenEditModal=openEditModal;
+openEditModal=function(id){
+  const p=publications.find(x=>x.id===id); if(p) p.product=normalizeProductCode(p.product);
+  __ioeOpenEditModal(id);
+  if(!p) return;
+  const val=document.getElementById('f-jif'), yr=document.getElementById('f-jifyear');
+  if(val) val.value=validJIFNumber(p.journalImpactFactor ?? p.jif) ?? ''; if(yr) yr.value=p.journalImpactFactorYear ?? p.jifYear ?? '';
+  autoFillJIFForForm();
+};
+
+const __ioeSavePublication=savePublication;
+savePublication=function(){
+  const idBefore=editingId, titleBefore=document.getElementById('f-title')?.value.trim() || '', journal=document.getElementById('f-journal')?.value.trim() || '';
+  const jif=validJIFNumber(document.getElementById('f-jif')?.value), jifYear=document.getElementById('f-jifyear')?.value || '';
+  const product=normalizeProductCode(document.querySelector('input[name="product"]:checked')?.value);
+  __ioeSavePublication();
+  const p=(idBefore?publications.find(x=>x.id===idBefore):null) || [...publications].reverse().find(x=>x.title===titleBefore);
+  if(p){p.product=product;if(jif!==null){p.journalImpactFactor=jif;p.journalImpactFactorYear=parseInt(jifYear)||'';upsertJIFEntry(journal,jif,jifYear,'Publication form');}}
+  applyJIFRegistryToPublications(false); save(); applyFilters(); renderDashboard();
+};
+
+const __ioeImportAllPubMedResults=importAllPubMedResults;
+importAllPubMedResults=function(){
+  __ioeImportAllPubMedResults(); migrateIOEDatabase(); save(); applyFilters(); renderDashboard();
+};
+
+const __ioeImportFromPubMed=importFromPubMed;
+importFromPubMed=async function(...args){
+  const result=await __ioeImportFromPubMed.apply(this,args); autoFillJIFForForm(); return result;
+};
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal('jif-modal');});
 </script>
 
 </body>
