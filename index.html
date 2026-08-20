@@ -1703,6 +1703,7 @@ body.modal-open .library-filter-sticky{
       <div class="form-group full"><label>Title *</label><textarea id="f-title" placeholder="Full publication title" rows="3" style="resize:vertical;min-height:72px;font-family:inherit;font-size:inherit;line-height:1.5"></textarea></div>
       <div class="form-group full"><label>Authors</label><input type="text" id="f-authors" placeholder="Smith J, Doe A, et al."></div>
       <div class="form-group full"><label>Journal</label><input type="text" id="f-journal" list="journal-jif-options" autocomplete="off" placeholder="Journal of Vascular and Interventional Radiology" oninput="scheduleAutoFillJIFForForm()" onblur="autoFillJIFForForm(true)"><datalist id="journal-jif-options"></datalist><div id="f-jif-match-status" class="jif-match-status"></div></div>
+      <div class="form-group full"><button type="button" class="btn btn-blue" id="update-jif-button" onclick="updateJIFForCurrentJournal()">↻ Update JIF from verified registry</button></div>
       <div class="form-group"><label>Journal Impact Factor</label><input type="number" id="f-jif" min="0" step="0.001" placeholder="Auto-filled from JIF registry" oninput="delete this.dataset.autoFilled"></div>
       <div class="form-group"><label>JIF Year</label><input type="number" id="f-jifyear" min="1990" max="2099" placeholder="e.g. 2025" oninput="delete this.dataset.autoFilled"></div>
       <div class="form-group full"><div class="review-note">JIF is a journal-level metric, not a score calculated from one paper. Enter it once (or import a JCR export in JIF Registry) and the database will automatically apply it to every matching journal.</div></div>
@@ -14403,6 +14404,7 @@ function normalizeJournalKey(value){
   const aliases={
     'jvir':'journal of vascular and interventional radiology',
     'j vasc interv radiol':'journal of vascular and interventional radiology',
+    'journal of vascular interventional radiology':'journal of vascular and interventional radiology',
     'cvir':'cardiovascular and interventional radiology',
     'cardiovasc intervent radiol':'cardiovascular and interventional radiology',
     'ejnmmi':'european journal of nuclear medicine and molecular imaging',
@@ -14504,6 +14506,35 @@ function autoFillJIFForForm(force=false){
   }
   return entry;
 }
+async function updateJIFForCurrentJournal(){
+  const journal=document.getElementById('f-journal')?.value.trim() || '';
+  const button=document.getElementById('update-jif-button');
+  const status=document.getElementById('f-jif-match-status');
+  if(!journal){
+    if(status){status.className='jif-match-status unmatched';status.textContent='Enter or select a journal first.';}
+    showToast('Enter or select a journal first.','error');
+    return null;
+  }
+  if(button){button.disabled=true;button.textContent='↻ Checking verified JIF…';}
+  if(status){status.className='jif-match-status unmatched';status.textContent='Checking the verified JIF registry…';}
+  try{
+    await loadVerifiedJIFUpdates(false);
+    const entry=getJIFEntry(journal);
+    if(entry){
+      autoFillJIFForForm(true);
+      applyJIFRegistryToPublications(false);
+      applyFilters(); renderDashboard();
+      if(status){status.className='jif-match-status matched';status.textContent=`✓ JIF ${entry.value}${entry.year?` (${entry.year})`:''} updated — click Save Publication to keep this edit`;}
+      showToast(`JIF ${entry.value}${entry.year?` (${entry.year})`:''} loaded from the verified registry.`,'success');
+      return entry;
+    }
+    if(status){status.className='jif-match-status unmatched';status.textContent=`No verified JIF found for “${journal}”. Existing values were kept.`;}
+    showToast('No verified JIF match was found. Existing values were kept.','error');
+    return null;
+  }finally{
+    if(button){button.disabled=false;button.textContent='↻ Update JIF from verified registry';}
+  }
+}
 function openJIFManager(){
   seedJIFRegistryFromPublications();
   loadJIFAutoSettings();
@@ -14561,6 +14592,14 @@ function mergeJIFRows(rows,source='JCR import',options={}){
 }
 
 const IOE_BUNDLED_JIF_DATA={"metricYear":2025,"verifiedAt":"2026-08-20","journals":[{"journal":"Abdominal Radiology","value":2.3,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/261","verificationStatus":"official-publisher"},{"journal":"Acta Oncologica","value":2.7,"year":2025,"source":"Medical Journals Sweden / JCR","sourceUrl":"https://medicaljournalssweden.se/actaoncologica/journalinformation","verificationStatus":"official-journal"},{"journal":"American Journal of Transplantation","value":8.1,"year":2025,"source":"American Journal of Transplantation / JCR","sourceUrl":"https://www.amjtransplant.org/","verificationStatus":"official-journal"},{"journal":"Biomedicine & Pharmacotherapy","value":7.5,"year":2025,"source":"Elsevier journal page / JCR","sourceUrl":"https://www.elsevier.com/journals/biomedicine-and-pharmacotherapy/07533322/open-access-journal","verificationStatus":"official-publisher-current"},{"journal":"BMC Cancer","value":4.1,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/12885","verificationStatus":"official-publisher"},{"journal":"British Journal of Radiology","value":3.4,"year":2025,"source":"Oxford University Press / JCR","sourceUrl":"https://academic.oup.com/bjr/pages/about","verificationStatus":"official-publisher"},{"journal":"Cancer Biotherapy and Radiopharmaceuticals","value":1.7,"year":2025,"source":"SAGE journal page / JCR","sourceUrl":"https://journals.sagepub.com/home/cbt","verificationStatus":"official-publisher-current"},{"journal":"Cancer Imaging","value":4.8,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40644","verificationStatus":"official-publisher"},{"journal":"Cancers","value":4.8,"year":2025,"source":"MDPI / JCR","sourceUrl":"https://www.mdpi.com/about/announcements/17198","verificationStatus":"official-publisher"},{"journal":"Cardiovascular and Interventional Radiology","value":3.4,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/270","verificationStatus":"official-publisher"},{"journal":"Clinical and Translational Imaging","value":1.4,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40336","verificationStatus":"official-publisher"},{"journal":"Diagnostic and Interventional Imaging","value":11.1,"year":2025,"source":"Elsevier journal page / JCR","sourceUrl":"https://www.sciencedirect.com/journal/diagnostic-and-interventional-imaging","verificationStatus":"official-publisher-current"},{"journal":"EJNMMI Physics","value":3.5,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/40658","verificationStatus":"official-publisher"},{"journal":"EJNMMI Research","value":2.7,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13550","verificationStatus":"official-publisher"},{"journal":"European Journal of Nuclear Medicine and Molecular Imaging","value":7.6,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/259","verificationStatus":"official-publisher"},{"journal":"European Radiology","value":6.0,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/330","verificationStatus":"official-publisher"},{"journal":"Frontiers in Medicine","value":3.6,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/medicine","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Nuclear Medicine","value":2.5,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/nuclear-medicine","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Oncology","value":3.4,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/oncology","verificationStatus":"official-publisher-current"},{"journal":"Frontiers in Pharmacology","value":5.4,"year":2025,"source":"Frontiers journal metrics / JCR","sourceUrl":"https://www.frontiersin.org/journals/pharmacology","verificationStatus":"official-publisher-current"},{"journal":"Journal of Cancer Research and Clinical Oncology","value":3.3,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/432","verificationStatus":"official-publisher"},{"journal":"Radiation Oncology","value":3.6,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13014","verificationStatus":"official-publisher"},{"journal":"Scientific Reports","value":4.9,"year":2025,"source":"Nature Portfolio / 2025 JCR","sourceUrl":"https://link.springer.com/journal/41598","verificationStatus":"official-publisher"},{"journal":"Trials","value":2.1,"year":2025,"source":"Springer Nature / JCR","sourceUrl":"https://link.springer.com/journal/13063","verificationStatus":"official-publisher"}]};
+IOE_BUNDLED_JIF_DATA.journals.push({
+  journal:'Journal of Vascular and Interventional Radiology',
+  value:3.1,
+  year:2025,
+  source:'Elsevier / SIR current journal metrics',
+  sourceUrl:'https://www.sciencedirect.com/journal/journal-of-vascular-and-interventional-radiology/about/insights',
+  verificationStatus:'official-publisher-current'
+});
 const IOE_JIF_DEFAULT_URL='journal-impact-factors.json';
 function loadJIFAutoSettings(){
   const url=document.getElementById('jif-auto-url'), enabled=document.getElementById('jif-auto-enabled');
