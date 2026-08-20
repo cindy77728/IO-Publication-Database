@@ -1,12 +1,18 @@
 {
   "version": "y90-publication-database-v3",
-  "savedAt": "2026-08-13T03:11:43.075Z",
+  "savedAt": "2026-08-20T07:45:30.015Z",
   "categories": [
+    "APAC Data",
     "Asian Data",
     "Balloon Occlusion",
     "Carbon",
     "Case Report",
     "Chemotherapy",
+    "Clinical Topic",
+    "Clinical Topic / Efficacy",
+    "Clinical Topic / Patient Selection",
+    "Clinical Topic / Quality of Life",
+    "Clinical Topic / Safety",
     "Combination Therapy",
     "Comparative",
     "Comparative / Ablation",
@@ -26,6 +32,14 @@
     "Dosimetry / Treatment Planning",
     "Dosimetry / Voxel-based",
     "Downstaging",
+    "Evidence Type",
+    "Evidence Type / Case Report",
+    "Evidence Type / Guideline & Consensus",
+    "Evidence Type / Prospective Study",
+    "Evidence Type / Randomized Trial",
+    "Evidence Type / Registry & Real-World Evidence",
+    "Evidence Type / Retrospective Study",
+    "Evidence Type / Systematic Review & Meta-analysis",
     "FL-HCC",
     "Glass vs Resin",
     "Guidelines",
@@ -33,9 +47,19 @@
     "Guidelines / EANM",
     "Guidelines / ESMO",
     "HCC",
+    "Health Economics",
     "Histotripsy",
     "Hypo Hyper Tumor",
     "Immunotherapy",
+    "Indication",
+    "Indication / Bone & Soft Tissue",
+    "Indication / HCC",
+    "Indication / ICC",
+    "Indication / Lung Cancer",
+    "Indication / mCRC",
+    "Indication / Neuroendocrine Tumor",
+    "Indication / Other Metastases",
+    "Indication / Renal Tumor",
     "Inferior Phrenic Artery",
     "Key Clinical Data",
     "Key Clinical Data / COBRAS",
@@ -88,6 +112,15 @@
     "Simplicity",
     "Technical",
     "Technical / Injection Pressure",
+    "Technique",
+    "Technique / Ablation Zone",
+    "Technique / Cryoablation Protocol",
+    "Technique / Cryoprotection",
+    "Technique / Image Guidance",
+    "Technique / Lung Shunt",
+    "Technique / Mapping & MAA",
+    "Technique / Radiation Segmentectomy",
+    "Technique / Y90 Dosimetry",
     "TN Ratio"
   ],
   "pdfFolderUrl": "https://bostonscientific-my.sharepoint.com/:f:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper?csf=1&web=1&e=rNVSPM",
@@ -111,13 +144,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Guidelines / BCLC",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Guidelines / BCLC",
         "HCC",
         "Dosimetry / Treatment Planning",
         "Guidelines"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507001,
@@ -138,13 +173,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / PROACTIF",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / PROACTIF",
         "HCC",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150810,
@@ -165,7 +202,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Combination Therapy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Combination Therapy",
         "HCC",
@@ -173,7 +210,9 @@
         "Safety",
         "Immunotherapy",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 4.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073109,
@@ -194,11 +233,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Lung Shunt"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150815,
@@ -219,10 +260,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 2.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026151004,
@@ -243,7 +286,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Lung Shunt",
         "Dosimetry / Dose Response",
@@ -251,7 +294,9 @@
         "Dosimetry / Treatment Planning",
         "Large Tumor",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072020,
@@ -272,11 +317,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073025,
@@ -297,14 +344,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150813,
@@ -325,11 +374,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 2.5,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150814,
@@ -350,14 +401,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "HCC",
         "Real-world evidence",
         "Combination Therapy",
         "Immunotherapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050610,
@@ -378,14 +431,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Comparative",
         "Dosimetry",
         "Dosimetry / Dose Response",
         "Metastases / Metastatic Colorectal Cancer (mCRC)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150816,
@@ -406,13 +461,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resin",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150812,
@@ -433,12 +490,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050805,
@@ -459,12 +518,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Radiation Safety & Handling",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150817,
@@ -485,12 +546,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Combination Therapy",
         "Immunotherapy"
-      ]
+      ],
+      "journalImpactFactor": 5.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150801,
@@ -511,12 +574,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Lung Shunt",
         "Resection"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072026,
@@ -537,12 +602,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Laboratory Investigation",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050706,
@@ -563,13 +630,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry",
         "Guidelines",
         "Dosimetry / Dosimetry Steering Committee",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073105,
@@ -590,14 +659,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Complications",
         "Dosimetry",
         "PVT",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073106,
@@ -618,13 +689,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Dosimetry",
         "PVT",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050620,
@@ -645,12 +718,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Complications",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Complications",
         "Radiation Pneumonitis",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073031,
@@ -671,14 +746,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection / Transplantation",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050815,
@@ -699,13 +776,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Guidelines / ESMO",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Guidelines / ESMO",
         "Guidelines",
         "HCC",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051102,
@@ -726,7 +805,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Inferior Phrenic Artery",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Inferior Phrenic Artery",
         "Dosimetry / Post-treatment",
@@ -735,7 +814,9 @@
         "HCC",
         "Complications",
         "Lung Shunt"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073107,
@@ -756,12 +837,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Resection",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050619,
@@ -782,11 +865,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / TACE",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / TACE",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150805,
@@ -807,11 +892,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150807,
@@ -832,12 +919,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Complications",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": 3.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150705,
@@ -858,11 +947,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Pneumonitis",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Radiation Pneumonitis",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071002,
@@ -883,11 +974,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Segmentectomy",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Radiation Segmentectomy",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150702,
@@ -908,13 +1001,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "PVT",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073108,
@@ -935,14 +1030,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150809,
@@ -963,11 +1060,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150808,
@@ -988,13 +1087,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Mapping",
         "Lung Shunt",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072060,
@@ -1015,11 +1116,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051009,
@@ -1040,14 +1143,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "No MAA",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "No MAA",
         "HCC",
         "Lung Shunt",
         "Asian Data",
         "Technical"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050618,
@@ -1068,11 +1173,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / TACE",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / TACE",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 2.3,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051108,
@@ -1093,14 +1200,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "PVT",
         "Safety",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": 11.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050806,
@@ -1121,13 +1230,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resin",
         "Metastases",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050607,
@@ -1148,11 +1259,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Comparative / Ablation",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150703,
@@ -1173,13 +1286,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "PVT",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150811,
@@ -1200,13 +1315,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Dosimetry",
         "Comparative",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071003,
@@ -1227,12 +1344,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Segmentectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Radiation Segmentectomy",
         "HCC",
         "Downstaging"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150804,
@@ -1253,14 +1372,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "HCC",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "HCC",
         "Safety",
         "Comparative",
         "Resin",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050901,
@@ -1281,12 +1402,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Hypo Hyper Tumor",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Hypo Hyper Tumor",
         "Dosimetry",
         "Dosimetry / Post-treatment"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 20260507008,
@@ -1307,7 +1430,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Microsphere Coverage",
         "Comparative",
@@ -1315,7 +1438,9 @@
         "Glass vs Resin",
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051107,
@@ -1336,12 +1461,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073104,
@@ -1362,14 +1489,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Dosimetry",
         "HCC",
         "Safety",
         "Radiation Segmentectomy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050813,
@@ -1390,13 +1519,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / EMERALD-90",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / EMERALD-90",
         "HCC",
         "Dosimetry / Treatment Planning",
         "Immunotherapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050804,
@@ -1417,12 +1548,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Comparative",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050811,
@@ -1443,11 +1576,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Cystic Artery",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Cystic Artery",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050812,
@@ -1468,14 +1603,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / DOSISPHERE",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / DOSISPHERE",
         "Dosimetry",
         "Dosimetry / Treatment Planning",
         "HCC",
         "Downstaging"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071119,
@@ -1496,14 +1633,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry / TN Ratio",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry / TN Ratio",
         "MAA",
         "Mapping",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050703,
@@ -1524,12 +1663,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Dosimetry / QA",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073103,
@@ -1550,14 +1691,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "PVT",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071108,
@@ -1578,12 +1721,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Radiation Safety & Handling",
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073102,
@@ -1604,13 +1749,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Dosimetry",
         "MAA",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026151002,
@@ -1631,12 +1778,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Large Tumor",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Large Tumor",
         "Dosimetry / Treatment Planning",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026151003,
@@ -1657,12 +1806,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Large Tumor",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Large Tumor",
         "HCC",
         "Dosimetry / Dose Response"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073006,
@@ -1683,7 +1834,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "SBRT",
@@ -1691,7 +1842,9 @@
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071103,
@@ -1712,14 +1865,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "SBRT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "SBRT",
         "Comparative",
         "Cost Effectiveness",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050814,
@@ -1740,10 +1895,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / EPOCH",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / EPOCH"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026250704,
@@ -1764,7 +1921,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry / Voxel-based",
@@ -1772,7 +1929,9 @@
         "Dosimetry",
         "Radiation Segmentectomy",
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050705,
@@ -1793,12 +1952,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Dosimetry / Treatment Planning",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051103,
@@ -1819,13 +1980,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Safety",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051006,
@@ -1846,14 +2009,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "Comparative",
         "Complications",
         "Safety",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 4.8,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051105,
@@ -1874,13 +2039,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Safety",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": 1.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050708,
@@ -1901,12 +2068,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry",
         "Dosimetry / Treatment Planning",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 3,
@@ -1915,7 +2084,7 @@
       "authors": "Labgaa I, et al.",
       "journal": "JVIR",
       "country": "Switzerland",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Comparative",
         "Dosimetry",
@@ -1929,7 +2098,9 @@
       "pmcid": "",
       "abstract": "",
       "primaryCategory": "Comparative",
-      "reviewStatus": "AI Draft"
+      "reviewStatus": "AI Draft",
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072024,
@@ -1950,13 +2121,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Dosimetry",
         "Safety",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051106,
@@ -1977,13 +2150,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Comparative",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072002,
@@ -2004,12 +2179,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Laboratory Investigation",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Laboratory Investigation",
         "Safety",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071106,
@@ -2030,13 +2207,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Lung Shunt",
         "Mapping",
         "Dosimetry",
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": 11.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073005,
@@ -2057,14 +2236,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Comparative",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051007,
@@ -2085,13 +2266,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Combination Therapy",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072025,
@@ -2112,12 +2295,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150704,
@@ -2138,12 +2323,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Pneumonitis",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Radiation Pneumonitis",
         "Complications",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050907,
@@ -2164,10 +2351,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Histotripsy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Histotripsy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050810,
@@ -2188,11 +2377,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Cystic Artery",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Cystic Artery",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071101,
@@ -2213,13 +2404,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / ROWAN",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / ROWAN",
         "HCC",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051005,
@@ -2240,11 +2433,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071107,
@@ -2265,13 +2460,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry",
         "Safety",
         "HCC",
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150803,
@@ -2292,11 +2489,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Glass vs Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050807,
@@ -2317,14 +2516,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Comparative",
         "HCC",
         "Dosimetry",
         "Dosimetry / TN Ratio"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071120,
@@ -2345,13 +2546,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / TRACE",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / TRACE",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071112,
@@ -2372,14 +2575,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / TARGET",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / TARGET",
         "HCC",
         "Safety",
         "Dosimetry",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050903,
@@ -2400,13 +2605,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Guidelines / BCLC",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Guidelines / BCLC",
         "HCC",
         "Dosimetry / Treatment Planning",
         "Guidelines"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150802,
@@ -2427,14 +2634,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Guidelines",
         "Asian Data",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050711,
@@ -2455,7 +2664,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry",
         "Guidelines",
@@ -2463,7 +2672,9 @@
         "Dosimetry / Treatment Planning",
         "Dosimetry / QA",
         "Dosimetry / Dosimetry Steering Committee"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072070,
@@ -2484,12 +2695,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2,
@@ -2510,11 +2723,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / DOSISPHERE",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Key Clinical Data / DOSISPHERE",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050902,
@@ -2535,7 +2750,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Guidelines / EANM",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Guidelines / EANM",
         "Dosimetry / Treatment Planning",
@@ -2544,7 +2759,9 @@
         "Safety",
         "Mapping / Failed Evaluation",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050908,
@@ -2565,10 +2782,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Histotripsy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Histotripsy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071102,
@@ -2589,7 +2808,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "RPM",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "RPM",
         "HCC",
@@ -2597,7 +2816,9 @@
         "Radiation Segmentectomy",
         "Resection / Downstaging and Bridging",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073004,
@@ -2618,13 +2839,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Resection",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / Resection",
         "HCC",
         "Safety",
         "Resection"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026151007,
@@ -2645,13 +2868,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Lung Shunt",
         "Radiation Pneumonitis",
         "Complications",
         "Dosimetry / Post-treatment"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051008,
@@ -2672,12 +2897,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Lung Shunt",
         "MAA",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 20260507006,
@@ -2698,14 +2925,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry",
         "Dosimetry / Treatment Planning",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1,
@@ -2726,11 +2955,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / RASER",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / RASER",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507005,
@@ -2751,12 +2982,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050605,
@@ -2777,11 +3010,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / Ablation",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050606,
@@ -2802,11 +3037,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / Ablation",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071118,
@@ -2827,13 +3064,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry / TN Ratio",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Dosimetry / TN Ratio",
         "Glass vs Resin",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051004,
@@ -2854,12 +3093,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "Safety",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072023,
@@ -2880,7 +3121,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Metastases",
@@ -2888,7 +3129,9 @@
         "Safety",
         "Mapping / Failed Evaluation",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 5,
@@ -2897,7 +3140,7 @@
       "authors": "Chow PKH, et al.",
       "journal": "Lancet Oncology",
       "country": "Singapore",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Complications",
         "Dosimetry",
@@ -2910,7 +3153,9 @@
       "pmcid": "PMC9876100",
       "abstract": "",
       "primaryCategory": "Complications",
-      "reviewStatus": "AI Draft"
+      "reviewStatus": "AI Draft",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073020,
@@ -2931,14 +3176,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073034,
@@ -2959,13 +3206,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "PVT",
         "Comparative",
         "Resection",
         "Resection / Lobectomy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026151001,
@@ -2986,14 +3235,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Mapping Failed Rate",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Mapping Failed Rate",
         "MAA",
         "Mapping / Extrahepatic Accumulation",
         "Lung Shunt",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 3.3,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071111,
@@ -3014,12 +3265,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Dosimetry",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 4.9,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026151006,
@@ -3040,13 +3293,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Lung Shunt",
         "MAA",
         "Mapping",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072057,
@@ -3067,14 +3322,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Complications",
         "Dosimetry",
         "Safety",
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050702,
@@ -3095,7 +3352,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Guidelines / EANM",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Guidelines / EANM",
         "Guidelines",
@@ -3105,7 +3362,9 @@
         "Lung Shunt",
         "Dosimetry / Treatment Planning",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.5,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050604,
@@ -3126,11 +3385,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Comparative / Ablation",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050906,
@@ -3151,10 +3412,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Histotripsy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Histotripsy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051020,
@@ -3175,13 +3438,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "MAA",
         "Dosimetry / Treatment Planning",
         "Dosimetry",
         "Lung Shunt"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072059,
@@ -3202,11 +3467,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073032,
@@ -3227,13 +3494,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072018,
@@ -3254,7 +3523,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Dosimetry",
@@ -3262,7 +3531,9 @@
         "Mapping / Failed Evaluation",
         "Resin",
         "Chemotherapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071117,
@@ -3283,12 +3554,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry / TN Ratio",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Dosimetry / TN Ratio",
         "Dosimetry / Treatment Planning",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051003,
@@ -3309,12 +3582,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "Safety",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072058,
@@ -3335,10 +3610,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026151005,
@@ -3359,12 +3636,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / LEGACY",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / LEGACY",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073015,
@@ -3385,13 +3664,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073013,
@@ -3412,13 +3693,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507003,
@@ -3439,13 +3722,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry / Treatment Planning",
         "HCC",
         "Dosimetry / QA"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050817,
@@ -3466,11 +3751,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "FL-HCC",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "FL-HCC",
         "Case Report"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073040,
@@ -3491,14 +3778,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "PVT",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073019,
@@ -3519,7 +3808,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "PVT",
@@ -3527,7 +3816,9 @@
         "Dosimetry",
         "HCC",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072055,
@@ -3548,13 +3839,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071115,
@@ -3575,14 +3868,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Safety & Handling",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Radiation Safety & Handling",
         "Mapping",
         "Technical",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051104,
@@ -3603,14 +3898,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Safety",
         "Complications",
         "Combination Therapy"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071105,
@@ -3631,11 +3928,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Simplicity",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Simplicity",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": 7.5,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050601,
@@ -3656,10 +3955,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Cost Effectiveness",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Cost Effectiveness"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507004,
@@ -3680,13 +3981,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry",
         "Glass vs Resin",
         "Dosimetry / TN Ratio"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072001,
@@ -3707,12 +4010,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Laboratory Investigation",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Laboratory Investigation",
         "Dosimetry",
         "Technical"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072056,
@@ -3733,12 +4038,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073027,
@@ -3759,13 +4066,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050707,
@@ -3786,13 +4095,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Dosimetry / QA",
         "Dosimetry / Treatment Planning",
         "Glass vs Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051019,
@@ -3813,13 +4124,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "MAA",
         "Dosimetry / Post-treatment",
         "Dosimetry / Treatment Planning",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050710,
@@ -3840,14 +4153,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Dosimetry",
         "Guidelines",
         "HCC",
         "Dosimetry / Treatment Planning",
         "Dosimetry / Dosimetry Steering Committee"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051001,
@@ -3868,14 +4183,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "PVT",
         "Comparative",
         "Complications",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072054,
@@ -3896,12 +4213,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073012,
@@ -3922,12 +4241,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072069,
@@ -3948,13 +4269,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Complications",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050616,
@@ -3975,11 +4298,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / EBRT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / EBRT",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073046,
@@ -4000,12 +4325,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073038,
@@ -4026,13 +4353,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "PVT",
         "Comparative",
         "Resection / Lobectomy",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071001,
@@ -4053,14 +4382,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Segmentectomy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Radiation Segmentectomy",
         "Dosimetry",
         "HCC",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072022,
@@ -4081,11 +4412,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051002,
@@ -4106,13 +4439,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC",
         "Safety",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050809,
@@ -4133,11 +4468,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Cystic Artery",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Cystic Artery",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071109,
@@ -4158,10 +4495,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Simplicity",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Simplicity"
-      ]
+      ],
+      "journalImpactFactor": 1.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072017,
@@ -4182,13 +4521,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases",
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Metastases / Breast Cancer",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073037,
@@ -4209,13 +4550,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection",
         "Resection / Lobectomy",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073033,
@@ -4236,12 +4579,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072013,
@@ -4262,12 +4607,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases",
         "Metastases / Breast Cancer",
         "Metastases / Metastatic Colorectal Cancer (mCRC)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050816,
@@ -4288,11 +4635,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "FL-HCC",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "FL-HCC",
         "Downstaging"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072051,
@@ -4313,13 +4662,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Dosimetry",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072014,
@@ -4340,12 +4691,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Chemotherapy",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072016,
@@ -4366,12 +4719,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Dosimetry",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072015,
@@ -4392,7 +4747,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Breast Cancer",
         "Dosimetry",
@@ -4400,7 +4755,9 @@
         "Safety",
         "Mapping / Failed Evaluation",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073043,
@@ -4421,11 +4778,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases",
         "Resection / Lobectomy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050609,
@@ -4446,11 +4805,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / cTACE",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Comparative / cTACE",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072067,
@@ -4471,12 +4832,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 2.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073101,
@@ -4497,14 +4860,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Comparative",
         "Chemotherapy",
         "PVT",
         "Asian Data"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072052,
@@ -4525,13 +4890,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073018,
@@ -4552,13 +4919,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072050,
@@ -4579,12 +4948,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050612,
@@ -4605,13 +4976,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Dosimetry / Dose Response",
         "Dosimetry",
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072068,
@@ -4632,14 +5005,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Complications",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051101,
@@ -4660,12 +5035,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Inferior Phrenic Artery",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Inferior Phrenic Artery",
         "HCC",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073039,
@@ -4686,12 +5063,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection / Lobectomy",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051017,
@@ -4712,12 +5091,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "MAA",
         "Mapping / Extrahepatic Accumulation",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": 4.8,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073007,
@@ -4738,14 +5119,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072042,
@@ -4766,11 +5149,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073011,
@@ -4791,14 +5176,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Comparative",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050803,
@@ -4819,13 +5206,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Comparative",
         "Complications",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051018,
@@ -4846,12 +5235,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "MAA",
         "Dosimetry / Post-treatment",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073045,
@@ -4872,13 +5263,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072047,
@@ -4899,14 +5292,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073023,
@@ -4927,14 +5322,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Complications",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072066,
@@ -4955,13 +5352,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Dosimetry",
         "Safety",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073024,
@@ -4982,7 +5381,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection / Transplantation",
         "Resection / Downstaging and Bridging",
@@ -4990,7 +5389,9 @@
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050808,
@@ -5011,13 +5412,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Cystic Artery",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Cystic Artery",
         "HCC",
         "Mapping",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072041,
@@ -5038,12 +5441,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072040,
@@ -5064,13 +5469,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050614,
@@ -5091,14 +5498,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Dosimetry",
         "Dosimetry / Dose Response",
         "HCC",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072043,
@@ -5119,14 +5528,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Resin",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 4.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073003,
@@ -5147,13 +5558,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resection",
         "Complications",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050602,
@@ -5174,11 +5587,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Chemotherapy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Chemotherapy",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050608,
@@ -5199,11 +5614,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / cTACE",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Comparative / cTACE",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072071,
@@ -5224,13 +5641,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Uveal Melanoma",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Uveal Melanoma",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072045,
@@ -5251,13 +5670,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073029,
@@ -5278,13 +5699,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072065,
@@ -5305,12 +5728,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Dosimetry",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072044,
@@ -5331,14 +5756,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "HCC",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073010,
@@ -5359,13 +5786,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Transplantation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Transplantation",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072037,
@@ -5386,13 +5815,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050613,
@@ -5413,13 +5844,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Dosimetry / Dose Response",
         "Combination Therapy",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072038,
@@ -5440,12 +5873,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072039,
@@ -5466,14 +5901,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050802,
@@ -5494,14 +5931,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Comparative",
         "HCC",
         "PVT",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050611,
@@ -5522,14 +5961,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Dosimetry / Dose Response",
         "MAA",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073041,
@@ -5550,14 +5991,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071114,
@@ -5578,7 +6021,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Technical",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Technical",
         "Dosimetry / Treatment Planning",
@@ -5586,7 +6029,9 @@
         "Dosimetry",
         "HCC",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073008,
@@ -5607,14 +6052,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 1.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 20260507014,
@@ -5635,13 +6082,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / PREMIERE",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / PREMIERE",
         "HCC",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072011,
@@ -5662,13 +6111,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Metastases",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072012,
@@ -5689,11 +6140,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050701,
@@ -5714,12 +6167,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "Dosimetry / QA",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072036,
@@ -5740,11 +6195,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073022,
@@ -5765,13 +6222,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051015,
@@ -5792,14 +6251,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "MAA",
         "Dosimetry / Post-treatment",
         "Dosimetry / Dose Response",
         "Dosimetry / Treatment Planning",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051014,
@@ -5820,11 +6281,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "MAA",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072073,
@@ -5845,13 +6308,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Uveal Melanoma",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Uveal Melanoma",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050801,
@@ -5872,12 +6337,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "HCC",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073048,
@@ -5898,13 +6365,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / Ablation",
         "Resection / Lobectomy",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072010,
@@ -5925,13 +6394,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases",
         "Chemotherapy",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072034,
@@ -5952,12 +6423,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071113,
@@ -5978,13 +6451,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Technical",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Technical",
         "Dosimetry / Treatment Planning",
         "Mapping",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507009,
@@ -6005,11 +6480,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050615,
@@ -6030,13 +6507,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Glass vs Resin",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Glass vs Resin",
         "Dosimetry",
         "Radiation Safety & Handling",
         "Dosimetry / Dose Response"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050603,
@@ -6057,11 +6536,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / Ablation",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Comparative / Ablation",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072033,
@@ -6082,13 +6563,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Gastrointestinal Cancer",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Gastrointestinal Cancer",
         "Dosimetry",
         "Safety",
         "Metastases"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072009,
@@ -6109,12 +6592,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Metastases",
         "Chemotherapy"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051013,
@@ -6135,12 +6620,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "MAA",
         "Dosimetry",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073030,
@@ -6161,14 +6648,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Resection / Transplantation",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051011,
@@ -6189,12 +6678,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "MAA",
         "Lung Shunt",
         "Dosimetry / Treatment Planning"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072008,
@@ -6215,14 +6706,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Metastases",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051012,
@@ -6243,13 +6736,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "MAA",
         "Dosimetry / Post-treatment",
         "Dosimetry / Dose Response",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073049,
@@ -6270,7 +6765,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection / Lobectomy",
         "Resection / Downstaging and Bridging",
@@ -6278,7 +6773,9 @@
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072007,
@@ -6299,12 +6796,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507002,
@@ -6325,13 +6824,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Microsphere Coverage",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Microsphere Coverage",
         "Dosimetry / Post-treatment",
         "Radiation Safety & Handling",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073035,
@@ -6352,13 +6853,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "PVT",
         "Resection / Lobectomy",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072021,
@@ -6379,12 +6882,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
         "Safety",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073028,
@@ -6405,13 +6910,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection / Transplantation",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026051010,
@@ -6432,13 +6939,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "MAA",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "MAA",
         "Dosimetry",
         "Dosimetry / Dose Response",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073009,
@@ -6459,13 +6968,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072064,
@@ -6486,10 +6997,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072063,
@@ -6510,11 +7023,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605071116,
@@ -6535,10 +7050,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Technical / Injection Pressure",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Technical / Injection Pressure"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507013,
@@ -6559,14 +7076,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Post-Mortem Considerations",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Post-Mortem Considerations",
         "Dosimetry / QA",
         "Radiation Safety & Handling",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072072,
@@ -6587,12 +7106,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Uveal Melanoma",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Uveal Melanoma",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073014,
@@ -6613,13 +7134,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072032,
@@ -6640,13 +7163,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Resin",
         "Comparative"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073021,
@@ -6667,13 +7192,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Comparative",
         "Resection",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 8.1,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073036,
@@ -6694,13 +7221,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Lobectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Resection / Lobectomy",
         "Resection",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072062,
@@ -6721,10 +7250,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 20260507012,
@@ -6745,11 +7276,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Post-Mortem Considerations",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Post-Mortem Considerations",
         "Radiation Safety & Handling"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072006,
@@ -6770,11 +7303,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases",
         "Chemotherapy"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072005,
@@ -6795,12 +7330,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Breast Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Breast Cancer",
         "Metastases",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026050709,
@@ -6821,13 +7358,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Dosimetry",
         "MAA",
         "Mapping / Failed Evaluation",
         "Lung Shunt"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605073016,
@@ -6848,14 +7387,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection / Downstaging and Bridging",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Resection / Downstaging and Bridging",
         "Resection",
         "Comparative / Ablation",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072031,
@@ -6876,12 +7417,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072030,
@@ -6902,14 +7445,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 2026150701,
@@ -6930,12 +7475,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "PVT",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 202605072029,
@@ -6956,14 +7503,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Chemotherapy",
         "Dosimetry",
         "Safety",
         "Resin"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778224885094,
@@ -6984,13 +7533,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Asian Data",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Asian Data",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778557202663,
@@ -7011,11 +7562,13 @@
       "abstract": "BACKGROUND: Metastatic uveal melanoma (UM) primarily affects the liver, and due to low response rates to systemic therapies, liver-directed therapies (LDT) are commonly used for hepatic tumor control. Direct head-to-head trials comparing these LDTs are still lacking. METHODS: A retrospective multicenter explorative analysis was conducted to evaluate the clinical outcomes of transarterial chemoembolization (TACE), selective internal radiotherapy (SIRT), and percutaneous hepatic perfusion (PHP, chemosaturation). RESULTS: The present analysis was conducted on a cohort of 121 patients who had been treated for metastatic UM with LDT at five different skin cancer centers. A total of n = 15 patients received TACE (12.4%), n = 51 SIRT (42.1%), and n = 55 PHP (45.5%). The estimated median overall survival (OS) for SIRT was 25.1 months (95% confidence interval [CI], 15.3-34.8), for TACE, 11.4 months (95% CI, 7.8-14.9), and for PHP, 24.9 months (95% CI, 13.7-36.0). In the multivariate analysis that included LDH and additional systemic therapies, there was no significant difference in OS between SIRT and PHP (HR 1.14, 95% CI 0.67-1.93, p = 0.63), whereas TACE was found to be associated with a substantially reduced in OS compared to PHP (HR 3.25, 95% CI 1.31-8.04, p = 0.01). Adverse events occurred in 41.6% of patients undergoing SIRT, 64.3% of patients receiving TACE, and 84.6% of patients receiving PHP. CONCLUSION: The findings of this study indicate that SIRT and PHP demonstrate equivalent survival rates in a real-world setting.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Uveal Melanoma",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Uveal Melanoma",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778572367711,
@@ -7036,12 +7589,14 @@
       "abstract": "Background Complete pathologic necrosis (CPN) at liver transplant is a positive predictor of freedom from recurrence and overall survival for patients with hepatocellular carcinoma (HCC). Comprehensive authorized user parameters for yttrium 90 radiation segmentectomy CPN rates at explant remain undefined. Purpose To evaluate established outcomes for radiation segmentectomy before liver transplant and determine optimal parameters to achieve CPN among patients with treatment-naive HCC. Materials and Methods This multicenter retrospective study included patients with treatment-naive HCC who underwent glass microsphere radiation segmentectomy before liver transplant from January 2016 to December 2024. Treatment parameters were compared for patients that achieved CPN versus those without CPN using Mann-Whitney U or χ2 tests. Receiver operating characteristic analysis was performed to determine treatment parameter thresholds and subsequently predict CPN. Results A total of 303 patients with 364 tumors were included in the study. Tumors had a median size of 2.4 cm (IQR, 2.0-3.1 cm) and demonstrated a CPN rate of 68% (246 of 364). Compared with tumors without CPN, those with CPN had a higher microsphere activity (median, 1242 Bq vs 1203 Bq; P <.03), microspheres per milliliter (median, 9000 per mL vs 7600 per mL; P =.02), single-compartment dose (median, 544 Gy vs 379 Gy; P <.001), and angiosome-to-tumor volume ratio (median, 25.2 vs 15.6; P =.02). Multivariable logistic regression showed that a microsphere activity of 1087 Bq or greater (P =.03), a dose of 440 Gy or greater (P <.001), and an angiosome-to-tumor volume ratio of 16 or greater (P <.001) were independent predictors of CPN. There was a positive association between the number of optimized parameters and CPN at liver transplant, with a positive predictive value of 74% (198 of 269) with one threshold met and 91% (57 of 63) with all thresholds met (P <.001). Conclusion Among patients with treatment-naive HCC, glass microsphere radiation segmentectomy before liver transplant achieved high rates of CPN, which was associated with optimized parameter thresholds determined for microsphere activity, microspheres per milliliter, dose, and angiosome-to-tumor volume ratio. © RSNA, 2026 Supplemental material is available for this article. See also the editorial by Gordon and Lewandowski in this issue.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / COBRAS",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / COBRAS",
         "HCC",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778652958265,
@@ -7062,12 +7617,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Balloon Occlusion",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Balloon Occlusion",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778653268226,
@@ -7088,13 +7645,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Balloon Occlusion",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Balloon Occlusion",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778653778037,
@@ -7115,10 +7674,12 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Carbon",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Carbon"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1778740503658,
@@ -7139,13 +7700,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Lung Cancer",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Metastases / Lung Cancer",
         "Dosimetry",
         "Safety",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1779173853832,
@@ -7166,13 +7729,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resection",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Resection",
         "Safety",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1779360493162,
@@ -7193,11 +7758,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Complications"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1779360777486,
@@ -7218,14 +7785,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "PVT",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "PVT",
         "Resin",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1779854294515,
@@ -7246,11 +7815,13 @@
       "abstract": "PURPOSE: To assess the dose-response and dose-survival outcomes of yttrium-90 (Y90) transarterial radioembolization (TARE) using Therasphere microspheres in patients with colorectal cancer liver metastases (CRCLM). MATERIAL AND METHODS: Between May 2014 and December 2024, patients with chemorefractory CRCLM who underwent Y90 TARE using glass microspheres were retrospectively included. Patients were divided into two groups according to tumour absorbed dose (TAD): TAD<189 Gy (group 1) and TAD ≥189 Gy (group 2). The primary outcomes were overall survival (OS) and hepatic progression-free survival (hPFS). The secondary outcome was the objective response rate (ORR). RESULTS: A total of seventy-eight patients with a mean age of 69.9±11.2 years (range 41 to 91 years) were included. The median tumor dose and the median OS were 171.5 Gy (IQR; 147-200 Gy) and 8.9 months ( IQR; 5-14 months), respectively. The median TAD for groups 1 (n=46) and 2 (n=32) was 150 Gy (IQR; 122-166 Gy) and 202 Gy (IQR; 195-232 Gy), respectively. The median OS and hPFS for group 1 versus group 2 were 9.4 months (IQR; 6.7-17.7 months) and 5.2 months (IQR; 4-6.7 months) versus 7.1 months (IQR; 5-10.7 months) and 5.5 months (IQR; 4.2-6.7 months), respectively and were not significantly different (p =.107 and p =.663, respectively). The ORR did not differ significantly between the two groups (p =.943). CONCLUSION: In a real-world population of heavily pretreated patients with CRCLM, escalation of TAD beyond 189 Gy did not translate into improved survival, highlighting the dominant impact of advanced disease burden and extrahepatic progression.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1779855010516,
@@ -7271,11 +7842,13 @@
       "abstract": "INTRODUCTION: Insufficiency of the future liver remnant (FLR) precludes surgery for liver tumors as it is associated with post-hepatectomy liver failure (PHLF). A common strategy to induce pre-operative FLR hypertrophy is portal vein embolization of the tumor bearing liver lobe. More recently, transarterial radio-embolization (radiation lobectomy, RL) has been employed. Direct functional assessment using 99mTc-mebrofenin-hepatobiliary-scintigraphy (HBS) predicts FLR sufficiency more accurately than conventional volume assessment. However, studies describing dynamic functional assessment of the FLR after RL as induction for surgery are currently lacking. This study aims to compare FLR functional changes after PVE and RL. METHODS: This non-interventional retrospective single-center cohort study was performed between 2016 and 2024. Patients with colorectal liver metastases (CRLM) who underwent PVE or RL because of an insufficient FLR (HBS < 2.7%/min/m2) were included. Induction of sufficient FLR function was the primary outcome. RESULTS: Ten PVE- and ten RL-treated patients were included. The median duration to achieve sufficient FLR function was longer for RL- than PVE-treated patients (75 days (64-85) vs 31 days (28-54.5), p = 0.002). RL showed a non-significant higher median functional increase (58.6% vs 51.1%, p = 0.940) and a significantly higher voluminal increase (65.7% vs 36.8%, p = 0.049) compared to PVE. PHLF and resection margins were comparable among groups. There was no 90 day mortality. CONCLUSION: RL represents a feasible alternative to PVE with comparable functional outcomes, particularly in patients with lower baseline FLR function or need for simultaneous tumor control. This warrants prospective studies with optimized RL protocols to better define the functional outcomes and clinical applications of RL versus PVE.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Dosimetry"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780381416528,
@@ -7283,7 +7856,7 @@
       "title": "Sequential Yttrium-90 radioembolization integrated with multimodal therapy for platinum-resistant ovarian cancer liver metastases.",
       "country": "USA",
       "authors": "Wahl A, Fryer J, Vazquez C, et al.",
-      "journal": "Gynecol Oncol Rep",
+      "journal": "Gynecologic Oncology Reports",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42199931/",
       "pmcid": "PMC13199652",
       "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/metastases/Ovarian%20cancer/platinum-resistant%20ovarian%20cancer/2026%20Wahl%20Sequential%20Y90%20integrated%20with%20multimodal%20therapy%20for%20platinum%20resistant%20ovarian%20cancer%20liver%20metastases.pdf?csf=1&web=1&e=VoQtU7",
@@ -7296,7 +7869,7 @@
       "abstract": "BACKGROUND: Hepatic metastases from ovarian cancer are associated with poor prognosis, particularly in patients with platinum-resistant disease, and treatment options are limited. We present a case illustrating the feasibility and potential benefit of sequential locoregional therapy using yttrium-90 radioembolization for liver-dominant metastatic ovarian carcinoma. CASE PRESENTATION: A 62-year-old female with stage IVB high-grade serous ovarian carcinoma and unresectable hepatic metastases underwent neoadjuvant platinum chemotherapy followed by selective internal radiation therapy targeting dominant liver lesions. Therapy was repeated in a staged manner alongside non-platinum systemic therapy, cytoreductive surgery, and nodal radiation as clinically indicated. Imaging and functional assessments were used to evaluate tumor response and liver function throughout treatment.Sequential radioembolization achieved durable hepatic disease control over a two-year period. The treated right hepatic lobe underwent gradual atrophy with compensatory hypertrophy of the left lobe, preserving overall liver function and enabling repeated therapy. Integration with systemic therapy and surgery allowed continued management of peritoneal disease. Treatment was well tolerated, with manageable laboratory and clinical toxicities. Imaging demonstrated a significant reduction in tumor size and resolution of metabolic activity, supporting effective locoregional control. CONCLUSION: Sequential yttrium-90 radioembolization is a feasible and potentially durable locoregional strategy for patients with unresectable, platinum-resistant ovarian cancer liver metastases. When integrated with systemic therapy and surgery, this approach may provide meaningful disease control while preserving liver function. Prospective studies are warranted to further define patient selection, optimal sequencing, and clinical outcomes for this emerging therapy.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Ovarian Cancer",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Ovarian Cancer",
         "Metastases"
@@ -7306,7 +7879,7 @@
       "id": 1780381921651,
       "year": 2026,
       "title": "Yttrium-90 Transarterial Radioembolization of a Hepatocellular Carcinoma via Parasitized Adrenal and Renal Capsular Arteries.",
-      "country": "",
+      "country": "USA",
       "authors": "Okinedo I, Frageau J, Krishnarao A, et al.",
       "journal": "J Vasc Interv Radiol",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41856402/",
@@ -7321,11 +7894,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Technical",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Technical",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780382131462,
@@ -7346,12 +7921,14 @@
       "abstract": "PURPOSE: The liver is the commonest site of metastases in neuroendocrine neoplasias (NENs) and is an independent predictor of poor outcome. Selective internal radiation therapy (SIRT) allows selective delivery of high dose radiation to liver tumours and has shown promise in the management of NENs. We determined the safety and efficacy of SIRT for inoperable liver metastases secondary to NENs. Dose-response and dose-toxicity relationship were assessed. METHODS: A prospective, multicentre, phase 2 study was conducted. Primary outcomes were objective response rate (ORR) in the treated liver volume according to RECIST 1.1 and mRECIST criteria, incidence and severity of adverse events (AEs) at 6 months. Secondary outcomes were hepatic specific progression free survival, PFS, overall survival (OS), change in quality of life (QoL). Tumour dose-response relationship was derived retrospectively from post therapy yttrium-90 bremsstrahlung single photon emission computed tomography/CT for both the tumour and perfused normal liver. RESULTS: 21 patients were analysed; majority had grade 2 NEN (67%) and were heavily pretreated, 76% having received prior systemic therapy including peptide receptor radiotherapy (33%). ORR by RECIST 1.1 and mRECIST were 14% and 45%, respectively. Median hepatic specific PFS, PFS and OS were 48.1, 13.3 and 49.9 months respectively. Only 3 patients experienced grade 3 AEs; 2 radiation-induced liver disease that resolved without sequelae and one arterial plug migration. No significant deterioration in QoL was observed following SIRT. Dosimetry analysis found a clear tumour dose/response relationship for 3-month ORR. Mean tumour dose in responders was 372 Gy versus 173 Gy in non-responders (p < 0.001). We identified a threshold tumour absorbed dose of 164 Gy for PFS 48.1months compared to 8.8months (HR 0.2, 95%CI 0.05-0.96. p = 0.03). CONCLUSION: In a prospective study of heavily pretreated patients, we have demonstrated clinical efficacy of SIRT for the management of liver metastases secondary to NENs. A tumour dose-response relationship was demonstrated and a threshold tumour dose for survival outcome. This work lends prospective evidence for personalised dosimetry in NENs.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Neuroendocrine Tumors (NETs)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Neuroendocrine Tumors (NETs)",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780382507326,
@@ -7372,14 +7949,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative",
         "HCC",
         "Downstaging",
         "Resection / Transplantation",
         "Resection"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780382821278,
@@ -7400,13 +7979,15 @@
       "abstract": "BACKGROUND & AIMS: Recent small studies suggest improved hepatocellular carcinoma (HCC)-related outcomes with transarterial radioembolization (TARE) compared with transarterial chemoembolization (TACE), although it is unclear whether this translates into superior transplant-related outcomes. We aimed to compare waitlist outcomes for TARE vs. TACE as first-line locoregional treatment (LRT) for HCC in the contemporary MMaT (median MELD at transplant minus 3) era, with standardized wait times nationwide. METHODS: The study cohort comprised 5,677 adult liver transplant candidates from the United Network for Organ Sharing database who had at least one approved HCC exception between May 14, 2019, and October 3, 2024, and received first-line LRT with either TACE (50.0%) or TARE (50.0%). RESULTS: The TARE group had a slightly higher proportion of patients with solitary initial tumors (76.4% vs. 70.5%) and a slightly larger median largest tumor size, although total tumor burden was similar. A higher proportion of patients in the TARE group received only one LRT (80.6% vs. 57.8%) and achieved complete necrosis on explant (35.3% vs. 20.2%) compared with the TACE group. In inverse probability of treatment-weighted competing risk analysis, TARE was associated with a 22% lower hazard of waitlist dropout (hazard ratio 0.78, 95% CI 0.69-0.89, p <0.001; cumulative incidence at 1 year: 8.9% vs. 11.4%; 2 years: 14.2% vs. 19.0%; 3 years: 16.8% vs. 22.1%), after adjusting for patient and tumor characteristics. CONCLUSIONS: In a large national cohort of liver transplant candidates with HCC, TARE as first-line LRT was associated with higher rates of complete necrosis on explant, lower likelihood of requiring multiple LRTs, and a lower risk of waitlist dropout compared with TACE. IMPACT AND IMPLICATIONS: With nearly all patients with hepatocellular carcinoma in the US now receiving locoregional therapies, a better understanding of the optimal type of locoregional therapy to achieve tumor control and maintain tumor stage within transplant criteria is needed. In this contemporary study of over 5,000 patients using the US national database (UNOS), we show that transarterial radioembolization (TARE) may be the preferred bridging therapy over chemoembolization (TACE), based on a significantly lower probability of waitlist dropout after controlling for liver function and tumor characteristics. Additionally, TARE-treated patients demonstrated higher probability of complete pathologic response and reduced tumor under-staging on explant, which taken together strongly suggests that TARE is a more effective tumor treatment than TACE.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Comparative / TACE",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Comparative / TACE",
         "HCC",
         "Comparative",
         "Resection / Transplantation"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780383803826,
@@ -7427,19 +8008,21 @@
       "abstract": "Transarterial radioembolization (TARE) and transarterial chemoembolization (TACE) are recognized locoregional therapies (LRTs) for patients with unresectable hepatocellular carcinoma (uHCC). We assessed the predictors of hepatic decompensation (HD) and its impact on overall survival (OS) in patients with uHCC undergoing TACE and TARE.We analyzed patients treated with TARE (n=135) or TACE (n=177) at four tertiary centers. HD was defined as ascites, variceal bleeding or portosystemic encephalopathy at baseline or its occurrence ≤6 months post LRT. Median OS and objective response (per mRECIST) were assessed.The cohort was predominantly male (73.9%), with a mean age of 67.1 ± 10.5 years; most had intermediate-stage (BCLC B, 54.5%), followed by early-stage (BCLC 0/A, 34.0%) and locally advanced-stage disease (BCLC C, 11.5%). HD was present at baseline in 36 patients (11.5%) and occurred after LRT in 48 patients (15.4%). The post-LRT HD group showed lower complete response rates (10.9%) than those without HD (31.4%; P = 0.002). The mOS was longer in patients without HD (41.0 months) than in those with HD at presentation (15.0 months [HR 2.35; 95% CI: 1.37-4.01) or after LRT (14.0 months [HR, 2.66; 95% CI: 1.68-4.26]). Multivariable analyses revealed hepatitis C etiology (OR 0.28, 95% CI: 0.11-0.66, P = 0.006), ALBI score (OR 2.12, 95% CI: 1.38-3.32, P = 0.001) and intervention with TARE (OR 2.20, 95% CI:1. 11-4.44, P = 0.026) as independent predictors of HD post-LRT.Post-LRT HD is common and strongly associated with reduced survival in patients with uHCC. Baseline hepatic reserve and intervention with TARE are crucial factors in predicting post-LRT HD. These findings underscore that treatment-related hepatic injury can outweigh its benefits when hepatic reserve is marginal.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Safety",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Safety",
         "Dosimetry",
         "HCC",
         "Comparative / cTACE"
-      ]
+      ],
+      "journalImpactFactor": 4.9,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780383984998,
       "year": 2026,
       "title": "Post-hoc analysis of adverse events during the EPOCH trial: reconsidering dosimetry.",
-      "country": "USA / Germany / Netherlands / International",
+      "country": "Worldwide",
       "authors": "Lam M, Kersting D, Harris W, et al.",
       "journal": "Eur J Nucl Med Mol Imaging",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42209817/",
@@ -7454,13 +8037,15 @@
       "abstract": "BACKGROUND: EPOCH demonstrated superior progression free survival using yttrium-90 [90Y] glass microspheres radioembolization plus chemotherapy versus chemotherapy in colorectal cancer patients with liver metastases who had progressed following first-line oxaliplatin or irinotecan-based chemotherapy. Exploratory post-hoc analyses and theoretical modeling assessed the potential impact of dosimetry on safety outcomes. PATIENTS AND METHODS: Liver-related treatment-emergent adverse event (TEAE) frequency and/or severity, and bilirubin increase were explored in participating patients. For hypothesis generation, a theoretical model was constructed to understand EPOCH dosimetry in the absence of multicompartment dosimetry data. RESULTS: Liver-related TEAEs were reported in 93/186 (50%) patients, TEAEs ≥ grade 3 in 44/186 (24%) patients. A total of 26/186 patients (14%) experienced a bilirubin increase TEAE of any grade, in five of which assessed as related to glass [90Y]Y-radioembolization with a median fractional tumour involvement of 2.3% (range 1.4-4.1%). Under the theoretical assumption of a T/N ratio of 2-10, most patients in EPOCH (62% had a fractional tumour involvement < 10%) received a normal liver absorbed dose of at least 75 Gy. In this model, at < 4.1% fractional tumour involvement, the normal liver absorbed dose approximates 120 Gy at any T/N ratio. CONCLUSION: When treatment is same-day whole liver at 120 Gy average absorbed dose, the normal liver absorbed dose is dependent on fractional tumour involvement. TRIAL REGISTRATION: ClinicalTrials.gov NCT01483027.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Key Clinical Data / EPOCH",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Key Clinical Data / EPOCH",
         "Dosimetry",
         "Safety",
         "Metastases / Metastatic Colorectal Cancer (mCRC)"
-      ]
+      ],
+      "journalImpactFactor": 7.6,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780384242032,
@@ -7481,12 +8066,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Lung Shunt",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Lung Shunt",
         "Technical",
         "MAA"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780384700348,
@@ -7494,7 +8081,7 @@
       "title": "Selective internal radiation therapy as a bridge to curative-intent surgery in bulky colorectal liver metastases.",
       "country": "France",
       "authors": "El Boukili I, Habouzit V, Mohamed S, et al.",
-      "journal": "Clin Res Hepatol Gastroenterol",
+      "journal": "Clinics and Research in Hepatology and Gastroenterology",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42173483/",
       "pmcid": "",
       "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/metastases/mCRC/2026%20Boukili%20Selective%20internal%20radiation%20therapy%20as%20a%20bridge%20to%20curative-intent%20surgery%20in%20bulky%20colorectal%20liver%20metastases.pdf?csf=1&web=1&e=mgiqT8",
@@ -7507,7 +8094,7 @@
       "abstract": "Achieving secondary resectability remains a major challenge in patients with initially unresectable colorectal liver metastases (CRLM). We report a 46-year-old patient with rectal adenocarcinoma and three large synchronous unresectable liver metastases who achieved a durable response following an intensive multimodal strategy. FOLFOX plus panitumumab induced partial regression, while selective internal radiation therapy (SIRT) led to extensive tumor necrosis, enabling curative-intent extended left hepatectomy combined with microwave ablation. The patient remains in remission without systemic therapy more than six months after treatment completion. This case highlights the role of SIRT in conversion strategies for large oligometastatic CRLM.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Metastases / Metastatic Colorectal Cancer (mCRC)",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Metastases / Metastatic Colorectal Cancer (mCRC)",
         "Downstaging",
@@ -7520,7 +8107,7 @@
       "title": "Five years after IMbrave150 with clinical integration of atezolizumab plus bevacizumab in hepatocellular carcinoma.",
       "country": "Taiwan",
       "authors": "Lai KC, Chen SC",
-      "journal": "Ann Hepatol",
+      "journal": "Annals of Hepatology",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42155867/",
       "pmcid": "",
       "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/immunotherapy/2026%20Lai%20Five%20years%20after%20IMbrave150%20with%20clinical%20integration%20of%20atezolizumab%20plus%20bevacizumab%20in%20HCC.pdf?csf=1&web=1&e=JTaYaz",
@@ -7533,7 +8120,7 @@
       "abstract": "Five years after IMbrave150, atezolizumab plus bevacizumab (ate/bev) remains the first-line standard for unresectable hepatocellular carcinoma (uHCC). High response rates allow downstaging and curative conversion, enabling drug-free remission in some patients. Durable responses suggest potential for de-escalation, though discontinuation criteria need validation. In hepatitis B virus-related HCC, ate/bev appears safe across baseline viral loads when administered with concomitant antiviral therapy. Bleeding risk, particularly esophagogastric variceal hemorrhage, warrants baseline endoscopy and proactive management. Hypertension and proteinuria require close surveillance and early control to maintain bevacizumab use. Late bevacizumab interruption is acceptable, whereas early discontinuation is associated with poorer outcomes. After progression on ate/bev, evidence across cohorts favors tyrosine kinase inhibitor strategies such as lenvatinib over sorafenib. Cabozantinib and ramucirumab (for alpha-fetoprotein ≥400 ng/mL) are options and selected patients may benefit from immune checkpoint inhibitor-based combinations. Combining ate/bev with locoregional therapy (LRT) is promising. Phase III data with transarterial chemoembolization show improved progression-related endpoints. Early series suggest potential benefit with Yttrium-90 radioembolization, hepatic arterial infusion chemotherapy and radiotherapy, although high-level evidence is still lacking. Translational markers such as pre-existing immunity and transcriptomic models are promising but unvalidated. Adjuvant ate/bev has not demonstrated durable benefit. The neoadjuvant role and additional combination strategies require further exploration. Although ate/bev has improved outcomes in uHCC, key gaps remain, including biomarkers for regimen selection, de-escalation criteria, optimal sequencing, and integration with LRT or perioperative care. Prospective studies are needed to guide practice.",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Immunotherapy",
         "HCC"
@@ -7558,12 +8145,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Segmentectomy",
-      "product": "ns",
+      "product": "y90-na",
       "categories": [
         "Radiation Segmentectomy",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780456041782,
@@ -7584,7 +8173,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Technical",
@@ -7592,7 +8181,9 @@
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780456432070,
@@ -7613,14 +8204,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Radiation Segmentectomy",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Radiation Segmentectomy",
         "HCC",
         "Technical",
         "Dosimetry",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780456693085,
@@ -7641,11 +8234,13 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1783426892504,
@@ -7666,14 +8261,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Resin",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Resin",
         "Lung Shunt",
         "Dosimetry",
         "HCC",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1784685032464,
@@ -7694,14 +8291,16 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Dosimetry / TN Ratio",
-      "product": "both",
+      "product": "y90-na",
       "categories": [
         "Dosimetry / TN Ratio",
         "Comparative",
         "Resin",
         "Dosimetry",
         "Particle Number"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1784735584553,
@@ -7722,12 +8321,14 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Large Tumor",
-      "product": "glass",
+      "product": "y90-glass",
       "categories": [
         "Large Tumor",
         "Dosimetry",
         "HCC"
-      ]
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1784876448382,
@@ -7748,13 +8349,15 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Combination Therapy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Combination Therapy",
         "Dosimetry",
         "HCC",
         "Safety"
-      ]
+      ],
+      "journalImpactFactor": 3.4,
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1786590672283,
@@ -7762,7 +8365,7 @@
       "title": "Efficacy and safety of Y90 radioembolization combined with targeted therapy and immunotherapy in patients with unresectable hepatocellular carcinoma: a dual-center, retrospective study",
       "country": "China",
       "authors": "Xiaolong Wang, Qinggui Jiang, Shiguang Chen et al.",
-      "journal": "",
+      "journal": "BMC Cancer",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41923204/",
       "pmcid": "PMC13169584",
       "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/Resin/2026%20Wang%20Efficacy%20and%20safety%20of%20Y90%20combined%20with%20targeted%20therapy%20and%20immunotherapy%20in%20patients%20with%20unresectable%20HCC%20a%20dual%20center,%20retrospective%20s.pdf?d=w4e3c970143ae42eab4ba1a062fe115f5&csf=1&web=1&e=jNzrRB",
@@ -7775,7 +8378,7 @@
       "abstract": "",
       "reviewStatus": "AI Draft",
       "primaryCategory": "Immunotherapy",
-      "product": "resin",
+      "product": "y90-resin",
       "categories": [
         "Immunotherapy",
         "Resin",
@@ -7784,7 +8387,9 @@
         "HCC",
         "Safety",
         "Mapping / Failed Evaluation"
-      ]
+      ],
+      "journalImpactFactor": 4.1,
+      "journalImpactFactorYear": 2025
     }
   ]
 }
