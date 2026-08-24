@@ -1,13 +1,18 @@
 {
   "version": "y90-publication-database-v3",
-  "savedAt": "2026-08-20T08:07:38.124Z",
+  "savedAt": "2026-08-24T08:56:09.854Z",
   "categories": [
+    "Adrenal",
     "APAC Data",
     "Asian Data",
     "Balloon Occlusion",
+    "Bone / Musculoskeletal",
+    "Bone Metastases",
     "Carbon",
     "Case Report",
+    "Cervical Cancer",
     "Chemotherapy",
+    "Clinical Efficacy",
     "Clinical Topic",
     "Clinical Topic / Efficacy",
     "Clinical Topic / Patient Selection",
@@ -75,17 +80,23 @@
     "Key Clinical Data / TRACE",
     "Laboratory Investigation",
     "Large Tumor",
+    "Lung",
+    "Lung Cancer / NSCLC",
+    "Lung Metastases",
     "Lung Shunt",
     "MAA",
     "Mapping",
     "Mapping / Extrahepatic Accumulation",
     "Mapping / Failed Evaluation",
     "Mapping Failed Rate",
+    "Melanoma",
     "Metastases",
     "Metastases / Breast Cancer",
     "Metastases / Gastrointestinal Cancer",
+    "Metastases / ICC",
     "Metastases / Intrahepatic Cholangiocarcinoma (ICC)",
     "Metastases / Lung Cancer",
+    "Metastases / mCRC",
     "Metastases / Metastatic Colorectal Cancer (mCRC)",
     "Metastases / Neuroendocrine Tumors (NETs)",
     "Metastases / Ovarian Cancer",
@@ -93,14 +104,19 @@
     "Metastases / Uveal Melanoma",
     "Microsphere Coverage",
     "No MAA",
+    "Osteoid Osteoma",
+    "Pain Palliation",
     "Particle Number",
     "Post-Mortem Considerations",
+    "Preclinical",
+    "Protocol",
     "Publication Summary",
     "PVT",
     "Radiation Pneumonitis",
     "Radiation Safety & Handling",
     "Radiation Segmentectomy",
     "Real-world evidence",
+    "Renal Cell Carcinoma",
     "Resection",
     "Resection / Downstaging and Bridging",
     "Resection / Lobectomy",
@@ -108,6 +124,7 @@
     "Resin",
     "RPM",
     "Safety",
+    "Sarcoma",
     "SBRT",
     "Simplicity",
     "Technical",
@@ -296,7 +313,7 @@
         "Resin"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072020,
@@ -323,7 +340,7 @@
         "Dosimetry"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073025,
@@ -816,7 +833,7 @@
         "Lung Shunt"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073107,
@@ -871,7 +888,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150805,
@@ -953,7 +970,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071002,
@@ -1152,7 +1169,7 @@
         "Technical"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050618,
@@ -1351,7 +1368,7 @@
         "Downstaging"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150804,
@@ -1642,7 +1659,7 @@
         "Dosimetry"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050703,
@@ -1757,7 +1774,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026151002,
@@ -1785,7 +1802,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026151003,
@@ -1813,7 +1830,7 @@
         "Dosimetry / Dose Response"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073006,
@@ -1931,7 +1948,7 @@
         "Simplicity"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050705,
@@ -2075,7 +2092,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 3,
@@ -2100,7 +2117,7 @@
       "primaryCategory": "Comparative",
       "reviewStatus": "AI Draft",
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072024,
@@ -2245,7 +2262,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051007,
@@ -2302,7 +2319,7 @@
         "Safety"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026150704,
@@ -2383,7 +2400,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071101,
@@ -2525,7 +2542,7 @@
         "Dosimetry / TN Ratio"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071120,
@@ -3877,7 +3894,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051104,
@@ -3907,7 +3924,7 @@
         "Combination Therapy"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605071105,
@@ -4447,7 +4464,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050809,
@@ -4558,7 +4575,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073033,
@@ -4586,7 +4603,7 @@
         "Dosimetry"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072013,
@@ -4811,7 +4828,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072067,
@@ -4955,7 +4972,7 @@
         "Resin"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050612,
@@ -5014,7 +5031,7 @@
         "Resin"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051101,
@@ -5042,7 +5059,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073039,
@@ -5242,7 +5259,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073045,
@@ -5360,7 +5377,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073024,
@@ -5620,7 +5637,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072071,
@@ -5735,7 +5752,7 @@
         "Resin"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072044,
@@ -5940,7 +5957,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050611,
@@ -6119,7 +6136,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072012,
@@ -6146,7 +6163,7 @@
         "Metastases"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050701,
@@ -6599,7 +6616,7 @@
         "Chemotherapy"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051013,
@@ -6889,7 +6906,7 @@
         "Dosimetry"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073028,
@@ -6918,7 +6935,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026051010,
@@ -7337,7 +7354,7 @@
         "Complications"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 2026050709,
@@ -7366,7 +7383,7 @@
         "Lung Shunt"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605073016,
@@ -7424,7 +7441,7 @@
         "Safety"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072030,
@@ -7482,7 +7499,7 @@
         "Safety"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 202605072029,
@@ -7624,7 +7641,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1778653268226,
@@ -7708,7 +7725,7 @@
         "Mapping / Failed Evaluation"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1779173853832,
@@ -7902,7 +7919,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780382131462,
@@ -7987,7 +8004,9 @@
         "HCC",
         "Comparative",
         "Resection / Transplantation"
-      ]
+      ],
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     },
     {
       "id": 1780383803826,
@@ -8187,7 +8206,7 @@
         "Safety"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1780456432070,
@@ -8274,7 +8293,7 @@
         "Mapping / Failed Evaluation"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1784685032464,
@@ -8332,7 +8351,7 @@
         "HCC"
       ],
       "journalImpactFactor": 3.1,
-      "journalImpactFactorYear": ""
+      "journalImpactFactorYear": 2025
     },
     {
       "id": 1784876448382,
@@ -8394,6 +8413,1389 @@
       ],
       "journalImpactFactor": 4.1,
       "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672284,
+      "year": 2010,
+      "title": "Comparison of Survival after Sublobar Resections and Ablative Therapies for Stage I Non Small Cell Lung Cancer",
+      "authors": "Zemlyak",
+      "journal": "ACS",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: The 3-year CSS SLR : 90.6%, RFA : 87.5%, PCT : 90.2% | Overall survival: 3-year SLR : 87.1%, RFA : 87.5%, PCT : 77% | Complications: Never had any long-term importance for patients",
+      "findings": "Three modalities comparable safety and efficacy outcomes, suggesting cryoablation may be a reasonable alternative for high-risk stage I NSCLC patients not eligible for standard surgery",
+      "notes": "Excel source: Lung sheet, row 7 | Department: Surgeon? | Topic: Compare the safety and efficacy of cryoablation, sublobar resection, and radiofrequency ablation as alternative treatments for patients medically unfit for standard lobar resection | Study type: Retrospective | Target specialties: Surgeon IR",
+      "url": "https://doi.org/10.1016/j.jamcollsurg.2010.03.020",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672285,
+      "year": 2011,
+      "title": "Percutaneous Cryoablation of Pulmonary Metastases from Colorectal Cancer",
+      "authors": "Yamauchi Y",
+      "journal": "PLoS ONE",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Metastases / mCRC",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 1-yr : 90.8% 3-yr : 59% | Overall survival: 1 yr 91%; 3 yr 59.6% | Complications: Common but mostly CTCAE 1,2",
+      "findings": "Feasible option for nonsurgical CRC lung mets; local progression free interval was satisfactory at least for tumors that were <=15 mm in diameter",
+      "notes": "Excel source: Lung sheet, row 8 | Tumor/type: Colorectal lung mets | Department: Surgery | Topic: Safety & efficacy; local progression-free interval (LPFI) and overall survival; effect of tumor size | Study type: Retrospective single-center cohort | Cryo technology: CRYOcare (Endocare)",
+      "url": "https://doi.org/10.1371/journal.pone.0027086",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672286,
+      "year": 2012,
+      "title": "Percutaneous cryoablation of lung tumors: feasibility and safety",
+      "authors": "Masanori Inoue",
+      "journal": "JVIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Safety"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Complications: Pneumothorax 61.7% (chest tube 17.6%)",
+      "findings": "A greater number ofcryoprobes was a significant (P=.001) predictor of pneumothorax",
+      "notes": "Excel source: Lung sheet, row 11 | Tumor/type: Mixed (primary + metastatic) | Department: Radiology | Topic: safety and feasibility of cryoablation for lung tumors as well as the incidence of, and risk factors for,complications | Study type: Retrospective Multi-center | Cryo technology: CRYOcare (Endocare)",
+      "url": "https://doi.org/10.1016/j.jvir.2011.11.019",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672287,
+      "year": 2021,
+      "title": "Outcomes Following Percutaneous Cryoablation or Microwave Ablation of Lung Metastases From Adenoid Cystic Carcinoma",
+      "authors": "Konstantin S. Leppelmann",
+      "journal": "Annals of Surg Oncol",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Pain Palliation",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 1-year : 94.7%, 2-year : 80.8% 3-year : 76.4% | Overall survival: Median OS 81.5 months | Complications: Major complications rare; BPF in only 4.8% with cryo vs 36% with MWA (p=0.037); cryo caused more mild hemoptysis (33% vs 0%); pneumothorax ~41% (22% chest tube) both groups",
+      "findings": "Cryoablation achieved equivalent local control to MWA (~81% 2-year) with less pain and fewer fistulas in ACC metastases",
+      "notes": "Excel source: Lung sheet, row 12 | Tumor/type: Adenoid cystic carcinoma mets | Department: Radiology | Topic: Cryoablation vs MWA for ACC lung metastases (comparative efficacy) | Study type: Retrospective Multi-center | Cryo technology: Galil Visual ICE",
+      "url": "https://doi.org/10.1245/s10434-021-09714-4",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672288,
+      "year": 2024,
+      "title": "Cryoablation for treatment of peripheral lung metastases from colorectal cancer: a bicenter retrospective study",
+      "authors": "Jean Izaaryene",
+      "journal": "European Radiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Metastases / mCRC",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 1-yr : 95% at 2,3,4-yr : 89% | Overall survival: 3-year : ~97% Chemo-free survival 14 month | Complications: Predominantly mild/moderate; severe complications rare",
+      "findings": "High local control with low severe complications; allowing patients a significant period without chemotherapy",
+      "notes": "Excel source: Lung sheet, row 13 | Tumor/type: Colorectal Mets (peripheral) | Department: IR | Topic: Oncologic efficacy, complications in treating mCRC at the lung periphery | Study type: Bicenter retrospective cohort | Cryo technology: Galil (IceForce)",
+      "url": "https://doi.org/10.1007/s00330-024-11153-0",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 6,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672289,
+      "year": 2013,
+      "title": "Factors Affecting Local Progression after Percutaneous Cryoablation of Lung Tumors",
+      "authors": "Hideki Yashiro",
+      "journal": "JVIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Complications: Pneumothorax (61.7%), pleural effusion (70.5%), hemoptysis(36.8%)",
+      "findings": "A greater number ofcryoprobes was a significant predictor of pneumothorax. Greater number of cryoprobes and no history of ipsilateral surgery werepredictors for pleural effusion. Greater number of cryoprobes and younger age were predictors for hemoptysis",
+      "notes": "Excel source: Lung sheet, row 14 | Tumor/type: Mixed | Department: IR | Topic: Predictors of local tumor progression and technique effectiveness after lung cryoablation | Study type: Retrospective single-center | Cryo technology: CryoCare (Endocare)",
+      "url": "https://doi.org/10.1016/j.jvir.2012.12.026",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672290,
+      "year": 2022,
+      "title": "Comparison of Percutaneous Image-Guided Microwave Ablation and Cryoablation for Sarcoma Lung Metastases: A 10-Year Experience",
+      "authors": "Patrick P. Bourgouin",
+      "journal": "AJR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Sarcoma",
+        "Comparative"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 2-year >1 cm: 79% (cryo) vs 62% (MWA) ≤1 cm: 98% (cryo) vs 95% (MWA) | Overall survival: 1-year : 100% 2-year : 89% 3-year : 82% | Complications: Overall complications in 44% of ablation chest tube placed in 23% no life-threatening events (0% Grade 4–5) cryo caused more minor hemoptysis, MWA had slightly higher bronchopleural fistula",
+      "findings": "Both cryo and MWA are effective for sarcoma lung mets; cryo showed a trend toward better control in lesions >1 cm (not statistically different)",
+      "notes": "Excel source: Lung sheet, row 15 | Tumor/type: Sarcoma | Department: IR | Topic: Head-to-head comparison of MWA vs cryoablation for sarcoma lung metastases | Study type: Retrospective Multicenter | Cryo technology: Galil (IceRod & IceSphere)",
+      "url": "https://doi.org/10.2214/AJR.21.26551",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672291,
+      "year": 2022,
+      "title": "Microwave ablation vs. cryoablation for treatment of primary and metastatic pulmonary malignant tumors",
+      "authors": "Hong-Wei Li",
+      "journal": "Molecular and Clinical Oncology (Spandidos Publications)",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Pain Palliation",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: Local progression at ablation site: 1/19 (5.3%) in cryo vs 1/29 (3.45%) in MWA | Overall survival: Cryo: 6/12/24/36–mo OS 94.07%/81.13%/57.33%/43.04%; MWA: 92.72%/81.28%/64.54%/54.91% | Complications: Cryo 36.84% vs MWA 34.48%; no intraprocedural deaths",
+      "findings": "Similar response and OS; cryoablation associated with significantly less intraprocedural pain; similar complication rates",
+      "notes": "Excel source: Lung sheet, row 16 | Tumor/type: Mixed: primary & metastatic pulmonary malignant tumors | Department: IR | Topic: Direct comparison of MWA vs cryo for malignant pulmonary tumors | Study type: Retrospective dual–center study | Cryo technology: CryoHit argon-helium system (AccuTarget MediPharma, Shanghai)",
+      "url": "https://doi.org/10.3892/mco.2022.2495",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672292,
+      "year": 2020,
+      "title": "Multicenter Study of Metastatic Lung Tumors Targeted by Interventional Cryoablation Evaluation (SOLSTICE)",
+      "authors": "Callstrom MR",
+      "journal": "J Thorac Oncol",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 1-yr : 85.1% 2-yr : 77.2% re-ablation of recurrences 1-yr : 91.1% 2-yr : 84.4% | Overall survival: 1-year : 97.6%, 2-year :86.6% | Complications: Pneumothorax requiring chest tube in 26% Grade ≥3 complications in 5.3% (4.7% Grade 3, 0.6% Grade 4)",
+      "findings": "Cryoablation achieves high 2-year local control (77.2%) in lung mets; repeat cryo can salvage failures",
+      "notes": "Excel source: Lung sheet, row 17 | Tumor/type: Mets | Department: IR | Topic: 2-year outcomes of cryoablation in oligometastatic lung disease | Cryo technology: Galil (BTG/Boston Scientific)",
+      "url": "https://doi.org/10.1016/j.jtho.2020.02.022",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672293,
+      "year": 2020,
+      "title": "Comparing cryoablation and microwave ablation for the treatment of patients with stage IIIB/IV non–small cell lung cancer",
+      "authors": "Sushant Kumar Das",
+      "journal": "Oncology Letters (Spandidos Publications)",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Pain Palliation",
+        "Comparative",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Overall survival: Median PFS: CA 10 mo vs MWA 11 mo; Median OS: CA 27.5 mo vs MWA 18 mo | Complications: AEs similar between groups (exact % NR in abstract)",
+      "findings": "Comparable efficacy overall; MWA favored for tumors >3 cm; cryo caused significantly less intraprocedural pain",
+      "notes": "Excel source: Lung sheet, row 18 | Tumor/type: NSCLC (stage IIIB/IV) | Department: IR | Topic: Compare cryo vs MWA for advanced NSCLC (endpoints: PFS/OS/AEs) | Study type: Retrospective single–/dual–center study | Cryo technology: AccuTarget MediPharma argon–based cryoablation system",
+      "url": "https://doi.org/10.3892/ol.2019.11149",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672294,
+      "year": 2021,
+      "title": "The ECLIPSE Study: Efficacy of Cryoablation on Metastatic Lung Tumors With a 5-Year Follow-Up",
+      "authors": "de Baere T",
+      "journal": "J Thorac Oncol",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Metastases",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 1-year : 94.2% 3-year : 87.9% 5-year : 79.2% | Overall survival: 3-year : 63.2% 5-year : 46.7%; | Complications: No grade 4/5 pneumothorax in 3 patients (7.5%, 1 required chest tube)",
+      "findings": "Cryoablation provides durable 5-year local control (79.2%) in lung mets, with survival similar to surgery",
+      "notes": "Excel source: Lung sheet, row 19 | Tumor/type: Mets | Department: IR | Topic: 5-year outcomes of cryoablation in lung oligometastases | Study type: Prospective multicenter | Cryo technology: Galil IceRod",
+      "url": "https://doi.org/10.1016/j.jtho.2021.07.021",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672295,
+      "year": 2022,
+      "title": "Cryoablation Using Liquid Nitrogen for Metastatic Lung Cancers",
+      "authors": "Hiroaki Nomori",
+      "journal": "Preprint JCTS",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 3‑yr : 73% | Overall survival: 96% <2cm 46% ≥2.2cm | Complications: pneumothorax 25%",
+      "findings": "Cryoablation using liquid nitrogen would be one of the treatment methods for metastatic lung cancers <2.2 cm. Preserved pulmonary function declined significantly with an increasing number of treated tumors",
+      "notes": "Excel source: Lung sheet, row 20 | Tumor/type: Mets | Department: Thoracic Surgery | Topic: Liquid‑nitrogen CA (IceCure) for lung mets; outcomes by size; pulmonary function impact | Study type: Retrospective single‑center observational | Cryo technology: IceSense 3 (IceCure)",
+      "url": "https://doi.org/10.21203/rs.3.rs-926836/v2",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672296,
+      "year": 2024,
+      "title": "Computed tomography-guided cryoablation in treating adrenal metastases: a retrospective single-center study",
+      "authors": "Claudio Pusceddu",
+      "journal": "DIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Adrenal",
+        "Safety"
+      ],
+      "primaryCategory": "Adrenal",
+      "results": "Local control: LTR 16.7%",
+      "findings": "Computed tomography-guided cryoabla tion achieved a high primary technical suc cess rate of 91.7% and a secondary success rate of 100% in treating adrenal metastases (AMs)",
+      "notes": "Excel source: RCC sheet, row 29 | Tumor/type: Mets | Department: Radiology | Topic: Assess the effectiveness and safety of computed tomography (CT)-guided cryoablation for treating adrenal metastases (AMs) | Protocol: 10F-8P-10F",
+      "url": "https://doi.org/10.4274/dir.2024.242956",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672297,
+      "year": 2025,
+      "title": "Lung Cryoablation: Patient Selection,Techniques, and Postablation Imaging",
+      "authors": "Àngel",
+      "journal": "RadioGraphics",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung"
+      ],
+      "primaryCategory": "Lung",
+      "results": "",
+      "findings": "",
+      "notes": "Excel source: Lung sheet, row 41 | Cryo technology: Boston Scientific",
+      "url": "https://doi.org/10.1148/rg.240157",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672298,
+      "year": 2024,
+      "title": "Safety and Effectiveness of Track Cauterization for Lung Cryoablation",
+      "authors": "Daniel H.",
+      "journal": "JVIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Comparative",
+        "Safety"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Complications: Patients who underwent procedures with track cautery were 2.6 times less likely to exhibit pleural effusion",
+      "findings": "Track cauterization in lung cryoablation was proven to reduce pleural effusion, but no difference in pneumothorax or delayed AEs was noted. The use of fewer probes was associated with a lower rate of Aes",
+      "notes": "Excel source: Lung sheet, row 42 | Department: Radiology | Topic: safety and effectiveness of track cauterization for lung cryoablation through comparison of postprocedural adverse event (AE) rates | Study type: Retrospective Review | Cryo technology: Boston Scientific",
+      "url": "https://doi.org/10.1016/j.jvir.2024.04.009",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672299,
+      "year": 2013,
+      "title": "CT-guided thin needles percutaneous cryoablation (PCA) in patients with primary and secondary lung tumors: a preliminary experience",
+      "authors": "Pusceddu",
+      "journal": "Eur JR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Complications: Mostly CTCEA grade 1",
+      "findings": "",
+      "notes": "Excel source: Lung sheet, row 29 | Tumor/type: NSCLC | Cryo technology: Galil IceRod",
+      "url": "",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672300,
+      "year": 2012,
+      "title": "Cryosurgery for lung cancer",
+      "authors": "Niu",
+      "journal": "J Thorac Dis",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Overall survival: 1-, 2-, and 3-year : 64%, 45% and 32% | Complications: pneumothorax 25.9%, pleural effusion 16.2%, hemoptysis 22.5%; most events mild and conservatively managed",
+      "findings": "Cryotherapy is a feasible option for patients not eligible for resectiocan and improve the immune system to trigger the specific anti-tumor response",
+      "notes": "Excel source: Lung sheet, row 30 | Tumor/type: NSCLC | Topic: Indications, techniques (endobronchial, intrathoracic, percutaneous), clinical outcomes, complications, and cryo‑immunology in lung cancer | Study type: Review | Cryo technology: NR Argon–helium",
+      "url": "https://doi.org/10.3978/j.issn.2072-1439.2012.07.13",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672301,
+      "year": 2022,
+      "title": "Safety and efficacy of cryoablation versus radiofrequency ablation for stage I NSCLC",
+      "authors": "M. Wang",
+      "journal": "Chinese Medical Association",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Pain Palliation",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: Local tumor progression: 31.6% (cryo) vs 25.0% (RFA), ns | Overall survival: Median PFS: 51 vs 44 mo (ns); OS: not reached | Complications: Overall AEs similar; pleural effusion higher with cryo (26.3% vs 5.8%); pneumothorax similar",
+      "findings": "Similar PFS/OS and LTP between groups; Cryo had less intraprocedural pain but longer procedure",
+      "notes": "Excel source: Lung sheet, row 31 | Tumor/type: NSCLC | Department: Radiology | Topic: Direct comparison of percutaneous cryo vs RFA | Study type: Retrospective Single center",
+      "url": "https://doi.org/10.3760/cma.j.cn112137-20220109-00060",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672302,
+      "year": 2023,
+      "title": "Cryoablation is superior to radiofrequency ablation for the treatment of non‑small cell lung cancer: A meta‑analysis",
+      "authors": "Ziwei Xu",
+      "journal": "Cryobiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Lung",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Safety"
+      ],
+      "primaryCategory": "Lung",
+      "results": "Local control: 3‑yr DFS favored Cryo | Overall survival: OS not directly pooled | Complications: Complications lower with Cryo",
+      "findings": "Cryo superior for 3‑yr DFS (p=0.003) and lower complications (p<0.00001); recurrence lower (p=0.05)",
+      "notes": "Excel source: Lung sheet, row 32 | Tumor/type: NSCLC | Topic: Comparative effectiveness cryo vs RFA in NSCLC | Study type: Systematic review meta‑analysis",
+      "url": "https://doi.org/10.1016/j.cryobiol.2023.104560",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672303,
+      "year": 2021,
+      "title": "Cryoablation for Palliation of Painful Bone Metastases: The MOTION Multicenter Study",
+      "authors": "Jennings JW",
+      "journal": "Radiol Imag Cancer",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "Opioid medication use at baseline was reported by 48 of 66 (73%)participants, with a mean MEDD of 43.1 mg ± 79.0 (median, 12.6 mg). Opioid medication use was reported by 56%–69% of participants who attended visits at week 4 through week 24. The MEDD among complete-case participants decreased from week 4 to week 24. Opioid pain medication use was stable (ie, increased ≤ 25% over baseline) over week 4 through week 24 in 57% (21 of 37) of participants.",
+      "notes": "Excel source: MSK sheet, row 41 | Department: Radiology | Topic: The efficacy of cryoablation for palliation of painful metastases involving bone in adult patients who were not candidates for current pain therapies (e.g., analgesia, radiation) or for whom current pain therapies had failed to provide adequate relief through 24 weeks | Study type: Multicenter Prospective Single arm | Target specialties: Oncology Radiology Orthopedic Hematology Pain management | Cryo technology: VICE",
+      "url": "https://doi.org/10.1148/rycan.2021200101",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672304,
+      "year": 2013,
+      "title": "Percutaneous image-guided cryoablation of painful metastases involving bone: multicenter trial",
+      "authors": "Callstrom MR",
+      "journal": "CANCER",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Pain Palliation"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "Of the patients who reported the use of opioid analgesics prior to the procedure, 39 of 47 (83%, exact 95% confidence interval of 69 to 92%) reported a reduction in the use of opioid analgesic medications, and 19 of 47 (40%, exact 95% confidence interval of 26%to 56%) reported no opioid analgesic medications at some time following the cryoablation procedure.",
+      "notes": "Excel source: MSK sheet, row 40 | Department: Radiology | Topic: This study sought to describe the results of a single-arm multicenter clinical trial using image-guided percutaneous cryoablation for the palliation of painful metastatic tumors involving bone. | Study type: Single arm Multi center | Target specialties: Oncology Radiology Orthopedic Hematology Pain management | Cryo technology: Endocare",
+      "url": "https://doi.org/10.1002/cncr.27793",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672305,
+      "year": 2022,
+      "title": "CT-guided cryoablation for management of bone metastases: a single center experience and review of the literature",
+      "authors": "Arrigoni F",
+      "journal": "La radiologia medica",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "The study demonstrates that cryoablation significantly reduces pain scores in patients with bone metastases. This is achieved through the precise targeting and ablation of painful metastatic lesions. The study may also highlight that the pain relief provided by cryoablation is sustained over a considerable period, improving the overall quality of life for patients. The findings support the use of cryoablation as a key tool in the pain management arsenal for patients with bone metastases, offering a reliable method to control and alleviate severe pain.",
+      "notes": "Excel source: MSK sheet, row 29 | Department: Radiology | Topic: Discusses the use of cryoablation, a thermal ablation technique, for the management of bone metastases | Study type: Single center Review | Target specialties: Oncology Radiology Orthopedic Pain management | Cryo technology: VICE",
+      "url": "https://doi.org/10.1007/s11547-021-01437-6",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672306,
+      "year": 2021,
+      "title": "A preliminary comparative study of percutaneous CT-guided cryoablation with surgical resection for osteoid osteoma",
+      "authors": "Meng L",
+      "journal": "Peer J",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Osteoid Osteoma",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. Cryoablation is a minimally invasive, safe, and effective treatment strategy for osteoid osteoma. 2. Cryoablation is fully comparable to surgical resection in terms of efficacy and outcome. 3. Cryoablation can be considered as an alternative to surgical resection for osteoid osteoma treatment.",
+      "notes": "Excel source: MSK sheet, row 16 | Tumor/type: Benign | Department: Radiology | Topic: The efficacy and safety of cryoablation as a treatment option for osteoid osteoma Analyze the outcomes of cryoablation, especially in refractory sites such as the spine. | Study type: Single center Retrospective | Target specialties: Oncology Radiology Orthopedic Pain management",
+      "url": "https://doi.org/10.7717/peerj.10724",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672307,
+      "year": 2021,
+      "title": "Percutaneous Ablative Therapies For the Managment of Osteoid Osteomas: A Systematic Review and Meta-Analyisis",
+      "authors": "Shanmugasundaram S",
+      "journal": "CIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Osteoid Osteoma",
+        "Pain Palliation",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. Percutaneous ablative therapies, including radiofrequency ablation, cryoablation, laser ablation, and microwave ablation, resulted in significant and lasting pain reduction. 2. The VAS pain scores for all ablative methods showed a significant decrease from pre-procedure to post-procedure, including at 24-48 hours and 3-6 months. 3. Technical and clinical success rates and major complications did not significantly differ between the different ablative methods. 4. The overall recurrence of bone pain at the same site occurred in 4.06% of all patients, on average 11 months after the procedure. 5. The findings suggest that percutaneous ablative therapies for osteoid osteomas are safe and effective in reducing pain, as demonstrated by visual analog scale pain scores.",
+      "notes": "Excel source: MSK sheet, row 17 | Tumor/type: Benign | Department: Radiology | Topic: Evaluate the safety and efficacy of percutaneous ablative therapy for the treatment of osteoid osteomas. | Study type: Single center Retrospective | Target specialties: Oncology Radiology Orthopedic Pain management | Cryo technology: VICE",
+      "url": "https://doi.org/10.1007/s00270-021-02804-6",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672308,
+      "year": 2017,
+      "title": "Hopeless Case Palliative Cryoablation and Cementoplasty Procedures for Palliation of Large Pelvic Bone Mets",
+      "authors": "Coupal TM",
+      "journal": "Pain Phys",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. Combination cryoablation and cementoplasty is a novel and efficacious treatment option for palliation of large pelvic bone metastases. 2. The procedure can lead to marked improvements in pain, mobility, and quality of life. 3. Medications alone may not provide adequate pain control for up to 50% of patients with pelvic bone metastases. 4. Minimally invasive image-guided treatment options should be considered as an alternative for palliation of bony metastases. 5. Large metastatic lesions should not be considered \"hopeless cases\" and can benefit from image-guided intervention.",
+      "notes": "Excel source: MSK sheet, row 31 | Department: Radiology | Topic: Explores the efficacy and safety of image-guided percutaneous cryoablation and cementoplasty for palliation of large pelvic bone metastases The study aimed to evaluate the outcomes of this treatment option for patients with metastases greater or equal to 5.0 cm and significant pain that was unresponsive to conventional pain management regimens | Study type: Single center Review | Target specialties: Oncology Radiology Orthopedic Pain management | Cryo technology: VICE",
+      "url": "https://doi.org/10.36076/ppj/2017.7.e1053",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672309,
+      "year": 2013,
+      "title": "Combined use of percutaneous cryoablation and vertebroplasty with 3D rotational angiograph in treatment of single vertebral metastasis: comparison with vertebroplasty",
+      "authors": "Masala S",
+      "journal": "Neuroradiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Comparative",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. The combined procedure of cryoablation and vertebroplasty (CVT) effectively reduced pain and improved the quality of life in patients with single painful metastatic vertebral fractures. 2.The combined procedure of CVT is a safe and effective option for pain relief in single metastatic vertebral fractures, particularly when other standard palliative treatments have been unsuccessful. It also improves disability in these patients. Accurate needle positioning and precise fluoroscopic and CT guidance are crucial for ensuring a complication-free treatment.",
+      "notes": "Excel source: MSK sheet, row 33 | Department: Radiology | Topic: The effectiveness of a combined procedure of percutaneous cryoablation and vertebroplasty (CVT) in treating single painful metastatic vertebral fractures | Study type: Single center Retrospective | Target specialties: Oncology Radiology Orthopedic Pain management | Cryo technology: Endocare Galil",
+      "url": "https://doi.org/10.1007/s00234-012-1096-7",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672310,
+      "year": 2014,
+      "title": "Image guided cryoablation for the treatment of painful MSK mets a single center experience",
+      "authors": "Prologo JD",
+      "journal": "Skeletal Radiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. There were statistically significant decreases in the median VAS score and narcotic usage at both 24 h and 3 months 2. Median narcotic usage, expressed as morphine equivalent (the amount of narcotics taken in 24 h, expressed as a morphine equivalent), was 340± 180 mg prior to the procedure. Morphine quivalent values decreased to 85±70 mg (p<0.000) 24 h after the procedure and at 3 months had increased to 130±70 mg (p<0.000). At 3 months post procedure, morphine equivalent values remained significantly lower than prior to the procedure (p<0.000).",
+      "notes": "Excel source: MSK sheet, row 42 | Department: Radiology | Topic: CT-guided percutaneous cryoablation for the management of painful musculoskeletal metastatic disease | Study type: Single center Single arm Retrospective | Target specialties: Oncology Radiology Orthopedic Hematology Pain management | Cryo technology: Galil",
+      "url": "https://doi.org/10.1007/s00256-014-1939-x",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672311,
+      "year": 2016,
+      "title": "Spine cryoablation Pain Palliation and Local Tumor Control for Vertebral Metastases",
+      "authors": "Tomasian.TA",
+      "journal": "AJNR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "Percutaneous imaging-guided spine cryoablation is a safe and effective treatment for pain palliation and local tumor control for vertebral metastases. It can be used as an alternative to conventional chemoradiation therapy or analgesics. The procedure provides significant pain relief and reduces the need for analgesic medications.",
+      "notes": "Excel source: MSK sheet, row 35 | Department: Radiology | Topic: safety and effectiveness of percutaneous imaging-guided spine cryoablation for the management of vertebral metastases | Study type: Retrostpective Single arm | Target specialties: Oncology Radiology Orthopedic Neurosurgeon Pain management | Cryo technology: Galil",
+      "url": "https://doi.org/10.3174/ajnr.a4521",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672312,
+      "year": 2016,
+      "title": "Percutaneous Image guided cryoablation of MSK mets Pain Palliation and Local Tumor Control",
+      "authors": "Wallace AN",
+      "journal": "JVIR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. Cryoablation is an effective treatment for palliating painful musculoskeletal metastases. 2. Cryoablation also achieves local tumor control in patients treated with percutaneous image-guided cryoablation. 3. The study demonstrates the safety and effectiveness of cryoablation for musculoskeletal metastases. 4. Cryoablation can be considered as a viable treatment option for patients with these conditions.",
+      "notes": "Excel source: MSK sheet, row 36 | Department: Radiology | Topic: Evaluate the safety and effectiveness of cryoablation in treating musculoskeletal metastases | Study type: Retrostpective Single arm | Target specialties: Oncology Radiology Orthopedic Neurosurgeon Pain management | Cryo technology: Endocare Galil",
+      "url": "https://doi.org/10.1016/j.jvir.2016.07.026",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672313,
+      "year": 2020,
+      "title": "Retrospective analysis of CT guided percutaneous cryoablation for treatment of painful osteolytic bone metastasis",
+      "authors": "Yang Y",
+      "journal": "Cryobiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1.the study suggests that CT-guided percutaneous cryoablation under local anesthesia is a safe and effective treatment for painful osteolytic bone metastases.",
+      "notes": "Excel source: MSK sheet, row 37 | Department: Radiology | Topic: Evaluate the safety and effectiveness of CT-guided percutaneous cryoablation for the treatment of painful osteolytic bone metastases | Study type: Single center | Target specialties: Oncology Radiology Pain management | Cryo technology: Galil",
+      "url": "https://doi.org/10.1016/j.cryobiol.2020.01.012",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672314,
+      "year": 2022,
+      "title": "Percutaneous Image guided cryoablation of spinal metastases over a 10 year experience in two academic centers",
+      "authors": "Cazzato RL",
+      "journal": "European Radiology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Bone Metastases",
+        "Pain Palliation",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1.Cryoablation of spinal metastases is safe. 2.Cryoablation of spinal metastases allows rapid and sustained pain relief. 3.The mean 2-year rate of local tumor control after cryoablation of spinal metastases is 82.1%.",
+      "notes": "Excel source: MSK sheet, row 38 | Department: Radiology | Topic: the safety and effectiveness of cryoablation for the treatment of spinal metastases (SM) | Study type: Multicenter Retrospective | Target specialties: Oncology Radiology Pain management | Cryo technology: BSC",
+      "url": "https://doi.org/10.1007/s00330-021-08477-6",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 6,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672315,
+      "year": 2011,
+      "title": "Palliation of painful metastatic disease involving bone with imaging-guided treatment: comparison of pat",
+      "authors": "Thacker PG",
+      "journal": "AJR",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Pain Palliation",
+        "Comparative",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "1. We found that patients who un derwent cryoablation for painful metastatic tumors to the bone experienced significantl less procedure-related pain in the first 24 hours after the procedure than did patients who underwent RFA for painful bony metas tasis (p = 0.03) 2. Objective measuringof analgesic usage showed a significant decrease in analgesic requirements among patients who underwent cryoablation treatment compared with the RFA group",
+      "notes": "Excel source: MSK sheet, row 44 | Department: Radiology | Topic: Compares the efficacy of percutaneous radiofrequency ablation (RFA) and cryoablation in the treatment of painful metastatic tumors involving bone | Study type: Retrostpective Single arm | Target specialties: Oncology Radiology Orthopedic Hematology Pain management | Cryo technology: Endocare",
+      "url": "https://doi.org/10.2214/AJR.10.6029",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672316,
+      "year": 2017,
+      "title": "Avoiding Complications in Bone and Soft Tissue Ablation",
+      "authors": "Kurup AN",
+      "journal": "Cardiovasc Interv Radiol",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Safety"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "",
+      "notes": "Excel source: MSK sheet, row 47",
+      "url": "",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672317,
+      "year": 2014,
+      "title": "Ablation zones and weight-bearing bones: points of caution for the palliative interventionalist",
+      "authors": "Prologo JD",
+      "journal": "",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Bone / Musculoskeletal",
+        "Pain Palliation"
+      ],
+      "primaryCategory": "Bone / Musculoskeletal",
+      "results": "",
+      "findings": "",
+      "notes": "Excel source: MSK sheet, row 48",
+      "url": "",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672318,
+      "year": 2025,
+      "title": "Efficacy of argon-helium cryoablation combined with PD-1 inhibitors in non-small cell lung cancer",
+      "authors": "Zheng Zheng",
+      "journal": "Acta Oncologica",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Argon-helium cryoablation combined with PD-1 inhibitors statistically significantly improved OS, PFS and immune function in NSCLC patients, offering a promising alternative to standard therapy",
+      "notes": "Excel source: Immuno sheet, row 7 | Type: Advanced NSCLC | Department: Oncology | Topic: Efficacy and safety of argon-helium cryoablation combined with Programmed Death-1 (PD-1) inhibitors versus PD-1 inhibitors plus chemotherapy in treating non-small cell lung cancer (NSCLC). | Study type: single center, open-label, RCT | Target specialties: Oncology Radiology Pulmonology CTS | Cryo technology: Varian or Sunshine basd on needle appearance",
+      "url": "https://doi.org/10.2340/1651-226X.2025.44215",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 2.7,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672319,
+      "year": 2025,
+      "title": "Ablation plus immunotherapy versus immunotherapy alone in patients of advanced NSCLC who develop oligo-residual disease after anti-PD-1/L1 therapy (BOOSTER): a randomized phase 2 trial",
+      "authors": "Shuo Yang",
+      "journal": "Signal Transduction and Targeted Therapy",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "The addition of ablation is well-tolerated and prolongs the survival of immunotherapy in patients with advanced NSCLC who develop ORD after anti-PD-1/L1 therapy, while cryoablation showing potentially superior survival benefit compared to thermal ablation.",
+      "notes": "Excel source: Immuno sheet, row 8 | Type: Advanced NSCLC who develop oligo-residual disease | Department: Oncology | Topic: Efficacy and safety of ablation combining continuous immunotherapy in NSCLC patients with oligo-residual disease (ORD) after anti-PD-1/L1 therapy | Study type: Randomized, phase 2 trial | Target specialties: Oncology Radiology Pulmonology CTS | Cryo technology: Hygea",
+      "url": "https://doi.org/10.1038/s41392-025-02460-z",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672320,
+      "year": 2025,
+      "title": "Local consolidative therapy extends survival in metastatic NSCLC with oligoresidual disease following first-line immunotherapy, irrespective of PD-L1 expression",
+      "authors": "Wangti Xie",
+      "journal": "Scientific Reports",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "LCT enhances survival in mNSCLC with ORD post-immunotherapy, irrespective of PD-L1 status. These findings support integrating LCT into standard care for immunotherapy-responsive ORD populations",
+      "notes": "Excel source: Immuno sheet, row 9 | Type: metastatic non-small cell lung cancer (mNSCLC) with oligoresidual disease (ORD) | Topic: Survival outcomes of local consolidative therapy (LCT) in metastatic non-small cell lung cancer (mNSCLC) with oligoresidual disease (ORD) after first-line immunotherapy | Study type: Retrospective Cohort | Target specialties: Oncology Radiology Pulmonology CTS Radiotherapy",
+      "url": "https://doi.org/10.1038/s41598-025-20679-2",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": 4.9,
+      "journalImpactFactorYear": 2025
+    },
+    {
+      "id": 1786590672321,
+      "year": 2025,
+      "title": "PD-1 inhibitor therapy combined with argon-helium cryoablation is effective against non-small cell lung cancer",
+      "authors": "Xuedong Chen",
+      "journal": "American Journal of Translational Research",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "PD-1 inhibitor therapy combined with argon-helium cryoablation offers a promising and effective treatment strategy for patients with NSCLC.",
+      "notes": "Excel source: Immuno sheet, row 10 | Department: Oncology | Topic: Clinical efficacy of programmed death-1 (PD-1) inhibitor therapy combined with argon-helium cryoablation in patients with non-small cell lung cancer (NSCLC). | Study type: Retrospective Cohort | Target specialties: Oncology Radiology Pulmonology CTS",
+      "url": "https://doi.org/10.62347/MBFJ9966",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672322,
+      "year": 2025,
+      "title": "Cryoablation combined with programmed cell death protein 1 (PD-1) inhibitors regulates myeloid-derived suppressor cells (MDSCs) through the JAK2-STAT3-S100A8/A9 axis in mice with Lewis lung carcinoma",
+      "authors": "Jiao Li",
+      "journal": "International Journal of Hyperthermia",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Preclinical"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Cryo + PD-1 inhibitor treatment can significantly delay tumor growth in mice and inhibit the proliferation and function of MDSCs through the JAK2-STAT3-S100A8/A9 axis, thereby improving the immunosuppressive tumor microenvironment.",
+      "notes": "Excel source: Immuno sheet, row 11 | Department: Pulmonology | Topic: Effect and mechanism of action of combination Cryo + programmed cell death protein 1(PD-1) inhibitors | Study type: Animal Study | Target specialties: Oncology Radiology Pulmonology CTS | Cryo technology: BSC",
+      "url": "https://doi.org/10.1080/02656736.2025.2525444",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672323,
+      "year": 2025,
+      "title": "Cryoablation Combined with Programmed Cell Death Protein 1 Inhibitor Pembrolizumab for Advanced Non-Small Cell Lung Cancer",
+      "authors": "Li Wang",
+      "journal": "Chemotherapy",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Cryoablation combined with pembrolizumab significantly improves clinical outcomes in advanced NSCLC patients compared to cryoablation alone, highlighting the potential of this combination therapy in enhancing antitumor immunity and prolonging survival.",
+      "notes": "Excel source: Immuno sheet, row 12 | Type: Advanced NSCLC | Department: CTS & Oncology | Topic: Efficacy and safety of cryoablation combined with pembrolizumab treatment versus cryoablation alone in patients with advanced non-small cell lung cancer (NSCLC). | Study type: Retrospective Cohort | Target specialties: Oncology Radiology Pulmonology CTS | Cryo technology: TBD",
+      "url": "https://doi.org/10.1159/000545185",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672324,
+      "year": 2024,
+      "title": "Efficacy and Safety of a Therapy Combining Sintilimab and Chemotherapy With Cryoablation in the First-Line Treatment of Advanced Nonsquamous Non-Small Cell Lung Cancer: Protocol for a Phase II, Pilot, Single-Arm, Single-Center Study",
+      "authors": "Zhiqiang Wang",
+      "journal": "JMIR Research Protocol",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Lung Cancer / NSCLC",
+        "Safety",
+        "Clinical Efficacy",
+        "Protocol"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Outcomes are expected to be submitted for publication in 2027",
+      "notes": "Excel source: Immuno sheet, row 13 | Type: Advanced non-squamous NSCLC | Department: Pulmonology | Topic: Efficacy and safety of immunochemotherapy in combination with cryoablation as a first-line treatment for advanced NSCLC. | Study type: Study Protocol | Target specialties: Oncology Radiology Pulmonology CTS | Cryo technology: BSC VICE",
+      "url": "https://doi.org/10.2196/64950",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672325,
+      "year": 2025,
+      "title": "Cryoablation plus sintilimab and lenvatinib in advanced or metastatic intrahepatic cholangiocarcinoma: a phase 2 trial",
+      "authors": "Sijia Gu",
+      "journal": "Nature Cancer",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Metastases / ICC",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "The objective response rate assessed by Response Evaluation Criteria in Solid Tumors version 1.1 was 75.0% (95% confidence interval (CI): 59-91%). Cryoablation combined with sintilimab plus lenvatinib represents a promising approach for the treatment of advanced or metastatic ICC.",
+      "notes": "Excel source: Immuno sheet, row 15 | Department: Oncology | Topic: Efficacy of cryoablation, followed by anti-PD1 sintilimab (200 mg every 3 weeks) plus lenvatinib (8-12 mg per day) 2 weeks later in patients with advanced or metastatic ICC who have progressed after chemotherapy | Study type: Single-arm, phase 2 trial | Target specialties: Oncology Radiology Hepatobiliary Surgery | Cryo technology: Hygea",
+      "url": "https://doi.org/10.1038/s43018-025-01058-2",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672326,
+      "year": 2025,
+      "title": "Efficacy and safety of the CT-guided co-ablation system in the treatment of malignant melanoma with hepatic metastasis",
+      "authors": "Xueyan Li",
+      "journal": "Journal of Cancer Research and Therapy",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Melanoma",
+        "Comparative",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "The CT-guided co-ablation system exhibited favorable clinical efficacy and was associated with a low incidence of AEs in the treatment of hepatic metastases from malignant melanoma, indicating its potential clinical value.",
+      "notes": "Excel source: Immuno sheet, row 17 | Type: Hepatic metastases from malignant melanoma | Department: Liver Surgery | Topic: Efficacy and safety of computed tomography (CT)-guided co-ablation in patients with hepatic metastases from malignant melanoma | Study type: Retrospective Cohort | Target specialties: Oncology Radiology Hepatobiliary Surgery | Cryo technology: Hygea",
+      "url": "https://doi.org/10.4103/jcrt.jcrt_2146_24",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672327,
+      "year": 2025,
+      "title": "Synergistic effects of cryoablation and GM-CSF in colorectal liver metastases management in tumor-bearing mice",
+      "authors": "Junfeng Wang",
+      "journal": "Iranian Journal of Basic Medical Science",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Metastases / mCRC",
+        "Clinical Efficacy",
+        "Preclinical"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Combining cryoablation with GM-CSF treatment holds promise for CLM management. It exhibits increased DC infiltration within the tumor microenvironment, enhanced immune responses, and prolonged survival in tumor-bearing mice.",
+      "notes": "Excel source: Immuno sheet, row 18 | Type: colorectal liver metastases | Department: Colorectal Cancer | Topic: Antitumor immune response following cryoablation combined with granulocyte-macrophage colony-stimulating factor (GM-CSF) treatment in a CLM mouse model. | Study type: Animal Study | Target specialties: Oncology Radiology Hepatobiliary Surgery",
+      "url": "https://doi.org/10.22038/ijbms.2025.82910.17980",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672328,
+      "year": 2024,
+      "title": "Size selection of intrahepatic lesions for cryoablation contributes to abscopal effect and long-term survival in patients with liver metastatic melanoma receiving PD-1 blockade therapy",
+      "authors": "Lujun Shen",
+      "journal": "Cancer Immunology, Immunotherapy",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Melanoma",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Size selection of intrahepatic lesions for cryoablation is important in order to achieve abscopal effect and long-term survival among patients with liver metastatic melanoma receiving PD-1 blockade therapy.",
+      "notes": "Excel source: Immuno sheet, row 19 | Type: liver metastatic melanoma | Department: IR | Topic: examine parameters of cryoablation, tumor characteristics, and their correlations with distant tumor response and survival of liver metastatic melanoma patients receiving cryoablation and PD-1 blockade (cryo-PD-1) combination treatment. | Study type: Retrospective Cohort | Target specialties: Oncology Radiology Hepatobiliary Surgery | Cryo technology: BSC VICE",
+      "url": "https://doi.org/10.1007/s00262-024-03637-1",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672329,
+      "year": 2021,
+      "title": "Pilot study of Tremelimumab with and without cryoablation in patients with metastatic renal cell carcinoma",
+      "authors": "M.T. Campbell",
+      "journal": "Nature Communications",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Renal Cell Carcinoma",
+        "Comparative",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Treatment with tremelimumab plus cryotherapy is feasible and modulates the immune microenvironment in patients with metastatic clear cell histology",
+      "notes": "Excel source: Immuno sheet, row 21 | Type: metastatic RCC | Department: Oncology | Topic: Survival outcome of anti-CTLA-4 (tremelimumab) with (n = 15) or without (n = 14) cryoablation in patients with metastatic renal cell carcinoma | Study type: Pilot study | Target specialties: Oncology Urology Radiology Pathology | Cryo technology: Endocare Varian",
+      "url": "https://doi.org/10.1038/s41467-021-26415-4",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672330,
+      "year": 2025,
+      "title": "Cryoablation synergizes with anti-PD-1 immunotherapy induces an effective abscopal effect in murine model of cervical cancer",
+      "authors": "Xiaoming Yang",
+      "journal": "Translational Oncology",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Cervical Cancer",
+        "Preclinical"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "Combination therapy with cryoablation and anti-PD-1 antibody induces an effective abscopal effect in murine model of cervical cancer and may be a novel therapeutic approach for patients with advanced/recurrent cervical cancer",
+      "notes": "Excel source: Immuno sheet, row 23 | Department: Oncology | Topic: Systemic immunological effects of cryoablation and the potential synergistic anti-tumor effects of cryoablation and anti-PD-1 antibody in cervical cancer | Study type: Animal Study | Target specialties: Oncology Gynecology | Cryo technology: SensCure",
+      "url": "https://doi.org/10.1016/j.tranon.2024.102175",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1786590672331,
+      "year": 2024,
+      "title": "Cryoablation and post-progression immune checkpoint inhibition in metastatic melanoma: a phase II trial",
+      "authors": "M.J. Mooradian",
+      "journal": "Nature Communications",
+      "country": "",
+      "product": "cryoablation",
+      "categories": [
+        "Immunotherapy",
+        "Melanoma",
+        "Safety",
+        "Clinical Efficacy"
+      ],
+      "primaryCategory": "Immunotherapy",
+      "results": "",
+      "findings": "The study met its primary endpoints with the combination strategy found to be safe and feasible with an objective response rate of 23.5% and disease control rate of 41% (4 partial response, 3 stable disease). Our data support further study of this synergistic therapeutic approach.",
+      "notes": "Excel source: Immuno sheet, row 25 | Department: Oncology | Topic: safety, feasibility and tumor response in non-ablated lesions | Study type: non-randomized phase II single-center study | Target specialties: Oncology Radiology | Cryo technology: BSC VICE",
+      "url": "https://doi.org/10.1038/s41467-024-51722-x",
+      "pmcid": "",
+      "pdfUrl": "",
+      "pdfFileName": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "journalImpactFactor": null,
+      "journalImpactFactorYear": ""
     }
   ]
 }
