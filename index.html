@@ -1531,6 +1531,247 @@ body.modal-open .library-filter-sticky{
   }
 }
 
+/* ══════════════════════════════════════════════════════════
+   v6.2 — LIGHT THEME
+   White workspace, high-contrast text, and restrained color coding.
+   ══════════════════════════════════════════════════════════ */
+:root{
+  color-scheme:light;
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --surface2:#f5f8fc;
+  --border:#d6dee9;
+  --accent:#9a5b00;
+  --accent2:#245fbd;
+  --accent3:#18764a;
+  --red:#c73535;
+  --purple:#7042b6;
+  --text:#1f2937;
+  --text-muted:#526172;
+  --text-dim:#78879a;
+  --cryo:#18764a;
+  --dc-bead:#b4236f;
+  --y90-resin:#b94708;
+  --y90-glass:#245fbd;
+  --y90-na:#7042b6;
+  --resin:var(--y90-resin);
+  --glass:var(--y90-glass);
+  --both:var(--y90-na);
+  --control-border:1px solid #cbd5e1;
+  --control-bg:#ffffff;
+  --control-bg-hover:#eef4fb;
+  --control-shadow:0 1px 2px rgba(15,23,42,.06);
+}
+html,body{background:#ffffff !important;}
+body{color:var(--text) !important;}
+::selection{background:#cfe1ff;color:#172033;}
+
+header{
+  background:#ffffff !important;
+  border-bottom:1px solid var(--border) !important;
+  box-shadow:0 3px 14px rgba(31,41,55,.08) !important;
+}
+.logo-area h1,.logo-area h1 span{color:#172033 !important;}
+.logo-area p{color:var(--text-muted) !important;}
+.header-actions .stat-pill{
+  background:#f7f9fc !important;
+  border-color:var(--border) !important;
+  color:#4b596a !important;
+  box-shadow:0 1px 3px rgba(15,23,42,.05) !important;
+}
+.header-actions > .btn{border-color:var(--border) !important;}
+.tabs{
+  background:#ffffff !important;
+  border-bottom:1px solid var(--border) !important;
+  box-shadow:0 1px 3px rgba(15,23,42,.04);
+}
+.tab{color:#5c6979 !important;}
+.tab:hover{color:var(--accent2) !important;background:#f5f8fc;}
+.tab.active{color:var(--accent2) !important;border-bottom-color:var(--accent2) !important;background:#eef5ff;}
+.panel{background:#ffffff !important;color:var(--text) !important;}
+.library-filter-sticky{
+  background:#ffffff !important;
+  box-shadow:0 8px 18px rgba(31,41,55,.10) !important;
+}
+.library-filter-sticky .smart-search-bar,
+.library-filter-sticky .controls,
+.library-filter-sticky .category-strip{background-color:#ffffff !important;}
+.smart-search-bar{background:linear-gradient(90deg,#eef5ff,#f8f5ff) !important;border-bottom-color:var(--border) !important;}
+.controls,.category-strip{background:#ffffff !important;border-bottom-color:var(--border) !important;}
+
+.btn,select,input[type=text],input[type=number],input[type=url],textarea,
+.smart-search-input,.smart-ex,.smart-badge,.cat-chip,.cat-select-chip,
+.view-toggle,.icon-btn,.file-input-area,.stat-pill{
+  border-color:#cbd5e1 !important;
+  box-shadow:0 1px 2px rgba(15,23,42,.05) !important;
+}
+.btn-secondary,.smart-ex,.cat-chip,.category-more-select,.view-toggle,
+.icon-btn,.file-input-area,input,textarea,select{
+  background:#ffffff !important;
+  border-color:#cbd5e1 !important;
+  color:var(--text) !important;
+}
+.btn-secondary:hover,.smart-ex:hover,.cat-chip:hover,.icon-btn:hover,select:hover{
+  background:#eef4fb !important;
+  border-color:#8eadd6 !important;
+  color:#174f9c !important;
+}
+.btn-primary{background:#245fbd !important;border-color:#245fbd !important;color:#ffffff !important;}
+.btn-primary:hover{background:#194f9f !important;border-color:#194f9f !important;color:#ffffff !important;}
+.btn-blue{background:#eaf2ff !important;border-color:#a9c7f5 !important;color:#174f9c !important;}
+.btn-blue:hover{background:#dceaff !important;border-color:#75a6e8 !important;}
+.btn-green{background:#eaf7ef !important;border-color:#9ed2b5 !important;color:#11613b !important;}
+.btn-green:hover{background:#daf0e3 !important;border-color:#69b28a !important;}
+.btn-purple{background:#f3edff !important;border-color:#c8b3ee !important;color:#5d319c !important;}
+.btn-purple:hover{background:#e9ddff !important;border-color:#a98add !important;}
+.btn-pmc{background:#e8f6ed !important;border-color:#8fcaa8 !important;color:#11613b !important;}
+
+.smart-search-input,.search-wrap input,input[type=text],input[type=number],input[type=url],textarea,select{
+  color:var(--text) !important;
+  background:#ffffff !important;
+  caret-color:var(--accent2);
+}
+.smart-search-input{border-color:#8bb2e8 !important;}
+.smart-search-input:focus,.search-wrap input:focus,input:focus,textarea:focus,select:focus{
+  border-color:#4f86d2 !important;
+  box-shadow:0 0 0 3px rgba(36,95,189,.14) !important;
+  outline:none !important;
+}
+.smart-search-input::placeholder,.search-wrap input::placeholder,
+input::placeholder,textarea::placeholder{color:#7b8796 !important;opacity:1 !important;}
+.search-wrap svg{color:#64748b !important;}
+option{background:#ffffff;color:var(--text);}
+.smart-badge{background:#e6f0ff !important;border-color:#a9c7f5 !important;color:#174f9c !important;}
+.smart-ex{color:#43546a !important;}
+.results-info,.section-title,.no-results{color:var(--text) !important;}
+
+.table-wrap{border-color:var(--border) !important;background:#ffffff !important;box-shadow:0 2px 8px rgba(15,23,42,.05);}
+thead{background:#edf3fa !important;}
+th{color:#334155 !important;border-bottom-color:#c9d5e3 !important;}
+th:hover{color:var(--accent2) !important;}
+td{color:var(--text) !important;}
+tbody tr{border-bottom-color:#e1e7ef !important;}
+tbody tr:nth-child(even){background:#fafcff !important;}
+tbody tr:hover{background:#edf5ff !important;}
+.td-year{color:#8a5100 !important;}
+.td-title a{color:#172033 !important;}
+.td-title a:hover{color:#174f9c !important;text-decoration:underline;}
+.td-country,.td-findings,.findings-preview{color:#465669 !important;}
+
+.product-badge{
+  min-height:auto !important;
+  padding:5px 10px !important;
+  border-radius:999px !important;
+  border:1px solid currentColor !important;
+  box-shadow:none !important;
+  font-weight:800 !important;
+}
+.badge-cryo{background:#eaf7ef !important;color:var(--cryo) !important;}
+.badge-dc-bead{background:#fff0f7 !important;color:var(--dc-bead) !important;}
+.badge-y90-resin,.badge-resin{background:#fff2e9 !important;color:var(--y90-resin) !important;}
+.badge-y90-glass,.badge-glass{background:#edf4ff !important;color:var(--y90-glass) !important;}
+.badge-y90-na,.badge-both{background:#f3edff !important;color:var(--y90-na) !important;}
+.badge-ns{background:#f1f4f7 !important;color:#5f6c7b !important;}
+.jif-badge{
+  background:#fff7dd !important;
+  border-color:#d6a63c !important;
+  color:#744900 !important;
+  box-shadow:none !important;
+}
+.jif-badge small{color:#744900 !important;opacity:.82 !important;}
+.badge-pmc{background:#e8f6ed !important;border-color:#8fcaa8 !important;color:#11613b !important;}
+
+.cat-tag,.cat-select-chip,.subcategory-edit-chip,.subcategory-chip-wrap{
+  background:#f5f8fc !important;
+  border-color:#cbd5e1 !important;
+  color:#334155 !important;
+  box-shadow:none !important;
+}
+.cat-chip{color:#43546a !important;}
+.cat-chip.active,.cat-select-chip.selected{
+  background:#e7f0ff !important;
+  border-color:#6593d1 !important;
+  color:#174f9c !important;
+}
+.cat-tag.primary-category{
+  background:#fff5d6 !important;
+  border-color:#d7a93f !important;
+  color:#744900 !important;
+  box-shadow:none !important;
+}
+.cat-parent-label,.cat-sep,.cat-child-label{color:inherit !important;}
+.primary-category-note,.review-note,.fulltext-note,.fulltext-file-name,.fulltext-unavailable,.no-secondary-tags,.no-subcategory-line{
+  color:var(--text-muted) !important;
+}
+
+.fulltext-link{
+  min-height:auto !important;
+  padding:5px 9px !important;
+  border:1px solid currentColor !important;
+  border-radius:999px !important;
+  background:#ffffff !important;
+  box-shadow:none !important;
+  color:#43546a !important;
+}
+.fulltext-link:hover{background:#eef4fb !important;text-decoration:none !important;}
+.fulltext-link.pdf-link{color:#a92d2d !important;background:#fff2f1 !important;}
+.fulltext-link.folder-link,.fulltext-link.request-link{color:#855500 !important;background:#fff8e7 !important;}
+.fulltext-link.pmc-link{color:#11613b !important;background:#eaf7ef !important;}
+.fulltext-link.uploaded-link{color:#174f9c !important;background:#edf4ff !important;}
+.fulltext-link.hardcopy-link{color:#5d319c !important;background:#f4efff !important;}
+.fulltext-link.paywall-link{color:#5f6c7b !important;background:#f1f4f7 !important;opacity:1 !important;}
+.review-badge{padding:5px 9px !important;border:1px solid currentColor !important;border-radius:999px !important;box-shadow:none !important;}
+.review-ai{background:#fff7dd !important;color:#744900 !important;}
+.review-reviewed{background:#edf4ff !important;color:#174f9c !important;}
+.review-final{background:#eaf7ef !important;color:#11613b !important;}
+
+.pub-card,.dash-card,.pubmed-result-card,.ai-panel,.modal{
+  background:#ffffff !important;
+  border-color:var(--border) !important;
+  color:var(--text) !important;
+  box-shadow:0 3px 12px rgba(15,23,42,.07) !important;
+}
+.pub-card:hover,.pubmed-result-card:hover{border-color:#8eadd6 !important;box-shadow:0 8px 22px rgba(36,95,189,.12) !important;}
+.card-title,.detail-title,.detail-value,.modal h2,.dash-card h3,.big-stat .num,
+.donut-label,.donut-val,.bar-label,.bar-val,.pubmed-title,.pubmed-abstract,.ai-result{
+  color:var(--text) !important;
+}
+.card-findings,.detail-label,.big-stat .sub,.pubmed-meta{color:var(--text-muted) !important;}
+.bar-track,.donut-bar{background:#e6ebf2 !important;}
+.pubmed-panel{color:var(--text) !important;}
+.pubmed-status{background:#f2f7fd !important;border-color:#cbdbea !important;color:#334155 !important;}
+.pubmed-result-card.has-pmc{background:linear-gradient(135deg,#f2fbf5,#ffffff) !important;border-color:#a9d4ba !important;}
+.pmc-free-box{background:#eef9f2 !important;border-color:#a9d4ba !important;}
+.pmc-free-box .pmc-text strong{color:#11613b !important;}
+.pmc-free-box .pmc-text span{color:#43546a !important;}
+.smart-result-highlight{background:#edf4ff !important;border-color:#a9c7f5 !important;color:#174f9c !important;}
+
+.modal-overlay{background:rgba(31,41,55,.42) !important;}
+.modal-close{color:#536274 !important;background:#f5f8fc !important;border:1px solid var(--border);}
+label{color:#334155 !important;}
+.file-input-area:hover{background:#eef5ff !important;border-color:#75a6e8 !important;}
+.category-manager-note{background:#eef5ff !important;border-color:#b4cceb !important;color:#334155 !important;}
+.category-manager-group{background:#ffffff !important;border-color:var(--border) !important;}
+.category-manager-group-header{background:#f2f6fb !important;border-bottom-color:var(--border) !important;}
+.category-manager-main,.category-manager-name,.category-manager-count{color:var(--text) !important;}
+.subcategory-delete-btn,.secondary-remove-btn{color:#b42318 !important;background:#fff1f0 !important;border-color:#e4a29d !important;}
+.subcategory-delete-btn:hover,.secondary-remove-btn:hover{color:#ffffff !important;background:#c73535 !important;}
+#mobile-menu-btn{background:#f5f8fc !important;border-color:var(--border) !important;color:#334155 !important;}
+
+[style*="var(--text-muted)"]{color:var(--text-muted) !important;}
+[style*="var(--text-dim)"]{color:var(--text-dim) !important;}
+[style*="color:#ffffff"],[style*="color: #ffffff"],[style*="color:#fff"],[style*="color: #fff"]{color:var(--text) !important;}
+[style*="color:#ccc"],[style*="color: #ccc"]{color:var(--text-muted) !important;}
+[style*="color:#aad4ff"]{color:#174f9c !important;}
+strong[style*="#4cca5a"]{color:#11613b !important;}
+
+@media(max-width:768px){
+  header,.tabs,.library-filter-sticky,.panel{background:#ffffff !important;}
+  .header-actions{background:#ffffff !important;border-top-color:var(--border) !important;}
+  .tab{background:#ffffff !important;}
+  .tab.active{background:#eef5ff !important;}
+}
+
 </style>
 </head>
 <body>
@@ -1539,7 +1780,7 @@ body.modal-open .library-filter-sticky{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v6.1</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v6.2</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -14366,7 +14607,7 @@ savePublication = function(){
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   IO&E DATABASE v6.1
+   IO&E DATABASE v6.2
    Cryoablation + DC Bead + Y90 product model, journal-level JIF registry,
    and combined PubMed discovery. Legacy Y90 records are migrated in place.
    ══════════════════════════════════════════════════════════ */
@@ -14864,7 +15105,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v6.1',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
+  const backup={version:'ioe-database-v6.2',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
