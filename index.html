@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IO&amp;E Database</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
@@ -12,7 +11,7 @@
   --bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#30363d;
   --accent:#e8c96a;--accent2:#58a6ff;--accent3:#3fb950;--red:#f85149;
   --purple:#bc8cff;--text:#e6edf3;--text-muted:#7d8590;--text-dim:#4d5562;
-  --cryo:#3fb950;--dc-bead:#f778ba;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
+  --cryo:#3fb950;--dc-bead:#f778ba;--y90-all:#8b5cf6;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
   --resin:var(--y90-resin);--glass:var(--y90-glass);--both:var(--y90-na);
   --radius:8px;--radius-lg:14px;
 }
@@ -1551,6 +1550,7 @@ body.modal-open .library-filter-sticky{
   --text-dim:#78879a;
   --cryo:#18764a;
   --dc-bead:#b4236f;
+  --y90-all:#5f4bb6;
   --y90-resin:#b94708;
   --y90-glass:#245fbd;
   --y90-na:#7042b6;
@@ -1738,6 +1738,16 @@ tbody tr:hover{background:#edf5ff !important;}
 }
 .card-findings,.detail-label,.big-stat .sub,.pubmed-meta{color:var(--text-muted) !important;}
 .bar-track,.donut-bar{background:#e6ebf2 !important;}
+.donut-row.product-parent{
+  margin-top:10px;
+  padding:9px 8px;
+  background:#f3f0ff;
+  border:1px solid #d7cdf4;
+  border-radius:10px;
+}
+.donut-row.product-parent .donut-label,.donut-row.product-parent .donut-val{font-weight:900 !important;color:#49378f !important;}
+.donut-row.product-child{padding-left:20px;}
+.donut-row.product-child .donut-label{font-size:16px !important;color:#526172 !important;}
 .pubmed-panel{color:var(--text) !important;}
 .pubmed-status{background:#f2f7fd !important;border-color:#cbdbea !important;color:#334155 !important;}
 .pubmed-result-card.has-pmc{background:linear-gradient(135deg,#f2fbf5,#ffffff) !important;border-color:#a9d4ba !important;}
@@ -1772,15 +1782,21 @@ strong[style*="#4cca5a"]{color:#11613b !important;}
   .tab.active{background:#eef5ff !important;}
 }
 
+/* v6.5 — Use Calibre consistently across all interface text. */
+:root{--font-ui:'Calibre','Calibri','Aptos','Helvetica Neue',Arial,sans-serif;}
+html body.calibre-theme,html body.calibre-theme *{
+  font-family:var(--font-ui) !important;
+}
+
 </style>
 </head>
-<body>
+<body class="calibre-theme">
 
 <header>
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v6.2</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v6.5</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -1788,9 +1804,7 @@ strong[style*="#4cca5a"]{color:#11613b !important;}
         <div class="stat-pill">Total: <strong id="stat-total">0</strong></div>
         <div class="stat-pill">Cryo: <strong id="stat-cryo" style="color:var(--cryo)">0</strong></div>
         <div class="stat-pill">DC Bead: <strong id="stat-dc-bead" style="color:var(--dc-bead)">0</strong></div>
-        <div class="stat-pill">Y90 Resin: <strong id="stat-y90-resin" style="color:var(--y90-resin)">0</strong></div>
-        <div class="stat-pill">Y90 Glass: <strong id="stat-y90-glass" style="color:var(--y90-glass)">0</strong></div>
-        <div class="stat-pill">Y90 N/A: <strong id="stat-y90-na" style="color:var(--y90-na)">0</strong></div>
+        <div class="stat-pill">Y90 (All): <strong id="stat-y90-all" style="color:var(--y90-all)">0</strong></div>
         <div class="stat-pill">PMC Free: <strong id="stat-pmc" style="color:#4cca5a">0</strong></div>
       </div>
       <button class="btn btn-secondary" onclick="openCategoryManager()">🏷️ Manage Categories</button>
@@ -1843,7 +1857,7 @@ strong[style*="#4cca5a"]{color:#11613b !important;}
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
       <option value="dc-bead">DC Bead</option>
-      <option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-na">Y90 N/A</option>
+      <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
@@ -8607,7 +8621,10 @@ function applyFilters() {
     if (search&&!txt.includes(search)) return false;
     const cat=activeCategory||catFilter;
     if (cat&&!p.categories.includes(cat)) return false;
-    if (productFilter&&p.product!==productFilter) return false;
+    if(productFilter){
+      const productCode=normalizeProductCode(p.product);
+      if(productFilter==='y90' ? !productCode.startsWith('y90-') : productCode!==productFilter) return false;
+    }
     if (yearFilter&&p.year!=yearFilter) return false;
     if (countryFilter&&(p.country||'')!==countryFilter) return false;
     return true;
@@ -8665,9 +8682,8 @@ function clearFilters() {
 function updateStats() {
   document.getElementById('stat-total').textContent=publications.length;
   document.getElementById('stat-cryo').textContent=publications.filter(p=>normalizeProductCode(p.product)==='cryoablation').length;
-  document.getElementById('stat-y90-resin').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-resin').length;
-  document.getElementById('stat-y90-glass').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-glass').length;
-  document.getElementById('stat-y90-na').textContent=publications.filter(p=>normalizeProductCode(p.product)==='y90-na').length;
+  document.getElementById('stat-dc-bead').textContent=publications.filter(p=>normalizeProductCode(p.product)==='dc-bead').length;
+  document.getElementById('stat-y90-all').textContent=publications.filter(p=>normalizeProductCode(p.product).startsWith('y90-')).length;
   document.getElementById('stat-pmc').textContent=publications.filter(p=>hasPMC(p)).length;
 }
 
@@ -10849,7 +10865,10 @@ function applyFilters(){
     if (search&&!txt.includes(search)) return false;
     const cat=activeCategory||catFilter;
     if (cat&&!categoryMatches(p.categories, cat)) return false;
-    if (productFilter&&p.product!==productFilter) return false;
+    if(productFilter){
+      const productCode=normalizeProductCode(p.product);
+      if(productFilter==='y90' ? !productCode.startsWith('y90-') : productCode!==productFilter) return false;
+    }
     if (yearFilter&&p.year!=yearFilter) return false;
     if (countryFilter&&(p.country||'')!==countryFilter) return false;
     return true;
@@ -14607,7 +14626,7 @@ savePublication = function(){
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   IO&E DATABASE v6.2
+   IO&E DATABASE v6.5
    Cryoablation + DC Bead + Y90 product model, journal-level JIF registry,
    and combined PubMed discovery. Legacy Y90 records are migrated in place.
    ══════════════════════════════════════════════════════════ */
@@ -15018,8 +15037,9 @@ init=function(){
 function updateStats(){
   const count=code=>(publications || []).filter(p=>normalizeProductCode(p.product)===code).length;
   const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
-  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-dc-bead',count('dc-bead')); set('stat-y90-resin',count('y90-resin'));
-  set('stat-y90-glass',count('y90-glass')); set('stat-y90-na',count('y90-na')); set('stat-pmc',(publications || []).filter(p=>hasPMC(p)).length);
+  const y90All=(publications || []).filter(p=>normalizeProductCode(p.product).startsWith('y90-')).length;
+  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-dc-bead',count('dc-bead')); set('stat-y90-all',y90All);
+  set('stat-pmc',(publications || []).filter(p=>hasPMC(p)).length);
 }
 
 function renderTable(data){
@@ -15067,7 +15087,7 @@ function renderCards(data){
 function renderDashboard(){
   const total=(publications || []).length;
   const productOrder=['cryoablation','dc-bead','y90-resin','y90-glass','y90-na'];
-  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
+  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -15077,6 +15097,15 @@ function renderDashboard(){
   const years=Object.entries(byYear).sort((a,b)=>b[0]-a[0]).slice(0,10), cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).slice(0,12), countries=Object.entries(byCountry).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxYear=Math.max(...Object.values(byYear),1), maxCat=cats[0]?.[1]||1, maxCountry=countries[0]?.[1]||1;
   const pmcCount=publications.filter(p=>hasPMC(p)).length, jifCount=publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length;
+  const y90All=byProduct['y90-resin']+byProduct['y90-glass']+byProduct['y90-na'];
+  const productRows=[
+    {key:'cryoablation',label:'Cryoablation',count:byProduct['cryoablation']},
+    {key:'dc-bead',label:'DC Bead',count:byProduct['dc-bead']},
+    {key:'y90-all',label:'Y90 (All)',count:y90All,parent:true},
+    {key:'y90-resin',label:'↳ Y90 Resin',count:byProduct['y90-resin'],child:true},
+    {key:'y90-glass',label:'↳ Y90 Glass',count:byProduct['y90-glass'],child:true},
+    {key:'y90-na',label:'↳ Y90 N/A',count:byProduct['y90-na'],child:true}
+  ];
   document.getElementById('dashboard-content').innerHTML=`
     <div class="dash-card"><h3>Overview</h3><div class="big-stat"><div class="num">${total}</div><div class="sub">total publications</div></div>
       <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
@@ -15084,7 +15113,7 @@ function renderDashboard(){
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📈 JIF matched</span><strong style="color:var(--accent)">${jifCount} (${total?(jifCount/total*100).toFixed(0):0}%)</strong></div>
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📄 Uploaded PDFs</span><strong>${publications.filter(p=>p.pdfData).length}</strong></div>
       </div></div>
-    <div class="dash-card"><h3>By Product</h3>${productOrder.map(k=>`<div class="donut-row"><div class="donut-dot" style="background:${colors[k]}"></div><span class="donut-label">${IOE_PRODUCT_META[k].label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?byProduct[k]/total*100:0}%;background:${colors[k]}"></div></div><span class="donut-val">${byProduct[k]}</span></div>`).join('')}</div>
+    <div class="dash-card"><h3>By Product</h3>${productRows.map(row=>`<div class="donut-row${row.parent?' product-parent':''}${row.child?' product-child':''}"><div class="donut-dot" style="background:${colors[row.key]}"></div><span class="donut-label">${row.label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?row.count/total*100:0}%;background:${colors[row.key]}"></div></div><span class="donut-val">${row.count}</span></div>`).join('')}</div>
     <div class="dash-card" style="grid-column:span 2"><h3>By Year</h3><div class="bar-chart">${years.map(([y,n])=>`<div class="bar-row"><span class="bar-label">${y}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxYear*100}%;background:var(--accent2)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card" style="grid-column:span 2"><h3>Top Categories</h3><div class="bar-chart">${cats.map(([c,n])=>`<div class="bar-row dash-cat-row"><span class="bar-label bar-label-full">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCat*100}%;background:var(--accent)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card"><h3>Top Countries</h3><div class="bar-chart">${countries.map(([c,n])=>`<div class="bar-row"><span class="bar-label">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCountry*100}%;background:var(--accent3)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>`;
@@ -15105,7 +15134,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v6.2',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
+  const backup={version:'ioe-database-v6.5',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
