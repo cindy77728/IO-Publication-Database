@@ -1788,8 +1788,9 @@ html body.calibre-theme,html body.calibre-theme *{
   font-family:var(--font-ui) !important;
 }
 
-/* v6.6 — Clinical Trial Monitor */
-.ctm-shell{max-width:1500px;margin:0 auto}
+/* v6.7 — Flexible Clinical Trial Monitor */
+.ctm-shell{max-width:1500px;min-width:0;margin:0 auto;overflow-x:hidden}
+#panel-trials{overflow-x:hidden}
 .ctm-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:0 3px 14px rgba(15,23,42,.05)}
 .ctm-toolbar .search-wrap{min-width:260px}
 .ctm-toolbar input,.ctm-toolbar select{min-height:42px}
@@ -1819,7 +1820,7 @@ html body.calibre-theme,html body.calibre-theme *{
 .ctm-pill.recruiting{background:#eaf8ef;border-color:#a9d4ba;color:#11613b}.ctm-pill.completed{background:#eef5ff;border-color:#b4cceb;color:#174f9c}.ctm-pill.stopped{background:#fff1f0;border-color:#e4a29d;color:#8f1d18}.ctm-pill.active{background:#fff7e8;border-color:#e7c998;color:#895011}
 .ctm-product.cryoablation{background:#eaf8ef;border-color:#a9d4ba;color:#11613b}.ctm-product.dc-bead{background:#fff0f7;border-color:#e7b1cc;color:#9b285f}.ctm-product.deb-competitor{background:#fff7e8;border-color:#e7c998;color:#895011}.ctm-product.y90-resin{background:#fff4e8;border-color:#e7c29e;color:#9a4c12}.ctm-product.y90-glass{background:#eef5ff;border-color:#b4cceb;color:#174f9c}.ctm-product.y90-na{background:#f4efff;border-color:#cbbce9;color:#5f35a2}
 .ctm-change{display:block;margin-top:5px;font-size:11px;font-weight:700;color:#895011}.ctm-new-badge{background:#14733f;color:#fff;border-radius:10px;padding:2px 7px;font-size:10px;margin-left:5px}
-.ctm-watch-fields{display:grid;grid-template-columns:100px 120px 120px 135px;gap:6px;min-width:500px}
+.ctm-watch-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;width:100%;min-width:0}
 .ctm-watch-fields select,.ctm-watch-fields input{font-size:12px;min-height:34px;padding:5px 8px}
 .ctm-watch-fields input[type=date]{background:#fff;border:1px solid var(--border);border-radius:8px;color:#27364a}
 .ctm-note{grid-column:1/-1}
@@ -1829,8 +1830,25 @@ html body.calibre-theme,html body.calibre-theme *{
 .ctm-help summary{cursor:pointer;font-weight:700;color:#27364a}
 .ctm-help ul{margin:10px 0 0 22px}
 .ctm-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ctm-modal-grid .full{grid-column:1/-1}
+.ctm-card-list{display:flex;flex-direction:column;gap:13px;min-width:0}
+.ctm-trial-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 4px 16px rgba(15,23,42,.05);min-width:0}
+.ctm-trial-card.ctm-new{background:linear-gradient(135deg,#f2fbf5,#fff);border-color:#a9d4ba}
+.ctm-trial-card.ctm-changed{background:linear-gradient(135deg,#fff9ed,#fff);border-color:#e7c998}
+.ctm-card-head{display:grid;grid-template-columns:36px minmax(0,1fr);gap:9px;align-items:start;padding-bottom:12px;border-bottom:1px solid #e4eaf1}
+.ctm-card-head .ctm-title{min-width:0;max-width:none;font-size:17px;overflow-wrap:anywhere}
+.ctm-card-tags{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.ctm-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px;min-width:0}
+.ctm-field{background:#f8fafc;border:1px solid #e4eaf1;border-radius:10px;padding:11px;min-width:0;overflow-wrap:anywhere}
+.ctm-field.wide{grid-column:span 2}
+.ctm-field.full{grid-column:1/-1}
+.ctm-field-label{font-size:11px;font-weight:800;letter-spacing:.35px;text-transform:uppercase;color:#637083;margin-bottom:5px}
+.ctm-field-value{font-size:13px;line-height:1.5;color:#27364a;overflow-wrap:anywhere}
+.ctm-management{margin-top:10px;background:#f2f7fd;border:1px solid #cbdbea;border-radius:10px;padding:11px;min-width:0}
+.ctm-management-title{font-size:12px;font-weight:800;color:#334155;margin-bottom:8px}
 @media(max-width:1100px){.ctm-kpis{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:700px){.ctm-kpis{grid-template-columns:repeat(2,1fr)}.ctm-toolbar>*{width:100%}.ctm-toolbar .search-wrap{min-width:0}.ctm-modal-grid{grid-template-columns:1fr}.ctm-modal-grid .full{grid-column:auto}}
+@media(max-width:1100px){.ctm-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.ctm-kpis{grid-template-columns:repeat(2,1fr)}.ctm-toolbar>*{width:100%}.ctm-toolbar .search-wrap{min-width:0}.ctm-modal-grid{grid-template-columns:1fr}.ctm-modal-grid .full{grid-column:auto}.ctm-card-grid{grid-template-columns:1fr}.ctm-field.wide,.ctm-field.full{grid-column:auto}.ctm-watch-fields{grid-template-columns:1fr 1fr}.ctm-note{grid-column:1/-1}}
+@media(max-width:460px){.ctm-watch-fields{grid-template-columns:1fr}.ctm-note{grid-column:auto}}
 
 </style>
 </head>
@@ -1840,7 +1858,7 @@ html body.calibre-theme,html body.calibre-theme *{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v6.6</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v6.7</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -2019,8 +2037,9 @@ html body.calibre-theme,html body.calibre-theme *{
     </div>
 
     <div class="ctm-toolbar">
-      <select id="ctm-scope" title="Product scope">
-        <option value="all">All IO&amp;E</option>
+      <select id="ctm-scope" title="Search scope">
+        <option value="any">Any clinical topic (unrestricted)</option>
+        <option value="all" selected>All IO&amp;E</option>
         <option value="y90">Y90 (All)</option>
         <option value="y90-resin">Y90 Resin</option>
         <option value="y90-glass">Y90 Glass</option>
@@ -2041,7 +2060,7 @@ html body.calibre-theme,html body.calibre-theme *{
       </select>
       <div class="search-wrap">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input id="ctm-query-extra" type="text" placeholder="Optional: sponsor, indication, device, competitor…" onkeydown="if(event.key==='Enter')ctmRunSearch()">
+        <input id="ctm-query-extra" type="text" placeholder="Topic, condition, sponsor, device… e.g. HCC" onkeydown="if(event.key==='Enter')ctmRunSearch()">
       </div>
       <button class="btn btn-blue" id="ctm-search-btn" onclick="ctmRunSearch()">🔍 Search Trials</button>
       <button class="btn btn-secondary" onclick="ctmLoadSavedView()">★ Watchlist</button>
@@ -14293,7 +14312,7 @@ async function saveToGitHub(){
     const headers={ Authorization:`Bearer ${s.token}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' };
     const apiBase=`https://api.github.com/repos/${s.owner}/${s.repo}/contents/${filePath}`;
     const savedAt=new Date().toISOString();
-    const payload={ version:'ioe-publication-database-v6.6', savedAt, categories:ALL_CATEGORIES, pdfFolderUrl:pdfFolderUrl, publications:publications.map(p=>{const c={...p};delete c.pdfData;return c;}), clinicalTrialMonitor:{ watch:ctmReadJson(CTM_STORAGE.watch,{}), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}), lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{}) } };
+    const payload={ version:'ioe-publication-database-v6.7', savedAt, categories:ALL_CATEGORIES, pdfFolderUrl:pdfFolderUrl, publications:publications.map(p=>{const c={...p};delete c.pdfData;return c;}), clinicalTrialMonitor:{ watch:ctmReadJson(CTM_STORAGE.watch,{}), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}), lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{}) } };
     const jsonStr=JSON.stringify(payload,null,2);
     const bytes=new TextEncoder().encode(jsonStr);
     let binary=''; bytes.forEach(b=>binary+=String.fromCharCode(b));
@@ -14804,7 +14823,7 @@ savePublication = function(){
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   IO&E DATABASE v6.6
+   IO&E DATABASE v6.7
    Cryoablation + DC Bead + Y90 product model, journal-level JIF registry,
    combined PubMed discovery, and ClinicalTrials.gov monitoring. Legacy Y90 records are migrated in place.
    ══════════════════════════════════════════════════════════ */
@@ -15312,7 +15331,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v6.6',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmReadJson(CTM_STORAGE.watch,{}),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
+  const backup={version:'ioe-database-v6.7',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmReadJson(CTM_STORAGE.watch,{}),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
@@ -15371,7 +15390,7 @@ importFromPubMed=async function(...args){
 };
 
 // ══════════════════════════════════════════════════════════
-// v6.6 — IO&E CLINICAL TRIAL MONITOR
+// v6.7 — FLEXIBLE CLINICAL TRIAL MONITOR
 // ══════════════════════════════════════════════════════════
 const CTM_STORAGE={
   snapshots:'ioeClinicalTrialSnapshotsV1',
@@ -15397,6 +15416,7 @@ function ctmUnique(values){return [...new Set((values||[]).filter(Boolean))];}
 function ctmStatusLabel(value){return String(value||'Not specified').replaceAll('_',' ').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 function ctmStatusClass(value){const s=String(value||'').toUpperCase();if(s==='RECRUITING'||s==='NOT_YET_RECRUITING'||s==='ENROLLING_BY_INVITATION')return'recruiting';if(s==='COMPLETED')return'completed';if(s==='ACTIVE_NOT_RECRUITING')return'active';if(/TERMINATED|WITHDRAWN|SUSPENDED/.test(s))return'stopped';return'';}
 function ctmScopeQuery(scope){
+  if(scope==='any')return '';
   const q={
     y90:'("yttrium-90" OR "Y-90" OR radioembolization OR "selective internal radiation therapy")',
     'y90-resin':'("SIR-Spheres" OR "resin microsphere" OR "resin microspheres")',
@@ -15484,7 +15504,11 @@ async function ctmRunSearch(){
   const extra=(document.getElementById('ctm-query-extra')?.value||'').trim();
   const days=Number(document.getElementById('ctm-updated-days')?.value||0);
   const region=document.getElementById('ctm-region')?.value||'all';
-  let query=ctmScopeQuery(scope);if(extra)query=`(${query}) AND (${extra})`;
+  let query=ctmScopeQuery(scope);if(extra)query=query?`(${query}) AND (${extra})`:extra;
+  if(!query){
+    statusEl.className='ctm-status error';statusEl.innerHTML='<span>Enter a clinical topic such as HCC, mCRC, liver metastases, immunotherapy, or a sponsor name.</span>';
+    showToast('Please enter a clinical topic for an unrestricted search.','error');return;
+  }
   btn.disabled=true;btn.textContent='Searching…';
   statusEl.className='ctm-status';statusEl.innerHTML='<div class="ai-thinking"><span></span><span></span><span></span></div><span>Searching ClinicalTrials.gov and comparing with your previous baseline…</span>';
   try{
@@ -15502,7 +15526,7 @@ async function ctmRunSearch(){
     if(days>0){const threshold=Date.now()-days*86400000;all=all.filter(t=>ctmDateValue(t.lastUpdate)>=threshold);}
     if(region==='apac')all=all.filter(t=>t.isApac);
     if(region==='multinational')all=all.filter(t=>t.isMultinational);
-    all=all.filter(t=>t.nctId&&t.products.length);
+    all=all.filter(t=>t.nctId&&(scope==='any'||t.products.length));
     ctmAllTrials=ctmMergeMonitoring(all,{updateBaseline:true});
     ctmWriteJson(CTM_STORAGE.lastResults,ctmCompactTrialsForStorage(ctmAllTrials));
     ctmWriteJson(CTM_STORAGE.lastSearch,{scope,extra,days,region,at:new Date().toISOString(),totalCount,capped:Boolean(token)});
@@ -15568,22 +15592,33 @@ function ctmRender(){
   set('ctm-kpi-total',shown);set('ctm-kpi-recruiting',recruiting);set('ctm-kpi-apac',ctmFilteredTrials.filter(t=>t.isApac).length);set('ctm-kpi-new',ctmFilteredTrials.filter(t=>t.isNew).length);set('ctm-kpi-changed',ctmFilteredTrials.filter(t=>t.isChanged).length);set('ctm-kpi-watch',Object.values(watch).filter(x=>x.starred).length);
   set('ctm-result-summary',`${shown} filtered result${shown===1?'':'s'}${shown>250?' · showing the first 250; CSV includes all':''}`);
   if(!shown){target.innerHTML='<div class="ctm-empty"><strong>No trials match the current filters.</strong><br>Clear filters or run a broader search.</div>';return;}
-  const rows=ctmFilteredTrials.slice(0,250).map(t=>{
-    const w=watch[t.nctId]||{},rowClass=t.isNew?'ctm-new':t.isChanged?'ctm-changed':'';
+  const cards=ctmFilteredTrials.slice(0,250).map(t=>{
+    const w=watch[t.nctId]||{},cardClass=t.isNew?'ctm-new':t.isChanged?'ctm-changed':'';
     const changes=t.isNew?'<span class="ctm-change">New since baseline</span>':t.isChanged?`<span class="ctm-change" title="${ctmEscape(t.changes.join(' | '))}">${ctmEscape(t.changes.slice(0,2).join(' · '))}${t.changes.length>2?' · +'+(t.changes.length-2):''}</span>`:'';
-    return `<tr class="${rowClass}">
-      <td><button class="ctm-star ${w.starred?'on':''}" title="${w.starred?'Remove from watchlist':'Add to watchlist'}" onclick="ctmToggleStar('${ctmEscape(t.nctId)}')">${w.starred?'★':'☆'}</button></td>
-      <td><div class="ctm-title"><a href="${ctmEscape(t.url)}" target="_blank">${ctmEscape(t.title)}</a>${t.isNew?'<span class="ctm-new-badge">NEW</span>':''}</div><div class="ctm-meta">${ctmEscape(t.nctId)} · Updated ${ctmEscape(t.lastUpdate||'N/A')}</div>${changes}<div class="ctm-meta">${ctmEscape((t.briefSummary||'').slice(0,230))}${(t.briefSummary||'').length>230?'…':''}</div></td>
-      <td>${ctmProductPills(t.products)}<div class="ctm-meta"><strong>Conditions:</strong> ${ctmEscape((t.conditions||[]).join('; ')||'Not listed')}</div><div class="ctm-meta"><strong>Interventions:</strong> ${ctmEscape((t.interventions||[]).slice(0,4).join('; ')||'Not listed')}</div></td>
-      <td><span class="ctm-pill ${ctmStatusClass(t.status)}">${ctmEscape(ctmStatusLabel(t.status))}</span><div class="ctm-meta">${ctmEscape((t.phases||[]).join(' / ')||'Phase N/A')} · ${ctmEscape(ctmStatusLabel(t.studyType))}</div>${t.whyStopped?`<div class="ctm-meta" style="color:#8f1d18">${ctmEscape(t.whyStopped)}</div>`:''}</td>
-      <td><strong>${ctmEscape(t.leadSponsor||'Not listed')}</strong><div class="ctm-meta">${ctmEscape(ctmStatusLabel(t.sponsorClass))}${t.collaborators.length?' · '+ctmEscape(t.collaborators.slice(0,2).join('; ')):''}</div><div class="ctm-meta">${ctmEscape([ctmStatusLabel(t.allocation),ctmStatusLabel(t.masking)].filter(x=>x&&x!=='Not Specified').join(' · '))}</div></td>
-      <td><strong>${t.enrollment?ctmEscape(t.enrollment):'N/A'}</strong><div class="ctm-meta">${ctmEscape(ctmStatusLabel(t.enrollmentType))}</div><div class="ctm-meta">Start: ${ctmEscape(t.startDate||'N/A')}<br>Primary: ${ctmEscape(t.primaryCompletionDate||'N/A')}<br>Completion: ${ctmEscape(t.completionDate||'N/A')}</div></td>
-      <td>${t.isApac?'<span class="ctm-pill active">APAC</span>':''}${t.isMultinational?'<span class="ctm-pill">Multinational</span>':''}<div class="ctm-meta"><strong>${t.siteCount}</strong> site${t.siteCount===1?'':'s'} · ${ctmEscape((t.countries||[]).join(', ')||'No country listed')}</div></td>
-      <td>${t.hasResults?'<span class="ctm-pill completed">Results posted</span>':'<span class="ctm-pill">No posted results</span>'}<div class="ctm-meta">${ctmEscape((t.primaryOutcomes||[]).slice(0,2).join('; ')||'Primary outcome not listed')}</div></td>
-      <td>${ctmManagementHtml(t)}</td>
-    </tr>`;
+    const design=[ctmStatusLabel(t.studyType),ctmStatusLabel(t.allocation),ctmStatusLabel(t.masking)].filter(x=>x&&x!=='Not Specified').join(' · ');
+    return `<article class="ctm-trial-card ${cardClass}">
+      <div class="ctm-card-head">
+        <button class="ctm-star ${w.starred?'on':''}" title="${w.starred?'Remove from watchlist':'Add to watchlist'}" onclick="ctmToggleStar('${ctmEscape(t.nctId)}')">${w.starred?'★':'☆'}</button>
+        <div>
+          <div class="ctm-title"><a href="${ctmEscape(t.url)}" target="_blank">${ctmEscape(t.title)}</a>${t.isNew?'<span class="ctm-new-badge">NEW</span>':''}</div>
+          <div class="ctm-meta">${ctmEscape(t.nctId)} · Last registry update: ${ctmEscape(t.lastUpdate||'N/A')}</div>${changes}
+          <div class="ctm-card-tags">${ctmProductPills(t.products)}<span class="ctm-pill ${ctmStatusClass(t.status)}">${ctmEscape(ctmStatusLabel(t.status))}</span>${(t.phases||[]).map(p=>`<span class="ctm-pill">${ctmEscape(p.replaceAll('_',' '))}</span>`).join('')}${t.isApac?'<span class="ctm-pill active">APAC</span>':''}${t.isMultinational?'<span class="ctm-pill">Multinational</span>':''}${t.hasResults?'<span class="ctm-pill completed">Results posted</span>':'<span class="ctm-pill">No posted results</span>'}</div>
+        </div>
+      </div>
+      <div class="ctm-card-grid">
+        <div class="ctm-field wide"><div class="ctm-field-label">Condition / indication</div><div class="ctm-field-value">${ctmEscape((t.conditions||[]).join('; ')||'Not listed')}</div></div>
+        <div class="ctm-field wide"><div class="ctm-field-label">Interventions</div><div class="ctm-field-value">${ctmEscape((t.interventions||[]).join('; ')||'Not listed')}</div></div>
+        <div class="ctm-field"><div class="ctm-field-label">Sponsor</div><div class="ctm-field-value"><strong>${ctmEscape(t.leadSponsor||'Not listed')}</strong><br>${ctmEscape(ctmStatusLabel(t.sponsorClass))}${t.collaborators.length?'<br>'+ctmEscape(t.collaborators.join('; ')):''}</div></div>
+        <div class="ctm-field"><div class="ctm-field-label">Design</div><div class="ctm-field-value">${ctmEscape(design||'Not specified')}${t.whyStopped?`<br><span style="color:#8f1d18">Stopped: ${ctmEscape(t.whyStopped)}</span>`:''}</div></div>
+        <div class="ctm-field"><div class="ctm-field-label">Enrollment</div><div class="ctm-field-value"><strong>${t.enrollment?ctmEscape(t.enrollment):'N/A'}</strong> · ${ctmEscape(ctmStatusLabel(t.enrollmentType))}<br>Start: ${ctmEscape(t.startDate||'N/A')}<br>Primary completion: ${ctmEscape(t.primaryCompletionDate||'N/A')}<br>Completion: ${ctmEscape(t.completionDate||'N/A')}</div></div>
+        <div class="ctm-field"><div class="ctm-field-label">Locations</div><div class="ctm-field-value"><strong>${t.siteCount}</strong> site${t.siteCount===1?'':'s'}<br>${ctmEscape((t.countries||[]).join(', ')||'No country listed')}</div></div>
+        <div class="ctm-field wide"><div class="ctm-field-label">Primary outcomes</div><div class="ctm-field-value">${ctmEscape((t.primaryOutcomes||[]).join('; ')||'Primary outcome not listed')}</div></div>
+        <div class="ctm-field wide"><div class="ctm-field-label">Trial summary</div><div class="ctm-field-value">${ctmEscape(t.briefSummary||'No summary available.')}</div></div>
+      </div>
+      <div class="ctm-management"><div class="ctm-management-title">Medical management</div>${ctmManagementHtml(t)}</div>
+    </article>`;
   }).join('');
-  target.innerHTML=`<div class="ctm-table-wrap"><table class="ctm-table"><thead><tr><th>Watch</th><th>Trial</th><th>Product / indication</th><th>Status / phase</th><th>Sponsor / design</th><th>Enrollment / dates</th><th>Locations</th><th>Outcomes / results</th><th>Medical management</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  target.innerHTML=`<div class="ctm-card-list">${cards}</div>`;
 }
 function ctmUpdateWatch(nctId,key,value){
   const store=ctmReadJson(CTM_STORAGE.watch,{}),current=store[nctId]||{starred:false,createdAt:new Date().toISOString()};
