@@ -12,7 +12,7 @@
   --bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#30363d;
   --accent:#e8c96a;--accent2:#58a6ff;--accent3:#3fb950;--red:#f85149;
   --purple:#bc8cff;--text:#e6edf3;--text-muted:#7d8590;--text-dim:#4d5562;
-  --cryo:#3fb950;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
+  --cryo:#3fb950;--dc-bead:#f778ba;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
   --resin:var(--y90-resin);--glass:var(--y90-glass);--both:var(--y90-na);
   --radius:8px;--radius-lg:14px;
 }
@@ -85,6 +85,7 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .badge-both{background:rgba(188,140,255,.15);color:var(--purple);border:1px solid rgba(188,140,255,.3)}
 .badge-ns{background:rgba(125,133,144,.12);color:var(--text-muted);border:1px solid rgba(125,133,144,.2)}
 .badge-cryo{background:rgba(63,185,80,.15);color:var(--cryo);border:1px solid rgba(63,185,80,.32)}
+.badge-dc-bead{background:rgba(247,120,186,.15);color:var(--dc-bead);border:1px solid rgba(247,120,186,.32)}
 .badge-y90-resin{background:rgba(240,136,62,.15);color:var(--y90-resin);border:1px solid rgba(240,136,62,.3)}
 .badge-y90-glass{background:rgba(88,166,255,.15);color:var(--y90-glass);border:1px solid rgba(88,166,255,.3)}
 .badge-y90-na{background:rgba(188,140,255,.15);color:var(--y90-na);border:1px solid rgba(188,140,255,.3)}
@@ -113,6 +114,7 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .pub-card.resin::before{background:var(--resin)}.pub-card.glass::before{background:var(--glass)}
 .pub-card.both::before{background:linear-gradient(90deg,var(--resin),var(--glass))}.pub-card.ns::before{background:var(--border)}
 .pub-card.cryoablation::before{background:var(--cryo)}
+.pub-card.dc-bead::before{background:var(--dc-bead)}
 .pub-card.y90-resin::before{background:var(--y90-resin)}
 .pub-card.y90-glass::before{background:var(--y90-glass)}
 .pub-card.y90-na::before{background:var(--y90-na)}
@@ -1537,13 +1539,14 @@ body.modal-open .library-filter-sticky{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v6.0</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v6.1</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
       <div class="header-stats">
         <div class="stat-pill">Total: <strong id="stat-total">0</strong></div>
         <div class="stat-pill">Cryo: <strong id="stat-cryo" style="color:var(--cryo)">0</strong></div>
+        <div class="stat-pill">DC Bead: <strong id="stat-dc-bead" style="color:var(--dc-bead)">0</strong></div>
         <div class="stat-pill">Y90 Resin: <strong id="stat-y90-resin" style="color:var(--y90-resin)">0</strong></div>
         <div class="stat-pill">Y90 Glass: <strong id="stat-y90-glass" style="color:var(--y90-glass)">0</strong></div>
         <div class="stat-pill">Y90 N/A: <strong id="stat-y90-na" style="color:var(--y90-na)">0</strong></div>
@@ -1577,11 +1580,12 @@ body.modal-open .library-filter-sticky{
 
   <div class="smart-search-bar">
     <span style="font-size:15px">🧠</span>
-    <input class="smart-search-input" id="smart-search" placeholder='Smart search: "lung cryoablation safety" · "Y90 glass + >400 Gy" · "PVT resin survival"' oninput="smartSearch(this.value)">
+    <input class="smart-search-input" id="smart-search" placeholder='Smart search: "lung cryoablation safety" · "DC Bead HCC" · "Y90 glass + >400 Gy"' oninput="smartSearch(this.value)">
     <span class="smart-badge">AI-powered</span>
     <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
       <span style="font-size:11px;color:var(--text-dim)">Try:</span>
       <span class="smart-ex" onclick="setSmartSearch('lung cryoablation safety')">lung cryoablation</span>
+      <span class="smart-ex" onclick="setSmartSearch('DC Bead HCC efficacy')">DC Bead + HCC</span>
       <span class="smart-ex" onclick="setSmartSearch('large tumor Y90 glass dosimetry')">large tumor + Y90 glass</span>
       <span class="smart-ex" onclick="setSmartSearch('PVT resin survival')">PVT + resin</span>
       <span class="smart-ex" onclick="setSmartSearch('immunotherapy combination 2023')">immunotherapy 2023</span>
@@ -1597,6 +1601,7 @@ body.modal-open .library-filter-sticky{
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
+      <option value="dc-bead">DC Bead</option>
       <option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-na">Y90 N/A</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
@@ -1661,6 +1666,7 @@ body.modal-open .library-filter-sticky{
           <option value="all">All IO&amp;E</option>
           <option value="y90">Y90 only</option>
           <option value="cryo">Cryoablation only</option>
+          <option value="dc-bead">DC Bead only</option>
         </select>
         <button class="btn btn-blue" onclick="fetchPubMed(7)">🔍 Last 7 days</button>
         <button class="btn btn-secondary" onclick="fetchPubMed(30)">Last 30 days</button>
@@ -1674,12 +1680,12 @@ body.modal-open .library-filter-sticky{
 
     <div class="pubmed-status" id="pubmed-status">
       <span class="pulse-dot"></span>
-      <span>Ready — choose All IO&amp;E, Y90, or Cryoablation, then select a timeframe. Papers with free PMC full text are automatically detected 🟢</span>
+      <span>Ready — choose All IO&amp;E, Y90, Cryoablation, or DC Bead, then select a timeframe. Papers with free PMC full text are automatically detected 🟢</span>
     </div>
 
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px">
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px"><strong style="color:var(--text)">Search query:</strong></div>
-      <div id="pubmed-query-description" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2)">Y90/radioembolization terms OR oncologic cryoablation terms (tumor, cancer, lung, renal, liver, bone, soft tissue, adrenal, or metastasis)</div>
+      <div id="pubmed-query-description" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2)">Y90/radioembolization OR oncologic cryoablation OR DC Bead product terms</div>
       <div style="margin-top:8px;font-size:11px;color:var(--text-muted)">
         <span class="badge-pmc" style="display:inline-flex;margin-right:6px">PMC FREE</span> = Full text automatically available from PubMed Central (free, legal) · ~30% of papers
       </div>
@@ -1717,6 +1723,7 @@ body.modal-open .library-filter-sticky{
         <label>Product</label>
         <div class="radio-group" style="margin-top:4px">
           <label class="radio-option"><input type="radio" name="product" value="cryoablation"> <span style="color:var(--cryo)">● Cryoablation</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="dc-bead"> <span style="color:var(--dc-bead)">● DC Bead</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-na" checked> <span style="color:var(--y90-na)">○ Y90 N/A</span></label>
@@ -8739,7 +8746,7 @@ async function fetchPubMed(days=7) {
   const statusEl=document.getElementById('pubmed-status');
   const resultsEl=document.getElementById('pubmed-results');
   const scope=document.getElementById('pubmed-scope')?.value || 'all';
-  const scopeLabel={all:'IO&E',y90:'Y90',cryo:'oncologic cryoablation'}[scope] || 'IO&E';
+  const scopeLabel={all:'IO&E',y90:'Y90',cryo:'oncologic cryoablation','dc-bead':'DC Bead'}[scope] || 'IO&E';
   statusEl.innerHTML=`<div class="ai-thinking"><span></span><span></span><span></span></div><span style="margin-left:9px">Searching PubMed for ${scopeLabel} papers from the last ${days} days…</span>`;
   resultsEl.innerHTML='';
   lastPubMedSearchResults = [];
@@ -8793,7 +8800,8 @@ async function fetchPubMed(days=7) {
       if(/sirtuin|antiaging|anti-aging|cosmeceutical|skin aging|pentapeptide|vialox|leuphasyl/.test(txt)) return false;
       const y90=/y-?90|yttrium[- ]?90|radioembolization|radio-embolization|selective internal radiation therapy/.test(txt);
       const cryo=/cryoablat|cryosurger|freeze[- ]?thaw/.test(txt) && /tumou?r|cancer|oncolog|neoplasm|metasta|lung|pulmonary|renal|kidney|liver|hepatic|bone|soft tissue|adrenal/.test(txt);
-      return scope==='y90' ? y90 : scope==='cryo' ? cryo : (y90 || cryo);
+      const dcBead=/\bdc[- ]?beads?\b|\bdcbeads?\b/.test(txt);
+      return scope==='y90' ? y90 : scope==='cryo' ? cryo : scope==='dc-bead' ? dcBead : (y90 || cryo || dcBead);
     };
     const papers=ids.map(id=>summaryData.result?.[id]).filter(Boolean).filter(p=>isLikelyIOEPaper(p, abstractMap?.[p.uid]||''));
     if (!papers.length) {
@@ -13137,7 +13145,7 @@ async function loadWeeklyPubMedJSON(){
         authors: p.authors || '',
         journal: p.journal || '',
         country: p.country || '',
-        product: p.product || 'ns',
+        product: normalizeProductCode(p.product || 'ns'),
         categories: cats,
         primaryCategory: primary,
         results: p.results || '',
@@ -14358,13 +14366,14 @@ savePublication = function(){
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   IO&E DATABASE v6.0
-   Cryoablation + Y90 product model, journal-level JIF registry,
+   IO&E DATABASE v6.1
+   Cryoablation + DC Bead + Y90 product model, journal-level JIF registry,
    and combined PubMed discovery. Legacy Y90 records are migrated in place.
    ══════════════════════════════════════════════════════════ */
 
 const IOE_PRODUCT_META = {
   'cryoablation': {label:'Cryoablation', short:'Cryo', cls:'badge-cryo'},
+  'dc-bead': {label:'DC Bead', short:'DC Bead', cls:'badge-dc-bead'},
   'y90-resin': {label:'Y90 Resin', short:'Y90 Resin', cls:'badge-y90-resin'},
   'y90-glass': {label:'Y90 Glass', short:'Y90 Glass', cls:'badge-y90-glass'},
   'y90-na': {label:'Y90 N/A', short:'Y90 N/A', cls:'badge-y90-na'}
@@ -14373,6 +14382,7 @@ const IOE_PRODUCT_META = {
 function normalizeProductCode(value){
   const v=String(value || '').trim().toLowerCase();
   if(v==='cryoablation' || v==='cryo') return 'cryoablation';
+  if(v==='dc-bead' || v==='dc bead' || v==='dcbead') return 'dc-bead';
   if(v==='y90-resin' || v==='resin') return 'y90-resin';
   if(v==='y90-glass' || v==='glass') return 'y90-glass';
   if(v==='y90-na' || v==='both' || v==='ns' || v==='n/a' || v==='not specific' || !v) return 'y90-na';
@@ -14382,6 +14392,7 @@ function normalizeProductCode(value){
 function classifyIOEProduct(text){
   const t=String(text || '').toLowerCase();
   if(/cryoablat|cryosurger|freeze[- ]?thaw|cryoprobe/.test(t)) return 'cryoablation';
+  if(/\bdc[- ]?beads?\b|\bdcbeads?\b/.test(t)) return 'dc-bead';
   const hasResin=/\bresin\b|sir[- ]?spheres?|sirspheres|sirtax/.test(t);
   const hasGlass=/\bglass\b|therasphere/.test(t);
   if(hasResin && !hasGlass) return 'y90-resin';
@@ -14397,17 +14408,19 @@ function productBadge(product){
 function buildIOEPubMedQuery(scope='all'){
   const y90='("Y-90"[tiab] OR "Y90"[tiab] OR "yttrium-90"[tiab] OR "yttrium 90"[tiab] OR "radioembolization"[tiab] OR "radio-embolization"[tiab] OR "selective internal radiation therapy"[tiab] OR "yttrium-90 microspheres"[tiab] OR "Y-90 microspheres"[tiab] OR ("SIRT"[tiab] AND (radioembolization[tiab] OR yttrium[tiab] OR microsphere*[tiab] OR liver[tiab] OR hepatic[tiab] OR hepatocellular[tiab] OR HCC[tiab])))';
   const cryo='(("cryoablation"[tiab] OR "cryo-ablation"[tiab] OR "percutaneous cryoablation"[tiab] OR "image-guided cryoablation"[tiab] OR "cryosurgery"[tiab]) AND (tumor[tiab] OR tumour[tiab] OR cancer[tiab] OR oncology[tiab] OR neoplasm*[tiab] OR metast*[tiab] OR lung[tiab] OR pulmonary[tiab] OR renal[tiab] OR kidney[tiab] OR liver[tiab] OR hepatic[tiab] OR bone[tiab] OR "soft tissue"[tiab] OR adrenal[tiab]))';
-  return scope==='y90' ? y90 : scope==='cryo' ? cryo : `(${y90} OR ${cryo})`;
+  const dcBead='("DC Bead"[tiab] OR "DC Beads"[tiab] OR "DC BeadM1"[tiab] OR "DC Bead M1"[tiab] OR "DC Bead LUMI"[tiab] OR "DC Bead Lumi"[tiab])';
+  return scope==='y90' ? y90 : scope==='cryo' ? cryo : scope==='dc-bead' ? dcBead : `(${y90} OR ${cryo} OR ${dcBead})`;
 }
 
 function parseSmartQuery(q){
   const tokens=[], lq=String(q || '').toLowerCase();
   if(/\bcryo(?:ablation)?\b/.test(lq)) tokens.push({type:'product',val:'cryoablation'});
+  if(/\bdc[- ]?bead\b|\bdcbead\b/.test(lq)) tokens.push({type:'product',val:'dc-bead'});
   if(/\bglass\b/.test(lq)) tokens.push({type:'product',val:'y90-glass'});
   if(/\bresin\b/.test(lq)) tokens.push({type:'product',val:'y90-resin'});
   for(const m of String(q || '').matchAll(/([><])\s*(\d+)\s*gy/gi)) tokens.push({type:'dose',op:m[1],val:parseInt(m[2])});
   for(const m of String(q || '').matchAll(/([><])(\d{4})/g)) tokens.push({type:'year',op:m[1],val:parseInt(m[2])});
-  const cleaned=String(q || '').replace(/[><]\d+\s*gy/gi,'').replace(/[><]\d{4}/g,'').replace(/\b(and|or|y90|glass|resin|cryo|cryoablation)\b/gi,'').trim();
+  const cleaned=String(q || '').replace(/[><]\d+\s*gy/gi,'').replace(/[><]\d{4}/g,'').replace(/\bdc[- ]?bead\b|\bdcbead\b/gi,'').replace(/\b(and|or|y90|glass|resin|cryo|cryoablation)\b/gi,'').trim();
   cleaned.split(/[\s+]+/).forEach(w=>{
     const wc=w.replace(/[^a-z0-9-]/gi,'').toLowerCase();
     if(wc.length>2) tokens.push({type:'keyword',val:wc,required:String(q).includes('+'+w)||String(q).includes(w+'+')});
@@ -14757,14 +14770,14 @@ init=function(){
   __ioeLegacyInit();
   const desc=document.getElementById('pubmed-query-description');
   const scope=document.getElementById('pubmed-scope');
-  if(scope) scope.onchange=()=>{if(desc) desc.textContent=scope.value==='y90'?'Y90 and radioembolization terms':scope.value==='cryo'?'Oncologic cryoablation terms constrained to tumor/cancer and IO target organs':'Y90/radioembolization OR oncologic cryoablation terms';};
+  if(scope) scope.onchange=()=>{if(desc) desc.textContent=scope.value==='y90'?'Y90 and radioembolization terms':scope.value==='cryo'?'Oncologic cryoablation terms constrained to tumor/cancer and IO target organs':scope.value==='dc-bead'?'DC Bead, DC BeadM1, and DC Bead LUMI product terms':'Y90/radioembolization OR oncologic cryoablation OR DC Bead product terms';};
   maybeAutoUpdateJIF();
 };
 
 function updateStats(){
   const count=code=>(publications || []).filter(p=>normalizeProductCode(p.product)===code).length;
   const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
-  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-y90-resin',count('y90-resin'));
+  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-dc-bead',count('dc-bead')); set('stat-y90-resin',count('y90-resin'));
   set('stat-y90-glass',count('y90-glass')); set('stat-y90-na',count('y90-na')); set('stat-pmc',(publications || []).filter(p=>hasPMC(p)).length);
 }
 
@@ -14812,8 +14825,8 @@ function renderCards(data){
 
 function renderDashboard(){
   const total=(publications || []).length;
-  const productOrder=['cryoablation','y90-resin','y90-glass','y90-na'];
-  const colors={'cryoablation':'var(--cryo)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
+  const productOrder=['cryoablation','dc-bead','y90-resin','y90-glass','y90-na'];
+  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -14851,7 +14864,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v6',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
+  const backup={version:'ioe-database-v6.1',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
