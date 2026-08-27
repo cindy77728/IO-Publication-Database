@@ -1,6 +1,6 @@
 {
   "version": "y90-publication-database-v3",
-  "savedAt": "2026-08-26T08:08:44.257Z",
+  "savedAt": "2026-08-27T06:34:50.995Z",
   "categories": [
     "Adrenal",
     "APAC Data",
@@ -9796,6 +9796,32 @@
       "fullTextNote": "",
       "journalImpactFactor": null,
       "journalImpactFactorYear": ""
+    },
+    {
+      "id": 1787812331961,
+      "year": 2016,
+      "title": "Impact of Yttrium-90 Microsphere Density, Flow Dynamics, and Administration Technique on Spatial Distribution: Analysis Using an In Vitro Model",
+      "country": "UK",
+      "authors": "Marcus Caine, Michael S McCafferty, Scott McGhee et al.",
+      "journal": "Journal of Vascular and Interventional Radiology",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27641675/",
+      "pmcid": "",
+      "pdfUrl": "https://bostonscientific-my.sharepoint.com/:b:/r/personal/cindy_cheng_bsci_com/Documents/Documents/Therasphere/paper/technical/2016%20Caine%20Impact%20of%20Y90%20Microsphere%20Density,%20Flow%20Dynamics,%20and%20Administration%20Technique%20on%20Spatial%20Distribution.pdf?d=wcd126b719bd246eca8cd59fdd8a8e941&csf=1&web=1&e=oza5J0",
+      "pdfFileName": "",
+      "fullTextStatus": "auto",
+      "fullTextNote": "",
+      "results": "• No significant differences in behavior were observed between the glass and resin surrogate materials under any tested flow conditions (P =.182; n = 144 injections).\n• Microspheres tend to align more consistently with the saline injection solution (r2 = 0.5712; n = 144) compared with total BMF flow distribution (r2 = 0.0104; n = 144).\n• The most predictable injectate distribution (ie, greatest alignment with BMF flow, < 5% variation) was demonstrated with > 10-mL/min injection rates of pure saline solution, although < 20% variation with glass microsphere distribution was observed with injection solution containing as much as 30% contrast medium when injected at > 20 mL/min.\n• Glass and resin yttrium-90 surrogates demonstrated similar distribution in a range of clinically relevant flow conditions, suggesting that microsphere density does not have a significant influence on microsphere distribution.",
+      "findings": "• No significant differences in behavior were observed between the glass and resin surrogate materials under any tested flow conditions (P =.182; n = 144 injections).\n• Microspheres tend to align more consistently with the saline injection solution (r2 = 0.5712; n = 144) compared with total BMF flow distribution (r2 = 0.0104; n = 144).\n• The most predictable injectate distribution (ie, greatest alignment with BMF flow, < 5% variation) was demonstrated with > 10-mL/min injection rates of pure saline solution, although < 20% variation with glass microsphere distribution was observed with injection solution containing as much as 30% contrast medium when injected at > 20 mL/min.\n• Glass and resin yttrium-90 surrogates demonstrated similar distribution in a range of clinically relevant flow conditions, suggesting that microsphere density does not have a significant influence on microsphere distribution.",
+      "notes": "",
+      "abstract": "",
+      "reviewStatus": "AI Draft",
+      "primaryCategory": "Technical",
+      "product": "y90-na",
+      "categories": [
+        "Technical"
+      ],
+      "journalImpactFactor": 3.1,
+      "journalImpactFactorYear": 2025
     }
   ]
 }
