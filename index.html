@@ -11,8 +11,8 @@
   --bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#30363d;
   --accent:#e8c96a;--accent2:#58a6ff;--accent3:#3fb950;--red:#f85149;
   --purple:#bc8cff;--text:#e6edf3;--text-muted:#7d8590;--text-dim:#4d5562;
-  --cryo:#3fb950;--dc-bead:#f778ba;--y90-all:#8b5cf6;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-na:#bc8cff;
-  --resin:var(--y90-resin);--glass:var(--y90-glass);--both:var(--y90-na);
+  --cryo:#3fb950;--dc-bead:#f778ba;--y90-all:#8b5cf6;--y90-resin:#f0883e;--y90-glass:#58a6ff;--y90-both:#a970ff;--y90-na:#bc8cff;
+  --resin:var(--y90-resin);--glass:var(--y90-glass);--both:var(--y90-both);
   --radius:8px;--radius-lg:14px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -87,6 +87,7 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .badge-dc-bead{background:rgba(247,120,186,.15);color:var(--dc-bead);border:1px solid rgba(247,120,186,.32)}
 .badge-y90-resin{background:rgba(240,136,62,.15);color:var(--y90-resin);border:1px solid rgba(240,136,62,.3)}
 .badge-y90-glass{background:rgba(88,166,255,.15);color:var(--y90-glass);border:1px solid rgba(88,166,255,.3)}
+.badge-y90-both{background:rgba(169,112,255,.15);color:var(--y90-both);border:1px solid rgba(169,112,255,.3)}
 .badge-y90-na{background:rgba(188,140,255,.15);color:var(--y90-na);border:1px solid rgba(188,140,255,.3)}
 .jif-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;background:rgba(232,201,106,.10);border:1px solid rgba(232,201,106,.32);color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;white-space:nowrap}
 .jif-badge{background:rgba(232,201,106,.22);border-color:var(--accent);color:#fff6cf;font-size:12px;font-weight:800;box-shadow:0 0 0 1px rgba(232,201,106,.08),0 2px 8px rgba(0,0,0,.28)}
@@ -116,6 +117,7 @@ td{padding:10px 12px;vertical-align:top;color:var(--text)}
 .pub-card.dc-bead::before{background:var(--dc-bead)}
 .pub-card.y90-resin::before{background:var(--y90-resin)}
 .pub-card.y90-glass::before{background:var(--y90-glass)}
+.pub-card.y90-both::before{background:linear-gradient(90deg,var(--y90-resin),var(--y90-glass))}
 .pub-card.y90-na::before{background:var(--y90-na)}
 .pub-card:hover{border-color:rgba(232,201,106,.3);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.4)}
 .card-title{font-family:'DM Serif Display',serif;font-size:14px;line-height:1.35;margin-bottom:8px;color:var(--text)}
@@ -1553,10 +1555,11 @@ body.modal-open .library-filter-sticky{
   --y90-all:#5f4bb6;
   --y90-resin:#b94708;
   --y90-glass:#245fbd;
+  --y90-both:#7137b8;
   --y90-na:#7042b6;
   --resin:var(--y90-resin);
   --glass:var(--y90-glass);
-  --both:var(--y90-na);
+  --both:var(--y90-both);
   --control-border:1px solid #cbd5e1;
   --control-bg:#ffffff;
   --control-bg-hover:#eef4fb;
@@ -1670,7 +1673,8 @@ tbody tr:hover{background:#edf5ff !important;}
 .badge-dc-bead{background:#fff0f7 !important;color:var(--dc-bead) !important;}
 .badge-y90-resin,.badge-resin{background:#fff2e9 !important;color:var(--y90-resin) !important;}
 .badge-y90-glass,.badge-glass{background:#edf4ff !important;color:var(--y90-glass) !important;}
-.badge-y90-na,.badge-both{background:#f3edff !important;color:var(--y90-na) !important;}
+.badge-y90-both,.badge-both{background:linear-gradient(90deg,#fff2e9,#edf4ff) !important;color:var(--y90-both) !important;}
+.badge-y90-na{background:#f3edff !important;color:var(--y90-na) !important;}
 .badge-ns{background:#f1f4f7 !important;color:#5f6c7b !important;}
 .jif-badge{
   background:#fff7dd !important;
@@ -1837,7 +1841,7 @@ html body.calibre-theme,html body.calibre-theme *{
 .ctm-meta{font-size:14px;color:#637083;margin-top:5px;line-height:1.5}
 .ctm-pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:13px;font-weight:700;white-space:nowrap;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;margin:2px 3px 2px 0}
 .ctm-pill.recruiting{background:#eaf8ef;border-color:#a9d4ba;color:#11613b}.ctm-pill.completed{background:#eef5ff;border-color:#b4cceb;color:#174f9c}.ctm-pill.stopped{background:#fff1f0;border-color:#e4a29d;color:#8f1d18}.ctm-pill.active{background:#fff7e8;border-color:#e7c998;color:#895011}
-.ctm-product.cryoablation{background:#eaf8ef;border-color:#a9d4ba;color:#11613b}.ctm-product.dc-bead{background:#fff0f7;border-color:#e7b1cc;color:#9b285f}.ctm-product.deb-competitor{background:#fff7e8;border-color:#e7c998;color:#895011}.ctm-product.y90-resin{background:#fff4e8;border-color:#e7c29e;color:#9a4c12}.ctm-product.y90-glass{background:#eef5ff;border-color:#b4cceb;color:#174f9c}.ctm-product.y90-na{background:#f4efff;border-color:#cbbce9;color:#5f35a2}
+.ctm-product.cryoablation{background:#eaf8ef;border-color:#a9d4ba;color:#11613b}.ctm-product.dc-bead{background:#fff0f7;border-color:#e7b1cc;color:#9b285f}.ctm-product.deb-competitor{background:#fff7e8;border-color:#e7c998;color:#895011}.ctm-product.y90-resin{background:#fff4e8;border-color:#e7c29e;color:#9a4c12}.ctm-product.y90-glass{background:#eef5ff;border-color:#b4cceb;color:#174f9c}.ctm-product.y90-both{background:linear-gradient(90deg,#fff4e8,#eef5ff);border-color:#b99fdc;color:#7137b8}.ctm-product.y90-na{background:#f4efff;border-color:#cbbce9;color:#5f35a2}
 .ctm-change{display:block;margin-top:6px;font-size:14px;font-weight:700;color:#895011}.ctm-new-badge{background:#14733f;color:#fff;border-radius:10px;padding:3px 8px;font-size:12px;margin-left:6px}
 .ctm-footer-tools{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;color:var(--text-muted);font-size:14px}
 .ctm-empty{padding:55px 20px;text-align:center;color:#637083;background:#fff;border:1px dashed #b8c5d4;border-radius:14px;font-size:16px}
@@ -1870,7 +1874,7 @@ html body.calibre-theme,html body.calibre-theme *{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v6.9</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v7.0</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -1932,7 +1936,7 @@ html body.calibre-theme,html body.calibre-theme *{
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
       <option value="dc-bead">DC Bead</option>
-      <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option>
+      <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-both">Y90 Both</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
@@ -2149,6 +2153,7 @@ html body.calibre-theme,html body.calibre-theme *{
           <label class="radio-option"><input type="radio" name="product" value="dc-bead"> <span style="color:var(--dc-bead)">● DC Bead</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
+          <label class="radio-option"><input type="radio" name="product" value="y90-both"> <span style="color:var(--y90-both)">◐ Y90 Both</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-na" checked> <span style="color:var(--y90-na)">○ Y90 N/A</span></label>
         </div>
       </div>
@@ -2189,7 +2194,7 @@ html body.calibre-theme,html body.calibre-theme *{
           <div>
             <label style="display:block;margin-bottom:4px">Primary Category</label>
             <select id="f-primarycategory"></select>
-            <div class="primary-category-note">This one will show as the bright tag. Secondary categories stay grey.</div>
+            <div class="primary-category-note">AI selects the best match automatically. This one will show as the bright tag.</div>
           </div>
           <div>
             <label style="display:block;margin-bottom:4px">Secondary Tags</label>
@@ -9337,6 +9342,8 @@ function importAllPubMedResults(){
   }
   const baseId = Math.max(0, ...publications.map(p => Number(p.id)||0), Date.now());
   newResults.forEach((r, idx) => {
+    const taxonomy=inferPublicationTaxonomy([r.title,r.journal,r.abstract].filter(Boolean).join(' '));
+    const autoCategories=[taxonomy.primaryCategory,...taxonomy.secondaryTags,'PubMed Updates'].filter(Boolean);
     publications.push({
       id: baseId + idx + 1,
       year: parseInt(r.year) || new Date().getFullYear(),
@@ -9345,8 +9352,8 @@ function importAllPubMedResults(){
       journal: r.journal || '',
       country: '',
       product: classifyIOEProduct([r.title,r.journal,r.abstract].filter(Boolean).join(' ')),
-      categories: ['PubMed Updates'],
-      primaryCategory: 'PubMed Updates',
+      categories: [...new Set(autoCategories)],
+      primaryCategory: taxonomy.primaryCategory || 'PubMed Updates',
       results: r.abstract ? buildResultsDraftFromAbstract(r.abstract,4) : '',
       findings: r.abstract ? (buildKeyFindingsDraftFromAbstract(r.abstract,4) || 'Imported from PubMed search. Abstract available but no clear key-finding sentence was detected. Please review manually.') : 'Imported from PubMed search. Please review the abstract/full text and replace this with curated key findings.',
       notes: r.abstract ? 'Imported via PubMed search results. Abstract-level findings were auto-drafted and need human review.' : 'Imported via PubMed search results. Needs human review before internal or external use.',
@@ -9434,8 +9441,8 @@ async function importFromPubMed(pmid,title,authors,journal,year,pmcid='') {
       if(resultsDraft && !document.getElementById('f-results').value.trim()) document.getElementById('f-results').value=resultsDraft.substring(0,1200);
     }
     const combined=[title,journal,authors,abstractText].filter(Boolean).join(' ');
-    const autoCats=guessLocalCategoriesFromText(combined);
-    if(autoCats.length) addFormCategories(autoCats);
+    const taxonomy=applyPublicationTaxonomy(combined,{force:true});
+    const autoCats=[taxonomy.primaryCategory,...taxonomy.secondaryTags].filter(Boolean);
     const product=classifyIOEProduct(combined);
     const r=document.querySelector(`input[name="product"][value="${product}"]`); if(r) r.checked=true;
     const country=await inferCountryFromPublication(temp, combined);
@@ -9900,10 +9907,10 @@ function buildPubMedAIPreview(title, abstract){
 
 function buildContentBasedAnalysis(p, sourceText, sourceLabel, mode='findings'){
   const sourcePlusMeta=[sourceText,p.title,p.product,(p.categories||[]).join(' ')].filter(Boolean).join(' ');
-  const guessed=guessLocalCategoriesFromText(sourcePlusMeta);
+  const taxonomy=inferPublicationTaxonomy(sourcePlusMeta);
   const categories=(p.categories||[]).join(', ') || 'None recorded';
   if(mode==='categorize'){
-    return `Category Suggestions\n\nSuggested categories from extracted publication text: ${guessed.length ? guessed.join(', ') : 'No confident suggestion'}\n\nCurrent categories: ${categories}\n\nSource used: ${sourceLabel || 'available record text'}.`;
+    return `Category Suggestions\n\nPrimary Category: ${taxonomy.primaryCategory || 'No confident suggestion'}\n\nSecondary Tags: ${taxonomy.secondaryTags.join(', ') || '—'}\n\nCurrent categories: ${categories}\n\nSource used: ${sourceLabel || 'available record text'}.`;
   }
   if(mode==='dosimetry'){
     const doseBullets=extractKeyFindingBullets(sourceText,8).filter(b=>/dose|dosim|gy\b|lung|tumou?r|absorbed|partition|voxel|MAA|shunt/i.test(b)).slice(0,5);
@@ -9944,14 +9951,15 @@ async function aiAnalyzePubMed(pmid,title) {
     const cached=(lastPubMedSearchResults||[]).find(r=>String(r.pmid)===String(pmid));
     const temp={pmid, title};
     const abstract=cached?.abstract || await fetchPubMedAbstractText(temp);
-    const guessed=guessLocalCategoriesFromText([title,abstract].join(' '));
+    const taxonomy=inferPublicationTaxonomy([title,abstract].join(' '));
     const preview=buildPubMedAIPreview(title, abstract);
     el.className='ai-result';
     el.textContent=`PubMed Abstract AI Draft
 
 ${preview}
 
-Likely categories: ${guessed.length ? guessed.join(', ') : 'No confident suggestion'}
+Primary Category: ${taxonomy.primaryCategory || 'No confident suggestion'}
+Secondary Tags: ${taxonomy.secondaryTags.join(', ') || '—'}
 
 Source: PubMed abstract${cached?.abstract ? ' fetched with search results' : ''}. Please verify against the full paper before importing.`;
   }catch(e){
@@ -10060,7 +10068,8 @@ async function aiSummarizeForm() {
     const notes=document.getElementById('f-notes')?.value.trim() || '';
     const resultsForClassification=document.getElementById('f-results')?.value.trim() || '';
     const textForClassification=[sourceText,titleOnlyText,journal,resultsForClassification,notes].filter(Boolean).join(' ');
-    const categories=guessLocalCategoriesFromText(textForClassification);
+    const taxonomy=inferPublicationTaxonomy(textForClassification);
+    const categories=[taxonomy.primaryCategory,...taxonomy.secondaryTags].filter(Boolean);
     const product=classifyIOEProduct(textForClassification);
     const inferredCountry=await inferCountryFromPublication(tempPub, textForClassification);
 
@@ -10068,9 +10077,7 @@ async function aiSummarizeForm() {
       const r=document.querySelector(`input[name="product"][value="${product}"]`);
       if(r) r.checked=true;
     }
-    if(categories.length){
-      addFormCategories(categories);
-    }
+    if(categories.length) applyPublicationTaxonomy(textForClassification,{force:true});
     const countryEl=document.getElementById('f-country');
     if(inferredCountry && !countryEl.value.trim()){
       countryEl.value=inferredCountry;
@@ -10079,7 +10086,7 @@ async function aiSummarizeForm() {
 
     if(!sourceText){
       resultEl.className='ai-result';
-      resultEl.textContent=`⚠️ No extractable abstract/full text found.\n\nI did not save a fake finding from the title.\n\nWhat I checked:\n• Abstract field\n• Results field\n• Uploaded PDF attached directly to this record\n• PMC ID\n• Direct PDF URL\n• PubMed URL / PMID\n• PubMed title search\n\nWhat you can do:\n• Paste the abstract into the Abstract field, or\n• Attach the PDF directly in this edit form, or\n• Add a PubMed URL / PMID / PMCID.\n\nCategory/product guesses from title only:\nProduct: ${product}\nSuggested categories: ${categories.join(', ') || '—'}`;
+      resultEl.textContent=`⚠️ No extractable abstract/full text found.\n\nI did not save a fake finding from the title.\n\nWhat I checked:\n• Abstract field\n• Results field\n• Uploaded PDF attached directly to this record\n• PMC ID\n• Direct PDF URL\n• PubMed URL / PMID\n• PubMed title search\n\nWhat you can do:\n• Paste the abstract into the Abstract field, or\n• Attach the PDF directly in this edit form, or\n• Add a PubMed URL / PMID / PMCID.\n\nCategory/product guesses from title only:\nProduct: ${product}\nPrimary Category: ${taxonomy.primaryCategory || '—'}\nSecondary Tags: ${taxonomy.secondaryTags.join(', ') || '—'}`;
       showToast('No extractable paper text found. Please add abstract/PDF/PubMed/PMC.','error');
       return;
     }
@@ -10105,7 +10112,7 @@ async function aiSummarizeForm() {
     }
 
     resultEl.className='ai-result';
-    resultEl.textContent=`✅ Extraction completed from ${source.source}.\n\nKey Findings draft:\n${findingText || '—'}\n\nProduct guess: ${product}\nSuggested categories: ${categories.join(', ') || '—'}\n\nPlease manually verify before saving.`;
+    resultEl.textContent=`✅ Extraction completed from ${source.source}.\n\nKey Findings draft:\n${findingText || '—'}\n\nProduct guess: ${product}\nPrimary Category: ${taxonomy.primaryCategory || '—'}\nSecondary Tags: ${taxonomy.secondaryTags.join(', ') || '—'}\n\nPlease manually verify before saving.`;
     showToast('Key findings extracted. Review, then Save Publication and Export JSON.','success');
   }catch(e){
     console.error(e);
@@ -14317,7 +14324,7 @@ async function saveToGitHub(){
     const headers={ Authorization:`Bearer ${s.token}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' };
     const apiBase=`https://api.github.com/repos/${s.owner}/${s.repo}/contents/${filePath}`;
     const savedAt=new Date().toISOString();
-    const payload={ version:'ioe-publication-database-v6.9', savedAt, categories:ALL_CATEGORIES, pdfFolderUrl:pdfFolderUrl, publications:publications.map(p=>{const c={...p};delete c.pdfData;return c;}), clinicalTrialMonitor:{ watch:ctmSimpleWatchStore(), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}), lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{}) } };
+    const payload={ version:'ioe-publication-database-v7.0', savedAt, categories:ALL_CATEGORIES, pdfFolderUrl:pdfFolderUrl, publications:publications.map(p=>{const c={...p};delete c.pdfData;return c;}), clinicalTrialMonitor:{ watch:ctmSimpleWatchStore(), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}), lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{}) } };
     const jsonStr=JSON.stringify(payload,null,2);
     const bytes=new TextEncoder().encode(jsonStr);
     let binary=''; bytes.forEach(b=>binary+=String.fromCharCode(b));
@@ -14828,7 +14835,7 @@ savePublication = function(){
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   IO&E DATABASE v6.9
+   IO&E DATABASE v7.0
    Cryoablation + DC Bead + Y90 product model, journal-level JIF registry,
    combined PubMed discovery, and ClinicalTrials.gov monitoring. Legacy Y90 records are migrated in place.
    ══════════════════════════════════════════════════════════ */
@@ -14838,6 +14845,7 @@ const IOE_PRODUCT_META = {
   'dc-bead': {label:'DC Bead', short:'DC Bead', cls:'badge-dc-bead'},
   'y90-resin': {label:'Y90 Resin', short:'Y90 Resin', cls:'badge-y90-resin'},
   'y90-glass': {label:'Y90 Glass', short:'Y90 Glass', cls:'badge-y90-glass'},
+  'y90-both': {label:'Y90 Both', short:'Y90 Both', cls:'badge-y90-both'},
   'y90-na': {label:'Y90 N/A', short:'Y90 N/A', cls:'badge-y90-na'}
 };
 
@@ -14847,7 +14855,8 @@ function normalizeProductCode(value){
   if(v==='dc-bead' || v==='dc bead' || v==='dcbead') return 'dc-bead';
   if(v==='y90-resin' || v==='resin') return 'y90-resin';
   if(v==='y90-glass' || v==='glass') return 'y90-glass';
-  if(v==='y90-na' || v==='both' || v==='ns' || v==='n/a' || v==='not specific' || !v) return 'y90-na';
+  if(v==='y90-both' || v==='both' || v==='resin and glass' || v==='glass and resin') return 'y90-both';
+  if(v==='y90-na' || v==='ns' || v==='n/a' || v==='not specific' || !v) return 'y90-na';
   return 'y90-na';
 }
 
@@ -14857,6 +14866,7 @@ function classifyIOEProduct(text){
   if(/\bdc[- ]?beads?\b|\bdcbeads?\b/.test(t)) return 'dc-bead';
   const hasResin=/\bresin\b|sir[- ]?spheres?|sirspheres|sirtax/.test(t);
   const hasGlass=/\bglass\b|therasphere/.test(t);
+  if(hasResin && hasGlass) return 'y90-both';
   if(hasResin && !hasGlass) return 'y90-resin';
   if(hasGlass && !hasResin) return 'y90-glass';
   return 'y90-na';
@@ -14905,9 +14915,9 @@ function guessLocalCategoriesFromText(text){
   const t=String(text || '').toLowerCase();
   const picks=[];
   const add=cat=>{ if(ALL_CATEGORIES.includes(cat) && !picks.includes(cat)) picks.push(cat); };
-  if(/hcc|hepatocellular|bclc/.test(t)){add('Indication / HCC');add('HCC');}
-  if(/cholangiocarcinoma|\bicc\b|biliary/.test(t)){add('Indication / ICC');add('ICC');}
-  if(/colorectal|\bcrc\b|crlm|mcrc/.test(t)){add('Indication / mCRC');add('mCRC');}
+  if(/hcc|hepatocellular|bclc/.test(t)) add('Indication / HCC');
+  if(/cholangiocarcinoma|\bicc\b|biliary/.test(t)) add('Indication / ICC');
+  if(/colorectal|\bcrc\b|crlm|mcrc/.test(t)) add('Indication / mCRC');
   if(/neuroendocrine|\bnet\b/.test(t)) add('Indication / Neuroendocrine Tumor');
   if(/lung cancer|pulmonary (?:tumou?r|metasta)|non-small cell|\bnsclc\b/.test(t)) add('Indication / Lung Cancer');
   if(/renal|kidney|renal cell|\brcc\b/.test(t)) add('Indication / Renal Tumor');
@@ -14919,21 +14929,59 @@ function guessLocalCategoriesFromText(text){
   if(/systematic review|meta-analysis/.test(t)) add('Evidence Type / Systematic Review & Meta-analysis');
   if(/guideline|consensus|recommendation/.test(t)) add('Evidence Type / Guideline & Consensus');
   if(/case report/.test(t)) add('Evidence Type / Case Report');
-  if(/safety|toxicity|adverse|complication|reild/.test(t)){add('Clinical Topic / Safety');add('Safety');}
-  if(/response|survival|efficacy|overall survival|\bpfs\b|\borr\b/.test(t)){add('Clinical Topic / Efficacy');add('Clinical efficacy');}
+  if(/safety|toxicity|adverse|complication|reild/.test(t)) add('Clinical Topic / Safety');
+  if(/response|survival|efficacy|overall survival|\bpfs\b|\borr\b/.test(t)) add('Clinical Topic / Efficacy');
   if(/patient selection|eligib|predictor|risk factor/.test(t)) add('Clinical Topic / Patient Selection');
   if(/quality of life|qol|patient reported/.test(t)) add('Clinical Topic / Quality of Life');
   if(/cryoablat|cryosurger|freeze[- ]?thaw/.test(t)) add('Technique / Cryoablation Protocol');
   if(/hydrodissection|pneumodissection|cryoprotection|thermal protection/.test(t)) add('Technique / Cryoprotection');
   if(/ablation zone|ice ball|margin/.test(t)) add('Technique / Ablation Zone');
   if(/image guidance|ct-guided|mri-guided|ultrasound-guided/.test(t)) add('Technique / Image Guidance');
-  if(/dosim|absorbed dose|dose[- ]response|partition|mird|voxel|tumor dose/.test(t)){add('Technique / Y90 Dosimetry');add('Dosimetry');}
-  if(/mapping|\bmaa\b/.test(t)){add('Technique / Mapping & MAA');add('MAA');}
-  if(/lung shunt|\blsf\b/.test(t)){add('Technique / Lung Shunt');add('Lung Shunt');}
-  if(/radiation segmentectomy/.test(t)){add('Technique / Radiation Segmentectomy');add('Radiation segmentectomy');}
+  if(/dosim|absorbed dose|dose[- ]response|partition|mird|voxel|tumor dose/.test(t)) add('Technique / Y90 Dosimetry');
+  if(/mapping|\bmaa\b/.test(t)) add('Technique / Mapping & MAA');
+  if(/lung shunt|\blsf\b/.test(t)) add('Technique / Lung Shunt');
+  if(/radiation segmentectomy/.test(t)) add('Technique / Radiation Segmentectomy');
   if(/combination|immunotherap|checkpoint|chemotherap|targeted therap/.test(t)) add('Combination Therapy');
   if(/asia|asian|apac|taiwan|korea|japan|china|singapore/.test(t)) add('APAC Data');
   return picks.slice(0,8);
+}
+
+/* v7.0 — Ranked AI taxonomy selection.
+   The classifier returns one explicit primary category and keeps every other
+   confident match as a secondary tag. This prevents a loose suggestion list
+   from leaving the Primary Category field empty. */
+function inferPublicationTaxonomy(text){
+  const categories=guessLocalCategoriesFromText(text);
+  if(!categories.length) return {primaryCategory:'',secondaryTags:[]};
+  const primaryCategory=
+    categories.find(c=>c.startsWith('Indication /')) ||
+    categories.find(c=>c.startsWith('Technique /')) ||
+    categories.find(c=>c.startsWith('Clinical Topic /')) ||
+    categories.find(c=>c.startsWith('Evidence Type /')) ||
+    categories[0];
+  return {primaryCategory,secondaryTags:categories.filter(c=>c!==primaryCategory)};
+}
+
+function applyPublicationTaxonomy(text,{force=false}={}){
+  const taxonomy=inferPublicationTaxonomy(text);
+  if(!taxonomy.primaryCategory) return taxonomy;
+  const primarySelect=document.getElementById('f-primarycategory');
+  if(!primarySelect) return taxonomy;
+  if(!force && primarySelect.value && primarySelect.dataset.aiSelected!=='true') return taxonomy;
+  if([...primarySelect.options].some(o=>o.value===taxonomy.primaryCategory)){
+    primarySelect.value=taxonomy.primaryCategory;
+    primarySelect.dataset.aiSelected='true';
+  }
+  formSecondaryCategories=[...new Set(taxonomy.secondaryTags.filter(c=>ALL_CATEGORIES.includes(c)))];
+  renderSecondaryCategoryPicker();
+  populateSecondaryCategoryDropdown();
+  return taxonomy;
+}
+
+function formTaxonomySourceText(){
+  return ['f-title','f-abstract','f-results','f-findings','f-notes']
+    .map(id=>document.getElementById(id)?.value?.trim()||'')
+    .filter(Boolean).join(' ');
 }
 
 /* Journal Impact Factor registry. JIF values are looked up, never inferred from
@@ -15288,8 +15336,8 @@ function renderCards(data){
 
 function renderDashboard(){
   const total=(publications || []).length;
-  const productOrder=['cryoablation','dc-bead','y90-resin','y90-glass','y90-na'];
-  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-na':'var(--y90-na)'};
+  const productOrder=['cryoablation','dc-bead','y90-resin','y90-glass','y90-both','y90-na'];
+  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -15299,13 +15347,14 @@ function renderDashboard(){
   const years=Object.entries(byYear).sort((a,b)=>b[0]-a[0]).slice(0,10), cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).slice(0,12), countries=Object.entries(byCountry).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxYear=Math.max(...Object.values(byYear),1), maxCat=cats[0]?.[1]||1, maxCountry=countries[0]?.[1]||1;
   const pmcCount=publications.filter(p=>hasPMC(p)).length, jifCount=publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length;
-  const y90All=byProduct['y90-resin']+byProduct['y90-glass']+byProduct['y90-na'];
+  const y90All=byProduct['y90-resin']+byProduct['y90-glass']+byProduct['y90-both']+byProduct['y90-na'];
   const productRows=[
     {key:'cryoablation',label:'Cryoablation',count:byProduct['cryoablation']},
     {key:'dc-bead',label:'DC Bead',count:byProduct['dc-bead']},
     {key:'y90-all',label:'Y90 (All)',count:y90All,parent:true},
     {key:'y90-resin',label:'↳ Y90 Resin',count:byProduct['y90-resin'],child:true},
     {key:'y90-glass',label:'↳ Y90 Glass',count:byProduct['y90-glass'],child:true},
+    {key:'y90-both',label:'↳ Y90 Both',count:byProduct['y90-both'],child:true},
     {key:'y90-na',label:'↳ Y90 N/A',count:byProduct['y90-na'],child:true}
   ];
   document.getElementById('dashboard-content').innerHTML=`
@@ -15336,7 +15385,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v6.9',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmSimpleWatchStore(),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
+  const backup={version:'ioe-database-v7.0',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmSimpleWatchStore(),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
@@ -15356,6 +15405,7 @@ function clearForm(){
   ['f-year','f-country','f-title','f-authors','f-journal','f-jif','f-jifyear','f-url','f-pmcid','f-pdfurl','f-pdffilename','f-fulltextnote','f-results','f-findings','f-notes','f-abstract','category-form-search'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   const radio=document.querySelector('input[name="product"][value="y90-na"]'); if(radio) radio.checked=true;
   formSecondaryCategories=[]; populatePrimaryCategorySelect(''); renderSecondaryCategoryPicker();
+  const primary=document.getElementById('f-primarycategory');if(primary)delete primary.dataset.aiSelected;
   const review=document.getElementById('f-reviewstatus');if(review)review.value='AI Draft'; const full=document.getElementById('f-fulltextstatus');if(full)full.value='auto';
   const label=document.getElementById('pdf-label');if(label)label.textContent='Click to attach PDF · or enter PMC ID above for auto free-text';
   const ai=document.getElementById('ai-form-result');if(ai)ai.style.display='none'; selectedPdfData=null; const pdf=document.getElementById('f-pdf');if(pdf)pdf.value='';
@@ -15377,6 +15427,15 @@ const __ioeSavePublication=savePublication;
 savePublication=function(){
   const idBefore=editingId, titleBefore=document.getElementById('f-title')?.value.trim() || '', journal=document.getElementById('f-journal')?.value.trim() || '';
   const jif=validJIFNumber(document.getElementById('f-jif')?.value), jifYear=document.getElementById('f-jifyear')?.value || '';
+  const taxonomyText=formTaxonomySourceText();
+  const primarySelect=document.getElementById('f-primarycategory');
+  if(!primarySelect?.value) applyPublicationTaxonomy(taxonomyText,{force:true});
+  const checkedProduct=document.querySelector('input[name="product"]:checked');
+  const inferredProduct=classifyIOEProduct(taxonomyText);
+  if(!editingId && normalizeProductCode(checkedProduct?.value)==='y90-na' && inferredProduct!=='y90-na'){
+    const inferredRadio=document.querySelector(`input[name="product"][value="${inferredProduct}"]`);
+    if(inferredRadio) inferredRadio.checked=true;
+  }
   const product=normalizeProductCode(document.querySelector('input[name="product"]:checked')?.value);
   __ioeSavePublication();
   const p=(idBefore?publications.find(x=>x.id===idBefore):null) || [...publications].reverse().find(x=>x.title===titleBefore);
@@ -15404,7 +15463,7 @@ const CTM_STORAGE={
   lastSearch:'ioeClinicalTrialLastSearchV1'
 };
 const CTM_PRODUCT_LABELS={
-  'cryoablation':'Cryoablation','dc-bead':'DC Bead','deb-competitor':'DEB Competitor','y90-resin':'Y90 Resin','y90-glass':'Y90 Glass','y90-na':'Y90 N/A'
+  'cryoablation':'Cryoablation','dc-bead':'DC Bead','deb-competitor':'DEB Competitor','y90-resin':'Y90 Resin','y90-glass':'Y90 Glass','y90-both':'Y90 Both','y90-na':'Y90 N/A'
 };
 const CTM_APAC_COUNTRIES=new Set([
   'Australia','Bangladesh','Brunei Darussalam','Cambodia','China','Hong Kong','India','Indonesia','Japan','Korea, Republic of','South Korea','Macao','Malaysia','Myanmar','Nepal','New Zealand','Pakistan','Philippines','Singapore','Sri Lanka','Taiwan','Thailand','Vietnam'
@@ -15644,6 +15703,19 @@ function ctmRestoreLastResults(){
 }
 const __ctmOriginalSwitchTab=switchTab;
 switchTab=function(tab){__ctmOriginalSwitchTab(tab);if(tab==='trials'&&!ctmAllTrials.length)ctmRestoreLastResults();};
+
+// Automatically refresh AI category choices while a new publication is being entered.
+// Selecting a primary category manually stops the automatic replacement.
+let __taxonomyInputTimer=null;
+document.addEventListener('input',e=>{
+  if(e.target?.id==='f-primarycategory') delete e.target.dataset.aiSelected;
+  if(editingId!==null || !['f-title','f-abstract','f-results','f-findings','f-notes'].includes(e.target?.id)) return;
+  clearTimeout(__taxonomyInputTimer);
+  __taxonomyInputTimer=setTimeout(()=>applyPublicationTaxonomy(formTaxonomySourceText()),350);
+});
+document.addEventListener('change',e=>{
+  if(e.target?.id==='f-primarycategory') delete e.target.dataset.aiSelected;
+});
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-modal');closeModal('ctm-manual-modal');}});
 </script>
