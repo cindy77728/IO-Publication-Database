@@ -1792,6 +1792,46 @@ html body.calibre-theme,html body.calibre-theme *{
   font-family:var(--font-ui) !important;
 }
 
+/* v7.2 — Compact fixed top controls and navigation */
+@media (min-width:769px){
+  header{
+    padding:10px 14px 6px !important;
+  }
+  .header-top{
+    gap:8px !important;
+  }
+  .header-actions{
+    padding-bottom:0 !important;
+  }
+  .header-actions .stat-pill,
+  .header-actions > .btn{
+    height:48px !important;
+    min-height:48px !important;
+    max-height:48px !important;
+    line-height:1.2 !important;
+  }
+  .header-actions .stat-pill{
+    padding:0 16px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+  }
+  .header-actions > .btn{
+    padding:0 16px !important;
+  }
+  .tabs{
+    position:sticky !important;
+    top:var(--tabs-sticky-top, 0px) !important;
+    z-index:1190 !important;
+  }
+  .tab{
+    padding:7px 30px !important;
+    line-height:1.2 !important;
+  }
+  .library-filter-sticky{
+    top:var(--library-sticky-top, 0px) !important;
+  }
+}
+
 /* v6.9 — Clear Watchlist Feedback */
 .toast{
   max-width:430px!important;
@@ -14665,15 +14705,26 @@ savePublication = function(){
 (function(){
   function updateLibraryStickyTop(){
     var header = document.querySelector('header');
-    if (!header) return;
+    var tabs = document.querySelector('.tabs');
+    if (!header || !tabs) return;
     if (window.innerWidth >= 769) {
-      document.documentElement.style.setProperty('--library-sticky-top', header.offsetHeight + 'px');
+      var headerHeight = header.offsetHeight;
+      document.documentElement.style.setProperty('--tabs-sticky-top', headerHeight + 'px');
+      document.documentElement.style.setProperty('--library-sticky-top', (headerHeight + tabs.offsetHeight) + 'px');
     } else {
+      document.documentElement.style.setProperty('--tabs-sticky-top', '0px');
       document.documentElement.style.setProperty('--library-sticky-top', '0px');
     }
   }
   window.addEventListener('load', updateLibraryStickyTop);
   window.addEventListener('resize', updateLibraryStickyTop);
+  if (window.ResizeObserver) {
+    var stickyObserver = new ResizeObserver(updateLibraryStickyTop);
+    var observedHeader = document.querySelector('header');
+    var observedTabs = document.querySelector('.tabs');
+    if (observedHeader) stickyObserver.observe(observedHeader);
+    if (observedTabs) stickyObserver.observe(observedTabs);
+  }
   setTimeout(updateLibraryStickyTop, 100);
   setTimeout(updateLibraryStickyTop, 500);
 })();
