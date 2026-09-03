@@ -2137,7 +2137,8 @@ html body.calibre-theme,html body.calibre-theme *{
             <option value="cryo">Cryoablation only</option>
             <option value="dc-bead">DC Bead only</option>
           </select>
-          <button class="btn btn-blue" onclick="fetchPubMed(7)">🔍 Last 7 days</button>
+          <button class="btn btn-blue" onclick="fetchPubMed(0)">🔍 No date limitation</button>
+          <button class="btn btn-secondary" onclick="fetchPubMed(7)">Last 7 days</button>
           <button class="btn btn-secondary" onclick="fetchPubMed(30)">Last 30 days</button>
           <button class="btn btn-secondary" onclick="fetchPubMed(90)">Last 90 days</button>
           <div class="custom-days-wrap" style="display:flex;gap:7px;align-items:center;flex-wrap:nowrap">
@@ -2148,16 +2149,16 @@ html body.calibre-theme,html body.calibre-theme *{
         <div class="pubmed-title-tools">
           <label for="pubmed-title-query">Title / title keywords (optional)</label>
           <input type="text" id="pubmed-title-query" placeholder="Paste a full title or enter title keywords" autocomplete="off">
-          <button class="btn btn-primary" onclick="fetchPubMedCustomDays()">Search title</button>
+          <button class="btn btn-primary" onclick="fetchPubMed(0)">Search title (all dates)</button>
           <button class="btn btn-secondary" type="button" onclick="clearPubMedTitleSearch()">Clear title</button>
-          <div class="pubmed-title-help">When this box has text, PubMed searches those words in the article title. The selected number of days still applies; clear the box to return to the IO&amp;E product search.</div>
+          <div class="pubmed-title-help">When this box has text, PubMed searches those words in the article title. “Search title” uses all dates; use a 7-, 30-, 90-day or custom-day button if you want to limit the title search. Clear the box to return to the IO&amp;E product search.</div>
         </div>
       </div>
     </div>
 
     <div class="pubmed-status" id="pubmed-status">
       <span class="pulse-dot"></span>
-      <span>Ready — choose All IO&amp;E, Y90, Cryoablation, or DC Bead, then select a timeframe. Papers with free PMC full text are automatically detected 🟢</span>
+      <span>Ready — the default search has no date limitation. Choose All IO&amp;E, Y90, Cryoablation, or DC Bead, then search all dates or select a shorter timeframe. Papers with free PMC full text are automatically detected 🟢</span>
     </div>
 
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px">
@@ -2241,6 +2242,11 @@ html body.calibre-theme,html body.calibre-theme *{
       <select id="ctm-filter-status" onchange="ctmApplyFilters()"><option value="">All statuses</option></select>
       <select id="ctm-filter-phase" onchange="ctmApplyFilters()"><option value="">All phases</option></select>
       <select id="ctm-filter-product" onchange="ctmApplyFilters()"><option value="">All products</option></select>
+      <select id="ctm-filter-apac" onchange="ctmApplyFilters()" title="Filter the currently loaded trials by site geography">
+        <option value="">All site geographies</option>
+        <option value="yes">APAC site involved</option>
+        <option value="no">No APAC site</option>
+      </select>
       <select id="ctm-filter-change" onchange="ctmApplyFilters()">
         <option value="">All monitoring states</option><option value="new">New</option><option value="changed">Changed</option><option value="watch">Watchlist only</option>
       </select>
@@ -2257,6 +2263,7 @@ html body.calibre-theme,html body.calibre-theme *{
       <summary>What this monitor tracks—and how to use it</summary>
       <ul>
         <li><strong>Automated:</strong> recruitment status, phase, enrollment, sponsor, study dates, locations, interventions, results availability, and registry update date.</li>
+        <li><strong>APAC results filter:</strong> use “APAC site involved” to narrow the trials already loaded, without running a new ClinicalTrials.gov search.</li>
         <li><strong>Change detection:</strong> new records plus changes in status, enrollment, completion date, locations, phase, or results posting versus your previous refresh.</li>
         <li><strong>Watchlist:</strong> click ☆ to save a trial, then use “View Watchlist” to retrieve your starred trials later. It creates a saved shortlist; it does not send automatic email alerts.</li>
         <li><strong>Recommended review:</strong> weekly for recruiting or competitor activity and monthly for completed trials and newly posted results.</li>
@@ -9393,14 +9400,17 @@ async function fetchPubMedAbstractsByPmids(ids){
   return map;
 }
 
-async function fetchPubMed(days=7) {
+async function fetchPubMed(days=0) {
   const statusEl=document.getElementById('pubmed-status');
   const resultsEl=document.getElementById('pubmed-results');
   const scope=document.getElementById('pubmed-scope')?.value || 'all';
   const titleText=document.getElementById('pubmed-title-query')?.value?.trim() || '';
+  const searchDays=Math.max(0,Math.floor(Number(days)||0));
+  const hasDateLimit=searchDays>0;
+  const dateLabel=hasDateLimit ? `the last ${searchDays} days` : 'all publication dates';
   const scopeLabel=titleText ? 'title-matched' : ({all:'IO&E',y90:'Y90',cryo:'oncologic cryoablation','dc-bead':'DC Bead'}[scope] || 'IO&E');
   const safeTitle=escapeHtml(titleText);
-  statusEl.innerHTML=`<div class="ai-thinking"><span></span><span></span><span></span></div><span style="margin-left:9px">Searching PubMed ${titleText?'for titles containing “'+safeTitle+'”':'for '+scopeLabel+' papers'} from the last ${days} days…</span>`;
+  statusEl.innerHTML=`<div class="ai-thinking"><span></span><span></span><span></span></div><span style="margin-left:9px">Searching PubMed ${titleText?'for titles containing “'+safeTitle+'”':'for '+scopeLabel+' papers'} across ${dateLabel}…</span>`;
   resultsEl.innerHTML='';
   lastPubMedSearchResults = [];
   const importAllBtn=document.getElementById('pubmed-import-all-btn');
@@ -9410,29 +9420,31 @@ async function fetchPubMed(days=7) {
   const queryString=getPubMedRequestQuery(scope);
   const query=encodeURIComponent(queryString);
 
-  const endDate=new Date();
-  const startDate=new Date();
-  startDate.setDate(endDate.getDate()-Number(days));
   const fmt=d=>`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-  const mindate=fmt(startDate);
-  const maxdate=fmt(endDate);
-  const directQuery=`${queryString} AND ("${mindate}"[Date - Publication] : "${maxdate}"[Date - Publication])`;
+  let mindate='',maxdate='';
+  if(hasDateLimit){
+    const endDate=new Date(),startDate=new Date();
+    startDate.setDate(endDate.getDate()-searchDays);
+    mindate=fmt(startDate);maxdate=fmt(endDate);
+  }
+  const directQuery=hasDateLimit ? `${queryString} AND ("${mindate}"[Date - Publication] : "${maxdate}"[Date - Publication])` : queryString;
   const directSearchUrl=`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(directQuery)}&sort=date`;
 
   try {
     // v5.7: previous retmax was 25 for both 30 and 90 days, so both could appear identical.
     // Use explicit publication date range and a higher cap so 30/90/custom windows behave differently.
     const retmax = titleText ? 200 : 500;
-    const searchData=await eutilsJson(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${query}&datetype=pdat&mindate=${mindate}&maxdate=${maxdate}&retmax=${retmax}&retmode=json&sort=pub+date`);
+    const dateParams=hasDateLimit ? `&datetype=pdat&mindate=${encodeURIComponent(mindate)}&maxdate=${encodeURIComponent(maxdate)}` : '';
+    const searchData=await eutilsJson(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${query}${dateParams}&retmax=${retmax}&retmode=json&sort=pub+date`);
     const ids=searchData.esearchresult?.idlist||[];
     const totalFound=Number(searchData.esearchresult?.count || ids.length || 0);
 
     if (!ids.length) {
-      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No new publications in the last ${days} days.</span>`;
+      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No matching publications found across ${dateLabel}.</span>`;
       return;
     }
 
-    statusEl.innerHTML=`<span class="pulse-dot"></span><span style="margin-left:8px">Found ${totalFound} PubMed match${totalFound===1?'':'es'} in the last ${days} days${ids.length<totalFound?' — loading the newest '+ids.length:''} — checking abstracts and PMC availability…</span>`;
+    statusEl.innerHTML=`<span class="pulse-dot"></span><span style="margin-left:8px">Found ${totalFound} PubMed match${totalFound===1?'':'es'} across ${dateLabel}${ids.length<totalFound?' — loading the newest '+ids.length:''} — checking abstracts and PMC availability…</span>`;
 
     // Long timeframes can return hundreds of IDs. Fetch in modest, rate-limited
     // batches so request URLs stay below browser/server limits and NCBI is not flooded.
@@ -9462,7 +9474,7 @@ async function fetchPubMed(days=7) {
     };
     const papers=ids.map(id=>summaryData.result?.[id]).filter(Boolean).filter(p=>isLikelyIOEPaper(p, abstractMap?.[p.uid]||''));
     if (!papers.length) {
-      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No likely ${scopeLabel} publications found in the last ${days} days after relevance filtering.</span>`;
+      statusEl.innerHTML=`<span style="color:var(--accent3)">✓</span><span style="margin-left:8px">No likely ${scopeLabel} publications found across ${dateLabel} after relevance filtering.</span>`;
       return;
     }
     const validPmids=new Set(papers.map(p=>String(p.uid)));
@@ -9537,12 +9549,12 @@ async function fetchPubMed(days=7) {
   } catch(e) {
     console.error('PubMed search failed', e);
     const isLocal=location.protocol==='file:';
-    statusEl.innerHTML=`<span style="color:var(--text-muted)">⚠️ PubMed could not complete this search${isLocal?' because this page is opened as a local file':'. The '+days+'-day value is valid; PubMed or the current network may be temporarily limiting browser requests'}. ${isLocal?'Upload to GitHub Pages or use a local server.':'You can retry or open the same search directly on PubMed.'}</span>`;
+    statusEl.innerHTML=`<span style="color:var(--text-muted)">⚠️ PubMed could not complete this search${isLocal?' because this page is opened as a local file':'. The '+(hasDateLimit?searchDays+'-day':'no-date-limit')+' search is valid; PubMed or the current network may be temporarily limiting browser requests'}. ${isLocal?'Upload to GitHub Pages or use a local server.':'You can retry or open the same search directly on PubMed.'}</span>`;
     resultsEl.innerHTML=`
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-size:13px">
         <strong style="color:var(--text)">The database and your entered days were not changed.</strong>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-          <button class="btn btn-primary" onclick="fetchPubMed(${Math.floor(Number(days))})">Retry this search</button>
+          <button class="btn btn-primary" onclick="fetchPubMed(${searchDays})">Retry this search</button>
           <a href="${directSearchUrl}" target="_blank" class="btn btn-secondary">Open this exact search on PubMed</a>
         </div>
         <div style="margin-top:10px;color:var(--text-muted);line-height:1.6">If direct PubMed opens but the in-page retry still fails, use Import by PMID while the browser request limit clears.</div>
@@ -15544,7 +15556,7 @@ init=function(){
     titleInput.addEventListener('keydown',event=>{
       if(event.key==='Enter'){
         event.preventDefault();
-        fetchPubMedCustomDays();
+        fetchPubMed(0);
       }
     });
   }
@@ -15734,7 +15746,7 @@ const CTM_PRODUCT_LABELS={
   'cryoablation':'Cryoablation','dc-bead':'DC Bead','deb-competitor':'DEB Competitor','y90-resin':'Y90 Resin','y90-glass':'Y90 Glass','y90-both':'Y90 Both','y90-na':'Y90 N/A'
 };
 const CTM_APAC_COUNTRIES=new Set([
-  'Australia','Bangladesh','Brunei Darussalam','Cambodia','China','Hong Kong','India','Indonesia','Japan','Korea, Republic of','South Korea','Macao','Malaysia','Myanmar','Nepal','New Zealand','Pakistan','Philippines','Singapore','Sri Lanka','Taiwan','Thailand','Vietnam'
+  'American Samoa','Australia','Bangladesh','Bhutan','Brunei Darussalam','Cambodia','China','Cook Islands','Fiji','French Polynesia','Guam','Hong Kong','India','Indonesia','Japan','Kiribati','Korea, Republic of','South Korea','Lao People’s Democratic Republic','Lao People\'s Democratic Republic','Laos','Macao','Malaysia','Maldives','Marshall Islands','Micronesia, Federated States of','Mongolia','Myanmar','Nepal','New Caledonia','New Zealand','Northern Mariana Islands','Pakistan','Palau','Papua New Guinea','Philippines','Samoa','Singapore','Solomon Islands','Sri Lanka','Taiwan','Thailand','Timor-Leste','Tonga','Vanuatu','Vietnam'
 ]);
 let ctmAllTrials=[];
 let ctmFilteredTrials=[];
@@ -15746,6 +15758,7 @@ function ctmDateValue(value){const n=Date.parse(value||'');return Number.isFinit
 function ctmToday(){return new Date().toISOString().slice(0,10);}
 function ctmEscape(value){return htmlSafe(String(value??''));}
 function ctmUnique(values){return [...new Set((values||[]).filter(Boolean))];}
+function ctmHasApacSite(countries){return (countries||[]).some(country=>CTM_APAC_COUNTRIES.has(String(country||'').trim()));}
 function ctmStatusLabel(value){return String(value||'Not specified').replaceAll('_',' ').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 function ctmStatusClass(value){const s=String(value||'').toUpperCase();if(s==='RECRUITING'||s==='NOT_YET_RECRUITING'||s==='ENROLLING_BY_INVITATION')return'recruiting';if(s==='COMPLETED')return'completed';if(s==='ACTIVE_NOT_RECRUITING')return'active';if(/TERMINATED|WITHDRAWN|SUSPENDED/.test(s))return'stopped';return'';}
 function ctmScopeQuery(scope){
@@ -15799,7 +15812,7 @@ function ctmParseStudy(study){
     enrollment:Number(design.enrollmentInfo?.count||0),enrollmentType:design.enrollmentInfo?.type||'',
     leadSponsor:sponsor.leadSponsor?.name||'',sponsorClass:sponsor.leadSponsor?.class||'',collaborators,
     conditions,interventions,primaryOutcomes,
-    countries,facilities,siteCount:locations.length,isApac:countries.some(c=>CTM_APAC_COUNTRIES.has(c)),isMultinational:countries.length>1,
+    countries,facilities,siteCount:locations.length,isApac:ctmHasApacSite(countries),isMultinational:countries.length>1,
     hasResults:Boolean(study?.hasResults||study?.resultsSection),products,
     url:`https://clinicaltrials.gov/study/${id.nctId||''}`,
     source:'ClinicalTrials.gov'
@@ -15816,6 +15829,7 @@ function ctmMergeMonitoring(rows,{updateBaseline=true,preserveFlags=false}={}){
   const snapshots=ctmReadJson(CTM_STORAGE.snapshots,{}), hadBaseline=Object.keys(snapshots).length>0;
   const watch=ctmReadJson(CTM_STORAGE.watch,{});
   rows.forEach(t=>{
+    t.isApac=ctmHasApacSite(t.countries);
     const snap=ctmSnapshot(t), prev=snapshots[t.nctId];
     if(!preserveFlags||typeof t.isNew!=='boolean')t.isNew=hadBaseline&&!prev;
     if(!preserveFlags||!Array.isArray(t.changes))t.changes=ctmCompareSnapshot(prev,snap);
@@ -15884,12 +15898,13 @@ function ctmPopulateFilters(){
 function ctmApplyFilters(){
   const text=(document.getElementById('ctm-filter-text')?.value||'').toLowerCase();
   const status=document.getElementById('ctm-filter-status')?.value||'',phase=document.getElementById('ctm-filter-phase')?.value||'';
-  const product=document.getElementById('ctm-filter-product')?.value||'',change=document.getElementById('ctm-filter-change')?.value||'';
+  const product=document.getElementById('ctm-filter-product')?.value||'',apac=document.getElementById('ctm-filter-apac')?.value||'',change=document.getElementById('ctm-filter-change')?.value||'';
   const sort=document.getElementById('ctm-sort')?.value||'updated-desc';
   ctmFilteredTrials=ctmAllTrials.filter(t=>{
     const w=ctmReadJson(CTM_STORAGE.watch,{})[t.nctId]||t.watch||{};
     const hay=[t.nctId,t.title,t.officialTitle,t.leadSponsor,(t.collaborators||[]).join(' '),(t.conditions||[]).join(' '),(t.interventions||[]).join(' '),(t.countries||[]).join(' ')].join(' ').toLowerCase();
     if(text&&!hay.includes(text))return false;if(status&&t.status!==status)return false;if(phase&&!t.phases.includes(phase))return false;if(product&&!t.products.includes(product))return false;
+    if(apac==='yes'&&!t.isApac)return false;if(apac==='no'&&t.isApac)return false;
     if(change==='new'&&!t.isNew)return false;if(change==='changed'&&!t.isChanged)return false;if(change==='watch'&&!w.starred)return false;
     return true;
   });
@@ -15940,7 +15955,7 @@ function ctmToggleStar(nctId){
   const store=ctmSimpleWatchStore(),previous=store[nctId]||{},current={starred:!previous.starred,createdAt:previous.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
   store[nctId]=current;ctmWriteJson(CTM_STORAGE.watch,store);ctmRender();showToast(current.starred?'★ Added to Watchlist — click “View Watchlist” to open it later.':'☆ Removed from Watchlist.','success');
 }
-function ctmClearFilters(){['ctm-filter-text','ctm-filter-status','ctm-filter-phase','ctm-filter-product','ctm-filter-change'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});const s=document.getElementById('ctm-sort');if(s)s.value='updated-desc';ctmApplyFilters();}
+function ctmClearFilters(){['ctm-filter-text','ctm-filter-status','ctm-filter-phase','ctm-filter-product','ctm-filter-apac','ctm-filter-change'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});const s=document.getElementById('ctm-sort');if(s)s.value='updated-desc';ctmApplyFilters();}
 async function ctmLoadSavedView(){
   const watch=ctmReadJson(CTM_STORAGE.watch,{}),ids=Object.entries(watch).filter(([,v])=>v.starred).map(([id])=>id);
   if(!ids.length){showToast('Your clinical trial watchlist is empty.','info');return;}
