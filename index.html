@@ -9483,6 +9483,8 @@ async function fetchPubMed(days=0) {
     const validPmids=new Set(papers.map(p=>String(p.uid)));
     Object.keys(pmcMap).forEach(k=>{ if(!validPmids.has(String(k))) delete pmcMap[k]; });
     const pmcCount=Object.keys(pmcMap).length;
+    const excludedByRelevance=Math.max(ids.length-papers.length,0);
+    const olderMatchesNotLoaded=Math.max(totalFound-ids.length,0);
     lastPubMedSearchResults = papers.map(paper => {
       const pmid=paper.uid;
       const title=paper.title?.replace(/<[^>]+>/g,'')||'Unknown Title';
@@ -9501,9 +9503,10 @@ async function fetchPubMed(days=0) {
     }
 
     statusEl.innerHTML=`<span class="pulse-dot" style="background:var(--accent3)"></span>
-      <span style="color:var(--accent3);margin-left:8px">✓ ${papers.length}${totalFound>papers.length?' of '+totalFound:''} ${scopeLabel} papers loaded · 
-      <span style="color:#4cca5a">🟢 ${pmcCount} with FREE full text on PMC</span> · 
-      ${papers.length-pmcCount} paywalled</span>`;
+      <span style="color:var(--accent3);margin-left:8px">✓ ${papers.length} relevant ${scopeLabel} papers loaded · 
+      ${excludedByRelevance} excluded by relevance screening · 
+      <span style="color:#17864f">${pmcCount} with free PMC full text</span> · 
+      ${papers.length-pmcCount} without PMC full text${olderMatchesNotLoaded?` · ${olderMatchesNotLoaded} older PubMed matches not loaded (newest ${ids.length} screened)`:''}</span>`;
 
     resultsEl.innerHTML=papers.map(paper=>{
       const pmid=paper.uid;
