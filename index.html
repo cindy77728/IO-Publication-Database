@@ -2331,7 +2331,7 @@ html body.calibre-theme,html body.calibre-theme *{
 <!-- ═══ MODALS ═══ -->
 <div class="modal-overlay" id="form-modal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('form-modal')">×</button>
+    <p id="access-form-status" role="status" aria-live="polite" style="padding:10px;background:#eff6ff;color:#174d90;font-size:14px">Automatic saving is on. Enter a title and year; changes save after you pause typing. Manual save is also available.</p><button class="modal-close" onclick="closeModal('form-modal')">×</button>
     <h2 id="modal-title">📄 Add Publication</h2>
     <div class="form-grid">
       <div class="form-group"><label>Year *</label><input type="number" id="f-year" min="1990" max="2099" placeholder="2024"></div>
@@ -2415,8 +2415,8 @@ html body.calibre-theme,html body.calibre-theme *{
       <div class="form-group full"><label>Notes</label><textarea id="f-notes" style="min-height:50px" placeholder="Study design, limitations, personal notes…"></textarea></div>
     </div>
     <div class="form-actions">
-      <button class="btn btn-secondary" onclick="closeModal('form-modal')">Cancel</button>
-      <button class="btn btn-primary" onclick="savePublication()">Save Publication</button>
+      <button class="btn btn-secondary" onclick="closeModal('form-modal')">Close</button>
+      <button class="btn btn-primary" onclick="savePublication()">Save now &amp; close</button>
     </div>
   </div>
 </div>
@@ -15933,6 +15933,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   let dirty = false, busy = false, initial = false, changeCounter = 0, refreshing = null;
   let booting = true, lastFocus = null;
   let autoTimer = null, autoPaused = false;
+  let formTimer = null, formPending = false, formBaseline = '', formTracking = false;
   function scheduleSave() {
     clearTimeout(autoTimer);
     if (!initial && dirty && !busy && !autoPaused && canEdit()) autoTimer=setTimeout(()=>publish(true),700);
@@ -15940,7 +15941,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   const $ = id => document.getElementById(id);
   const canEdit = () => configured && ready && (role === 'admin' || role === 'editor') && (!initial || role === 'admin');
   const notify = (text, type='info') => showToast(text, type);
-  function message(text) { $('access-message').textContent = text; }
+  function message(text) {
+    const shown=formPending && text.startsWith('Saved ✓') ? 'Saving form changes…' : text;
+    $('access-message').textContent = shown;
+    const formStatus=$('access-form-status'); if(formStatus) formStatus.textContent=shown;
+  }
   function ui() {
     document.documentElement.dataset.ioeRole = canEdit() ? role : 'viewer';
     $('access-role').textContent = canEdit() ? (role === 'admin' ? 'Admin' : 'Editor') : 'View only';
@@ -16079,7 +16084,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
     finally{$('access-password').value='';$('access-login').disabled=false;ui();}
   };
   $('access-signout').onclick=async()=>{
-    if (dirty && !confirm('You have unpublished changes. Export your draft first if you want to keep it. Sign out and discard this tab’s draft?')) return;
+    if ((dirty || formPending) && !confirm('You have unpublished changes. Export your draft first if you want to keep it. Sign out and discard this tab’s draft?')) return;
     const token=session?.access_token;
     saveSession(null); role='viewer'; dirty=false; ui();
     document.querySelectorAll('.modal-overlay.open').forEach(el=>el.classList.remove('open'));
@@ -16110,7 +16115,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
     }catch(e){$('access-team-status').textContent=e.message;}
     finally{$('access-authorize').disabled=false;}
   };
-  $('access-save').onclick=()=>publish(false);
+  $('access-save').onclick=()=>{
+    if(formIsOpen() && !commitForm(true))return;
+    return publish(false);
+  };
   $('access-draft-export').onclick=()=>exportJSON();
   window.importJSON=function(text){
     try{
@@ -16151,9 +16159,93 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   window.save=function(){originalSave();markDirty();};
   const originalSaveCategories=saveCategories;
   window.saveCategories=function(){originalSaveCategories();markDirty();};
+  // Save publication fields without closing the form or moving the cursor.
+  const formFields={year:'f-year',title:'f-title',country:'f-country',authors:'f-authors',journal:'f-journal',
+    url:'f-url',pmcid:'f-pmcid',pdfUrl:'f-pdfurl',pdfFileName:'f-pdffilename',fullTextStatus:'f-fulltextstatus',
+    fullTextNote:'f-fulltextnote',results:'f-results',findings:'f-findings',notes:'f-notes',abstract:'f-abstract',
+    reviewStatus:'f-reviewstatus',primaryCategory:'f-primarycategory',journalImpactFactor:'f-jif',journalImpactFactorYear:'f-jifyear'};
+  function formIsOpen(){return Boolean($('form-modal')?.classList.contains('open'));}
+  function readForm(){
+    const fields={};
+    for(const [key,id] of Object.entries(formFields)) fields[key]=String($(id)?.value || '');
+    fields.product=document.querySelector('input[name="product"]:checked')?.value || 'y90-na';
+    fields.categories=[...formSecondaryCategories];
+    fields.pdfData=selectedPdfData;
+    return fields;
+  }
+  function commitForm(manual=false){
+    clearTimeout(formTimer);
+    if(!canEdit() || !formIsOpen())return false;
+    const fields=readForm(), signature=JSON.stringify(fields);
+    if(signature===formBaseline && !formPending)return true;
+    const year=Number(fields.year), title=fields.title.trim();
+    if(!title || !Number.isInteger(year) || year<1000 || year>9999){
+      formPending=true;
+      message('Not saved yet: enter a title and a valid four-digit publication year.');
+      if(manual)notify('Title and a four-digit year are required.','error');
+      return false;
+    }
+    const index=editingId===null ? -1 : publications.findIndex(p=>p.id===editingId);
+    if(editingId!==null && index<0){message('This publication is no longer available. Export your draft before reloading.');return false;}
+    let id=editingId;
+    if(id===null){id=Date.now();while(publications.some(p=>p.id===id))id++;}
+    const old=index<0?{}:publications[index];
+    const primary=fields.primaryCategory.trim();
+    const pub={...old,...fields,id,year,title,product:normalizeProductCode(fields.product),
+      primaryCategory:primary,categories:[...new Set([primary,...fields.categories].filter(Boolean))]};
+    pub.journalImpactFactor=validJIFNumber(fields.journalImpactFactor);
+    pub.journalImpactFactorYear=fields.journalImpactFactorYear ? Number(fields.journalImpactFactorYear) : '';
+    if(index<0)publications.push(pub);else publications[index]=pub;
+    editingId=id;formPending=false;formBaseline=signature;
+    for(const category of pub.categories)if(!ALL_CATEGORIES.includes(category))ALL_CATEGORIES.push(category);
+    saveCategories();save();
+    // Refresh the library behind the form; do not rebuild form widgets.
+    buildCategoryStrip();populateCategoryFilter();populateYearFilter();populateCountryFilter();applyFilters();renderDashboard();
+    return true;
+  }
+  function watchForm(){
+    if(!canEdit() || !formIsOpen()){formTracking=false;return;}
+    const signature=JSON.stringify(readForm());
+    if(!formTracking){formTracking=true;formBaseline=signature;return;}
+    if(signature!==formBaseline){
+      formPending=true;message(autoPaused?'Automatic saving is paused. Keep this tab open and resolve the save error.':'Saving form changes…');
+      clearTimeout(formTimer);formTimer=setTimeout(()=>commitForm(),1500);
+    }
+  }
+  for(const name of ['openAddModal','openEditModal','importFromPubMed']){
+    const original=window[name];if(typeof original!=='function')continue;
+    window[name]=function(...args){
+      if(formIsOpen() && formPending && !commitForm(true))return;
+      const result=original.apply(this,args);
+      const baseline=()=>{if(formIsOpen()){formBaseline=JSON.stringify(readForm());formTracking=true;formPending=false;}};
+      if(result?.then)return result.then(value=>{baseline();return value;});
+      baseline();return result;
+    };
+  }
+  document.addEventListener('input',event=>{if(event.target.closest?.('#form-modal'))watchForm();});
+  document.addEventListener('change',event=>{if(event.target.closest?.('#form-modal'))watchForm();});
+  // Catch changes inserted by AI/PDF extraction and category chip controls.
+  setInterval(watchForm,3000);
+  window.savePublication=function(){
+    if(!commitForm(true))return;
+    closeModal('form-modal');
+    return publish(false);
+  };
+  const previousCloseModal=closeModal;
+  window.closeModal=function(id){
+    if(id==='form-modal' && formIsOpen()){
+      const changed=JSON.stringify(readForm())!==formBaseline;
+      if(changed && !commitForm(true)){
+        if(!confirm('This form cannot be saved without a title and valid year. Discard the incomplete form changes and close?'))return;
+        formPending=false;
+      }
+      formTracking=false;clearTimeout(formTimer);
+    }
+    return previousCloseModal(id);
+  };
   // Startup migrations are used only for the legacy snapshot, never shared data.
   window.maybeAutoUpdateJIF=()=>{};
-  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  window.addEventListener('beforeunload',event=>{if(dirty || formPending){event.preventDefault();event.returnValue='';}});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden && session) checkRole().catch(()=>{});});
   setInterval(()=>{if(session)checkRole().catch(()=>{});},60000);
   async function start(){
