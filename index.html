@@ -1,6 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ioe-role="viewer">
 <head>
+<!-- Configure only after running database-setup.sql. Never put a secret/service-role key here. -->
+<script>
+window.IOE_ACCESS_CONFIG = { url: "", publishableKey: "" };
+// The shared service is authoritative. Drafts live in this tab until published/exported.
+const ioeLocalStore = (() => { const values=new Map(); return {
+ getItem:key=>values.has(key)?values.get(key):null,
+ setItem:(key,value)=>values.set(key,String(value)), removeItem:key=>values.delete(key)
+}; })();
+</script>
+<style>
+[hidden]{display:none!important}
+#github-save-btn,#github-settings-btn,#autosave-pill,#github-settings-modal{display:none!important}
+html[data-ioe-role="viewer"] .edit-btn,html[data-ioe-role="viewer"] .del-btn,
+html[data-ioe-role="viewer"] [data-editor-control],
+html[data-ioe-role="viewer"] [onclick*="openAddModal"],
+html[data-ioe-role="viewer"] [onclick*="openCategoryManager"],
+html[data-ioe-role="viewer"] [onclick*="openJIFManager"],
+html[data-ioe-role="viewer"] [onclick*="setPdfFolderUrl"]{display:none!important}
+.access-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 0;font-size:14px}
+#access-role{border:1px solid #a6bee4;color:#174d90;background:#eff6ff;border-radius:20px;padding:5px 12px;font-weight:700;white-space:nowrap}
+#access-message{flex:1 1 250px;color:#355071;font-size:14px;line-height:1.45}
+dialog.access-dialog{border:1px solid #bbcbe1;border-radius:14px;padding:24px;width:min(520px,calc(100% - 32px));max-height:85vh;overflow:auto;color:#18334d;background:white;box-shadow:0 24px 70px #102d4940}
+dialog.access-dialog::backdrop{background:#122c4966}
+.access-dialog h2{font-size:22px;margin:0 0 16px}.access-dialog p{font-size:15px;line-height:1.5}
+.access-dialog label{display:block;margin:14px 0 6px;font-size:15px}
+.access-dialog input{display:block;width:100%;box-sizing:border-box;font-size:16px;padding:11px;border:1px solid #8398b0;border-radius:6px;color:#142c45;background:white}
+.access-dialog button{margin-top:12px;font-size:14px}.access-close{float:right;margin:0!important}
+.access-member{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #dce4ee;font-size:14px;overflow-wrap:anywhere}
+.access-member span{min-width:0}.access-member button{flex-shrink:0;margin:0}
+html[data-ioe-role="admin"] #access-role,html[data-ioe-role="editor"] #access-role{background:#e8f6f1;border-color:#75b69f;color:#17644b}
+</style>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IO&amp;E Database</title>
@@ -2035,6 +2067,17 @@ html body.calibre-theme,html body.calibre-theme *{
       </button>
     </div>
   </div>
+
+<div class="access-strip" aria-label="Database access">
+  <span id="access-role">View only</span>
+  <span id="access-message" role="status" aria-live="polite">Loading the public library…</span>
+  <button class="btn btn-secondary" id="access-signin">Editor sign-in</button>
+  <button class="btn btn-secondary" id="access-team" hidden>Manage editors</button>
+  <label class="btn btn-secondary" data-editor-control>Import JSON<input type="file" accept=".json,application/json" onchange="importJSONFile(this)" style="display:none"></label>
+  <button class="btn btn-green" id="access-save" hidden>Publish changes</button>
+  <button class="btn btn-secondary" id="access-draft-export" hidden>Export unsaved draft</button>
+  <button class="btn btn-secondary" id="access-signout" hidden>Sign out</button>
+</div>
 </header>
 
 <div class="tabs">
@@ -2523,17 +2566,17 @@ const DEFAULT_CATEGORIES = [
   'TN ratio',
   'TRACE'
 ];
-let ALL_CATEGORIES = JSON.parse(localStorage.getItem('y90categories') || 'null') || [...DEFAULT_CATEGORIES];
+let ALL_CATEGORIES = JSON.parse(ioeLocalStore.getItem('y90categories') || 'null') || [...DEFAULT_CATEGORIES];
 function saveCategories(){
   ALL_CATEGORIES = [...new Set(ALL_CATEGORIES.map(c => String(c).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  localStorage.setItem('y90categories', JSON.stringify(ALL_CATEGORIES));
+  ioeLocalStore.setItem('y90categories', JSON.stringify(ALL_CATEGORIES));
 }
 saveCategories();
 
 // ══════════════════════════════════════════════════════════ DATA
-let publications = JSON.parse(localStorage.getItem('y90db') || '[]');
+let publications = JSON.parse(ioeLocalStore.getItem('y90db') || '[]');
 publications = publications.map(p => ({...p, reviewStatus: p.reviewStatus || p.review || 'AI Draft'}));
-let pdfFolderUrl = localStorage.getItem('y90PdfFolderUrl') || '';
+let pdfFolderUrl = ioeLocalStore.getItem('y90PdfFolderUrl') || '';
 let editingId = null, currentView = 'table', activeCategory = '';
 let formOpenedFromTab = 'library';
 let sortField = 'year', sortDir = 'desc';
@@ -3105,7 +3148,7 @@ function mergeImportedPapers20260506(){
     existingTitles.add(titleKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapers20260506();
 
@@ -3423,7 +3466,7 @@ function mergeImportedPapersDosimetry20260506(){
     existingTitles.add(titleKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersDosimetry20260506();
 
@@ -3914,7 +3957,7 @@ function mergeImportedPapersGlassResin20260506(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersGlassResin20260506();
 
@@ -4171,7 +4214,7 @@ function mergeImportedPapersHypoHyper20260506(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersHypoHyper20260506();
 
@@ -4414,7 +4457,7 @@ function mergeImportedPapersImmunotherapy20260506(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersImmunotherapy20260506();
 
@@ -4451,7 +4494,7 @@ function normalizeImmunotherapyCategoryHierarchy20260506(){
   ].forEach(c => { if(!ALL_CATEGORIES.includes(c)) ALL_CATEGORIES.push(c); });
 
   saveCategories();
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 normalizeImmunotherapyCategoryHierarchy20260506();
 
@@ -4730,7 +4773,7 @@ function mergeImportedPapersIpaImmuno220260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersIpaImmuno220260507();
 
@@ -5295,7 +5338,7 @@ function mergeImportedPapersMappingFailed20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersMappingFailed20260507();
 
@@ -5689,7 +5732,7 @@ function mergeImportedPapersProactif20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersProactif20260507();
 
@@ -6060,7 +6103,7 @@ function compactCategories20260507(){
   CURATED_CATEGORIES_COMPACT_20260507.forEach(c => used.add(c));
   ALL_CATEGORIES = [...used].filter(Boolean).sort((a,b)=>a.localeCompare(b));
   saveCategories();
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 
 function mergeImportedPapersPvt20260507(){
@@ -6083,7 +6126,7 @@ function mergeImportedPapersPvt20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
   // Category compaction is applied after required-category mappings are initialized.
 }
 mergeImportedPapersPvt20260507();
@@ -6212,7 +6255,7 @@ function updateExistingRaserFromRadsegZip20260507(){
     }
     return p;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 
 function mergeImportedPapersRadseg20260507(){
@@ -6236,7 +6279,7 @@ function mergeImportedPapersRadseg20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
   // Category compaction is applied after required-category mappings are initialized.
 }
 mergeImportedPapersRadseg20260507();
@@ -6751,7 +6794,7 @@ function mergeImportedPapersRowan20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
   // Category compaction is applied after required-category mappings are initialized.
 }
 mergeImportedPapersRowan20260507();
@@ -8500,11 +8543,11 @@ function mergeImportedPapersLabMetastases20260507(){
     if(fileKey) existingFiles.add(fileKey);
     changed=true;
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersLabMetastases20260507();
 
-function save() { localStorage.setItem('y90db', JSON.stringify(publications)); }
+function save() { ioeLocalStore.setItem('y90db', JSON.stringify(publications)); }
 
 
 // ══════════════════════════════════════════════════════════
@@ -8732,7 +8775,7 @@ function resetAllSubcategoriesNow(){
 function autoResetOldSubcategoriesOnce(){
   // Disabled: this function was forcibly remapping and dropping user-defined categories
   // (e.g. HCC, Key Study, Real-world evidence) on every fresh load. Categories are now
-  // preserved as-is from publications.json and localStorage.
+  // preserved as-is from publications.json and ioeLocalStore.
   return;
 }
 
@@ -8802,7 +8845,7 @@ function setPdfFolderUrl(){
   const next = prompt('Paste your OneDrive folder sharing link. This will be used when a paper has a PDF file name but no individual PDF link.', current);
   if(next === null) return;
   pdfFolderUrl = next.trim();
-  localStorage.setItem('y90PdfFolderUrl', pdfFolderUrl);
+  ioeLocalStore.setItem('y90PdfFolderUrl', pdfFolderUrl);
   showToast(pdfFolderUrl ? 'PDF folder link saved.' : 'PDF folder link cleared.', 'success');
   applyFilters();
 }
@@ -10888,14 +10931,14 @@ function importJSON(s){
     if(!confirm('Import will replace the current local database in this browser. Continue?')) return;
     publications = importedPublications.map(p => ({...p, reviewStatus: p.reviewStatus || p.review || 'AI Draft'}));
     if(Array.isArray(importedCategories)) ALL_CATEGORIES = importedCategories;
-    if(typeof data.pdfFolderUrl === 'string'){ pdfFolderUrl = data.pdfFolderUrl; localStorage.setItem('y90PdfFolderUrl', pdfFolderUrl); }
+    if(typeof data.pdfFolderUrl === 'string'){ pdfFolderUrl = data.pdfFolderUrl; ioeLocalStore.setItem('y90PdfFolderUrl', pdfFolderUrl); }
     if(!Array.isArray(data) && data.clinicalTrialMonitor){
       const tm=data.clinicalTrialMonitor;
-      if(tm.watch && typeof tm.watch==='object') localStorage.setItem('ioeClinicalTrialWatchV1',JSON.stringify(tm.watch));
-      if(tm.snapshots && typeof tm.snapshots==='object') localStorage.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(tm.snapshots));
-      if(tm.lastSearch && typeof tm.lastSearch==='object') localStorage.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(tm.lastSearch));
-      if(Array.isArray(tm.lastResults)) localStorage.setItem('ioeClinicalTrialLastResultsV1',JSON.stringify(tm.lastResults));
-      localStorage.setItem('ioeClinicalTrialLocalModifiedAt',new Date().toISOString());
+      if(tm.watch && typeof tm.watch==='object') ioeLocalStore.setItem('ioeClinicalTrialWatchV1',JSON.stringify(tm.watch));
+      if(tm.snapshots && typeof tm.snapshots==='object') ioeLocalStore.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(tm.snapshots));
+      if(tm.lastSearch && typeof tm.lastSearch==='object') ioeLocalStore.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(tm.lastSearch));
+      if(Array.isArray(tm.lastResults)) ioeLocalStore.setItem('ioeClinicalTrialLastResultsV1',JSON.stringify(tm.lastResults));
+      ioeLocalStore.setItem('ioeClinicalTrialLocalModifiedAt',new Date().toISOString());
     }
     // Add any categories found in imported publications so nothing disappears from filters.
     publications.forEach(p => (p.categories || []).forEach(c => { if(c && !ALL_CATEGORIES.includes(c)) ALL_CATEGORIES.push(c); }));
@@ -11668,8 +11711,8 @@ function enforceRequiredFolderCategories20260507(){
     return {...p, categories:newCats};
   });
   ALL_CATEGORIES = [...REQUIRED_FOLDER_CATEGORIES_20260507];
-  localStorage.setItem('y90categories', JSON.stringify(ALL_CATEGORIES));
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  ioeLocalStore.setItem('y90categories', JSON.stringify(ALL_CATEGORIES));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 // Disabled in v5.1: do not force category list back to old required folder categories.
 // enforceRequiredFolderCategories20260507();
@@ -11684,7 +11727,7 @@ function migratePrimaryCategories20260507(){
     if((p.primaryCategory || '') !== primary || JSON.stringify(p.categories || []) !== JSON.stringify(orderedCats)) changed = true;
     return {...p, categories: orderedCats, primaryCategory: primary};
   });
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 migratePrimaryCategories20260507();
 
@@ -12934,7 +12977,7 @@ function mergeImportedPapersSafetyResection20260507(){
     changed=true;
   });
   saveCategories();
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersSafetyResection20260507();
 
@@ -13206,7 +13249,7 @@ function mergeImportedPapersResin20260507(){
     changed=true;
   });
   saveCategories();
-  if(changed) localStorage.setItem('y90db', JSON.stringify(publications));
+  if(changed) ioeLocalStore.setItem('y90db', JSON.stringify(publications));
 }
 mergeImportedPapersResin20260507();
 
@@ -13783,8 +13826,8 @@ function ensureBundledPublicationRecords20260507(){
 
   if(changed){
     try {
-      localStorage.setItem('y90db', JSON.stringify(publications));
-      localStorage.setItem('y90dbBundledSyncVersion', '2026-05-07-all-imports-force-sync-v1');
+      ioeLocalStore.setItem('y90db', JSON.stringify(publications));
+      ioeLocalStore.setItem('y90dbBundledSyncVersion', '2026-05-07-all-imports-force-sync-v1');
     } catch(e) {
       console.warn('Bundled publications were merged for this session, but could not be saved to localStorage:', e);
     }
@@ -13804,13 +13847,13 @@ async function loadWeeklyPubMedJSON(){
     const remoteTrialMonitor = !Array.isArray(payload) ? payload.clinicalTrialMonitor : null;
     if(remoteTrialMonitor && typeof remoteTrialMonitor === 'object'){
       const remoteAt=Date.parse(payload.savedAt||'')||0;
-      const localAt=Date.parse(localStorage.getItem('ioeClinicalTrialLocalModifiedAt')||'')||0;
-      const hasLocal=Boolean(localStorage.getItem('ioeClinicalTrialWatchV1')||localStorage.getItem('ioeClinicalTrialSnapshotsV1'));
+      const localAt=Date.parse(ioeLocalStore.getItem('ioeClinicalTrialLocalModifiedAt')||'')||0;
+      const hasLocal=Boolean(ioeLocalStore.getItem('ioeClinicalTrialWatchV1')||ioeLocalStore.getItem('ioeClinicalTrialSnapshotsV1'));
       if(!hasLocal || remoteAt>=localAt){
-        if(remoteTrialMonitor.watch && typeof remoteTrialMonitor.watch==='object') localStorage.setItem('ioeClinicalTrialWatchV1',JSON.stringify(remoteTrialMonitor.watch));
-        if(remoteTrialMonitor.snapshots && typeof remoteTrialMonitor.snapshots==='object') localStorage.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(remoteTrialMonitor.snapshots));
-        if(remoteTrialMonitor.lastSearch && typeof remoteTrialMonitor.lastSearch==='object') localStorage.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(remoteTrialMonitor.lastSearch));
-        localStorage.setItem('ioeClinicalTrialLastSyncedAt',payload.savedAt||new Date().toISOString());
+        if(remoteTrialMonitor.watch && typeof remoteTrialMonitor.watch==='object') ioeLocalStore.setItem('ioeClinicalTrialWatchV1',JSON.stringify(remoteTrialMonitor.watch));
+        if(remoteTrialMonitor.snapshots && typeof remoteTrialMonitor.snapshots==='object') ioeLocalStore.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(remoteTrialMonitor.snapshots));
+        if(remoteTrialMonitor.lastSearch && typeof remoteTrialMonitor.lastSearch==='object') ioeLocalStore.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(remoteTrialMonitor.lastSearch));
+        ioeLocalStore.setItem('ioeClinicalTrialLastSyncedAt',payload.savedAt||new Date().toISOString());
       }
     }
     const incoming = Array.isArray(payload) ? payload : (payload.publications || []);
@@ -13886,7 +13929,7 @@ async function loadWeeklyPubMedJSON(){
 
     if(changed){
       saveCategories();
-      localStorage.setItem('y90db', JSON.stringify(publications));
+      ioeLocalStore.setItem('y90db', JSON.stringify(publications));
       if(typeof showToast === 'function') showToast('✅ Weekly PubMed updates loaded from GitHub', 'success');
     }
     return changed;
@@ -14062,8 +14105,8 @@ function stabilizeDatasetBeforeInit(){
   publications.forEach(p => (p.categories || []).forEach(c => { if(c && !ALL_CATEGORIES.includes(c)) ALL_CATEGORIES.push(c); }));
   saveCategories();
   try {
-    localStorage.setItem('y90db', JSON.stringify(publications));
-    localStorage.setItem('y90dbDatasetVersion', Y90_STABLE_DATASET_VERSION);
+    ioeLocalStore.setItem('y90db', JSON.stringify(publications));
+    ioeLocalStore.setItem('y90dbDatasetVersion', Y90_STABLE_DATASET_VERSION);
   } catch(e) {
     console.warn('Could not save stabilized publication database:', e);
   }
@@ -14320,13 +14363,13 @@ async function loadGitHubPublicationsJsonAsSourceOfTruth(){
     const remoteTrialMonitor = !Array.isArray(data) ? data.clinicalTrialMonitor : null;
     if(remoteTrialMonitor && typeof remoteTrialMonitor==='object'){
       const remoteAt=Date.parse(data.savedAt||'')||0;
-      const localAt=Date.parse(localStorage.getItem('ioeClinicalTrialLocalModifiedAt')||'')||0;
-      const hasLocal=Boolean(localStorage.getItem('ioeClinicalTrialWatchV1')||localStorage.getItem('ioeClinicalTrialSnapshotsV1'));
+      const localAt=Date.parse(ioeLocalStore.getItem('ioeClinicalTrialLocalModifiedAt')||'')||0;
+      const hasLocal=Boolean(ioeLocalStore.getItem('ioeClinicalTrialWatchV1')||ioeLocalStore.getItem('ioeClinicalTrialSnapshotsV1'));
       if(!hasLocal||remoteAt>=localAt){
-        if(remoteTrialMonitor.watch && typeof remoteTrialMonitor.watch==='object') localStorage.setItem('ioeClinicalTrialWatchV1',JSON.stringify(remoteTrialMonitor.watch));
-        if(remoteTrialMonitor.snapshots && typeof remoteTrialMonitor.snapshots==='object') localStorage.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(remoteTrialMonitor.snapshots));
-        if(remoteTrialMonitor.lastSearch && typeof remoteTrialMonitor.lastSearch==='object') localStorage.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(remoteTrialMonitor.lastSearch));
-        localStorage.setItem('ioeClinicalTrialLastSyncedAt',data.savedAt||new Date().toISOString());
+        if(remoteTrialMonitor.watch && typeof remoteTrialMonitor.watch==='object') ioeLocalStore.setItem('ioeClinicalTrialWatchV1',JSON.stringify(remoteTrialMonitor.watch));
+        if(remoteTrialMonitor.snapshots && typeof remoteTrialMonitor.snapshots==='object') ioeLocalStore.setItem('ioeClinicalTrialSnapshotsV1',JSON.stringify(remoteTrialMonitor.snapshots));
+        if(remoteTrialMonitor.lastSearch && typeof remoteTrialMonitor.lastSearch==='object') ioeLocalStore.setItem('ioeClinicalTrialLastSearchV1',JSON.stringify(remoteTrialMonitor.lastSearch));
+        ioeLocalStore.setItem('ioeClinicalTrialLastSyncedAt',data.savedAt||new Date().toISOString());
       }
     }
     const incomingPublications = Array.isArray(data) ? data : data.publications;
@@ -14347,7 +14390,7 @@ async function loadGitHubPublicationsJsonAsSourceOfTruth(){
       }
       if(typeof data.pdfFolderUrl === 'string'){
         pdfFolderUrl = data.pdfFolderUrl;
-        localStorage.setItem('y90PdfFolderUrl', pdfFolderUrl);
+        ioeLocalStore.setItem('y90PdfFolderUrl', pdfFolderUrl);
       }
     } else {
       ALL_CATEGORIES = [];
@@ -14375,11 +14418,10 @@ async function bootY90Database(){
   const importedCryoCount = mergeCryoLiterature20260824();
   init();
   if(importedCryoCount){
-    setTimeout(()=>showToast(`✅ Added ${importedCryoCount} Cryoablation publications from the Excel library. Click ☁️ Save to GitHub to make them permanent.`, 'success'), 700);
+    // Legacy embedded records are used only as a fallback snapshot.
   }
 }
-if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bootY90Database,{once:true});
-else bootY90Database();
+// Boot is owned by the access controller below.
 
 // ══════════════════════════════════════════════════════════
 // ☁️ SAVE TO GITHUB — commits publications.json directly via GitHub API
@@ -14388,18 +14430,18 @@ else bootY90Database();
 
 function getGitHubSettings() {
   return {
-    token:  localStorage.getItem('y90ghToken')  || '',
-    owner:  localStorage.getItem('y90ghOwner')  || '',
-    repo:   localStorage.getItem('y90ghRepo')   || '',
-    branch: localStorage.getItem('y90ghBranch') || 'main',
+    token:  ioeLocalStore.getItem('y90ghToken')  || '',
+    owner:  ioeLocalStore.getItem('y90ghOwner')  || '',
+    repo:   ioeLocalStore.getItem('y90ghRepo')   || '',
+    branch: ioeLocalStore.getItem('y90ghBranch') || 'main',
   };
 }
 
 function saveGitHubSettings({ token, owner, repo, branch }) {
-  localStorage.setItem('y90ghToken',  token.trim());
-  localStorage.setItem('y90ghOwner',  owner.trim());
-  localStorage.setItem('y90ghRepo',   repo.trim());
-  localStorage.setItem('y90ghBranch', branch.trim() || 'main');
+  ioeLocalStore.setItem('y90ghToken',  token.trim());
+  ioeLocalStore.setItem('y90ghOwner',  owner.trim());
+  ioeLocalStore.setItem('y90ghRepo',   repo.trim());
+  ioeLocalStore.setItem('y90ghBranch', branch.trim() || 'main');
 }
 
 function openGitHubSettingsModal() {
@@ -14547,11 +14589,11 @@ function toggleMobileMenu(){
 // ☁️ SAVE TO GITHUB
 // ══════════════════════════════════════════════════════════
 function getGitHubSettings(){
-  return { token:localStorage.getItem('y90ghToken')||'', owner:localStorage.getItem('y90ghOwner')||'', repo:localStorage.getItem('y90ghRepo')||'', branch:localStorage.getItem('y90ghBranch')||'main' };
+  return { token:ioeLocalStore.getItem('y90ghToken')||'', owner:ioeLocalStore.getItem('y90ghOwner')||'', repo:ioeLocalStore.getItem('y90ghRepo')||'', branch:ioeLocalStore.getItem('y90ghBranch')||'main' };
 }
 function saveGitHubSettings({token,owner,repo,branch}){
-  localStorage.setItem('y90ghToken',token.trim()); localStorage.setItem('y90ghOwner',owner.trim());
-  localStorage.setItem('y90ghRepo',repo.trim()); localStorage.setItem('y90ghBranch',branch.trim()||'main');
+  ioeLocalStore.setItem('y90ghToken',token.trim()); ioeLocalStore.setItem('y90ghOwner',owner.trim());
+  ioeLocalStore.setItem('y90ghRepo',repo.trim()); ioeLocalStore.setItem('y90ghBranch',branch.trim()||'main');
 }
 function openGitHubSettingsModal(){
   const s=getGitHubSettings();
@@ -14592,7 +14634,7 @@ async function saveToGitHub(){
     }catch(e){ if(e.message.includes('Token')||e.message.includes('Repo')||e.message.includes('GitHub error')) throw e; }
     const putRes=await fetch(apiBase,{ method:'PUT', headers, body:JSON.stringify({ message:`Update publications.json — ${new Date().toLocaleString()}`, content:encoded, branch:s.branch, ...(fileSha?{sha:fileSha}:{}) }) });
     if(!putRes.ok){ const err=await putRes.json().catch(()=>({})); throw new Error(err.message||`GitHub API error ${putRes.status}`); }
-    localStorage.setItem('ioeClinicalTrialLastSyncedAt',savedAt);
+    ioeLocalStore.setItem('ioeClinicalTrialLastSyncedAt',savedAt);
     showToast('✅ Saved to GitHub! Publications and trial monitoring data are live.','success');
   }catch(e){
     alert('❌ Save failed:\n\n'+e.message);
@@ -14611,22 +14653,22 @@ function toggleMobileMenu(){
 
 // ══════════════════════════════════════════════════════════
 // GitHub Settings / Reset Token helper
-// Added to make token replacement explicit instead of forcing users to clear localStorage.
+// Added to make token replacement explicit instead of forcing users to clear ioeLocalStore.
 // ══════════════════════════════════════════════════════════
 function getGitHubSettings(){
   return {
-    token:  localStorage.getItem('y90ghToken')  || '',
-    owner:  localStorage.getItem('y90ghOwner')  || 'cindy77728',
-    repo:   localStorage.getItem('y90ghRepo')   || 'Y90-Publication-Database',
-    branch: localStorage.getItem('y90ghBranch') || 'main'
+    token:  ioeLocalStore.getItem('y90ghToken')  || '',
+    owner:  ioeLocalStore.getItem('y90ghOwner')  || 'cindy77728',
+    repo:   ioeLocalStore.getItem('y90ghRepo')   || 'Y90-Publication-Database',
+    branch: ioeLocalStore.getItem('y90ghBranch') || 'main'
   };
 }
 
 function saveGitHubSettings({token, owner, repo, branch}){
-  localStorage.setItem('y90ghToken',  (token  || '').trim());
-  localStorage.setItem('y90ghOwner',  (owner  || 'cindy77728').trim());
-  localStorage.setItem('y90ghRepo',   (repo   || 'Y90-Publication-Database').trim());
-  localStorage.setItem('y90ghBranch', (branch || 'main').trim() || 'main');
+  ioeLocalStore.setItem('y90ghToken',  (token  || '').trim());
+  ioeLocalStore.setItem('y90ghOwner',  (owner  || 'cindy77728').trim());
+  ioeLocalStore.setItem('y90ghRepo',   (repo   || 'Y90-Publication-Database').trim());
+  ioeLocalStore.setItem('y90ghBranch', (branch || 'main').trim() || 'main');
 }
 
 function openGitHubSettingsModal(){
@@ -14643,10 +14685,10 @@ function openGitHubSettingsModal(){
 }
 
 function resetGitHubTokenAndOpenSettings(){
-  localStorage.removeItem('y90ghToken');
-  if(!localStorage.getItem('y90ghOwner'))  localStorage.setItem('y90ghOwner',  'cindy77728');
-  if(!localStorage.getItem('y90ghRepo'))   localStorage.setItem('y90ghRepo',   'Y90-Publication-Database');
-  if(!localStorage.getItem('y90ghBranch')) localStorage.setItem('y90ghBranch', 'main');
+  ioeLocalStore.removeItem('y90ghToken');
+  if(!ioeLocalStore.getItem('y90ghOwner'))  ioeLocalStore.setItem('y90ghOwner',  'cindy77728');
+  if(!ioeLocalStore.getItem('y90ghRepo'))   ioeLocalStore.setItem('y90ghRepo',   'Y90-Publication-Database');
+  if(!ioeLocalStore.getItem('y90ghBranch')) ioeLocalStore.setItem('y90ghBranch', 'main');
   openGitHubSettingsModal();
   showToast('Old GitHub token cleared. Paste your new token, then save settings.', 'info');
 }
@@ -14829,7 +14871,7 @@ savePublication = function(){
         <input id="gh-branch" type="text" placeholder="main" style="width:100%;margin-top:6px">
       </label>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:6px">
-        <button class="btn btn-secondary" onclick="localStorage.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
+        <button class="btn btn-secondary" onclick="ioeLocalStore.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
         <button class="btn btn-secondary" onclick="closeModal('github-settings-modal')">Cancel</button>
         <button class="btn btn-green" onclick="saveGitHubSettingsFromForm()">Save Settings & Close</button>
       </div>
@@ -14866,7 +14908,7 @@ savePublication = function(){
         <input id="gh-branch" type="text" placeholder="main" style="width:100%;margin-top:6px">
       </label>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:6px">
-        <button class="btn btn-secondary" onclick="localStorage.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
+        <button class="btn btn-secondary" onclick="ioeLocalStore.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
         <button class="btn btn-secondary" onclick="closeModal('github-settings-modal')">Cancel</button>
         <button class="btn btn-green" onclick="saveGitHubSettingsFromForm()">Save Settings</button>
       </div>
@@ -14903,7 +14945,7 @@ savePublication = function(){
         <input id="gh-branch" type="text" placeholder="main" style="width:100%;margin-top:6px">
       </label>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:6px">
-        <button class="btn btn-secondary" onclick="localStorage.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
+        <button class="btn btn-secondary" onclick="ioeLocalStore.removeItem('y90ghToken'); document.getElementById('gh-token').value=''; showToast('GitHub token cleared. Paste a new token.', 'info')">Reset Token</button>
         <button class="btn btn-secondary" onclick="closeModal('github-settings-modal')">Cancel</button>
         <button class="btn btn-green" onclick="saveGitHubSettingsFromForm()">Save Settings</button>
       </div>
@@ -14941,161 +14983,7 @@ savePublication = function(){
 })();
 </script>
 
-<script>
-/* ══ AUTO-SAVE TO GITHUB ══
-   Runs every 10 minutes when GitHub settings are configured.
-   A silent background save — no button click needed.
-   Shows a live countdown pill in the header.
-*/
-(function() {
-  var AUTO_SAVE_INTERVAL = 10 * 60; // 10 minutes in seconds
-  var secondsLeft = AUTO_SAVE_INTERVAL;
-  var countdownTimer = null;
-  var pill = null;
-  var countdownEl = null;
-
-  function hasGitHubSettings() {
-    try {
-      var s = getGitHubSettings ? getGitHubSettings() : null;
-      return s && s.token && s.owner && s.repo;
-    } catch(e) { return false; }
-  }
-
-  function formatTime(secs) {
-    var m = Math.floor(secs / 60);
-    var s = secs % 60;
-    return m + ':' + (s < 10 ? '0' : '') + s;
-  }
-
-  function updatePill() {
-    pill = pill || document.getElementById('autosave-pill');
-    countdownEl = countdownEl || document.getElementById('autosave-countdown');
-    if (!pill || !countdownEl) return;
-
-    if (hasGitHubSettings()) {
-      pill.style.display = '';
-      countdownEl.textContent = formatTime(secondsLeft);
-    } else {
-      pill.style.display = 'none';
-    }
-  }
-
-  async function autoSave() {
-    if (!hasGitHubSettings()) return;
-
-    // Silently call saveToGitHub but don't touch the button if it's mid-save
-    var btn = document.getElementById('github-save-btn');
-    if (btn && btn.disabled) return; // a manual save is already running
-
-    try {
-      var s = getGitHubSettings();
-      var filePath = 'publications.json';
-      var headers = {
-        Authorization: 'Bearer ' + s.token,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      };
-      var apiBase = 'https://api.github.com/repos/' + s.owner + '/' + s.repo + '/contents/' + filePath;
-
-      var payload = {
-        version: 'y90-publication-database-v3',
-        savedAt: new Date().toISOString(),
-        categories: typeof ALL_CATEGORIES !== 'undefined' ? ALL_CATEGORIES : [],
-        pdfFolderUrl: typeof pdfFolderUrl !== 'undefined' ? pdfFolderUrl : '',
-        publications: (typeof publications !== 'undefined' ? publications : []).map(function(p) {
-          var c = Object.assign({}, p);
-          delete c.pdfData;
-          return c;
-        })
-      };
-
-      var jsonStr = JSON.stringify(payload, null, 2);
-      var bytes = new TextEncoder().encode(jsonStr);
-      var binary = '';
-      bytes.forEach(function(b) { binary += String.fromCharCode(b); });
-      var encoded = btoa(binary);
-
-      // Get file SHA
-      var fileSha = null;
-      try {
-        var refRes = await fetch(
-          'https://api.github.com/repos/' + s.owner + '/' + s.repo + '/git/ref/heads/' + s.branch,
-          { headers: headers }
-        );
-        if (refRes.ok) {
-          var refData = await refRes.json();
-          var commitSha = refData.object.sha;
-          var commitRes = await fetch(
-            'https://api.github.com/repos/' + s.owner + '/' + s.repo + '/git/commits/' + commitSha,
-            { headers: headers }
-          );
-          var commitData = await commitRes.json();
-          var treeSha = commitData.tree.sha;
-          var treeRes = await fetch(
-            'https://api.github.com/repos/' + s.owner + '/' + s.repo + '/git/trees/' + treeSha,
-            { headers: headers }
-          );
-          var treeData = await treeRes.json();
-          var fileEntry = treeData.tree.find(function(f) { return f.path === filePath; });
-          if (fileEntry) fileSha = fileEntry.sha;
-        }
-      } catch(e) { /* proceed without SHA */ }
-
-      var body = {
-        message: '⏱️ Auto-save — ' + new Date().toLocaleString(),
-        content: encoded,
-        branch: s.branch
-      };
-      if (fileSha) body.sha = fileSha;
-
-      var putRes = await fetch(apiBase, {
-        method: 'PUT',
-        headers: headers,
-        body: JSON.stringify(body)
-      });
-
-      if (putRes.ok) {
-        // Show a subtle success toast
-        if (typeof showToast === 'function') {
-          showToast('🕐 Auto-saved to GitHub', 'success');
-        }
-        console.log('[Auto-save] GitHub save successful at', new Date().toLocaleString());
-      } else {
-        var err = await putRes.json().catch(function() { return {}; });
-        console.warn('[Auto-save] GitHub save failed:', putRes.status, err.message);
-        // Don't alert — just log silently so it's not disruptive
-      }
-    } catch(e) {
-      console.warn('[Auto-save] Error:', e.message);
-    }
-  }
-
-  function tick() {
-    secondsLeft--;
-    if (secondsLeft <= 0) {
-      secondsLeft = AUTO_SAVE_INTERVAL;
-      autoSave();
-    }
-    updatePill();
-  }
-
-  function startAutoSave() {
-    if (countdownTimer) return; // already running
-    secondsLeft = AUTO_SAVE_INTERVAL;
-    updatePill();
-    countdownTimer = setInterval(tick, 1000);
-  }
-
-  // Start once the page is fully loaded
-  window.addEventListener('load', function() {
-    setTimeout(startAutoSave, 1500);
-  });
-
-  // Re-check pill visibility whenever GitHub settings might change
-  // (poll every 5 seconds so pill appears right after settings are saved)
-  setInterval(updatePill, 5000);
-})();
-</script>
+<!-- Legacy GitHub autosave removed: Publish changes uses permission-checked RPC. -->
 
 <script>
 /* ══════════════════════════════════════════════════════════
@@ -15263,7 +15151,7 @@ function formTaxonomySourceText(){
 /* Journal Impact Factor registry. JIF values are looked up, never inferred from
    article citation counts or substituted with OpenAlex/SJR metrics. */
 let journalImpactFactorRegistry = (()=>{
-  try{return JSON.parse(localStorage.getItem('ioeJifRegistry') || '{}') || {};}catch(e){return {};}
+  try{return JSON.parse(ioeLocalStore.getItem('ioeJifRegistry') || '{}') || {};}catch(e){return {};}
 })();
 
 function normalizeJournalKey(value){
@@ -15299,7 +15187,7 @@ function getJIFEntry(journal){
   return journalImpactFactorRegistry[key] || null;
 }
 function saveJIFRegistryLocal(){
-  localStorage.setItem('ioeJifRegistry', JSON.stringify(journalImpactFactorRegistry));
+  ioeLocalStore.setItem('ioeJifRegistry', JSON.stringify(journalImpactFactorRegistry));
 }
 function upsertJIFEntry(journal,value,year,source='Manual/JCR import',metadata={}){
   const key=normalizeJournalKey(journal), num=validJIFNumber(value), yr=parseInt(year);
@@ -15335,7 +15223,7 @@ function applyJIFRegistryToPublications(showMessage=false){
     return {...p,journalImpactFactor:entry.value,journalImpactFactorYear:entry.year || ''};
   });
   saveJIFRegistryLocal();
-  try{localStorage.setItem('y90db',JSON.stringify(publications));}catch(e){}
+  try{ioeLocalStore.setItem('y90db',JSON.stringify(publications));}catch(e){}
   if(showMessage){
     applyFilters(); renderDashboard(); renderJIFRegistryList();
     showToast(`JIF applied to ${matched} publication${matched===1?'':'s'}${changed?` · ${changed} updated`:''}.`,'success');
@@ -15470,24 +15358,24 @@ IOE_BUNDLED_JIF_DATA.journals.push({
 const IOE_JIF_DEFAULT_URL='journal-impact-factors.json';
 function loadJIFAutoSettings(){
   const url=document.getElementById('jif-auto-url'), enabled=document.getElementById('jif-auto-enabled');
-  if(url) url.value=localStorage.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL;
-  if(enabled) enabled.checked=localStorage.getItem('ioeJifAutoEnabled')!=='false';
+  if(url) url.value=ioeLocalStore.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL;
+  if(enabled) enabled.checked=ioeLocalStore.getItem('ioeJifAutoEnabled')!=='false';
   renderJIFAutoStatus();
 }
 function saveJIFAutoSettings(){
   const url=document.getElementById('jif-auto-url')?.value.trim() || IOE_JIF_DEFAULT_URL;
   const enabled=document.getElementById('jif-auto-enabled')?.checked !== false;
-  localStorage.setItem('ioeJifAutoUrl',url); localStorage.setItem('ioeJifAutoEnabled',String(enabled));
+  ioeLocalStore.setItem('ioeJifAutoUrl',url); ioeLocalStore.setItem('ioeJifAutoEnabled',String(enabled));
   renderJIFAutoStatus();
 }
 function renderJIFAutoStatus(message=''){
   const el=document.getElementById('jif-auto-status'); if(!el) return;
-  const last=localStorage.getItem('ioeJifLastChecked'), metricYear=localStorage.getItem('ioeJifMetricYear');
+  const last=ioeLocalStore.getItem('ioeJifLastChecked'), metricYear=ioeLocalStore.getItem('ioeJifMetricYear');
   const now=new Date(), nextYear=now.getFullYear()+(now.getMonth()>=5?1:0);
   el.textContent=message || `${metricYear?`Latest verified metric year: ${metricYear}. `:''}${last?`Last checked: ${new Date(last).toLocaleDateString()}. `:'Not checked yet. '}Next automatic JCR-season check: June ${nextYear}.`;
 }
 async function loadVerifiedJIFUpdates(manual=false){
-  const url=(document.getElementById('jif-auto-url')?.value.trim() || localStorage.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL);
+  const url=(document.getElementById('jif-auto-url')?.value.trim() || ioeLocalStore.getItem('ioeJifAutoUrl') || IOE_JIF_DEFAULT_URL);
   if(manual) renderJIFAutoStatus('Checking verified JIF source…');
   try{
     const r=await fetch(url+(url.includes('?')?'&':'?')+'ts='+Date.now(),{cache:'no-store'});
@@ -15495,7 +15383,7 @@ async function loadVerifiedJIFUpdates(manual=false){
     const data=await r.json(), verifiedAt=data.verifiedAt || new Date().toISOString().slice(0,10);
     const added=mergeJIFRows(extractJIFRows(data),'Verified JIF update',{onlyIfNewer:true,verifiedAt});
     const result=applyJIFRegistryToPublications(false), now=new Date().toISOString();
-    localStorage.setItem('ioeJifLastChecked',now); if(data.metricYear) localStorage.setItem('ioeJifMetricYear',String(data.metricYear));
+    ioeLocalStore.setItem('ioeJifLastChecked',now); if(data.metricYear) ioeLocalStore.setItem('ioeJifMetricYear',String(data.metricYear));
     saveJIFRegistryLocal(); applyFilters(); renderDashboard(); renderJIFRegistryList();
     renderJIFAutoStatus(`Verified source checked ${new Date(now).toLocaleDateString()}: ${added} journal records read; ${result.matched} publications matched${result.changed?`, ${result.changed} updated`:''}.`);
     if(manual) showToast(`Verified JIF update complete · ${result.matched} publications matched.`,'success');
@@ -15507,8 +15395,8 @@ async function loadVerifiedJIFUpdates(manual=false){
   }
 }
 function maybeAutoUpdateJIF(){
-  if(localStorage.getItem('ioeJifAutoEnabled')==='false') return;
-  const now=new Date(), last=Date.parse(localStorage.getItem('ioeJifLastChecked') || 0), due=!last || now-last>30*86400000;
+  if(ioeLocalStore.getItem('ioeJifAutoEnabled')==='false') return;
+  const now=new Date(), last=Date.parse(ioeLocalStore.getItem('ioeJifLastChecked') || 0), due=!last || now-last>30*86400000;
   if(now.getMonth()>=5 && due) loadVerifiedJIFUpdates(false);
   else if(!last) loadVerifiedJIFUpdates(false);
 }
@@ -15544,7 +15432,7 @@ function migrateIOEDatabase(){
   seedJIFRegistryFromPublications();
   applyJIFRegistryToPublications(false);
   saveCategories();
-  try{localStorage.setItem('y90db',JSON.stringify(publications));}catch(e){}
+  try{ioeLocalStore.setItem('y90db',JSON.stringify(publications));}catch(e){}
 }
 
 const __ioeLegacyInit=init;
@@ -15757,8 +15645,8 @@ const CTM_APAC_COUNTRIES=new Set([
 let ctmAllTrials=[];
 let ctmFilteredTrials=[];
 
-function ctmReadJson(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch(e){return fallback;}}
-function ctmWriteJson(key,value){try{localStorage.setItem(key,JSON.stringify(value));localStorage.setItem('ioeClinicalTrialLocalModifiedAt',new Date().toISOString());return true;}catch(e){showToast('Trial monitor could not save locally. Browser storage may be full.','error');return false;}}
+function ctmReadJson(key,fallback){try{return JSON.parse(ioeLocalStore.getItem(key)||'null')||fallback;}catch(e){return fallback;}}
+function ctmWriteJson(key,value){try{ioeLocalStore.setItem(key,JSON.stringify(value));ioeLocalStore.setItem('ioeClinicalTrialLocalModifiedAt',new Date().toISOString());return true;}catch(e){showToast('Trial monitor could not save locally. Browser storage may be full.','error');return false;}}
 function ctmSimpleWatchStore(){const raw=ctmReadJson(CTM_STORAGE.watch,{}),clean={};Object.entries(raw).forEach(([id,v])=>{clean[id]={starred:Boolean(v?.starred),createdAt:v?.createdAt||'',updatedAt:v?.updatedAt||''};});return clean;}
 function ctmDateValue(value){const n=Date.parse(value||'');return Number.isFinite(n)?n:0;}
 function ctmToday(){return new Date().toISOString().slice(0,10);}
@@ -16009,5 +15897,278 @@ document.addEventListener('change',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-modal');closeModal('ctm-manual-modal');}});
 </script>
 
+
+<dialog class="access-dialog" id="access-auth" aria-labelledby="access-auth-title">
+ <button class="btn btn-secondary access-close" id="access-auth-close" aria-label="Close sign-in">Close</button>
+ <h2 id="access-auth-title">Editor sign-in</h2>
+ <p id="access-auth-status" role="status" aria-live="polite"></p>
+ <form id="access-email-form">
+  <label for="access-email">Email address</label><input type="email" id="access-email" autocomplete="email" required>
+  <button class="btn btn-primary" id="access-send-code" type="submit">Send sign-in code</button>
+ </form>
+ <form id="access-code-form" hidden>
+  <label for="access-code">Code from your email</label><input id="access-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" required>
+  <button class="btn btn-primary" id="access-verify" type="submit">Verify and sign in</button>
+ </form>
+</dialog>
+<dialog class="access-dialog" id="access-team-dialog" aria-labelledby="access-team-title">
+ <button class="btn btn-secondary access-close" id="access-team-close" aria-label="Close editor management">Close</button>
+ <h2 id="access-team-title">Manage editors</h2>
+ <p>Authorize a colleague’s email to let them add, edit, and delete publications and categories.</p>
+ <div id="access-members"></div>
+ <form id="access-invite-form">
+  <label for="access-invite-email">Colleague’s email</label><input type="email" id="access-invite-email" autocomplete="off" required>
+  <button class="btn btn-primary" id="access-authorize" type="submit">Authorize editor</button>
+ </form>
+ <p id="access-team-status" role="status" aria-live="polite"></p>
+</dialog>
+
+<script>
+/* Email sign-in uses Supabase Auth REST. Database RPCs enforce all permissions. */
+(() => {
+  'use strict';
+  const config = window.IOE_ACCESS_CONFIG;
+  const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.url) && /^sb_publishable_/.test(config.publishableKey);
+  const sessionKey = 'ioe-editor-session:' + config.url;
+  let session = null, role = 'viewer', revision = null, ready = false;
+  let dirty = false, busy = false, initial = false, changeCounter = 0, refreshing = null;
+  let booting = true, lastFocus = null;
+  const $ = id => document.getElementById(id);
+  const canEdit = () => configured && ready && (role === 'admin' || role === 'editor') && (!initial || role === 'admin');
+  const notify = (text, type='info') => showToast(text, type);
+  function message(text) { $('access-message').textContent = text; }
+  function ui() {
+    document.documentElement.dataset.ioeRole = canEdit() ? role : 'viewer';
+    $('access-role').textContent = canEdit() ? (role === 'admin' ? 'Admin' : 'Editor') : 'View only';
+    $('access-signin').hidden = Boolean(session);
+    $('access-signout').hidden = !session;
+    $('access-team').hidden = role !== 'admin' || !ready;
+    $('access-save').hidden = !canEdit();
+    $('access-save').disabled = busy;
+    $('access-save').textContent = busy ? 'Publishing…' : initial ? 'Publish initial database' : 'Publish changes';
+    $('access-draft-export').hidden = !dirty;
+  }
+  async function request(path, {method='GET', body, token}={}) {
+    const headers = {apikey: config.publishableKey, 'Content-Type':'application/json'};
+    if (token) headers.Authorization = 'Bearer ' + token;
+    const response = await fetch(config.url + path, {method, headers, body:body === undefined ? undefined : JSON.stringify(body), cache:'no-store', signal:AbortSignal.timeout(20000)});
+    const result = await response.json().catch(() => null);
+    if (!response.ok) {
+      const e = new Error(result?.msg || result?.message || result?.error_description || 'Request failed ('+response.status+').');
+      e.status = response.status; throw e;
+    }
+    return result;
+  }
+  function saveSession(value) {
+    session = value;
+    if (value) {
+      value.expires_at = value.expires_at || Math.floor(Date.now()/1000) + value.expires_in;
+      sessionStorage.setItem(sessionKey, JSON.stringify(value));
+    } else sessionStorage.removeItem(sessionKey);
+  }
+  async function accessToken() {
+    if (!session) throw new Error('Please sign in.');
+    if (session.expires_at * 1000 < Date.now() + 60000) {
+      if (!refreshing) refreshing = request('/auth/v1/token?grant_type=refresh_token', {method:'POST', body:{refresh_token:session.refresh_token}})
+        .then(saveSession).catch(e => {saveSession(null); role='viewer'; ui(); throw e;}).finally(() => {refreshing=null;});
+      await refreshing;
+    }
+    return session.access_token;
+  }
+  async function rpc(name, body={}) {
+    return request('/rest/v1/rpc/'+name, {method:'POST', body, token:await accessToken()});
+  }
+  async function checkRole() {
+    const previous = role;
+    try { role = session ? await rpc('ioe_my_role') : 'viewer'; }
+    catch (e) { role='viewer'; throw e; }
+    finally {
+      ui();
+      if (previous !== 'viewer' && role === 'viewer') {
+        document.querySelectorAll('.modal-overlay.open').forEach(el=>el.classList.remove('open'));
+        message('Editor access is unavailable. Browsing remains public.' + (dirty ? ' Export your unsaved draft before leaving.' : ''));
+      }
+    }
+    return role;
+  }
+  function snapshot() {
+    return {version:'ioe-public-access-v1', savedAt:new Date().toISOString(),
+      publications:publications.map(p=>{const q={...p}; delete q.pdfData; return q;}),
+      categories:[...ALL_CATEGORIES], pdfFolderUrl:pdfFolderUrl || '', journalImpactFactors:journalImpactFactorRegistry,
+      clinicalTrialMonitor:{watch:ctmSimpleWatchStore(), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),
+        lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
+  }
+  function render() {
+    buildCategoryStrip(); populateCategoryFilter(); populateYearFilter(); populateCountryFilter();
+    buildCatSelectGrid(); renderJournalJIFOptions(); applyFilters(); renderDashboard();
+  }
+  function applyDocument(data) {
+    if (!Array.isArray(data.publications) || !Array.isArray(data.categories)) throw new Error('Shared database format is invalid.');
+    publications = data.publications;
+    ALL_CATEGORIES = data.categories;
+    pdfFolderUrl = data.pdfFolderUrl || '';
+    journalImpactFactorRegistry = data.journalImpactFactors || {};
+    const t = data.clinicalTrialMonitor || {};
+    for (const key of ['watch','snapshots','lastResults','lastSearch']) ioeLocalStore.setItem(CTM_STORAGE[key], JSON.stringify(t[key] || (key==='lastResults'?[]:{})));
+    ctmAllTrials=[]; ctmFilteredTrials=[];
+    render();
+  }
+  async function readShared() {
+    const rows = await request('/rest/v1/ioe_document?id=eq.1&select=payload,revision');
+    if (!rows?.length) throw new Error('The database schema has not been initialized.');
+    const row = rows[0];
+    initial = row.payload === null;
+    if (row.payload) applyDocument(row.payload);
+    revision = row.revision; ready = true; dirty = false; ui();
+    message(initial ? 'Showing the existing library. The admin has not published the shared database yet.' : 'Public browsing · Changes can be published by approved editors only.');
+  }
+  function markDirty() {
+    if (!booting && canEdit()) {
+      dirty=true; changeCounter++; ui();
+      message('Unpublished changes in this tab. Select Publish changes to share them.');
+    }
+  }
+  async function publish() {
+    if (busy) return;
+    try {
+      await checkRole();
+      if (!canEdit()) throw new Error('Approved editor access is required.');
+      if (initial && !confirm('Publish this database for everyone to browse? First check the publication count and import your latest JSON backup if needed.')) return;
+      busy=true; ui();
+      const versionAtStart=changeCounter;
+      const next=await rpc('ioe_save_document',{p_payload:snapshot(),p_revision:revision});
+      revision=next; initial=false; dirty=changeCounter!==versionAtStart;
+      message(dirty ? 'Published. You also have newer unpublished changes in this tab.' : 'Published successfully. Viewers will see these changes when they reload.');
+      notify('Changes published.','success');
+    } catch(e) {
+      // Never retry a failed/ambiguous save automatically or adopt a newer revision.
+      message('Not published: '+e.message+' Your draft remains in this tab; export it before reloading.');
+      notify('Could not publish. Export your draft before reloading.','error');
+    } finally {busy=false; ui();}
+  }
+  function openDialog(id) {lastFocus=document.activeElement; $(id).showModal(); $(id).querySelector('input,button')?.focus();}
+  function closeDialog(id) {$(id).close();lastFocus?.focus();}
+  $('access-signin').onclick=()=>{
+    $('access-auth-status').textContent=configured ? 'Use your own email. Only approved accounts can edit.' : 'Editor sign-in is not connected yet. Please contact the database administrator.';
+    $('access-email').disabled=!configured; $('access-send-code').disabled=!configured;
+    $('access-code-form').hidden=true; openDialog('access-auth');
+  };
+  $('access-auth-close').onclick=()=>closeDialog('access-auth');
+  $('access-team-close').onclick=()=>closeDialog('access-team-dialog');
+  $('access-email-form').onsubmit=async event=>{
+    event.preventDefault(); $('access-send-code').disabled=true;
+    try {
+      await request('/auth/v1/otp',{method:'POST',body:{email:$('access-email').value.trim().toLowerCase(),create_user:true}});
+      $('access-auth-status').textContent='Check your inbox for a sign-in code. A verified email does not automatically grant editing access.';
+      $('access-code-form').hidden=false; $('access-code').focus();
+    }catch(e){$('access-auth-status').textContent=e.message;}
+    finally{$('access-send-code').disabled=false;}
+  };
+  $('access-code-form').onsubmit=async event=>{
+    event.preventDefault(); $('access-verify').disabled=true;
+    try{
+      const data=await request('/auth/v1/verify',{method:'POST',body:{email:$('access-email').value.trim().toLowerCase(),token:$('access-code').value.trim(),type:'email'}});
+      saveSession(data); await checkRole();
+      $('access-code').value=''; closeDialog('access-auth');
+      if (role==='viewer') message('Signed in with view-only access. Ask the admin to authorize this email.');
+      else if (!ready) message('Signed in. The shared database could not load, so editing remains locked. Reload to try again.');
+      else message(initial ? 'Admin: import your latest JSON backup, review it, then publish the initial database.' : 'Signed in as '+role+'. Publish changes when your edits are ready.');
+    }catch(e){$('access-auth-status').textContent=e.message;}
+    finally{$('access-verify').disabled=false;ui();}
+  };
+  $('access-signout').onclick=async()=>{
+    if (dirty && !confirm('You have unpublished changes. Export your draft first if you want to keep it. Sign out and discard this tab’s draft?')) return;
+    const token=session?.access_token;
+    saveSession(null); role='viewer'; dirty=false; ui();
+    document.querySelectorAll('.modal-overlay.open').forEach(el=>el.classList.remove('open'));
+    if ($('access-team-dialog').open) $('access-team-dialog').close();
+    try{if(token) await request('/auth/v1/logout',{method:'POST',token});}catch(e){/* Local credentials are already cleared. */}
+    location.reload();
+  };
+  async function renderTeam(){
+    const members=await rpc('ioe_list_editors');
+    $('access-members').replaceChildren();
+    for(const member of members){
+      const row=document.createElement('div'); row.className='access-member';
+      const label=document.createElement('span');label.textContent=member.email+' · '+member.role;row.append(label);
+      if(member.role==='editor'){
+        const button=document.createElement('button');button.className='btn btn-secondary';button.textContent='Revoke';
+        button.onclick=async()=>{if(!confirm('Revoke editor access for '+member.email+'?'))return;button.disabled=true;
+          try{await rpc('ioe_set_editor',{p_email:member.email,p_enabled:false});await renderTeam();$('access-team-status').textContent='Editor access revoked.';}
+          catch(e){$('access-team-status').textContent=e.message;button.disabled=false;}};row.append(button);
+      }
+      $('access-members').append(row);
+    }
+  }
+  $('access-team').onclick=async()=>{openDialog('access-team-dialog');try{await checkRole();await renderTeam();}catch(e){$('access-team-status').textContent=e.message;}};
+  $('access-invite-form').onsubmit=async event=>{
+    event.preventDefault();$('access-authorize').disabled=true;
+    try{await rpc('ioe_set_editor',{p_email:$('access-invite-email').value.trim(),p_enabled:true});
+      $('access-invite-email').value='';await renderTeam();$('access-team-status').textContent='Editor authorized. Share the website link with them; they can request their own sign-in code. No invitation email was sent.';
+    }catch(e){$('access-team-status').textContent=e.message;}
+    finally{$('access-authorize').disabled=false;}
+  };
+  $('access-save').onclick=publish;
+  $('access-draft-export').onclick=()=>exportJSON();
+  window.importJSON=function(text){
+    try{
+      let data=JSON.parse(text);
+      if(Array.isArray(data)) data={publications:data,categories:[...new Set(data.flatMap(p=>p.categories||[]))]};
+      if(!Array.isArray(data.publications)||!Array.isArray(data.categories))throw new Error('Expected publications and categories arrays.');
+      if(!confirm('Replace this tab’s draft with the backup? Nothing is shared until you publish.'))return;
+      applyDocument(data);markDirty();notify('Backup imported as an unpublished draft.','success');
+    }catch(e){notify('Import failed: '+e.message,'error');}
+  };
+  // Disable the old GitHub write path (including any browser-stored token).
+  window.getGitHubSettings=()=>({token:'',owner:'',repo:'',branch:''});
+  window.saveToGitHub=publish;
+  for(const name of ['saveGitHubSettings','openGitHubSettingsModal','saveGitHubSettingsFromForm','resetGitHubTokenAndOpenSettings']) window[name]=()=>notify('Use Editor sign-in and Publish changes.');
+  const mutations = new Set('savePublication deletePublication addCategoryFromManager renameCategory deleteCategory renameParentCategory addSubcategoryQuick renameSubcategoryQuick deleteSubcategoryQuick importJSON importJSONFile importFromPubMed importAllPubMedResults applyAISuggestion setPdfFolderUrl resetAllSubcategoriesNow saveJIFRegistryEntry deleteJIFRegistryEntry importJIFRegistryFile loadVerifiedJIFUpdates ctmToggleStar ctmAddManualTrial'.split(' '));
+  const editorActions = new Set([...mutations,...'openAddModal openEditModal openCategoryManager openJIFManager openAIModal ctmOpenManualModal handlePdfSelect saveJIFAutoSettings fetchByPMID'.split(' ')]);
+  for(const name of editorActions){
+    const original=window[name]; if(typeof original!=='function') continue;
+    window[name]=function(...args){
+      if(!canEdit()){notify('View only. Sign in with an approved editor account to make changes.');return;}
+      const result=original.apply(this,args);
+      if(mutations.has(name)) {
+        if(result?.then) return result.then(value=>{markDirty();return value;});
+        markDirty();
+      }
+      return result;
+    };
+  }
+  const selector = [...editorActions].map(name=>'[onclick*="'+name+'("],[onchange*="'+name+'("]').join(',');
+  // CSS covers dynamically rendered controls before they can be clicked.
+  const style=document.createElement('style');
+  style.textContent=selector.split(',').map(s=>'html[data-ioe-role="viewer"] '+s).join(',')+'{display:none!important}';
+  document.head.append(style);
+  document.addEventListener('click',event=>{
+    if(!canEdit() && event.target.closest(selector)){event.preventDefault();event.stopImmediatePropagation();}
+  },true);
+  const originalSave=save;
+  window.save=function(){originalSave();markDirty();};
+  const originalSaveCategories=saveCategories;
+  window.saveCategories=function(){originalSaveCategories();markDirty();};
+  // Startup migrations are used only for the legacy snapshot, never shared data.
+  window.maybeAutoUpdateJIF=()=>{};
+  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden && session) checkRole().catch(()=>{});});
+  setInterval(()=>{if(session)checkRole().catch(()=>{});},60000);
+  async function start(){
+    ui();
+    try{
+      await bootY90Database();
+      if(configured){
+        await readShared();
+        try{session=JSON.parse(sessionStorage.getItem(sessionKey)||'null');}catch(e){session=null;}
+        if(session) await checkRole();
+      }else message('Public browsing · Editor sign-in is awaiting setup.');
+    }catch(e){ready=false;message('Showing the existing snapshot. Editing is locked: '+e.message);}
+    finally{booting=false;ui();}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+
+</script>
 </body>
 </html>
