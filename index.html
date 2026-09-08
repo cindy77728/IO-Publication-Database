@@ -3,7 +3,7 @@
 <head>
 <!-- Configure only after running database-setup.sql. Never put a secret/service-role key here. -->
 <script>
-window.IOE_ACCESS_CONFIG = { url: "", publishableKey: "" };
+window.IOE_ACCESS_CONFIG = { url: "https://xplxcvjtarriohflvynk.supabase.co", publishableKey: "sb_publishable_WSb8neipJNKR8CgaHxQfbA_Qkd6Trx2" };
 // The shared service is authoritative. Drafts live in this tab until published/exported.
 const ioeLocalStore = (() => { const values=new Map(); return {
  getItem:key=>values.has(key)?values.get(key):null,
@@ -15904,11 +15904,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
  <p id="access-auth-status" role="status" aria-live="polite"></p>
  <form id="access-email-form">
   <label for="access-email">Email address</label><input type="email" id="access-email" autocomplete="email" required>
-  <button class="btn btn-primary" id="access-send-code" type="submit">Send sign-in code</button>
- </form>
- <form id="access-code-form" hidden>
-  <label for="access-code">Code from your email</label><input id="access-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" required>
-  <button class="btn btn-primary" id="access-verify" type="submit">Verify and sign in</button>
+  <label for="access-password">Website password</label><input type="password" id="access-password" autocomplete="current-password" required>
+  <p>Use your publication website password. If you need an account or forgot your password, contact the administrator.</p>
+  <button class="btn btn-primary" id="access-login" type="submit">Sign in</button>
  </form>
 </dialog>
 <dialog class="access-dialog" id="access-team-dialog" aria-labelledby="access-team-title">
@@ -15924,7 +15922,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
 </dialog>
 
 <script>
-/* Email sign-in uses Supabase Auth REST. Database RPCs enforce all permissions. */
+/* Password sign-in uses Supabase Auth REST. Database RPCs enforce all permissions. */
 (() => {
   'use strict';
   const config = window.IOE_ACCESS_CONFIG;
@@ -15933,6 +15931,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   let session = null, role = 'viewer', revision = null, ready = false;
   let dirty = false, busy = false, initial = false, changeCounter = 0, refreshing = null;
   let booting = true, lastFocus = null;
+  let autoTimer = null, autoPaused = false;
+  function scheduleSave() {
+    clearTimeout(autoTimer);
+    if (!initial && dirty && !busy && !autoPaused && canEdit()) autoTimer=setTimeout(()=>publish(true),700);
+  }
   const $ = id => document.getElementById(id);
   const canEdit = () => configured && ready && (role === 'admin' || role === 'editor') && (!initial || role === 'admin');
   const notify = (text, type='info') => showToast(text, type);
@@ -15945,7 +15948,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
     $('access-team').hidden = role !== 'admin' || !ready;
     $('access-save').hidden = !canEdit();
     $('access-save').disabled = busy;
-    $('access-save').textContent = busy ? 'Publishing…' : initial ? 'Publish initial database' : 'Publish changes';
+    $('access-save').textContent = busy ? 'Saving…' : initial ? 'Publish initial database' : autoPaused ? 'Retry save' : 'Save now';
     $('access-draft-export').hidden = !dirty;
   }
   async function request(path, {method='GET', body, token}={}) {
@@ -16025,11 +16028,14 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   function markDirty() {
     if (!booting && canEdit()) {
       dirty=true; changeCounter++; ui();
-      message('Unpublished changes in this tab. Select Publish changes to share them.');
+      message(initial ? 'Initial draft: review and publish once to enable automatic saving.' : autoPaused ? 'Not saved. Automatic saving is paused; export your draft, then resolve the error or retry.' : 'Saving changes…');
+      scheduleSave();
     }
   }
-  async function publish() {
-    if (busy) return;
+  async function publish(automatic=false) {
+    if (busy || (automatic && (initial || autoPaused || !dirty))) return;
+    clearTimeout(autoTimer);
+    busy=true; ui();
     try {
       await checkRole();
       if (!canEdit()) throw new Error('Approved editor access is required.');
@@ -16037,44 +16043,39 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
       busy=true; ui();
       const versionAtStart=changeCounter;
       const next=await rpc('ioe_save_document',{p_payload:snapshot(),p_revision:revision});
-      revision=next; initial=false; dirty=changeCounter!==versionAtStart;
-      message(dirty ? 'Published. You also have newer unpublished changes in this tab.' : 'Published successfully. Viewers will see these changes when they reload.');
-      notify('Changes published.','success');
+      revision=next; initial=false; autoPaused=false; dirty=changeCounter!==versionAtStart;
+      message(dirty ? 'Saving newer changes…' : 'Saved ✓ · Changes are saved to the shared database.');
+      if(!automatic) notify('Changes saved.','success');
     } catch(e) {
+      autoPaused=true;
       // Never retry a failed/ambiguous save automatically or adopt a newer revision.
       message('Not published: '+e.message+' Your draft remains in this tab; export it before reloading.');
       notify('Could not publish. Export your draft before reloading.','error');
-    } finally {busy=false; ui();}
+    } finally {busy=false; ui();scheduleSave();}
   }
   function openDialog(id) {lastFocus=document.activeElement; $(id).showModal(); $(id).querySelector('input,button')?.focus();}
   function closeDialog(id) {$(id).close();lastFocus?.focus();}
   $('access-signin').onclick=()=>{
     $('access-auth-status').textContent=configured ? 'Use your own email. Only approved accounts can edit.' : 'Editor sign-in is not connected yet. Please contact the database administrator.';
-    $('access-email').disabled=!configured; $('access-send-code').disabled=!configured;
-    $('access-code-form').hidden=true; openDialog('access-auth');
+    $('access-email').disabled=!configured; $('access-login').disabled=!configured;
+    $('access-password').disabled=!configured; openDialog('access-auth');
   };
   $('access-auth-close').onclick=()=>closeDialog('access-auth');
   $('access-team-close').onclick=()=>closeDialog('access-team-dialog');
+  $('access-auth').addEventListener('close',()=>{$('access-password').value='';});
   $('access-email-form').onsubmit=async event=>{
-    event.preventDefault(); $('access-send-code').disabled=true;
-    try {
-      await request('/auth/v1/otp',{method:'POST',body:{email:$('access-email').value.trim().toLowerCase(),create_user:true}});
-      $('access-auth-status').textContent='Check your inbox for a sign-in code. A verified email does not automatically grant editing access.';
-      $('access-code-form').hidden=false; $('access-code').focus();
-    }catch(e){$('access-auth-status').textContent=e.message;}
-    finally{$('access-send-code').disabled=false;}
-  };
-  $('access-code-form').onsubmit=async event=>{
-    event.preventDefault(); $('access-verify').disabled=true;
+    event.preventDefault();
+    if(!configured || $('access-login').disabled) return;
+    $('access-login').disabled=true;
     try{
-      const data=await request('/auth/v1/verify',{method:'POST',body:{email:$('access-email').value.trim().toLowerCase(),token:$('access-code').value.trim(),type:'email'}});
+      const data=await request('/auth/v1/token?grant_type=password',{method:'POST',body:{email:$('access-email').value.trim().toLowerCase(),password:$('access-password').value}});
       saveSession(data); await checkRole();
-      $('access-code').value=''; closeDialog('access-auth');
+      closeDialog('access-auth');
       if (role==='viewer') message('Signed in with view-only access. Ask the admin to authorize this email.');
       else if (!ready) message('Signed in. The shared database could not load, so editing remains locked. Reload to try again.');
-      else message(initial ? 'Admin: import your latest JSON backup, review it, then publish the initial database.' : 'Signed in as '+role+'. Publish changes when your edits are ready.');
-    }catch(e){$('access-auth-status').textContent=e.message;}
-    finally{$('access-verify').disabled=false;ui();}
+      else message(initial ? 'Admin: import your latest JSON backup, review it, then publish the initial database.' : 'Signed in as '+role+'. Confirmed changes save automatically.');
+    }catch(e){$('access-auth-status').textContent=e.status===400 ? 'Sign-in failed. Check your email and website password, or ask the admin to check your account.' : e.message;}
+    finally{$('access-password').value='';$('access-login').disabled=false;ui();}
   };
   $('access-signout').onclick=async()=>{
     if (dirty && !confirm('You have unpublished changes. Export your draft first if you want to keep it. Sign out and discard this tab’s draft?')) return;
@@ -16104,11 +16105,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   $('access-invite-form').onsubmit=async event=>{
     event.preventDefault();$('access-authorize').disabled=true;
     try{await rpc('ioe_set_editor',{p_email:$('access-invite-email').value.trim(),p_enabled:true});
-      $('access-invite-email').value='';await renderTeam();$('access-team-status').textContent='Editor authorized. Share the website link with them; they can request their own sign-in code. No invitation email was sent.';
+      $('access-invite-email').value='';await renderTeam();$('access-team-status').textContent='Editor authorized. Their password account must also be created in Supabase Authentication → Users. Authorizing an email here does not create a login account or send an email.';
     }catch(e){$('access-team-status').textContent=e.message;}
     finally{$('access-authorize').disabled=false;}
   };
-  $('access-save').onclick=publish;
+  $('access-save').onclick=()=>publish(false);
   $('access-draft-export').onclick=()=>exportJSON();
   window.importJSON=function(text){
     try{
@@ -16121,7 +16122,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   };
   // Disable the old GitHub write path (including any browser-stored token).
   window.getGitHubSettings=()=>({token:'',owner:'',repo:'',branch:''});
-  window.saveToGitHub=publish;
+  window.saveToGitHub=()=>publish(false);
   for(const name of ['saveGitHubSettings','openGitHubSettingsModal','saveGitHubSettingsFromForm','resetGitHubTokenAndOpenSettings']) window[name]=()=>notify('Use Editor sign-in and Publish changes.');
   const mutations = new Set('savePublication deletePublication addCategoryFromManager renameCategory deleteCategory renameParentCategory addSubcategoryQuick renameSubcategoryQuick deleteSubcategoryQuick importJSON importJSONFile importFromPubMed importAllPubMedResults applyAISuggestion setPdfFolderUrl resetAllSubcategoriesNow saveJIFRegistryEntry deleteJIFRegistryEntry importJIFRegistryFile loadVerifiedJIFUpdates ctmToggleStar ctmAddManualTrial'.split(' '));
   const editorActions = new Set([...mutations,...'openAddModal openEditModal openCategoryManager openJIFManager openAIModal ctmOpenManualModal handlePdfSelect saveJIFAutoSettings fetchByPMID'.split(' ')]);
