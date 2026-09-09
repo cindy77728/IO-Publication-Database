@@ -2044,7 +2044,7 @@ html body.calibre-theme,html body.calibre-theme *{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v7.4 · Product list cleanup</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v7.5 · Matching product lists</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -2115,9 +2115,18 @@ html body.calibre-theme,html body.calibre-theme *{
     </div>
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
-      <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
-      <option value="tace">TACE / DEB-TACE (All)</option><option value="dc-bead">DC Bead only</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
-      <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-both">Y90 Both</option>
+      <option value="">All Products</option>
+      <option value="cryoablation">Cryoablation</option>
+      <option value="tace">TACE / DEB-TACE (All)</option>
+      <option value="dc-bead">↳ DC Bead</option>
+      <option value="deb-competitor">↳ DEB Competitor</option>
+      <option value="tace-unspecified">↳ TACE / Brand unconfirmed</option>
+      <option value="tace-other">↳ Other TACE-related studies</option>
+      <option value="y90">Y90 (All)</option>
+      <option value="y90-resin">↳ Y90 Resin</option>
+      <option value="y90-glass">↳ Y90 Glass</option>
+      <option value="y90-both">↳ Y90 Both</option>
+      <option value="y90-na">↳ Y90 N/A</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
@@ -15020,6 +15029,7 @@ function isTACERelated(p){
 function matchesPublicationProduct(p,filter){
   if(!filter)return true;
   if(filter==='tace')return isTACERelated(p);
+  if(filter==='tace-other')return isTACERelated(p) && !['dc-bead','deb-competitor','tace-unspecified'].includes(normalizeProductCode(p.product));
   const code=normalizeProductCode(p.product);
   return filter==='y90' ? code.startsWith('y90-') : code===filter;
 }
