@@ -2044,14 +2044,14 @@ html body.calibre-theme,html body.calibre-theme *{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v7.1</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v7.3 · TACE dashboard groups</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
       <div class="header-stats">
         <div class="stat-pill">Total: <strong id="stat-total">0</strong></div>
         <div class="stat-pill">Cryo: <strong id="stat-cryo" style="color:var(--cryo)">0</strong></div>
-        <div class="stat-pill">DC Bead: <strong id="stat-dc-bead" style="color:var(--dc-bead)">0</strong></div>
+        <div class="stat-pill" title="All TACE / DEB-TACE-related publications, including comparative studies and all bead brands">TACE / DEB-TACE: <strong id="stat-dc-bead" style="color:var(--dc-bead)">0</strong></div>
         <div class="stat-pill">Y90 (All): <strong id="stat-y90-all" style="color:var(--y90-all)">0</strong></div>
         <div class="stat-pill">PMC Free: <strong id="stat-pmc" style="color:#4cca5a">0</strong></div>
       </div>
@@ -2116,7 +2116,7 @@ html body.calibre-theme,html body.calibre-theme *{
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
-      <option value="dc-bead">DC Bead</option><option value="embolization-mixed">Embolization / Mixed products</option><option value="embosphere">Embosphere</option><option value="embozene">Embozene</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
+      <option value="tace">TACE / DEB-TACE (All)</option><option value="dc-bead">DC Bead only</option><option value="embolization-mixed">Embolization / Mixed products</option><option value="embosphere">Embosphere</option><option value="embozene">Embozene</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
       <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-both">Y90 Both</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
@@ -8995,7 +8995,7 @@ function applyFilters() {
     if (cat&&!p.categories.includes(cat)) return false;
     if(productFilter){
       const productCode=normalizeProductCode(p.product);
-      if(productFilter==='y90' ? !productCode.startsWith('y90-') : productCode!==productFilter) return false;
+      if(!matchesPublicationProduct(p,productFilter)) return false;
     }
     if (yearFilter&&p.year!=yearFilter) return false;
     if (countryFilter&&(p.country||'')!==countryFilter) return false;
@@ -9054,7 +9054,7 @@ function clearFilters() {
 function updateStats() {
   document.getElementById('stat-total').textContent=publications.length;
   document.getElementById('stat-cryo').textContent=publications.filter(p=>normalizeProductCode(p.product)==='cryoablation').length;
-  document.getElementById('stat-dc-bead').textContent=publications.filter(p=>normalizeProductCode(p.product)==='dc-bead').length;
+  document.getElementById('stat-dc-bead').textContent=publications.filter(isTACERelated).length;
   document.getElementById('stat-y90-all').textContent=publications.filter(p=>normalizeProductCode(p.product).startsWith('y90-')).length;
   document.getElementById('stat-pmc').textContent=publications.filter(p=>hasPMC(p)).length;
 }
@@ -11346,7 +11346,7 @@ function applyFilters(){
     if (cat&&!categoryMatches(p.categories, cat)) return false;
     if(productFilter){
       const productCode=normalizeProductCode(p.product);
-      if(productFilter==='y90' ? !productCode.startsWith('y90-') : productCode!==productFilter) return false;
+      if(!matchesPublicationProduct(p,productFilter)) return false;
     }
     if (yearFilter&&p.year!=yearFilter) return false;
     if (countryFilter&&(p.country||'')!==countryFilter) return false;
@@ -15009,6 +15009,21 @@ const IOE_PRODUCT_META = {
   'y90-na': {label:'Y90 N/A', short:'Y90 N/A', cls:'badge-y90-na'}
 };
 
+
+// Topic membership is independent of the specific product saved on each record.
+function isTACERelated(p){
+  if(['dc-bead','tace-unspecified','deb-competitor'].includes(p.product))return true;
+  const text=[p.title,p.abstract,p.results,p.findings,p.primaryCategory,...(Array.isArray(p.categories)?p.categories:[])]
+    .filter(Boolean).join(' ').normalize('NFKC').replace(/[\u2010-\u2015]/g,'-');
+  return /\b(?:[cd]-?)?TACE\b|\bDEB[-\s]?(?:TACE|IRI|DOX)\b|\bDC[\s-]*Beads?\b|\bDCBeads?\b|\bdrug[\s-]*eluting\s+(?:beads?|microspheres?)\b|\b(?:trans[\s-]*arterial|transcatheter(?:\s+arterial)?)\s+chemo[\s-]*emboli[sz]ation\b/i.test(text);
+}
+function matchesPublicationProduct(p,filter){
+  if(!filter)return true;
+  if(filter==='tace')return isTACERelated(p);
+  const code=normalizeProductCode(p.product);
+  return filter==='y90' ? code.startsWith('y90-') : code===filter;
+}
+
 function normalizeProductCode(value){
   if(String(value||'').trim().toLowerCase()==='embolization-mixed')return 'embolization-mixed';
   if(String(value||'').trim().toLowerCase()==='embosphere')return 'embosphere';
@@ -15474,7 +15489,7 @@ function updateStats(){
   const count=code=>(publications || []).filter(p=>normalizeProductCode(p.product)===code).length;
   const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
   const y90All=(publications || []).filter(p=>normalizeProductCode(p.product).startsWith('y90-')).length;
-  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-dc-bead',count('dc-bead')); set('stat-y90-all',y90All);
+  set('stat-total',(publications || []).length); set('stat-cryo',count('cryoablation')); set('stat-dc-bead',publications.filter(isTACERelated).length); set('stat-y90-all',y90All);
   set('stat-pmc',(publications || []).filter(p=>hasPMC(p)).length);
 }
 
@@ -15523,7 +15538,7 @@ function renderCards(data){
 function renderDashboard(){
   const total=(publications || []).length;
   const productOrder=['embolization-mixed','embosphere','embozene','cryoablation','dc-bead','deb-competitor','tace-unspecified','y90-resin','y90-glass','y90-both','y90-na'];
-  const colors={'embolization-mixed':'#718096','embosphere':'#718096','embozene':'#718096','deb-competitor':'#ad7624','tace-unspecified':'#718096','cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
+  const colors={'tace-all':'var(--dc-bead)','tace-other':'#718096','embolization-mixed':'#718096','embosphere':'#718096','embozene':'#718096','deb-competitor':'#ad7624','tace-unspecified':'#718096','cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -15534,14 +15549,18 @@ function renderDashboard(){
   const maxYear=Math.max(...Object.values(byYear),1), maxCat=cats[0]?.[1]||1, maxCountry=countries[0]?.[1]||1;
   const pmcCount=publications.filter(p=>hasPMC(p)).length, jifCount=publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length;
   const y90All=byProduct['y90-resin']+byProduct['y90-glass']+byProduct['y90-both']+byProduct['y90-na'];
+  const taceAll=publications.filter(isTACERelated).length;
+  const taceOther=publications.filter(p=>isTACERelated(p) && !['dc-bead','deb-competitor','tace-unspecified'].includes(normalizeProductCode(p.product))).length;
   const productRows=[
     {key:'embolization-mixed',label:'Embolization / Mixed products',count:byProduct['embolization-mixed']},
     {key:'embosphere',label:'Embosphere',count:byProduct['embosphere']},
     {key:'embozene',label:'Embozene',count:byProduct['embozene']},
     {key:'cryoablation',label:'Cryoablation',count:byProduct['cryoablation']},
-    {key:'dc-bead',label:'DC Bead',count:byProduct['dc-bead']},
-    {key:'deb-competitor',label:'DEB Competitor',count:byProduct['deb-competitor']},
-    {key:'tace-unspecified',label:'TACE / Brand unconfirmed',count:byProduct['tace-unspecified']},
+    {key:'tace-all',label:'TACE / DEB-TACE (All)',count:taceAll,parent:true},
+    {key:'dc-bead',label:'↳ DC Bead',count:byProduct['dc-bead'],child:true},
+    {key:'deb-competitor',label:'↳ DEB Competitor',count:byProduct['deb-competitor'],child:true},
+    {key:'tace-unspecified',label:'↳ TACE / Brand unconfirmed',count:byProduct['tace-unspecified'],child:true},
+    {key:'tace-other',label:'↳ Other TACE-related studies',count:taceOther,child:true},
     {key:'y90-all',label:'Y90 (All)',count:y90All,parent:true},
     {key:'y90-resin',label:'↳ Y90 Resin',count:byProduct['y90-resin'],child:true},
     {key:'y90-glass',label:'↳ Y90 Glass',count:byProduct['y90-glass'],child:true},
@@ -15555,7 +15574,7 @@ function renderDashboard(){
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📈 JIF matched</span><strong style="color:var(--accent)">${jifCount} (${total?(jifCount/total*100).toFixed(0):0}%)</strong></div>
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📄 Uploaded PDFs</span><strong>${publications.filter(p=>p.pdfData).length}</strong></div>
       </div></div>
-    <div class="dash-card"><h3>By Product</h3>${productRows.map(row=>`<div class="donut-row${row.parent?' product-parent':''}${row.child?' product-child':''}"><div class="donut-dot" style="background:${colors[row.key]}"></div><span class="donut-label">${row.label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?row.count/total*100:0}%;background:${colors[row.key]}"></div></div><span class="donut-val">${row.count}</span></div>`).join('')}</div>
+    <div class="dash-card"><h3>By Product</h3><p style="font-size:13px;margin:0 0 12px;color:var(--text-muted)">TACE-related comparative studies may also appear under Y90.</p>${productRows.map(row=>`<div class="donut-row${row.parent?' product-parent':''}${row.child?' product-child':''}"><div class="donut-dot" style="background:${colors[row.key]}"></div><span class="donut-label">${row.label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?row.count/total*100:0}%;background:${colors[row.key]}"></div></div><span class="donut-val">${row.count}</span></div>`).join('')}</div>
     <div class="dash-card" style="grid-column:span 2"><h3>By Year</h3><div class="bar-chart">${years.map(([y,n])=>`<div class="bar-row"><span class="bar-label">${y}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxYear*100}%;background:var(--accent2)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card" style="grid-column:span 2"><h3>Top Categories</h3><div class="bar-chart">${cats.map(([c,n])=>`<div class="bar-row dash-cat-row"><span class="bar-label bar-label-full">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCat*100}%;background:var(--accent)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card"><h3>Top Countries</h3><div class="bar-chart">${countries.map(([c,n])=>`<div class="bar-row"><span class="bar-label">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCountry*100}%;background:var(--accent3)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>`;
