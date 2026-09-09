@@ -32,6 +32,9 @@ dialog.access-dialog::backdrop{background:#122c4966}
 .access-member{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #dce4ee;font-size:14px;overflow-wrap:anywhere}
 .access-member span{min-width:0}.access-member button{flex-shrink:0;margin:0}
 html[data-ioe-role="admin"] #access-role,html[data-ioe-role="editor"] #access-role{background:#e8f6f1;border-color:#75b69f;color:#17644b}
+
+.retired-product-note{display:none;font-size:13px;color:var(--text-muted);flex-basis:100%;margin:6px 0}
+input[data-retired-product]:checked + .retired-product-note{display:block}
 </style>
 
 <meta charset="UTF-8">
@@ -2044,7 +2047,7 @@ html body.calibre-theme,html body.calibre-theme *{
   <div class="header-top">
     <div class="logo-area">
       <h1>IO&amp;E <span>Database</span></h1>
-      <p>Interventional Oncology &amp; Embolization Literature Management · v7.5 · Matching product lists</p>
+      <p>Interventional Oncology &amp; Embolization Literature Management · v7.6 · Add/Edit product cleanup</p>
     </div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
@@ -2357,7 +2360,7 @@ html body.calibre-theme,html body.calibre-theme *{
         <div class="radio-group" style="margin-top:4px">
           <label class="radio-option"><input type="radio" name="product" value="cryoablation"> <span style="color:var(--cryo)">● Cryoablation</span></label>
           <label class="radio-option"><input type="radio" name="product" value="dc-bead"> <span style="color:var(--dc-bead)">● DC Bead</span></label>
-<label class="radio-option"><input type="radio" name="product" value="deb-competitor">DEB Competitor</label><label class="radio-option"><input type="radio" name="product" value="embolization-mixed">Embolization / Mixed products</label><label class="radio-option"><input type="radio" name="product" value="embosphere">Embosphere</label><label class="radio-option"><input type="radio" name="product" value="embozene">Embozene</label>
+<label class="radio-option"><input type="radio" name="product" value="deb-competitor">DEB Competitor</label><input type="radio" name="product" value="embolization-mixed" data-retired-product hidden style="display:none" tabindex="-1" aria-hidden="true"><span class="retired-product-note">Saved product: Embolization / Mixed products. This option is retired. Choose another product only if you want to reclassify this publication.</span><input type="radio" name="product" value="embosphere" data-retired-product hidden style="display:none" tabindex="-1" aria-hidden="true"><span class="retired-product-note">Saved product: Embosphere. This option is retired. Choose another product only if you want to reclassify this publication.</span><input type="radio" name="product" value="embozene" data-retired-product hidden style="display:none" tabindex="-1" aria-hidden="true"><span class="retired-product-note">Saved product: Embozene. This option is retired. Choose another product only if you want to reclassify this publication.</span>
 <label class="radio-option"><input type="radio" name="product" value="tace-unspecified">TACE / Brand unconfirmed</label>
           <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
