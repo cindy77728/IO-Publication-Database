@@ -2116,7 +2116,7 @@ html body.calibre-theme,html body.calibre-theme *{
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
-      <option value="dc-bead">DC Bead</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
+      <option value="dc-bead">DC Bead</option><option value="embolization-mixed">Embolization / Mixed products</option><option value="embosphere">Embosphere</option><option value="embozene">Embozene</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
       <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-both">Y90 Both</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
@@ -2348,7 +2348,7 @@ html body.calibre-theme,html body.calibre-theme *{
         <div class="radio-group" style="margin-top:4px">
           <label class="radio-option"><input type="radio" name="product" value="cryoablation"> <span style="color:var(--cryo)">● Cryoablation</span></label>
           <label class="radio-option"><input type="radio" name="product" value="dc-bead"> <span style="color:var(--dc-bead)">● DC Bead</span></label>
-<label class="radio-option"><input type="radio" name="product" value="deb-competitor">DEB Competitor</label>
+<label class="radio-option"><input type="radio" name="product" value="deb-competitor">DEB Competitor</label><label class="radio-option"><input type="radio" name="product" value="embolization-mixed">Embolization / Mixed products</label><label class="radio-option"><input type="radio" name="product" value="embosphere">Embosphere</label><label class="radio-option"><input type="radio" name="product" value="embozene">Embozene</label>
 <label class="radio-option"><input type="radio" name="product" value="tace-unspecified">TACE / Brand unconfirmed</label>
           <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
@@ -14996,6 +14996,9 @@ savePublication = function(){
    ══════════════════════════════════════════════════════════ */
 
 const IOE_PRODUCT_META = {
+  'embolization-mixed': {label:'Embolization / Mixed products', short:'Embolization / Mixed products', cls:'badge-dc-bead'},
+  'embosphere': {label:'Embosphere', short:'Embosphere', cls:'badge-dc-bead'},
+  'embozene': {label:'Embozene', short:'Embozene', cls:'badge-dc-bead'},
   'cryoablation': {label:'Cryoablation', short:'Cryo', cls:'badge-cryo'},
   'dc-bead': {label:'DC Bead', short:'DC Bead', cls:'badge-dc-bead'},
   'deb-competitor': {label:'DEB Competitor', short:'DEB Competitor', cls:'badge-dc-bead'},
@@ -15007,6 +15010,9 @@ const IOE_PRODUCT_META = {
 };
 
 function normalizeProductCode(value){
+  if(String(value||'').trim().toLowerCase()==='embolization-mixed')return 'embolization-mixed';
+  if(String(value||'').trim().toLowerCase()==='embosphere')return 'embosphere';
+  if(String(value||'').trim().toLowerCase()==='embozene')return 'embozene';
   const v=String(value || '').trim().toLowerCase();
   if(v==='deb-competitor' || v==='tace-unspecified') return v;
   if(v==='cryoablation' || v==='cryo') return 'cryoablation';
@@ -15516,8 +15522,8 @@ function renderCards(data){
 
 function renderDashboard(){
   const total=(publications || []).length;
-  const productOrder=['cryoablation','dc-bead','deb-competitor','tace-unspecified','y90-resin','y90-glass','y90-both','y90-na'];
-  const colors={'deb-competitor':'#ad7624','tace-unspecified':'#718096','cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
+  const productOrder=['embolization-mixed','embosphere','embozene','cryoablation','dc-bead','deb-competitor','tace-unspecified','y90-resin','y90-glass','y90-both','y90-na'];
+  const colors={'embolization-mixed':'#718096','embosphere':'#718096','embozene':'#718096','deb-competitor':'#ad7624','tace-unspecified':'#718096','cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -15529,6 +15535,9 @@ function renderDashboard(){
   const pmcCount=publications.filter(p=>hasPMC(p)).length, jifCount=publications.filter(p=>validJIFNumber(p.journalImpactFactor ?? p.jif)!==null).length;
   const y90All=byProduct['y90-resin']+byProduct['y90-glass']+byProduct['y90-both']+byProduct['y90-na'];
   const productRows=[
+    {key:'embolization-mixed',label:'Embolization / Mixed products',count:byProduct['embolization-mixed']},
+    {key:'embosphere',label:'Embosphere',count:byProduct['embosphere']},
+    {key:'embozene',label:'Embozene',count:byProduct['embozene']},
     {key:'cryoablation',label:'Cryoablation',count:byProduct['cryoablation']},
     {key:'dc-bead',label:'DC Bead',count:byProduct['dc-bead']},
     {key:'deb-competitor',label:'DEB Competitor',count:byProduct['deb-competitor']},
