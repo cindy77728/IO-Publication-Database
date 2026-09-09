@@ -2116,7 +2116,7 @@ html body.calibre-theme,html body.calibre-theme *{
     <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option><option value="cryoablation">Cryoablation</option>
-      <option value="dc-bead">DC Bead</option>
+      <option value="dc-bead">DC Bead</option><option value="deb-competitor">DEB Competitor</option><option value="tace-unspecified">TACE / Brand unconfirmed</option>
       <option value="y90">Y90 (All)</option><option value="y90-resin">Y90 Resin</option><option value="y90-glass">Y90 Glass</option><option value="y90-both">Y90 Both</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
@@ -2348,6 +2348,8 @@ html body.calibre-theme,html body.calibre-theme *{
         <div class="radio-group" style="margin-top:4px">
           <label class="radio-option"><input type="radio" name="product" value="cryoablation"> <span style="color:var(--cryo)">● Cryoablation</span></label>
           <label class="radio-option"><input type="radio" name="product" value="dc-bead"> <span style="color:var(--dc-bead)">● DC Bead</span></label>
+<label class="radio-option"><input type="radio" name="product" value="deb-competitor">DEB Competitor</label>
+<label class="radio-option"><input type="radio" name="product" value="tace-unspecified">TACE / Brand unconfirmed</label>
           <label class="radio-option"><input type="radio" name="product" value="y90-resin"> <span style="color:var(--y90-resin)">● Y90 Resin</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-glass"> <span style="color:var(--y90-glass)">● Y90 Glass</span></label>
           <label class="radio-option"><input type="radio" name="product" value="y90-both"> <span style="color:var(--y90-both)">◐ Y90 Both</span></label>
@@ -14996,6 +14998,8 @@ savePublication = function(){
 const IOE_PRODUCT_META = {
   'cryoablation': {label:'Cryoablation', short:'Cryo', cls:'badge-cryo'},
   'dc-bead': {label:'DC Bead', short:'DC Bead', cls:'badge-dc-bead'},
+  'deb-competitor': {label:'DEB Competitor', short:'DEB Competitor', cls:'badge-dc-bead'},
+  'tace-unspecified': {label:'TACE / Brand unconfirmed', short:'TACE / Brand unconfirmed', cls:'badge-dc-bead'},
   'y90-resin': {label:'Y90 Resin', short:'Y90 Resin', cls:'badge-y90-resin'},
   'y90-glass': {label:'Y90 Glass', short:'Y90 Glass', cls:'badge-y90-glass'},
   'y90-both': {label:'Y90 Both', short:'Y90 Both', cls:'badge-y90-both'},
@@ -15004,6 +15008,7 @@ const IOE_PRODUCT_META = {
 
 function normalizeProductCode(value){
   const v=String(value || '').trim().toLowerCase();
+  if(v==='deb-competitor' || v==='tace-unspecified') return v;
   if(v==='cryoablation' || v==='cryo') return 'cryoablation';
   if(v==='dc-bead' || v==='dc bead' || v==='dcbead') return 'dc-bead';
   if(v==='y90-resin' || v==='resin') return 'y90-resin';
@@ -15511,8 +15516,8 @@ function renderCards(data){
 
 function renderDashboard(){
   const total=(publications || []).length;
-  const productOrder=['cryoablation','dc-bead','y90-resin','y90-glass','y90-both','y90-na'];
-  const colors={'cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
+  const productOrder=['cryoablation','dc-bead','deb-competitor','tace-unspecified','y90-resin','y90-glass','y90-both','y90-na'];
+  const colors={'deb-competitor':'#ad7624','tace-unspecified':'#718096','cryoablation':'var(--cryo)','dc-bead':'var(--dc-bead)','y90-all':'var(--y90-all)','y90-resin':'var(--y90-resin)','y90-glass':'var(--y90-glass)','y90-both':'var(--y90-both)','y90-na':'var(--y90-na)'};
   const byProduct=Object.fromEntries(productOrder.map(k=>[k,0])), byYear={}, byCat={}, byCountry={};
   publications.forEach(p=>{
     byProduct[normalizeProductCode(p.product)]++;
@@ -15526,6 +15531,8 @@ function renderDashboard(){
   const productRows=[
     {key:'cryoablation',label:'Cryoablation',count:byProduct['cryoablation']},
     {key:'dc-bead',label:'DC Bead',count:byProduct['dc-bead']},
+    {key:'deb-competitor',label:'DEB Competitor',count:byProduct['deb-competitor']},
+    {key:'tace-unspecified',label:'TACE / Brand unconfirmed',count:byProduct['tace-unspecified']},
     {key:'y90-all',label:'Y90 (All)',count:y90All,parent:true},
     {key:'y90-resin',label:'↳ Y90 Resin',count:byProduct['y90-resin'],child:true},
     {key:'y90-glass',label:'↳ Y90 Glass',count:byProduct['y90-glass'],child:true},
@@ -16125,6 +16132,22 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
       let data=JSON.parse(text);
       if(Array.isArray(data)) data={publications:data,categories:[...new Set(data.flatMap(p=>p.categories||[]))]};
       if(!Array.isArray(data.publications)||!Array.isArray(data.categories))throw new Error('Expected publications and categories arrays.');
+      if(data.importMode==='merge-publications'){
+        if(!data.publications.every(p=>p && typeof p.title==='string' && p.title.trim() && Number.isInteger(p.year) && Array.isArray(p.categories)))throw new Error('Invalid publication records.');
+        const key=s=>String(s||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g,'');
+        const doi=s=>(String(s||'').toLowerCase().match(/10\.\d{4,9}\/[^\s?#]+/)||[])[0]||'';
+        const titles=new Set(publications.map(p=>key(p.title))), dois=new Set(publications.map(p=>doi(p.url)).filter(Boolean));
+        const ids=new Set(publications.map(p=>p.id));let added=0,skipped=0;
+        for(const p of data.publications){
+          const t=key(p.title),d=doi(p.url);
+          if(titles.has(t)||(d&&dois.has(d))){skipped++;continue;}
+          let id=p.id;while(!Number.isSafeInteger(id)||ids.has(id))id=Date.now()+added+Math.floor(Math.random()*100000);
+          publications.push({...p,id,product:normalizeProductCode(p.product)});ids.add(id);titles.add(t);if(d)dois.add(d);added++;
+          for(const c of [...p.categories,p.primaryCategory].filter(Boolean))if(!ALL_CATEGORIES.includes(c))ALL_CATEGORIES.push(c);
+        }
+        if(added){render();markDirty();}
+        notify(added+' publications imported · '+skipped+' duplicates skipped.','success');return;
+      }
       if(!confirm('Replace this tab’s draft with the backup? Nothing is shared until you publish.'))return;
       applyDocument(data);markDirty();notify('Backup imported as an unpublished draft.','success');
     }catch(e){notify('Import failed: '+e.message,'error');}
