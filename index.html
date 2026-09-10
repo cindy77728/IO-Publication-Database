@@ -2169,7 +2169,7 @@ body.modal-open #publication-floating-head{visibility:hidden}
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
     <select id="filter-region" aria-label="Filter by region" onchange="populateCountryFilter();applyFilters()">
-      <option value="">All Regions</option><option>APAC</option><option>EMEA</option><option>US/Canada</option><option>Global</option><option value="unspecified">Not specified</option>
+      <option value="">All Regions</option><option>APAC</option><option>EMEA</option><option>US/Canada</option><option value="Global">Global (Worldwide)</option><option value="multi-region">Multi-region</option><option value="unspecified">Not specified / scope unconfirmed</option>
     </select>
     <select id="filter-country" aria-label="Filter by country or recorded location" onchange="applyFilters()"><option value="">All Countries</option></select>
     <select id="sort-by" onchange="applySortSelection()">
@@ -8858,7 +8858,9 @@ function populateYearFilter() {
 function publicationRegion(country) {
   const value = String(country || '').trim().toLowerCase();
   if (!value) return 'unspecified';
-  if (/\b(international|global|worldwide)\b/.test(value)) return 'Global';
+  if (/\b(global|worldwide)\b/.test(value)) return 'Global';
+  // International alone does not establish worldwide coverage.
+  const international = /\binternational\b/.test(value);
   const groups = {
     APAC: ['apac','asia','asia-pacific','asia pacific','australia','new zealand','china','mainland china','hong kong','macau','macao','taiwan','japan','korea','south korea','republic of korea','singapore','india','indonesia','malaysia','thailand','vietnam','viet nam','philippines','pakistan','bangladesh','sri lanka','nepal','cambodia','laos','myanmar','mongolia','bhutan','brunei','maldives','fiji','papua new guinea'],
     EMEA: ['emea','europe','european union','middle east','africa','uk','united kingdom','england','scotland','wales','northern ireland','ireland','france','germany','italy','spain','portugal','netherlands','belgium','switzerland','austria','greece','denmark','sweden','norway','finland','iceland','poland','czech republic','czechia','hungary','romania','bulgaria','croatia','serbia','slovenia','slovakia','estonia','latvia','lithuania','ukraine','russia','turkey','türkiye','israel','saudi arabia','uae','united arab emirates','qatar','kuwait','oman','bahrain','jordan','lebanon','iran','iraq','egypt','south africa','morocco','tunisia','algeria','kenya','nigeria','ghana','ethiopia','tanzania'],
@@ -8867,12 +8869,12 @@ function publicationRegion(country) {
   const parts = value.split(/\s*(?:\/|;|,|&|\band\b)\s*/).filter(Boolean);
   const regions = new Set();
   for (const part of parts) {
-    if (/^(multicenter|multicentre|multicountry|multi-country)$/.test(part)) continue;
+    if (/^(international|multicenter|multicentre|multicountry|multi-country)$/.test(part)) continue;
     const region = Object.keys(groups).find(key => groups[key].includes(part));
     if (!region) return 'unspecified';
     regions.add(region);
   }
-  return regions.size > 1 ? 'Global' : [...regions][0] || 'unspecified';
+  return regions.size > 1 ? 'multi-region' : international ? 'unspecified' : [...regions][0] || 'unspecified';
 }
 function populateCountryFilter() {
   const region = document.getElementById('filter-region')?.value || '';
