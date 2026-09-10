@@ -2146,7 +2146,7 @@ body.modal-open #publication-floating-head{visibility:hidden}
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="search-input" placeholder="Search title, authors, country, findings…" oninput="applyFilters()">
     </div>
-    <select id="filter-category" onchange="applyFilters()"><option value="">All Categories</option></select>
+    <select id="filter-category" aria-label="Filter by main category or subcategory" onchange="activeCategory='';buildCategoryStrip();applyFilters()"><option value="">All Categories</option></select>
     <select id="filter-product" onchange="applyFilters()">
       <option value="">All Products</option>
       <option value="cryoablation">Cryoablation</option>
@@ -11145,13 +11145,26 @@ function filterByMoreCategory(cat){
   buildCategoryStrip();
 }
 function populateCategoryFilter(){
+  const select = document.getElementById('filter-category');
+  const selected = select.value;
   const counts = categoryUsageCounts();
-  const parents = getParentCategories();
-  const children = ALL_CATEGORIES.filter(isChildCategory).sort();
-  document.getElementById('filter-category').innerHTML = '<option value="">All Categories</option>' +
-    parents.map(c => `<option value="${escapeHtml(c)}">${optionLabel(c, counts)}</option>`).join('') +
-    (children.length ? `<optgroup label="Subcategories">${children.map(c => `<option value="${escapeHtml(c)}">${optionLabel(c, counts)}</option>`).join('')}</optgroup>` : '');
+  select.innerHTML = '<option value="">All Categories</option>' +
+    getParentCategories().map(parent => {
+      const children = ALL_CATEGORIES
+        .filter(c => isChildCategory(c) && catParent(c) === parent)
+        .sort((a,b) => catParts(a).child.localeCompare(catParts(b).child));
+      if (!children.length) {
+        return `<option value="${escapeHtml(parent)}">${escapeHtml(optionLabel(parent, counts))}</option>`;
+      }
+      return `<optgroup label="${escapeHtml(parent)}">` +
+        `<option value="${escapeHtml(parent)}">All ${escapeHtml(parent)} (${counts[parent] || 0})</option>` +
+        children.map(c => `<option value="${escapeHtml(c)}">  ↳ ${escapeHtml(catParts(c).child)} (${counts[c] || 0})</option>`).join('') +
+        '</optgroup>';
+    }).join('');
+  // Preserve the current selection when publications or categories refresh.
+  if ([...select.options].some(option => option.value === selected)) select.value = selected;
 }
+
 function buildCatSelectGrid(){
   const selected = new Set([...document.querySelectorAll('.cat-select-chip.selected')].map(c => c.dataset.cat));
   const parents = getParentCategories();
