@@ -9000,6 +9000,34 @@ function paperPdfButtons(p){
 // ══════════════════════════════════════════════════════════ SMART SEARCH
 function setSmartSearch(q) { document.getElementById('smart-search').value=q; smartSearch(q); }
 
+function smartSearchText(p) {
+  return [p.title,p.abstract,p.findings,p.results,p.authors,p.journal,...(p.categories || [])]
+    .filter(Boolean).join(' ').normalize('NFKC').replace(/[\u2010-\u2015]/g,'-').toLowerCase();
+}
+function smartTokenMatches(p, tok, text) {
+  if (tok.type === 'product') {
+    const product = normalizeProductCode(p.product);
+    if (tok.val === 'dc-bead') return product === 'dc-bead' || /\bdc[\s-]*beads?(?:\s*m1|\s*lumi)?\b/.test(text);
+    if (tok.val === 'y90') return product.startsWith('y90-') || /\by[- ]?90\b|radioemboli[sz]ation/.test(text);
+    if (tok.val === 'y90-glass' || tok.val === 'y90-resin') return product === tok.val || product === 'y90-both';
+    return product === tok.val;
+  }
+  if (tok.type === 'keyword') {
+    const synonyms = {
+      hcc: /\bhcc\b|hepatocellular carcinoma|hepatocellular cancer/,
+      pvt: /\bpvt\b|portal vein (?:tumou?r |tumou?r[- ]?)?thromb/,
+      mcrc: /\bmcrc\b|colorectal.*metasta|metasta.*colorectal/,
+      efficacy: /efficacy|effectiveness|clinical (?:outcomes?|response)|tumou?r response/,
+      safety: /safety|adverse events?|complications?|toxicity/
+    };
+    return synonyms[tok.val] ? synonyms[tok.val].test(text) : text.includes(tok.val);
+  }
+  if (tok.type === 'dose') {
+    return [...text.matchAll(/(\d+(?:\.\d+)?)\s*gy\b/g)].some(m => tok.op==='>' ? Number(m[1])>tok.val : Number(m[1])<tok.val);
+  }
+  if (tok.type === 'year') return tok.op==='>' ? p.year>tok.val : p.year<tok.val;
+  return false;
+}
 function smartSearch(query) {
   if (!query.trim()) {
     smartFilterActive=false; smartFilteredIds=[];
@@ -9008,28 +9036,17 @@ function smartSearch(query) {
   }
   const tokens = parseSmartQuery(query);
   const scored = publications.map(p => {
-    let score=0;
-    const text=[p.title,p.findings||'',p.results||'',p.notes||'',p.authors||'',p.journal||'',...(p.categories||[])].join(' ').toLowerCase();
-    tokens.forEach(tok => {
-      if (tok.type==='keyword') {
-        if (text.includes(tok.val)) score += tok.required?3:1;
-        else if (tok.required) score-=10;
-      } else if (tok.type==='product') {
-        if (p.product===tok.val||p.product==='both') score+=4;
-      } else if (tok.type==='dose') {
-        const nums=text.match(/(\d+)\s*gy/gi)||[];
-        if (nums.some(m=>{ const d=parseInt(m); return tok.op==='>'?d>tok.val:d<tok.val; })) score+=5;
-      } else if (tok.type==='year') {
-        if ((tok.op==='>'&&p.year>tok.val)||(tok.op==='<'&&p.year<tok.val)) score+=3;
-      }
-    });
+    const text = smartSearchText(p);
+    // Every requested concept must match; a shared disease cannot bypass the product.
+    if (!tokens.length || !tokens.every(tok => smartTokenMatches(p,tok,text))) return null;
+    const title=String(p.title || '').toLowerCase();
+    const score=tokens.reduce((sum,tok)=>sum+(tok.type==='product'?4:tok.type==='keyword'&&title.includes(tok.val)?3:1),0);
     return {p,score};
-  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
-
+  }).filter(Boolean).sort((a,b)=>b.score-a.score);
   smartFilterActive=true; smartFilteredIds=scored.map(x=>x.p.id);
   const banner=document.getElementById('smart-result-banner');
   banner.style.display='block';
-  banner.innerHTML=`<div class="smart-result-highlight">🧠 Smart search found <strong>${scored.length}</strong> publications matching <em>"${query}"</em> — ranked by relevance</div>`;
+  banner.innerHTML=`<div class="smart-result-highlight">🧠 Smart search found <strong>${scored.length}</strong> publications matching all requested concepts in <em>"${escapeHtml(query)}"</em> — ranked by relevance</div>`;
   applyFilters();
 }
 
@@ -15174,12 +15191,13 @@ function buildIOEPubMedQuery(scope='all'){
 function parseSmartQuery(q){
   const tokens=[], lq=String(q || '').toLowerCase();
   if(/\bcryo(?:ablation)?\b/.test(lq)) tokens.push({type:'product',val:'cryoablation'});
-  if(/\bdc[- ]?bead\b|\bdcbead\b/.test(lq)) tokens.push({type:'product',val:'dc-bead'});
+  if(/\bdc[\s-]*beads?(?:\s*m1|\s*lumi)?\b/.test(lq)) tokens.push({type:'product',val:'dc-bead'});
   if(/\bglass\b/.test(lq)) tokens.push({type:'product',val:'y90-glass'});
   if(/\bresin\b/.test(lq)) tokens.push({type:'product',val:'y90-resin'});
+  if(/\by[- ]?90\b/.test(lq) && !tokens.some(t=>t.val==='y90-glass'||t.val==='y90-resin')) tokens.push({type:'product',val:'y90'});
   for(const m of String(q || '').matchAll(/([><])\s*(\d+)\s*gy/gi)) tokens.push({type:'dose',op:m[1],val:parseInt(m[2])});
   for(const m of String(q || '').matchAll(/([><])(\d{4})/g)) tokens.push({type:'year',op:m[1],val:parseInt(m[2])});
-  const cleaned=String(q || '').replace(/[><]\d+\s*gy/gi,'').replace(/[><]\d{4}/g,'').replace(/\bdc[- ]?bead\b|\bdcbead\b/gi,'').replace(/\b(and|or|y90|glass|resin|cryo|cryoablation)\b/gi,'').trim();
+  const cleaned=String(q || '').replace(/[><]\s*\d+\s*gy/gi,'').replace(/[><]\s*\d{4}/g,'').replace(/\bdc[\s-]*beads?(?:\s*m1|\s*lumi)?\b/gi,'').replace(/\b(and|or|y[- ]?90|glass|resin|cryo|cryoablation)\b/gi,'').trim();
   cleaned.split(/[\s+]+/).forEach(w=>{
     const wc=w.replace(/[^a-z0-9-]/gi,'').toLowerCase();
     if(wc.length>2) tokens.push({type:'keyword',val:wc,required:String(q).includes('+'+w)||String(q).includes(w+'+')});
