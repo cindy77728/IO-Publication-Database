@@ -2040,6 +2040,35 @@ html body.calibre-theme,html body.calibre-theme *{
 @media(max-width:700px){.pubmed-title-tools>*{width:100%}.pubmed-title-tools input{width:100%!important;min-width:0}.pubmed-timeframe-tools>.btn,.pubmed-timeframe-tools>select,.custom-days-wrap{flex:1 1 auto}.custom-days-wrap input{min-width:90px}}
 
 </style>
+<style>
+/* Compact access controls and readable publication headings. */
+@media(min-width:769px){
+  header .header-top{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;gap:8px 16px!important}
+  header .logo-area{width:auto!important;min-width:0!important}
+  header .logo-area h1{font-size:32px!important;line-height:1.1!important}
+  header .logo-area p{font-size:14px!important}
+  header .header-actions{grid-column:1/-1}
+  header .access-strip{max-width:650px;justify-content:flex-end}
+}
+header .access-strip{padding:0!important;gap:8px;align-items:center}
+header .access-strip .btn{min-height:36px;padding:7px 12px!important;font-size:14px!important;margin:0}
+header #access-message{flex:1 1 100%;font-size:14px;margin:0}
+html[data-ioe-role="viewer"] #access-message{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#access-role{font-size:14px}
+.publication-table thead th{background:#e5eef9!important;color:#163c67!important;font-size:15px!important;font-weight:700!important;letter-spacing:.02em!important;padding:14px 16px!important;border-bottom:2px solid #9db6d7!important;white-space:nowrap}
+.publication-table .column-sort{font:inherit;color:inherit;background:transparent;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:24px;text-transform:inherit}
+.publication-table th:has(.column-sort):hover{background:#d7e6f9!important}
+.publication-table .column-sort:focus-visible{outline:2px solid #2563eb;outline-offset:4px;border-radius:2px}
+#publication-floating-head{position:fixed;overflow:hidden;z-index:1180;background:#e5eef9;box-shadow:0 3px 8px #163c6726;border:1px solid #9db6d7;pointer-events:auto}
+#publication-floating-head table{table-layout:fixed;border-collapse:collapse;margin:0!important;min-width:0!important}
+#publication-floating-head[hidden]{display:none!important}
+body.modal-open #publication-floating-head{visibility:hidden}
+@media(max-width:768px){
+  header .access-strip{margin-left:auto;justify-content:flex-end;max-width:100%}
+  header .logo-area h1{font-size:26px!important}
+}
+@media print{#publication-floating-head{display:none!important}}
+</style>
 </head>
 <body class="calibre-theme">
 
@@ -2049,6 +2078,16 @@ html body.calibre-theme,html body.calibre-theme *{
       <h1>IO&amp;E <span>Database</span></h1>
       <p>Interventional Oncology &amp; Embolization Literature Management · v7.6 · Add/Edit product cleanup</p>
     </div>
+<div class="access-strip" aria-label="Database access">
+  <span id="access-role">View only</span>
+  <span id="access-message" role="status" aria-live="polite">Loading the public library…</span>
+  <button class="btn btn-secondary" id="access-signin">Editor sign-in</button>
+  <button class="btn btn-secondary" id="access-team" hidden>Manage editors</button>
+  <label class="btn btn-secondary" data-editor-control>Import JSON<input type="file" accept=".json,application/json" onchange="importJSONFile(this)" style="display:none"></label>
+  <button class="btn btn-green" id="access-save" hidden>Publish changes</button>
+  <button class="btn btn-secondary" id="access-draft-export" hidden>Export unsaved draft</button>
+  <button class="btn btn-secondary" id="access-signout" hidden>Sign out</button>
+</div>
     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <div class="header-actions" id="header-actions-drawer">
       <div class="header-stats">
@@ -2072,16 +2111,7 @@ html body.calibre-theme,html body.calibre-theme *{
     </div>
   </div>
 
-<div class="access-strip" aria-label="Database access">
-  <span id="access-role">View only</span>
-  <span id="access-message" role="status" aria-live="polite">Loading the public library…</span>
-  <button class="btn btn-secondary" id="access-signin">Editor sign-in</button>
-  <button class="btn btn-secondary" id="access-team" hidden>Manage editors</button>
-  <label class="btn btn-secondary" data-editor-control>Import JSON<input type="file" accept=".json,application/json" onchange="importJSONFile(this)" style="display:none"></label>
-  <button class="btn btn-green" id="access-save" hidden>Publish changes</button>
-  <button class="btn btn-secondary" id="access-draft-export" hidden>Export unsaved draft</button>
-  <button class="btn btn-secondary" id="access-signout" hidden>Sign out</button>
-</div>
+
 </header>
 
 <div class="tabs">
@@ -16325,5 +16355,64 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
 })();
 
 </script>
+
+<script>
+/* Keep the same sortable column controls visible above a horizontally scrollable table. */
+(() => {
+ const table=document.querySelector('#table-view .publication-table');
+ const wrap=table.parentElement, head=table.tHead;
+ const floating=document.createElement('div');
+ floating.id='publication-floating-head';floating.hidden=true;
+ const copy=document.createElement('table');copy.className='publication-table';
+ copy.setAttribute('aria-label','Publication column sorting');
+ floating.append(copy);document.body.append(floating);
+ const labels={year:'Year',title:'Title',country:'Country',jif:'JIF'};
+ head.querySelectorAll('th').forEach(th=>{
+   th.scope='col';const handler=th.getAttribute('onclick');if(!handler)return;
+   const field=handler.match(/sortBy\('([^']+)'\)/)[1];
+   th.removeAttribute('onclick');th.dataset.sortField=field;
+   const button=document.createElement('button');button.type='button';button.className='column-sort';
+   button.setAttribute('onclick',handler);th.replaceChildren(button);
+ });
+ function updateLabels(root){
+   root.querySelectorAll('[data-sort-field]').forEach(th=>{
+     const field=th.dataset.sortField,active=sortField===field;
+     th.setAttribute('aria-sort',active?(sortDir==='asc'?'ascending':'descending'):'none');
+     const button=th.querySelector('button');button.textContent=labels[field]+' '+(active?(sortDir==='asc'?'↑':'↓'):'↕');
+     button.setAttribute('aria-label','Sort by '+(field==='jif'?'Journal Impact Factor':labels[field]));
+   });
+ }
+ updateLabels(head);copy.append(head.cloneNode(true));
+ let scheduled=false;
+ function update(){
+   scheduled=false;updateLabels(head);updateLabels(copy);
+   const role=document.getElementById('access-role'),message=document.getElementById('access-message');
+   role.title=message.textContent;role.setAttribute('aria-describedby','access-message');
+   const rect=table.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
+   let top=0;
+   for(const el of document.querySelectorAll('header,.tabs,.library-filter-sticky')){
+     const style=getComputedStyle(el),r=el.getBoundingClientRect();
+     if((style.position==='sticky'||style.position==='fixed')&&r.height&&r.top<=top+1)top=Math.max(top,r.bottom);
+   }
+   const height=head.getBoundingClientRect().height;
+   const show=table.getClientRects().length&&rect.top<top&&rect.bottom>top+height&&top+height<innerHeight;
+   floating.hidden=!show;if(!show)return;
+   floating.style.top=top+'px';floating.style.left=wr.left+'px';floating.style.width=wr.width+'px';
+   copy.style.width=rect.width+'px';copy.style.transform='translateX('+(-wrap.scrollLeft)+'px)';
+   [...head.rows[0].cells].forEach((cell,i)=>{const target=copy.tHead.rows[0].cells[i],width=cell.getBoundingClientRect().width+'px';target.style.boxSizing='border-box';for(const property of ['width','min-width','max-width'])target.style.setProperty(property,width,'important');});
+ }
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update);}}
+ window.addEventListener('scroll',schedule,{passive:true});wrap.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',schedule);window.addEventListener('load',schedule);
+ new ResizeObserver(schedule).observe(table);
+ for(const el of document.querySelectorAll('header,.tabs,.library-filter-sticky'))new ResizeObserver(schedule).observe(el);
+ new MutationObserver(schedule).observe(document.getElementById('table-body'),{childList:true});
+ new MutationObserver(schedule).observe(document.getElementById('access-message'),{childList:true});
+ new MutationObserver(schedule).observe(document.getElementById('panel-library'),{attributes:true,attributeFilter:['class','style']});
+ new MutationObserver(schedule).observe(document.getElementById('table-view'),{attributes:true,attributeFilter:['style']});
+ schedule();
+})();
+</script>
+
 </body>
 </html>
