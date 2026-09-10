@@ -2069,6 +2069,12 @@ body.modal-open #publication-floating-head{visibility:hidden}
 }
 @media print{#publication-floating-head{display:none!important}}
 </style>
+<style>
+/* Keep linked geography filters readable while allowing the toolbar to wrap. */
+.library-filter-sticky .controls{flex-wrap:wrap!important}
+.library-filter-sticky #filter-region{min-width:145px;width:145px;font-size:14px}
+.library-filter-sticky #filter-country{min-width:160px!important}
+</style>
 </head>
 <body class="calibre-theme">
 
@@ -2162,7 +2168,10 @@ body.modal-open #publication-floating-head{visibility:hidden}
       <option value="y90-na">↳ Y90 N/A</option>
     </select>
     <select id="filter-year" onchange="applyFilters()"><option value="">All Years</option></select>
-    <select id="filter-country" onchange="applyFilters()"><option value="">Country</option></select>
+    <select id="filter-region" aria-label="Filter by region" onchange="populateCountryFilter();applyFilters()">
+      <option value="">All Regions</option><option>APAC</option><option>EMEA</option><option>US/Canada</option><option>Global</option><option value="unspecified">Not specified</option>
+    </select>
+    <select id="filter-country" aria-label="Filter by country or recorded location" onchange="applyFilters()"><option value="">All Countries</option></select>
     <select id="sort-by" onchange="applySortSelection()">
       <option value="year-desc">Year ↓</option><option value="year-asc">Year ↑</option>
       <option value="jif-desc">JIF: highest first</option><option value="jif-asc">JIF: lowest first</option>
@@ -8845,16 +8854,40 @@ function populateYearFilter() {
   document.getElementById('filter-year').innerHTML = '<option value="">All Years</option>' +
     years.map(y=>`<option value="${y}">${y}</option>`).join('');
 }
+// Region is derived for browsing; original country text remains unchanged.
+function publicationRegion(country) {
+  const value = String(country || '').trim().toLowerCase();
+  if (!value) return 'unspecified';
+  if (/\b(international|global|worldwide)\b/.test(value)) return 'Global';
+  const groups = {
+    APAC: ['apac','asia','asia-pacific','asia pacific','australia','new zealand','china','mainland china','hong kong','macau','macao','taiwan','japan','korea','south korea','republic of korea','singapore','india','indonesia','malaysia','thailand','vietnam','viet nam','philippines','pakistan','bangladesh','sri lanka','nepal','cambodia','laos','myanmar','mongolia','bhutan','brunei','maldives','fiji','papua new guinea'],
+    EMEA: ['emea','europe','european union','middle east','africa','uk','united kingdom','england','scotland','wales','northern ireland','ireland','france','germany','italy','spain','portugal','netherlands','belgium','switzerland','austria','greece','denmark','sweden','norway','finland','iceland','poland','czech republic','czechia','hungary','romania','bulgaria','croatia','serbia','slovenia','slovakia','estonia','latvia','lithuania','ukraine','russia','turkey','türkiye','israel','saudi arabia','uae','united arab emirates','qatar','kuwait','oman','bahrain','jordan','lebanon','iran','iraq','egypt','south africa','morocco','tunisia','algeria','kenya','nigeria','ghana','ethiopia','tanzania'],
+    'US/Canada': ['usa','us','u.s.','u.s.a.','united states','united states of america','canada']
+  };
+  const parts = value.split(/\s*(?:\/|;|,|&|\band\b)\s*/).filter(Boolean);
+  const regions = new Set();
+  for (const part of parts) {
+    if (/^(multicenter|multicentre|multicountry|multi-country)$/.test(part)) continue;
+    const region = Object.keys(groups).find(key => groups[key].includes(part));
+    if (!region) return 'unspecified';
+    regions.add(region);
+  }
+  return regions.size > 1 ? 'Global' : [...regions][0] || 'unspecified';
+}
 function populateCountryFilter() {
-  const countries = [...new Set(publications.map(p => (p.country || '').trim()).filter(Boolean))]
+  const region = document.getElementById('filter-region')?.value || '';
+  const countries = [...new Set(publications
+    .filter(p => !region || publicationRegion(p.country) === region)
+    .map(p => (p.country || '').trim()).filter(Boolean))]
     .sort((a,b)=>a.localeCompare(b));
   const select = document.getElementById('filter-country');
   if (!select) return;
   const current = select.value;
-  select.innerHTML = '<option value="">Country</option>' +
-    countries.map(c=>`<option value="${c}">${c}</option>`).join('');
+  select.innerHTML = '<option value="">All Countries</option>' +
+    countries.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
   if ([...select.options].some(o => o.value === current)) select.value = current;
 }
+
 function buildCatSelectGrid() {
   document.getElementById('cat-select-grid').innerHTML =
     ALL_CATEGORIES.map(c=>`<span class="cat-select-chip" onclick="toggleCatChip(this)" data-cat="${c}">${c}</span>`).join('');
@@ -9027,6 +9060,7 @@ function applyFilters() {
   const productFilter=document.getElementById('filter-product').value;
   const yearFilter=document.getElementById('filter-year').value;
   const countryFilter=document.getElementById('filter-country').value;
+  const regionFilter=document.getElementById('filter-region').value;
   const sortVal=document.getElementById('sort-by').value;
 
   let filtered=publications.filter(p=>{
@@ -9040,7 +9074,8 @@ function applyFilters() {
       if(!matchesPublicationProduct(p,productFilter)) return false;
     }
     if (yearFilter&&p.year!=yearFilter) return false;
-    if (countryFilter&&(p.country||'')!==countryFilter) return false;
+    if (regionFilter && publicationRegion(p.country)!==regionFilter) return false;
+    if (countryFilter&&(p.country||'').trim()!==countryFilter) return false;
     return true;
   });
 
@@ -9084,7 +9119,8 @@ function filterByCategory(el,cat) {
 function clearFilters() {
   document.getElementById('search-input').value='';
   document.getElementById('smart-search').value='';
-  ['filter-category','filter-product','filter-year','filter-country'].forEach(id=>document.getElementById(id).value='');
+  ['filter-category','filter-product','filter-year','filter-region','filter-country'].forEach(id=>document.getElementById(id).value='');
+  populateCountryFilter();
   document.getElementById('sort-by').value='year-desc';
   document.getElementById('smart-result-banner').style.display='none';
   activeCategory=''; smartFilterActive=false; smartFilteredIds=[];
@@ -11392,6 +11428,7 @@ function applyFilters(){
   const productFilter=document.getElementById('filter-product').value;
   const yearFilter=document.getElementById('filter-year').value;
   const countryFilter=document.getElementById('filter-country').value;
+  const regionFilter=document.getElementById('filter-region').value;
   const sortVal=document.getElementById('sort-by').value;
   let filtered=publications.filter(p=>{
     if (smartFilterActive&&!smartFilteredIds.includes(p.id)) return false;
@@ -11404,7 +11441,8 @@ function applyFilters(){
       if(!matchesPublicationProduct(p,productFilter)) return false;
     }
     if (yearFilter&&p.year!=yearFilter) return false;
-    if (countryFilter&&(p.country||'')!==countryFilter) return false;
+    if (regionFilter && publicationRegion(p.country)!==regionFilter) return false;
+    if (countryFilter&&(p.country||'').trim()!==countryFilter) return false;
     return true;
   });
   const selectedCatForSort = activeCategory || catFilter;
@@ -11454,7 +11492,8 @@ function filterByCategory(el,cat){
 function clearFilters(){
   document.getElementById('search-input').value='';
   document.getElementById('smart-search').value='';
-  ['filter-category','filter-product','filter-year','filter-country'].forEach(id=>document.getElementById(id).value='');
+  ['filter-category','filter-product','filter-year','filter-region','filter-country'].forEach(id=>document.getElementById(id).value='');
+  populateCountryFilter();
   document.getElementById('sort-by').value='year-desc';
   document.getElementById('smart-result-banner').style.display='none';
   activeCategory=''; smartFilterActive=false; smartFilteredIds=[];
@@ -14791,6 +14830,7 @@ function capturePublicationReturnState(){
     filterCategory: __getValueSafe('filter-category'),
     filterProduct: __getValueSafe('filter-product'),
     filterYear: __getValueSafe('filter-year'),
+    filterRegion: __getValueSafe('filter-region'),
     filterCountry: __getValueSafe('filter-country'),
     sortBy: __getValueSafe('sort-by'),
     pubmedScope: __getValueSafe('pubmed-scope'),
@@ -14809,6 +14849,8 @@ function restorePublicationReturnState(state, highlightId){
     __setValueSafe('filter-category', state.filterCategory);
     __setValueSafe('filter-product', state.filterProduct);
     __setValueSafe('filter-year', state.filterYear);
+    __setValueSafe('filter-region', state.filterRegion || '');
+    populateCountryFilter();
     __setValueSafe('filter-country', state.filterCountry);
     __setValueSafe('sort-by', state.sortBy || 'year-desc');
 
