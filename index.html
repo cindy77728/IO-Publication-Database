@@ -2075,6 +2075,16 @@ body.modal-open #publication-floating-head{visibility:hidden}
 .library-filter-sticky #filter-region{min-width:145px;width:145px;font-size:14px}
 .library-filter-sticky #filter-country{min-width:160px!important}
 </style>
+<style>
+.library-filter-sticky .library-view-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto;margin-left:auto;white-space:nowrap}
+.library-filter-sticky .library-view-actions > .btn{height:40px!important;min-height:40px!important;padding:0 14px!important}
+.library-filter-sticky .library-view-actions .view-toggle{display:flex!important;flex-direction:row!important;width:auto!important;margin:0!important}
+@media(min-width:1400px){
+  .library-filter-sticky .controls{display:grid!important;grid-template-columns:minmax(200px,1.7fr) minmax(200px,1.4fr) minmax(150px,1.2fr) 110px 150px minmax(145px,1fr) auto;gap:9px!important;align-items:center}
+  .library-filter-sticky .controls .search-wrap{width:100%!important;min-width:0!important;max-width:none!important}
+  .library-filter-sticky .controls > select{width:100%!important;min-width:0!important;max-width:none!important}
+}
+</style>
 </head>
 <body class="calibre-theme">
 
@@ -2172,16 +2182,14 @@ body.modal-open #publication-floating-head{visibility:hidden}
       <option value="">All Regions</option><option>APAC</option><option>EMEA</option><option>US/Canada</option><option>Global</option><option value="unspecified">Not specified</option>
     </select>
     <select id="filter-country" aria-label="Filter by country or recorded location" onchange="applyFilters()"><option value="">All Countries</option></select>
-    <select id="sort-by" onchange="applySortSelection()">
-      <option value="year-desc">Year ↓</option><option value="year-asc">Year ↑</option>
-      <option value="jif-desc">JIF: highest first</option><option value="jif-asc">JIF: lowest first</option>
-      <option value="title-asc">Title A–Z</option><option value="country-asc">Country A–Z</option>
-    </select>
+    <input type="hidden" id="sort-by" value="year-desc">
+    <div class="library-view-actions">
     <button class="btn btn-secondary" onclick="clearFilters()">Clear</button>
     <div class="view-toggle" style="margin-left:auto" aria-label="Display type">
       <button class="view-btn active" id="view-table" onclick="setView('table')" title="Table display" aria-label="Table display" aria-pressed="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/></svg><span>Table</span></button>
       <button class="view-btn" id="view-cards" onclick="setView('cards')" title="Card display" aria-label="Card display" aria-pressed="false"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Cards</span></button>
     </div>
+    </div><!-- /.library-view-actions -->
   </div>
 
   <div class="category-strip" id="category-strip"></div>
@@ -9062,6 +9070,7 @@ function applyFilters() {
   const countryFilter=document.getElementById('filter-country').value;
   const regionFilter=document.getElementById('filter-region').value;
   const sortVal=document.getElementById('sort-by').value;
+  [sortField,sortDir]=sortVal.split('-');
 
   let filtered=publications.filter(p=>{
     if (smartFilterActive&&!smartFilteredIds.includes(p.id)) return false;
@@ -11430,6 +11439,7 @@ function applyFilters(){
   const countryFilter=document.getElementById('filter-country').value;
   const regionFilter=document.getElementById('filter-region').value;
   const sortVal=document.getElementById('sort-by').value;
+  [sortField,sortDir]=sortVal.split('-');
   let filtered=publications.filter(p=>{
     if (smartFilterActive&&!smartFilteredIds.includes(p.id)) return false;
     const txt=[p.title,p.authors||'',p.country||'',p.findings||'',p.results||'',...(p.categories||[])].join(' ').toLowerCase();
