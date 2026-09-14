@@ -232,7 +232,8 @@ textarea{min-height:72px;resize:vertical}
 /* PUBMED PANEL */
 .pubmed-panel{max-width:880px}
 .pubmed-result-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:border-color .2s;position:relative}
-.pubmed-product-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.pubmed-product-tags{display:inline-flex;flex-wrap:wrap;gap:6px;margin:0;align-items:center}
+.pubmed-meta.pubmed-result-meta{margin-top:8px;gap:6px 10px}
 .pubmed-product-tags .product-badge{font-size:12px;white-space:normal}
 .pubmed-result-card:hover{border-color:rgba(232,201,106,.25)}
 .pubmed-result-card.has-pmc{border-color:rgba(63,185,80,.3);background:linear-gradient(135deg,rgba(63,185,80,.04),var(--surface2))}
@@ -9679,8 +9680,8 @@ async function fetchPubMed(days=0) {
           <div style="display:flex;align-items:flex-start;gap:10px;justify-content:space-between">
             <div style="flex:1">
               <div class="pubmed-title">${title}</div>
-              <div class="pubmed-product-tags" aria-label="Product and treatment labels" title="Automatically identified from the title and abstract; labels may include comparator treatments.">${pubmedProductBadges(title,abstract)}</div>
-              <div class="pubmed-meta">
+              <div class="pubmed-meta pubmed-result-meta">
+                <span class="pubmed-product-tags" aria-label="Product and treatment labels" title="Automatically identified from the title and abstract; labels may include comparator treatments.">${pubmedProductBadges(title,abstract)}</span>
                 <span>PMID: ${pmid}</span><span>${authors}</span>
                 <span style="font-style:italic">${journal}</span><span>${year}</span>
                 ${alreadyIn?'<span style="color:var(--accent3)">✓ In database</span>':''}
