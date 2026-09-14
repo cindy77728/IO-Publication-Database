@@ -2005,7 +2005,10 @@ html body.calibre-theme,html body.calibre-theme *{
 .ctm-trial-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 4px 16px rgba(15,23,42,.05);min-width:0}
 .ctm-trial-card.ctm-new{background:linear-gradient(135deg,#f2fbf5,#fff);border-color:#a9d4ba}
 .ctm-trial-card.ctm-changed{background:linear-gradient(135deg,#fff9ed,#fff);border-color:#e7c998}
-.ctm-card-head{display:grid;grid-template-columns:36px minmax(0,1fr);gap:9px;align-items:start;padding-bottom:12px;border-bottom:1px solid #e4eaf1}
+/* Flexible header keeps the title full-width when viewer access hides the star. */
+.ctm-card-head{display:flex;gap:9px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid #e4eaf1}
+.ctm-card-head > .ctm-star{flex:0 0 36px}
+.ctm-card-head > div{flex:1 1 0;min-width:0}
 .ctm-card-head .ctm-title{min-width:0;max-width:none;font-size:20px;overflow-wrap:anywhere}
 .ctm-card-tags{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:8px}
 .ctm-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px;min-width:0}
