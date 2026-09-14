@@ -232,6 +232,8 @@ textarea{min-height:72px;resize:vertical}
 /* PUBMED PANEL */
 .pubmed-panel{max-width:880px}
 .pubmed-result-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:border-color .2s;position:relative}
+.pubmed-product-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.pubmed-product-tags .product-badge{font-size:12px;white-space:normal}
 .pubmed-result-card:hover{border-color:rgba(232,201,106,.25)}
 .pubmed-result-card.has-pmc{border-color:rgba(63,185,80,.3);background:linear-gradient(135deg,rgba(63,185,80,.04),var(--surface2))}
 .pubmed-title{font-weight:500;font-size:13px;margin-bottom:5px;line-height:1.4}
@@ -9677,6 +9679,7 @@ async function fetchPubMed(days=0) {
           <div style="display:flex;align-items:flex-start;gap:10px;justify-content:space-between">
             <div style="flex:1">
               <div class="pubmed-title">${title}</div>
+              <div class="pubmed-product-tags" aria-label="Product and treatment labels" title="Automatically identified from the title and abstract; labels may include comparator treatments.">${pubmedProductBadges(title,abstract)}</div>
               <div class="pubmed-meta">
                 <span>PMID: ${pmid}</span><span>${authors}</span>
                 <span style="font-style:italic">${journal}</span><span>${year}</span>
@@ -15165,6 +15168,32 @@ function normalizeProductCode(value){
   if(v==='y90-both' || v==='both' || v==='resin and glass' || v==='glass and resin') return 'y90-both';
   if(v==='y90-na' || v==='ns' || v==='n/a' || v==='not specific' || !v) return 'y90-na';
   return 'y90-na';
+}
+
+// Display-only, multi-label classification; does not change imported product assignments.
+function pubmedProductLabels(title,abstract=''){
+  const text=[title,abstract].filter(Boolean).join(' ').normalize('NFKC').replace(/[\u2010-\u2015]/g,'-');
+  const labels=[];
+  const add=(label,cls)=>labels.push({label,cls});
+  if(/cryo[- ]?ablat|cryosurger|cryoprobe|freeze[- ]?thaw/i.test(text)) add('Cryoablation','badge-cryo');
+  const dc=/\bdc[ -]?beads?(?:m1)?\b/i.test(text);
+  const deb=/\bhepasphere\b|\bquadrasphere\b|\blifepearl\b|\bcallispheres?\b|\btandem\s+(?:beads?|microspheres?)\b/i.test(text);
+  if(dc) add('DC Bead','badge-dc-bead');
+  if(deb) add('DEB Competitor','badge-dc-bead');
+  if(!dc&&!deb&&isTACERelated({title:text})) add('TACE / Brand unconfirmed','badge-dc-bead');
+  const y90=/\b(?:y-?90|90y|yttrium[- ]?90)\b|radio[- ]?emboli[sz]ation|selective internal radiation therapy|\btheraspheres?\b|\bsir[- ]?spheres?\b/i.test(text);
+  if(y90){
+    const resin=/\bsir[- ]?spheres?\b|\bresin\b/i.test(text);
+    const glass=/\btheraspheres?\b|\bglass\b(?![- ]ground)|\bglass\b/i.test(text.replace(/ground[- ]glass/gi,''));
+    if(resin) add('Y90 Resin','badge-y90-resin');
+    if(glass) add('Y90 Glass','badge-y90-glass');
+    if(!resin&&!glass) add('Y90 · type unspecified','badge-y90-na');
+  }
+  if(!labels.length) add('Product not identified','badge-y90-na');
+  return labels;
+}
+function pubmedProductBadges(title,abstract=''){
+  return pubmedProductLabels(title,abstract).map(({label,cls})=>`<span class="product-badge ${cls}">${label}</span>`).join('');
 }
 
 function classifyIOEProduct(text){
