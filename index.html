@@ -2014,6 +2014,10 @@ html body.calibre-theme,html body.calibre-theme *{
 .ctm-card-head > div{flex:1 1 0;min-width:0}
 .ctm-card-head .ctm-title{min-width:0;max-width:none;font-size:20px;overflow-wrap:anywhere}
 .ctm-card-tags{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.ctm-meta-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin-top:5px}
+.ctm-meta-row .ctm-meta{margin-top:0}
+.ctm-meta-row .ctm-card-tags{display:contents}
+.ctm-meta-row .ctm-pill{margin:0}
 .ctm-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px;min-width:0}
 .ctm-field{background:#f8fafc;border:1px solid #e4eaf1;border-radius:10px;padding:11px;min-width:0;overflow-wrap:anywhere}
 .ctm-field.wide{grid-column:span 2}
@@ -16016,8 +16020,8 @@ function ctmRender(){
         <button class="ctm-star ${w.starred?'on':''}" title="${w.starred?'Remove from watchlist':'Add to watchlist'}" onclick="ctmToggleStar('${ctmEscape(t.nctId)}')">${w.starred?'★':'☆'}</button>
         <div>
           <div class="ctm-title"><a href="${ctmEscape(t.url)}" target="_blank">${ctmEscape(t.title)}</a>${t.isNew?'<span class="ctm-new-badge">NEW</span>':''}</div>
-          <div class="ctm-meta">${ctmEscape(t.nctId)} · Last registry update: ${ctmEscape(t.lastUpdate||'N/A')}</div>${changes}
-          <div class="ctm-card-tags">${ctmProductPills(t.products)}<span class="ctm-pill ${ctmStatusClass(t.status)}">${ctmEscape(ctmStatusLabel(t.status))}</span>${(t.phases||[]).map(p=>`<span class="ctm-pill">${ctmEscape(p.replaceAll('_',' '))}</span>`).join('')}${t.isApac?'<span class="ctm-pill active">APAC</span>':''}${t.isMultinational?'<span class="ctm-pill">Multinational</span>':''}${t.hasResults?'<span class="ctm-pill completed">Results posted</span>':'<span class="ctm-pill">No posted results</span>'}</div>
+          <div class="ctm-meta-row"><span class="ctm-meta">${ctmEscape(t.nctId)} · Last registry update: ${ctmEscape(t.lastUpdate||'N/A')}</span>
+          <div class="ctm-card-tags">${ctmProductPills(t.products)}<span class="ctm-pill ${ctmStatusClass(t.status)}">${ctmEscape(ctmStatusLabel(t.status))}</span>${(t.phases||[]).map(p=>`<span class="ctm-pill">${ctmEscape(p.replaceAll('_',' '))}</span>`).join('')}${t.isApac?'<span class="ctm-pill active">APAC</span>':''}${t.isMultinational?'<span class="ctm-pill">Multinational</span>':''}${t.hasResults?'<span class="ctm-pill completed">Results posted</span>':'<span class="ctm-pill">No posted results</span>'}</div></div>${changes}
         </div>
       </div>
       <div class="ctm-card-grid">
