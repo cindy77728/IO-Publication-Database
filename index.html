@@ -11222,13 +11222,10 @@ function populateCategoryFilter(){
       const children = ALL_CATEGORIES
         .filter(c => isChildCategory(c) && catParent(c) === parent)
         .sort((a,b) => catParts(a).child.localeCompare(catParts(b).child));
-      if (!children.length) {
-        return `<option value="${escapeHtml(parent)}">${escapeHtml(optionLabel(parent, counts))}</option>`;
-      }
-      return `<optgroup label="${escapeHtml(parent)}">` +
-        `<option value="${escapeHtml(parent)}">All ${escapeHtml(parent)} (${counts[parent] || 0})</option>` +
-        children.map(c => `<option value="${escapeHtml(c)}">  ↳ ${escapeHtml(catParts(c).child)} (${counts[c] || 0})</option>`).join('') +
-        '</optgroup>';
+      // Every main category has the same selectable row, with or without children.
+      // Explicit arrows and nonbreaking spaces retain hierarchy in native menus.
+      return `<option class="category-main-option" style="font-weight:700;color:#0755b5;background-color:#edf4fd" value="${escapeHtml(parent)}">${escapeHtml(parent)} (${counts[parent] || 0})</option>` +
+        children.map(c => `<option class="category-child-option" style="font-weight:400;color:#26364a;background-color:#ffffff" value="${escapeHtml(c)}">&nbsp;&nbsp;&nbsp;&nbsp;↳ ${escapeHtml(catParts(c).child)} (${counts[c] || 0})</option>`).join('');
     }).join('');
   // Preserve the current selection when publications or categories refresh.
   if ([...select.options].some(option => option.value === selected)) select.value = selected;
