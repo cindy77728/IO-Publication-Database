@@ -2123,7 +2123,7 @@ body.modal-open #publication-floating-head{visibility:hidden}
         <div class="stat-pill">Y90 (All): <strong id="stat-y90-all" style="color:var(--y90-all)">0</strong></div>
         <div class="stat-pill">PMC Free: <strong id="stat-pmc" style="color:#4cca5a">0</strong></div>
       </div>
-      <button class="btn btn-secondary" data-editor-control onclick="openProductModal()">＋ Add product</button>
+      <button class="btn btn-secondary" data-editor-control onclick="openProductModal()">Manage products</button>
       <button class="btn btn-secondary" onclick="openCategoryManager()">🏷️ Manage Categories</button>
       <button class="btn btn-secondary" onclick="openJIFManager()">📈 JIF Registry</button>
       <button class="btn btn-green" onclick="saveToGitHub()" id="github-save-btn" title="Save all changes directly to GitHub">☁️ Save to GitHub</button>
@@ -15144,6 +15144,7 @@ const IOE_PRODUCT_META = {
 
 
 let customProducts = [];
+let hiddenProducts = [];
 function setCustomProducts(rows){
   for(const row of customProducts) delete IOE_PRODUCT_META[row.code];
   customProducts=[];
@@ -15168,6 +15169,7 @@ function renderCustomProducts(){
 function openProductModal(){
   document.getElementById('new-product-name').value='';
   document.getElementById('product-add-error').textContent='';
+  renderProductManager();
   document.getElementById('product-add-modal').classList.add('open');
   document.getElementById('new-product-name').focus();
 }
@@ -15178,9 +15180,51 @@ function addCustomProduct(){
   if(Object.values(IOE_PRODUCT_META).some(p=>p.label.toLowerCase()===label.toLowerCase())){error.textContent='This product already exists.';return;}
   const code='custom-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
   setCustomProducts([...customProducts,{code,label}]);
-  closeModal('product-add-modal');
+  document.getElementById('new-product-name').value='';
+  renderProductManager();
   save();applyFilters();renderDashboard();
   showToast('Product added. It is now available in the publication form and product filter.','success');
+}
+
+function refreshProductVisibility(){
+  const filter=document.getElementById('filter-product');
+  for(const radio of document.querySelectorAll('input[name="product"]')){
+    if(radio.hasAttribute('data-retired-product'))continue;
+    const hidden=hiddenProducts.includes(radio.value);
+    radio.closest('label').hidden=hidden;
+    radio.closest('label').style.display=hidden?'none':'';
+    if(hidden && radio.checked){const fallback=document.querySelector('input[name="product"][value="y90-na"]');if(fallback)fallback.checked=true;}
+  }
+  if(filter)for(const option of filter.options){option.hidden=hiddenProducts.includes(option.value);if(option.hidden && option.selected)filter.value='';}
+}
+function renderProductManager(){
+  refreshProductVisibility();
+  const list=document.getElementById('product-manager-list');if(!list)return;
+  list.replaceChildren();
+  for(const [code,meta] of Object.entries(IOE_PRODUCT_META)){
+    const count=publications.filter(p=>normalizeProductCode(p.product)===code).length;
+    const hidden=hiddenProducts.includes(code);
+    const row=document.createElement('div');row.style.cssText='display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd';
+    const label=document.createElement('span');label.textContent=meta.label+' · '+count+' publication'+(count===1?'':'')+(hidden?' · Removed':'');
+    const button=document.createElement('button');button.type='button';button.className='btn btn-secondary';button.textContent=hidden?'Restore':'Delete';
+    button.disabled=!hidden&&(count>0||code==='y90-na');
+    button.title=count?'Reassign these publications before deleting this product.':code==='y90-na'?'Required default for records with an unidentified product.':'';
+    button.addEventListener('click',()=>hidden?restoreProduct(code):deleteProduct(code));
+    row.append(label,button);list.append(row);
+  }
+}
+function deleteProduct(code){
+  if(!Object.hasOwn(IOE_PRODUCT_META,code)||code==='y90-na')return;
+  if(publications.some(p=>normalizeProductCode(p.product)===code)){showToast('Reassign publications using this product before deleting it.','error');return;}
+  if(!confirm('Delete '+IOE_PRODUCT_META[code].label+' from product choices?'))return;
+  if(customProducts.some(p=>p.code===code))setCustomProducts(customProducts.filter(p=>p.code!==code));
+  else hiddenProducts=[...new Set([...hiddenProducts,code])];
+  refreshProductVisibility();renderProductManager();save();applyFilters();renderDashboard();
+  showToast('Product deleted from the available choices.','success');
+}
+function restoreProduct(code){
+  hiddenProducts=hiddenProducts.filter(p=>p!==code);
+  refreshProductVisibility();renderProductManager();save();applyFilters();renderDashboard();
 }
 
 // Topic membership is independent of the specific product saved on each record.
@@ -15774,7 +15818,7 @@ function renderDashboard(){
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📈 JIF matched</span><strong style="color:var(--accent)">${jifCount} (${total?(jifCount/total*100).toFixed(0):0}%)</strong></div>
         <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--text-muted)">📄 Uploaded PDFs</span><strong>${publications.filter(p=>p.pdfData).length}</strong></div>
       </div></div>
-    <div class="dash-card"><h3>By Product</h3><p style="font-size:13px;margin:0 0 12px;color:var(--text-muted)">TACE-related comparative studies may also appear under Y90.</p>${productRows.map(row=>`<div class="donut-row${row.parent?' product-parent':''}${row.child?' product-child':''}"><div class="donut-dot" style="background:${colors[row.key]}"></div><span class="donut-label">${row.label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?row.count/total*100:0}%;background:${colors[row.key]}"></div></div><span class="donut-val">${row.count}</span></div>`).join('')}</div>
+    <div class="dash-card"><h3>By Product</h3><p style="font-size:13px;margin:0 0 12px;color:var(--text-muted)">TACE-related comparative studies may also appear under Y90.</p>${productRows.filter(row=>!hiddenProducts.includes(row.key)).map(row=>`<div class="donut-row${row.parent?' product-parent':''}${row.child?' product-child':''}"><div class="donut-dot" style="background:${colors[row.key]}"></div><span class="donut-label">${row.label}</span><div class="donut-bar"><div class="donut-fill" style="width:${total?row.count/total*100:0}%;background:${colors[row.key]}"></div></div><span class="donut-val">${row.count}</span></div>`).join('')}</div>
     <div class="dash-card" style="grid-column:span 2"><h3>By Year</h3><div class="bar-chart">${years.map(([y,n])=>`<div class="bar-row"><span class="bar-label">${y}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxYear*100}%;background:var(--accent2)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card" style="grid-column:span 2"><h3>Top Categories</h3><div class="bar-chart">${cats.map(([c,n])=>`<div class="bar-row dash-cat-row"><span class="bar-label bar-label-full">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCat*100}%;background:var(--accent)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>
     <div class="dash-card"><h3>Top Countries</h3><div class="bar-chart">${countries.map(([c,n])=>`<div class="bar-row"><span class="bar-label">${escapeHtml(c)}</span><div class="bar-track"><div class="bar-fill" style="width:${n/maxCountry*100}%;background:var(--accent3)"></div></div><span class="bar-val">${n}</span></div>`).join('')}</div></div>`;
@@ -15795,7 +15839,7 @@ function exportExcel(){
 }
 
 function exportJSON(){
-  const backup={version:'ioe-database-v7.1',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,customProducts:customProducts,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmSimpleWatchStore(),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
+  const backup={version:'ioe-database-v7.1',exportedAt:new Date().toISOString(),categories:ALL_CATEGORIES,customProducts:customProducts,hiddenProducts:hiddenProducts,pdfFolderUrl:pdfFolderUrl||'',journalImpactFactors:journalImpactFactorRegistry,publications:publications,clinicalTrialMonitor:{watch:ctmSimpleWatchStore(),snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url; a.download=`ioe_database_backup_${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),500);
   showToast('✅ IO&E database backup exported.','success');
@@ -16238,7 +16282,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   function snapshot() {
     return {version:'ioe-public-access-v1', savedAt:new Date().toISOString(),
       publications:publications.map(p=>{const q={...p}; delete q.pdfData; return q;}),
-      categories:[...ALL_CATEGORIES], customProducts:customProducts, pdfFolderUrl:pdfFolderUrl || '', journalImpactFactors:journalImpactFactorRegistry,
+      categories:[...ALL_CATEGORIES], customProducts:customProducts,hiddenProducts:hiddenProducts, pdfFolderUrl:pdfFolderUrl || '', journalImpactFactors:journalImpactFactorRegistry,
       clinicalTrialMonitor:{watch:ctmSimpleWatchStore(), snapshots:ctmReadJson(CTM_STORAGE.snapshots,{}),
         lastResults:ctmReadJson(CTM_STORAGE.lastResults,[]),lastSearch:ctmReadJson(CTM_STORAGE.lastSearch,{})}};
   }
@@ -16248,7 +16292,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   }
   function applyDocument(data) {
     if (!Array.isArray(data.publications) || !Array.isArray(data.categories)) throw new Error('Shared database format is invalid.');
+    hiddenProducts=Array.isArray(data.hiddenProducts)?data.hiddenProducts.filter(code=>typeof code==='string' && code!=='y90-na'):[];
     setCustomProducts(data.customProducts || []);
+    refreshProductVisibility();
     publications = data.publications;
     ALL_CATEGORIES = data.categories;
     pdfFolderUrl = data.pdfFolderUrl || '';
@@ -16385,7 +16431,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   window.getGitHubSettings=()=>({token:'',owner:'',repo:'',branch:''});
   window.saveToGitHub=()=>publish(false);
   for(const name of ['saveGitHubSettings','openGitHubSettingsModal','saveGitHubSettingsFromForm','resetGitHubTokenAndOpenSettings']) window[name]=()=>notify('Use Editor sign-in and Publish changes.');
-  const mutations = new Set('addCustomProduct savePublication deletePublication addCategoryFromManager renameCategory deleteCategory renameParentCategory addSubcategoryQuick renameSubcategoryQuick deleteSubcategoryQuick importJSON importJSONFile importFromPubMed importAllPubMedResults applyAISuggestion setPdfFolderUrl resetAllSubcategoriesNow saveJIFRegistryEntry deleteJIFRegistryEntry importJIFRegistryFile loadVerifiedJIFUpdates ctmToggleStar ctmAddManualTrial'.split(' '));
+  const mutations = new Set('deleteProduct restoreProduct addCustomProduct savePublication deletePublication addCategoryFromManager renameCategory deleteCategory renameParentCategory addSubcategoryQuick renameSubcategoryQuick deleteSubcategoryQuick importJSON importJSONFile importFromPubMed importAllPubMedResults applyAISuggestion setPdfFolderUrl resetAllSubcategoriesNow saveJIFRegistryEntry deleteJIFRegistryEntry importJIFRegistryFile loadVerifiedJIFUpdates ctmToggleStar ctmAddManualTrial'.split(' '));
   const editorActions = new Set([...mutations,...'openProductModal openAddModal openEditModal openCategoryManager openJIFManager openAIModal ctmOpenManualModal handlePdfSelect saveJIFAutoSettings fetchByPMID'.split(' ')]);
   for(const name of editorActions){
     const original=window[name]; if(typeof original!=='function') continue;
@@ -16576,8 +16622,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
 </script>
 
 <div class="modal-overlay" id="product-add-modal" role="dialog" aria-modal="true" aria-labelledby="product-add-title">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-header"><h2 id="product-add-title">Add product</h2><button class="btn btn-secondary" onclick="closeModal('product-add-modal')" aria-label="Close">✕</button></div>
+  <div class="modal" style="max-width:620px">
+    <div class="modal-header"><h2 id="product-add-title">Manage products</h2><button class="btn btn-secondary" onclick="closeModal('product-add-modal')" aria-label="Close">✕</button></div>
+    <div style="padding:0 24px"><p>Products in use cannot be deleted. Reassign their publications first. Y90 N/A is the required default.</p><div id="product-manager-list" style="max-height:35vh;overflow:auto"></div></div>
     <form onsubmit="event.preventDefault();addCustomProduct()" style="padding:24px">
       <label for="new-product-name">Product name</label>
       <input id="new-product-name" type="text" maxlength="80" required style="width:100%;margin:10px 0" placeholder="Enter a new product name">
