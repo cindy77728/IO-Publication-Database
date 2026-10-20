@@ -15457,7 +15457,18 @@ function validJIFNumber(value){
 function getJIFEntry(journal){
   const key=normalizeJournalKey(journal);
   if(!key) return null;
-  return journalImpactFactorRegistry[key] || null;
+  const registered=journalImpactFactorRegistry[key] || null;
+  // Bundled entries must be accessible even before initialization, after a
+  // shared-data refresh, or when a saved registry has omitted the journal.
+  const bundled=(typeof IOE_BUNDLED_JIF_DATA!=='undefined' && Array.isArray(IOE_BUNDLED_JIF_DATA.journals))
+    ? IOE_BUNDLED_JIF_DATA.journals.find(row=>normalizeJournalKey(row.journal)===key) : null;
+  if(!bundled) return registered;
+  if(!registered) return bundled;
+  // Prefer the most recent year; a same-year curated publisher entry wins
+  // over a publication-derived entry.
+  const regYear=Number(registered.year)||0, bundledYear=Number(bundled.year)||0;
+  if(bundledYear>regYear || (bundledYear===regYear && registered.source==='Publication record')) return bundled;
+  return registered;
 }
 function saveJIFRegistryLocal(){
   ioeLocalStore.setItem('ioeJifRegistry', JSON.stringify(journalImpactFactorRegistry));
