@@ -15480,9 +15480,13 @@ function seedJIFRegistryFromPublications(){
   });
 }
 function jifBadgeHtml(p){
-  const val=validJIFNumber(p?.journalImpactFactor ?? p?.jif);
-  if(val===null) return '<span style="color:var(--text-dim)">—</span>';
-  const year=p?.journalImpactFactorYear ?? p?.jifYear ?? '';
+  // Resolve the current journal-level JIF at display time, rather than relying
+  // on a potentially blank or outdated JIF copied into an individual paper.
+  const entry=getJIFEntry(p?.journal);
+  const stored=validJIFNumber(p?.journalImpactFactor ?? p?.jif);
+  const val=entry && validJIFNumber(entry.value)!==null ? validJIFNumber(entry.value) : stored;
+  if(val===null) return '<span style="color:var(--text-dim)" title="No JIF in verified registry or publication record">JIF not in registry</span>';
+  const year=entry && validJIFNumber(entry.value)!==null ? entry.year : (p?.journalImpactFactorYear ?? p?.jifYear ?? '');
   return `<span class="jif-badge" title="Journal-level metric${year?' · JIF '+year:''}">JIF ${val.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')}${year?` <small>(${year})</small>`:''}</span>`;
 }
 function applyJIFRegistryToPublications(showMessage=false){
@@ -15712,6 +15716,12 @@ const __ioeLegacyInit=init;
 init=function(){
   migrateIOEDatabase();
   mergeJIFRows(extractJIFRows(IOE_BUNDLED_JIF_DATA),'Bundled verified JIF registry',{onlyIfNewer:true,verifiedAt:IOE_BUNDLED_JIF_DATA.verifiedAt});
+  // A bundled verified entry supersedes same-year values seeded from old papers.
+  IOE_BUNDLED_JIF_DATA.journals.forEach(row=>{
+    const existing=getJIFEntry(row.journal);
+    if(!existing || (Number(existing.year||0)<=Number(row.year||0) && existing.source==='Publication record'))
+      upsertJIFEntry(row.journal,row.value,row.year,row.source,{sourceUrl:row.sourceUrl,verificationStatus:row.verificationStatus,verifiedAt:IOE_BUNDLED_JIF_DATA.verifiedAt});
+  });
   applyJIFRegistryToPublications(false);
   renderJournalJIFOptions();
   __ioeLegacyInit();
