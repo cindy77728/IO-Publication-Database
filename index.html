@@ -2135,6 +2135,34 @@ html[data-ioe-role="viewer"] .publication-table td:last-child {
 #tab-instructions{background:transparent;border:0;border-bottom:2px solid transparent;font-family:inherit}
 #tab-instructions.active{border-bottom-color:var(--accent)}
 .tabs:has(#tab-instructions){flex-wrap:wrap}
+<style>
+/* Instructions tab only: balanced two-column guide tables. */
+#panel-instructions .ioe-guide-table table {
+  table-layout: fixed !important;
+  width: 100% !important;
+}
+#panel-instructions .ioe-guide-table th:first-child,
+#panel-instructions .ioe-guide-table td:first-child {
+  width: 30% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow-wrap: anywhere;
+  white-space: normal !important;
+}
+#panel-instructions .ioe-guide-table th:nth-child(2),
+#panel-instructions .ioe-guide-table td:nth-child(2) {
+  width: 70% !important;
+  min-width: 0 !important;
+  overflow-wrap: anywhere;
+  white-space: normal !important;
+}
+@media(max-width:620px) {
+  #panel-instructions .ioe-guide-table th:first-child,
+  #panel-instructions .ioe-guide-table td:first-child { width: 38% !important; }
+  #panel-instructions .ioe-guide-table th:nth-child(2),
+  #panel-instructions .ioe-guide-table td:nth-child(2) { width: 62% !important; }
+}
+</style>
 </style>
 </head>
 <body class="calibre-theme">
