@@ -2136,24 +2136,6 @@ html[data-ioe-role="viewer"] .publication-table td:last-child {
 #tab-instructions.active{border-bottom-color:var(--accent)}
 .tabs:has(#tab-instructions){flex-wrap:wrap}
 
-/* First Instructions table only: wider descriptions, compact Open column. */
-@media (min-width: 769px) {
-  #panel-instructions .ioe-guide-first-table > table {
-    width: 760px !important;
-    max-width: 100% !important;
-    table-layout: fixed !important;
-  }
-  #panel-instructions .ioe-guide-first-table tr > :first-child {
-    width: 550px !important;
-    min-width: 0 !important;
-    max-width: none !important;
-  }
-  #panel-instructions .ioe-guide-first-table tr > :nth-child(2) {
-    width: 210px !important;
-    min-width: 0 !important;
-    max-width: none !important;
-  }
-}
 /* Instructions: content-sized tables, not stretched across the page. */
 #panel-instructions .ioe-guide-table {
   width:100%; max-width:100%; overflow-x:auto;
@@ -2184,6 +2166,25 @@ html[data-ioe-role="viewer"] .publication-table td:last-child {
 @media(max-width:620px){
   #panel-instructions .ioe-guide-table tr > :first-child { min-width:190px !important; max-width:280px !important; }
   #panel-instructions .ioe-guide-table tr > :nth-child(2) { min-width:150px !important; max-width:440px !important; }
+}
+/* Final override: first Instructions table only. Keep this AFTER general guide rules. */
+@media (min-width: 769px) {
+  #panel-instructions .ioe-guide-table.ioe-guide-first-table > table {
+    width: 800px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+  #panel-instructions .ioe-guide-table.ioe-guide-first-table tr > :first-child {
+    width: 600px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+  #panel-instructions .ioe-guide-table.ioe-guide-first-table tr > :nth-child(2) {
+    width: 200px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
 }
 </style>
 </head>
