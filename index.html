@@ -2095,23 +2095,6 @@ body.modal-open #publication-floating-head{visibility:hidden}
   .library-filter-sticky .controls > select{width:100%!important;min-width:0!important;max-width:none!important}
 }
 </style>
-<style>
-/* Viewer table layout: remove the unused Actions column and prioritize titles.
-   Applies to the live table and its cloned floating header. */
-html[data-ioe-role="viewer"] .publication-table th:last-child,
-html[data-ioe-role="viewer"] .publication-table td:last-child {
-  display:none !important;
-}
-@media (min-width:769px) {
-  html[data-ioe-role="viewer"] .publication-table th:nth-child(2),
-  html[data-ioe-role="viewer"] .publication-table td.td-title {
-    width:38% !important;
-    min-width:440px !important;
-    max-width:760px !important;
-    overflow-wrap:anywhere;
-  }
-}
-</style>
 </head>
 <body class="calibre-theme">
 
