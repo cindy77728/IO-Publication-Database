@@ -2135,31 +2135,26 @@ html[data-ioe-role="viewer"] .publication-table td:last-child {
 #tab-instructions{background:transparent;border:0;border-bottom:2px solid transparent;font-family:inherit}
 #tab-instructions.active{border-bottom-color:var(--accent)}
 .tabs:has(#tab-instructions){flex-wrap:wrap}
-/* Instructions tables: content-aware first column, flexible explanation column. */
+/* Instructions tables: first column is measured from its labels. */
+#panel-instructions .ioe-guide-table { width:100%; max-width:100%; overflow-x:auto; }
 #panel-instructions .ioe-guide-table table {
-  table-layout: auto !important;
-  width: 100% !important;
+  width:100% !important;
+  min-width:0 !important;
+  table-layout:fixed !important;
 }
-#panel-instructions .ioe-guide-table th:first-child,
-#panel-instructions .ioe-guide-table td:first-child {
-  width: 1% !important;
-  min-width: 160px !important;
-  max-width: 360px !important;
-  white-space: normal !important;
-  overflow-wrap: break-word;
+#panel-instructions .ioe-guide-table tr > :first-child {
+  width:var(--guide-label-width, 260px) !important;
+  min-width:0 !important;
+  max-width:none !important;
+  white-space:normal !important;
+  overflow-wrap:break-word !important;
 }
-#panel-instructions .ioe-guide-table th:nth-child(2),
-#panel-instructions .ioe-guide-table td:nth-child(2) {
-  width: auto !important;
-  white-space: normal !important;
-  overflow-wrap: break-word;
-}
-@media (max-width: 620px) {
-  #panel-instructions .ioe-guide-table th:first-child,
-  #panel-instructions .ioe-guide-table td:first-child {
-    min-width: 115px !important;
-    max-width: 210px !important;
-  }
+#panel-instructions .ioe-guide-table tr > :nth-child(2) {
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
 }
 </style>
 </head>
@@ -16733,5 +16728,35 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('jif-mod
   </div>
 </div>
 
+<script>
+/* Measure the longest first-column label in each Instructions table.
+   Keep that column compact and leave the remaining space for explanations. */
+(function () {
+  function fitGuideColumns() {
+    document.querySelectorAll('#panel-instructions .ioe-guide-table table').forEach(function(table) {
+      var firstCells=Array.from(table.querySelectorAll('tr > :first-child'));
+      if (!firstCells.length) return;
+      var canvas=document.createElement('canvas');
+      var ctx=canvas.getContext('2d');
+      var maxText=0;
+      firstCells.forEach(function(cell) {
+        var cs=getComputedStyle(cell);
+        ctx.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
+        maxText=Math.max(maxText,ctx.measureText(cell.textContent.trim().replace(/\s+/g,' ')).width);
+      });
+      var available=table.parentElement.clientWidth;
+      var mobile=window.innerWidth<=620;
+      var cap=mobile?210:340;
+      var floor=mobile?110:140;
+      var width=Math.max(floor,Math.min(cap,Math.ceil(maxText+34)));
+      width=Math.min(width,Math.max(floor,Math.floor(available*0.42)));
+      table.style.setProperty('--guide-label-width',width+'px');
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fitGuideColumns);
+  else fitGuideColumns();
+  window.addEventListener('resize',fitGuideColumns);
+})();
+</script>
 </body>
 </html>
